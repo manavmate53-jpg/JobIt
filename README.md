@@ -109,18 +109,29 @@ Inspect gap analysis, matching competencies, recruiter info, and recommended pit
 python3 cli.py view <job_id>
 ```
 
-### 4. Tailor Resume & Cover Letter
+### 4. Resume-Matcher Style Compatibility Check
+Run a standalone ATS match analysis with dimension scoring and missing keywords:
+```bash
+python3 cli.py match <job_id>
+```
+Displays:
+- **5-Dimension ATS Breakdown**: Keyword Match (40%), Skills Coverage (20%), Title Match (15%), Section Completeness (15%), Date Consistency (10%)
+- Top matched keywords vs missing opportunity keywords
+- Actionable recommendations to boost recruiter hit rates
+
+### 5. Tailor Resume & Cover Letter
 Automatically tailor an ATS-compliant resume and a human under-130-word cover letter:
 ```bash
 python3 cli.py tailor <job_id>
 ```
 Outputs:
 - Single-page A4 PDF resume rendered via headless Chromium (`exports/resumes/Manav_Mate_[Company]_CV.pdf`)
+- ATS Compatibility Match Report JSON (`exports/resumes/Manav_Mate_[Company]_ATS_Report.json`)
 - ATS HTML file (`exports/resumes/Manav_Mate_[Company]_CV.html`)
 - Markdown CV (`exports/resumes/Manav_Mate_[Company]_CV.md`)
 - Builder Cover Letter (`exports/cover_letters/Manav_Mate_[Company]_CoverLetter.txt`)
 
-### 5. Recruiter Outreach & Permutations
+### 6. Recruiter Outreach & Permutations
 Verify domain DNS MX records, formulate enterprise email permutations, and draft a LinkedIn note:
 ```bash
 # Safe dry-run (default: logs to exports/outreach_drafts/ without sending)
@@ -130,13 +141,13 @@ python3 cli.py outreach <job_id> --dry-run
 python3 cli.py outreach <job_id> --send
 ```
 
-### 6. Pipeline Status & Follow-Up Alerts
+### 7. Pipeline Status & Follow-Up Alerts
 View active pipeline stages and alerts for applications awaiting follow-up:
 ```bash
 python3 cli.py status
 ```
 
-### 7. End-to-End Autonomous Pipeline
+### 8. End-to-End Autonomous Pipeline
 Run the entire workflow (scrape -> filter -> evaluate -> tailor top APPLY jobs -> generate outreach drafts):
 ```bash
 python3 cli.py run-all --limit 10

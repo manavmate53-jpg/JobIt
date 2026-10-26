@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import sys
 from pathlib import Path
@@ -194,13 +195,87 @@ def tailor_cmd(job_id: int):
     # Update database record
     db.update_status(job_id, status="Tailored", tailored_cv_path=outputs["pdf_path"])
 
+    ats_rep = outputs.get("ats_report")
+
+    # Render ATS Score Breakdown Table
+    ats_table = Table(title=f"ATS Compatibility Report ({ats_rep.overall_score}/100)", box=box.ROUNDED)
+    ats_table.add_column("ATS Dimension", style="bold cyan")
+    ats_table.add_column("Weight", justify="center", style="dim")
+    ats_table.add_column("Sub-Score", justify="center", style="bold white")
+
+    ats_table.add_row("Keyword Match", "40%", f"{ats_rep.sub_scores.get('keyword_match', 0)}%")
+    ats_table.add_row("Skills Coverage", "20%", f"{ats_rep.sub_scores.get('skills_coverage', 0)}%")
+    ats_table.add_row("Title Match", "15%", f"{ats_rep.sub_scores.get('title_match', 0)}%")
+    ats_table.add_row("Section Completeness", "15%", f"{ats_rep.sub_scores.get('section_completeness', 0)}%")
+    ats_table.add_row("Date Consistency", "10%", f"{ats_rep.sub_scores.get('date_consistency', 0)}%")
+
+    console.print(ats_table)
+
     console.print(Panel(
         f"[bold green]Successfully Tailored Application #[/bold green][bold white]{job_id}[/bold white]\n\n"
+        f"🎯 [bold]Overall ATS Score:[/bold] [bold green]{ats_rep.overall_score}/100[/bold green] ({ats_rep.title_match_type})\n"
         f"📄 [bold]HTML CV:[/bold] {outputs['html_path']}\n"
         f"📝 [bold]Markdown CV:[/bold] {outputs['md_path']}\n"
-        f"🎯 [bold]Print PDF CV (Single-Page A4):[/bold] {outputs['pdf_path']}\n"
+        f"🖨️  [bold]Print PDF CV (Single-Page A4):[/bold] {outputs['pdf_path']}\n"
+        f"📊 [bold]ATS Match Report (JSON):[/bold] {outputs['ats_report_path']}\n"
         f"✉️  [bold]Cover Letter (TXT):[/bold] {outputs['cover_letter_txt']}\n"
         f"📋 [bold]Cover Letter (MD):[/bold] {outputs['cover_letter_md']}",
+        box=box.ROUNDED
+    ))
+
+
+@cli.command("match")
+@click.argument("job_id", type=int)
+def match_cmd(job_id: int):
+    """Resume-Matcher style ATS compatibility check without re-exporting files."""
+    app = db.get_job_by_id(job_id)
+    if not app:
+        console.print(f"[bold red]Error:[/bold red] Job #{job_id} not found.")
+        return
+
+    job = ScrapedJob(
+        company=app["company"],
+        role=app["role"],
+        job_url=app["job_url"],
+        source=app["source"],
+        location=app.get("location", "Mumbai"),
+        raw_description=app.get("raw_description", "")
+    )
+
+    ctx = profile_engine.get_template_context()
+    resume_plain = f"{ctx['name']} {ctx['summary']} {json.dumps(ctx['skills'])} {json.dumps(ctx['work_experience'])}"
+
+    from src.services.ats_scorer import ATSScorer
+    scorer = ATSScorer()
+    report = scorer.evaluate(
+        resume_text=resume_plain,
+        resume_context=ctx,
+        job_role=job.role,
+        job_description=f"{job.role} {job.raw_description}"
+    )
+
+    table = Table(title=f"Resume Matcher Card: {job.role} at {job.company}", box=box.ROUNDED)
+    table.add_column("ATS Dimension", style="bold cyan")
+    table.add_column("Weight", justify="center", style="dim")
+    table.add_column("Score", justify="center", style="bold white")
+
+    table.add_row("Keyword Match", "40%", f"{report.sub_scores.get('keyword_match', 0)}%")
+    table.add_row("Skills Coverage", "20%", f"{report.sub_scores.get('skills_coverage', 0)}%")
+    table.add_row("Title Match", "15%", f"{report.sub_scores.get('title_match', 0)}%")
+    table.add_row("Section Completeness", "15%", f"{report.sub_scores.get('section_completeness', 0)}%")
+    table.add_row("Date Consistency", "10%", f"{report.sub_scores.get('date_consistency', 0)}%")
+
+    console.print(table)
+
+    matched_sample = ", ".join(report.matched_keywords[:6]) if report.matched_keywords else "None"
+    missing_sample = ", ".join(report.missing_keywords[:6]) if report.missing_keywords else "None"
+
+    console.print(Panel(
+        f"[bold]Overall Score:[/bold] [bold green]{report.overall_score}/100[/bold green] | [bold]Title Match:[/bold] {report.title_match_type}\n\n"
+        f"[bold green]Top Matched Keywords:[/bold green]\n{matched_sample}\n\n"
+        f"[bold yellow]Missing Opportunity Keywords:[/bold yellow]\n{missing_sample}\n\n"
+        f"[bold]Actionable Recommendations:[/bold]\n" + "\n".join(f"• {s}" for s in report.suggestions),
+        title="ATS Scoring Breakdown",
         box=box.ROUNDED
     ))
 

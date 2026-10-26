@@ -39,6 +39,7 @@ test-results/
 exports/resumes/*.pdf
 exports/resumes/*.html
 exports/resumes/*.md
+exports/resumes/*.json
 !exports/resumes/.gitkeep
 exports/cover_letters/*.txt
 exports/cover_letters/*.md
