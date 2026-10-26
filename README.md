@@ -131,7 +131,22 @@ Outputs:
 - Markdown CV (`exports/resumes/Manav_Mate_[Company]_CV.md`)
 - Builder Cover Letter (`exports/cover_letters/Manav_Mate_[Company]_CoverLetter.txt`)
 
-### 6. Recruiter Outreach & Permutations
+### 6. Automated Web Applying (Naukri & LinkedIn Browser Automation)
+JobIt can automate online job submissions directly in the browser via Playwright:
+```bash
+# Step 1: Log in once to save your session cookies and tokens
+python3 cli.py login --portal naukri
+# (or: python3 cli.py login --portal linkedin)
+
+# Step 2: Run automated web apply in dry-run mode (attaches resume, stops at review preview)
+python3 cli.py web-apply <job_id> --dry-run
+
+# Step 3: Automatically submit the application on the web portal
+python3 cli.py web-apply <job_id> --submit
+```
+JobIt automatically opens the persistent session, clicks Apply, attaches your tailored single-page PDF CV, answers standard candidate prompts (Notice: 15 days, Current CTC: ₹8 LPA, Expected CTC: ₹12-16 LPA, Location: Mumbai), and saves a confirmation screenshot in `exports/applications/`.
+
+### 7. Recruiter Outreach & Permutations
 Verify domain DNS MX records, formulate enterprise email permutations, and draft a LinkedIn note:
 ```bash
 # Safe dry-run (default: logs to exports/outreach_drafts/ without sending)
@@ -141,13 +156,13 @@ python3 cli.py outreach <job_id> --dry-run
 python3 cli.py outreach <job_id> --send
 ```
 
-### 7. Pipeline Status & Follow-Up Alerts
+### 8. Pipeline Status & Follow-Up Alerts
 View active pipeline stages and alerts for applications awaiting follow-up:
 ```bash
 python3 cli.py status
 ```
 
-### 8. End-to-End Autonomous Pipeline
+### 9. End-to-End Autonomous Pipeline
 Run the entire workflow (scrape -> filter -> evaluate -> tailor top APPLY jobs -> generate outreach drafts):
 ```bash
 python3 cli.py run-all --limit 10

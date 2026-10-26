@@ -47,3 +47,8 @@ exports/cover_letters/*.md
 exports/outreach_drafts/*.txt
 exports/outreach_drafts/*.json
 !exports/outreach_drafts/.gitkeep
+
+# Browser Sessions & Application Artifacts
+data/browser_sessions/
+exports/applications/*.png
+!exports/applications/.gitkeep

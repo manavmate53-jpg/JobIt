@@ -401,6 +401,79 @@ def outreach_cmd(job_id: int, dry_run: bool):
             console.print(f"[bold red]Dispatch failed:[/bold red] {result.get('smtp_details', {}).get('error')}")
 
 
+@cli.command("login")
+@click.option("--portal", default="naukri", type=click.Choice(["naukri", "linkedin"], case_sensitive=False), help="Portal to authenticate with")
+def login_cmd(portal: str):
+    """Opens visible browser to log into Naukri or LinkedIn once; saves persistent session cookies."""
+    from src.web_applier import PortalWebApplier
+    applier = PortalWebApplier()
+    applier.login_interactively(portal=portal)
+
+
+@cli.command("web-apply")
+@click.argument("job_id", type=int)
+@click.option("--dry-run/--submit", default=True, help="Stop at preview/modal (default) vs submit final application")
+@click.option("--visible/--headless", default=True, help="Launch visible browser window or run headless")
+def web_apply_cmd(job_id: int, dry_run: bool, visible: bool):
+    """Automates web application submission on Naukri or LinkedIn using Playwright."""
+    app = db.get_job_by_id(job_id)
+    if not app:
+        console.print(f"[bold red]Error:[/bold red] Job #{job_id} not found.")
+        return
+
+    job = ScrapedJob(
+        company=app["company"],
+        role=app["role"],
+        job_url=app["job_url"],
+        source=app["source"],
+        location=app.get("location", "Mumbai"),
+        raw_description=app.get("raw_description", ""),
+        hr_name=app.get("hr_name"),
+        hr_email=app.get("hr_email"),
+    )
+
+    pdf_cv = app.get("tailored_cv_path")
+    if not pdf_cv or not os.path.exists(pdf_cv):
+        console.print(f"[bold cyan]Auto-tailoring CV first for {job.role} at {job.company}...[/bold cyan]")
+        eval_result = scoring_engine.evaluate(job)
+        outputs = tailor_engine.tailor(job, eval_result)
+        pdf_cv = outputs["pdf_path"]
+        db.update_status(job_id, status="Tailored", tailored_cv_path=pdf_cv)
+
+    from src.web_applier import PortalWebApplier
+    applier = PortalWebApplier()
+
+    with console.status(f"[bold green]Automating web application on {job.source}...[/bold green]"):
+        res = applier.apply(job, pdf_path=pdf_cv, dry_run=dry_run, headless=not visible)
+
+    if res.get("status") == "LOGIN_REQUIRED":
+        console.print(Panel(
+            f"[bold red]Authentication Required[/bold red]\n\n"
+            f"You need to log into {job.source} once so Playwright can use your session.\n"
+            f"Run: [bold yellow]python3 cli.py login --portal {'naukri' if 'naukri' in job.source.lower() else 'linkedin'}[/bold yellow]\n"
+            f"Screenshot captured: {res.get('screenshot_path')}",
+            box=box.ROUNDED
+        ))
+        return
+
+    if res.get("success"):
+        if not dry_run and res.get("status") == "SUBMITTED":
+            import datetime
+            db.update_status(job_id, status="Applied", applied_date=datetime.datetime.now().isoformat())
+        console.print(Panel(
+            f"[bold green]Web Application Status: {res.get('status')}[/bold green]\n\n"
+            f"🏢 [bold]Company:[/bold] {job.company} | [bold]Role:[/bold] {job.role}\n"
+            f"🌐 [bold]Portal:[/bold] {job.source} ([link={job.job_url}]{job.job_url}[/link])\n"
+            f"📄 [bold]Uploaded PDF Resume:[/bold] {pdf_cv}\n"
+            f"📸 [bold]Proof Screenshot:[/bold] {res.get('screenshot_path')}\n\n"
+            f"[italic]{res.get('message')}[/italic]",
+            title="Browser Automation Result",
+            box=box.ROUNDED
+        ))
+    else:
+        console.print(f"[bold red]Web apply notice:[/bold red] {res.get('message')}\nScreenshot: {res.get('screenshot_path')}")
+
+
 @cli.command("status")
 def status_cmd():
     """Renders clean summary table of active pipeline stages and follow-up alerts."""
