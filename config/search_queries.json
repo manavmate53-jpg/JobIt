@@ -1,0 +1,70 @@
+{
+  "target_roles": [
+    "Associate Product Manager",
+    "Product Manager",
+    "Junior Product Manager",
+    "AI Product Manager",
+    "Product Operations",
+    "Technical Product Manager"
+  ],
+  "target_locations": [
+    "Mumbai",
+    "Navi Mumbai",
+    "Remote"
+  ],
+  "portals": {
+    "linkedin": {
+      "enabled": true,
+      "base_search_url": "https://www.linkedin.com/jobs/search",
+      "default_limit": 25
+    },
+    "naukri": {
+      "enabled": true,
+      "base_search_url": "https://www.naukri.com",
+      "default_limit": 25
+    }
+  },
+  "negative_traps": {
+    "manufacturing_operations": [
+      "mattress",
+      "foam production",
+      "plastic furniture",
+      "plant engineering",
+      "injection molding",
+      "casting",
+      "extrusion",
+      "boiler operator",
+      "textile mill",
+      "chemical factory",
+      "shop floor"
+    ],
+    "pharma_brand_marketing": [
+      "hcp marketing",
+      "clinical detailing",
+      "medical vaccines",
+      "pharma sales",
+      "prescribing doctors",
+      "medical representative",
+      "mr brand manager",
+      "therapeutics marketing"
+    ],
+    "offline_nbfc_vehicle_financing": [
+      "construction equipment loans",
+      "commercial vehicle branch",
+      "tractor loan",
+      "used car branch credit",
+      "nbfc collection",
+      "repossession officer"
+    ],
+    "senior_corporate_gates": [
+      "minimum 5 years of product management",
+      "minimum 6 years of product management",
+      "minimum 7 years of product management",
+      "minimum 8 years",
+      "minimum 10 years",
+      "vp of product",
+      "director of product",
+      "chief product officer"
+    ]
+  }
+}

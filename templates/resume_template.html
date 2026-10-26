@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ name }} - Tailored Product Manager Resume</title>
+<style>
+  @page {
+    size: A4;
+    margin: 8.5mm 10.5mm;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1a1a1a;
+    background-color: #ffffff;
+    line-height: 1.32;
+    font-size: 9.2pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .resume-container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  header {
+    border-bottom: 1.5px solid #0f172a;
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  h1 {
+    font-size: 17pt;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: #0f172a;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .contact-bar {
+    font-size: 8.5pt;
+    color: #334155;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 3px;
+  }
+  .contact-bar span {
+    display: inline-flex;
+    align-items: center;
+  }
+  .contact-bar a {
+    color: #0284c7;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .links-bar {
+    font-size: 8.5pt;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  .links-bar a {
+    color: #0369a1;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .links-bar a:hover {
+    text-decoration: underline;
+  }
+  section {
+    margin-bottom: 5.5px;
+  }
+  .section-title {
+    font-size: 9.8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #0f172a;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 1.5px;
+    margin-bottom: 3.5px;
+  }
+  .summary-text {
+    font-size: 8.8pt;
+    color: #1e293b;
+    text-align: justify;
+  }
+  .skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5px;
+    font-size: 8.7pt;
+  }
+  .skill-row {
+    display: flex;
+  }
+  .skill-category {
+    font-weight: 700;
+    color: #0f172a;
+    width: 145px;
+    flex-shrink: 0;
+  }
+  .skill-items {
+    color: #334155;
+    flex: 1;
+  }
+  .job-block {
+    margin-bottom: 4px;
+  }
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1px;
+  }
+  .job-title {
+    font-weight: 700;
+    color: #0f172a;
+    font-size: 9.2pt;
+  }
+  .job-company {
+    font-weight: 600;
+    color: #0284c7;
+  }
+  .job-meta {
+    font-size: 8.4pt;
+    color: #64748b;
+    font-weight: 500;
+  }
+  .job-bullets {
+    list-style-type: square;
+    padding-left: 14px;
+    margin-top: 1.5px;
+  }
+  .job-bullets li {
+    font-size: 8.6pt;
+    color: #1e293b;
+    margin-bottom: 1px;
+    line-height: 1.28;
+  }
+  .project-item {
+    font-size: 8.6pt;
+    margin-bottom: 2px;
+    line-height: 1.28;
+  }
+  .project-title {
+    font-weight: 700;
+    color: #0f172a;
+  }
+  .project-url {
+    color: #0284c7;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .project-desc {
+    color: #334155;
+  }
+  .edu-cert-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .edu-cert-col {
+    flex: 1;
+  }
+  .compact-list {
+    list-style: none;
+    padding: 0;
+    font-size: 8.5pt;
+  }
+  .compact-list li {
+    margin-bottom: 1px;
+    color: #1e293b;
+  }
+  @media print {
+    body {
+      background: none;
+    }
+    .page-break {
+      page-break-after: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="resume-container">
+  <header>
+    <h1>{{ name }}</h1>
+    <div class="contact-bar">
+      <span>{{ location }}</span> •
+      <span>{{ phone }}</span> •
+      <span><a href="mailto:{{ email }}">{{ email }}</a></span>
+    </div>
+    <div class="links-bar">
+      <span>Interactive PM Product Lab: <a href="{{ links.pm_product_lab }}">{{ links.pm_product_lab }}</a></span> •
+      <span>Portfolio: <a href="{{ links.portfolio }}">{{ links.portfolio }}</a></span> •
+      <span>GitHub: <a href="{{ links.github }}">github.com/manavmate53-jpg</a></span> •
+      <span>LinkedIn: <a href="https://{{ links.linkedin }}">{{ links.linkedin }}</a></span>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-title">Professional Summary</div>
+    <p class="summary-text">{{ summary }}</p>
+  </section>
+
+  <section>
+    <div class="section-title">Core Competencies & Tooling</div>
+    <div class="skills-grid">
+      <div class="skill-row">
+        <span class="skill-category">Product Execution:</span>
+        <span class="skill-items">{{ skills.product_management | join(', ') }}</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-category">AI & Data Systems:</span>
+        <span class="skill-items">{{ skills.ai_and_technical | join(', ') }}</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-category">Operations & Scale:</span>
+        <span class="skill-items">{{ skills.operations_and_business | join(', ') }}</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-category">Platforms & Tools:</span>
+        <span class="skill-items">{{ skills.tools | join(', ') }}</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">Professional Experience</div>
+    {% for job in work_experience %}
+    <div class="job-block">
+      <div class="job-header">
+        <div>
+          <span class="job-title">{{ job.role }}</span> | 
+          <span class="job-company">{{ job.company }}</span>
+        </div>
+        <div class="job-meta">{{ job.duration }} | {{ job.location }}</div>
+      </div>
+      <ul class="job-bullets">
+        {% for bullet in job.achievements %}
+        <li>{{ bullet }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section>
+    <div class="section-title">Interactive Builds (Live in PM Product Lab)</div>
+    {% for proj in featured_projects[:3] %}
+    <div class="project-item">
+      <span class="project-title">{{ proj.name }}</span> ({{ proj.category }}): 
+      <span class="project-desc">{{ proj.summary }} <strong>Impact: {{ proj.key_metrics }}.</strong></span>
+      [<a class="project-url" href="{{ proj.url }}">Live Hub Demo</a>]
+    </div>
+    {% endfor %}
+  </section>
+
+  <section>
+    <div class="edu-cert-container">
+      <div class="edu-cert-col">
+        <div class="section-title">Education</div>
+        <ul class="compact-list">
+          {% for edu in education %}
+          <li><strong>{{ edu.degree }}</strong>, {{ edu.institution }} ({{ edu.specialization }})</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="edu-cert-col">
+        <div class="section-title">Certifications</div>
+        <ul class="compact-list">
+          {% for cert in certifications[:4] %}
+          <li><strong>{{ cert.name }}</strong> ({{ cert.issuer }})</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

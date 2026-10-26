@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Databases (ignore actual sqlite db file, keep directory)
+*.db
+*.sqlite3
+!data/.gitkeep
+
+# Playwright
+.playwright/
+test-results/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Generated exports (keep directory structure)
+exports/resumes/*.pdf
+exports/resumes/*.html
+exports/resumes/*.md
+!exports/resumes/.gitkeep
+exports/cover_letters/*.txt
+exports/cover_letters/*.md
+!exports/cover_letters/.gitkeep
+exports/outreach_drafts/*.txt
+exports/outreach_drafts/*.json
+!exports/outreach_drafts/.gitkeep

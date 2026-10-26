@@ -1,0 +1,203 @@
+{
+  "personal": {
+    "name": "Manav Mate",
+    "location": "Jogeshwari East, Mumbai, Maharashtra, India",
+    "phone": "+91 85915 95889",
+    "email": "manavmate53@gmail.com",
+    "headline": "Product Manager & Early-Career Builder | AI Systems, PRDs & Operations",
+    "links": {
+      "portfolio": "https://manavmate53-jpg.github.io/portfolio/#hero",
+      "pm_product_lab": "https://manavmate53-jpg.github.io/pm-product-lab/#hub",
+      "github": "https://github.com/manavmate53-jpg",
+      "linkedin": "https://linkedin.com/in/manavmate"
+    }
+  },
+  "positioning": {
+    "persona": "Early-career tech product manager and former bootstrapped founder who transitioned from commercial ground operations to high-leverage AI product management. Proven ability to take 0-to-1 products from customer discovery to production delivery.",
+    "years_experience": "2-3 years across tech product management and bootstrapped founder operations",
+    "primary_target_roles": [
+      "Associate Product Manager",
+      "Product Manager",
+      "Junior Product Manager",
+      "AI Product Manager",
+      "Product Operations Manager",
+      "Technical Product Manager"
+    ],
+    "target_locations": [
+      "Mumbai",
+      "Navi Mumbai",
+      "Thane",
+      "Remote",
+      "Hybrid - Mumbai"
+    ],
+    "target_domains": [
+      "Software",
+      "AI / GenAI",
+      "B2B SaaS",
+      "Marketplaces",
+      "Fintech",
+      "Supply Chain & Logistics"
+    ],
+    "compensation": {
+      "current_ctc_inr_lpa": 8.0,
+      "expected_ctc_min_inr_lpa": 11.0,
+      "expected_ctc_max_inr_lpa": 16.0,
+      "notes": "Current CTC anchored at ₹8 LPA. Expected CTC targeted at ₹11 to ₹16 LPA based on company profile and role scope."
+    }
+  },
+  "work_experience": [
+    {
+      "company": "HireFlo India",
+      "role": "Product Manager",
+      "duration": "2026 - Aug 2026",
+      "location": "Mumbai, India",
+      "context": "Joined the founder early to own product discovery, PRDs, sprint planning, and core user journeys for an AI hiring intelligence platform.",
+      "achievements": [
+        "Cut model inference compute costs by 40% on Llama 3.1 by deploying self-hosted microservices via NVIDIA NIM and optimizing token cache strategies.",
+        "Built and shipped a 1,000-document resume parsing and schema extraction pipeline completing runs in under 10 minutes with 98% field precision.",
+        "Improved candidate self-serve platform completion rates by 30% through end-to-end user friction audits and reworked onboarding funnels.",
+        "Authored 14+ technical PRDs, user journey maps, and sprint backlogs, leading weekly agile cadences directly alongside engineering.",
+        "Defined token unit economics, latency SLA budgets, and regression guardrails for production LLM workflows."
+      ],
+      "technologies": ["Llama 3.1", "NVIDIA NIM", "Python", "FastAPI", "PostgreSQL", "Jira", "Figma", "JSON Schema"]
+    },
+    {
+      "company": "NeoManpower",
+      "role": "Founder & Operations Lead",
+      "duration": "Dec 2022 - Feb 2026",
+      "location": "Mumbai, India",
+      "context": "Bootstrapped a commercial operations and B2B workforce business from zero without external venture capital.",
+      "achievements": [
+        "Acquired 50+ B2B corporate enterprise clients through direct founder sales, contract negotiations, and referral loops.",
+        "Orchestrated on-ground operations for 200+ commercial projects across the Mumbai metropolitan region with zero client SLA breaches.",
+        "Recruited, trained, and managed multidisciplinary field teams of up to 133 personnel across demanding multi-shift deployments.",
+        "Built internal operational dashboards and shift roster trackers that trimmed billing reconciliation cycles from 12 days to 48 hours.",
+        "Managed P&L, vendor contracts, regulatory compliance, and working capital cash flows to maintain sustainable operational margins."
+      ],
+      "technologies": ["Operational Logistics", "B2B Sales", "P&L Management", "SLA Control", "Client Account Management", "Field Operations"]
+    }
+  ],
+  "featured_projects": [
+    {
+      "name": "EvalGuard AI",
+      "category": "Agentic AI & Evaluation Guardrails",
+      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#hub",
+      "summary": "Agentic evaluation workflow implementing JSON schema guardrails, automated hallucination detection, and real-time token unit economics tracking.",
+      "key_metrics": "99.4% schema validation compliance, 35% lower evaluation latency"
+    },
+    {
+      "name": "VeriShield",
+      "category": "Fintech & Compliance Engine",
+      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#hub",
+      "summary": "B2B KYC and GSTIN verification risk engine that cross-references public registries, computes fraud anomaly scores, and flags shell entities.",
+      "key_metrics": "Sub-800ms verification response time across 12-point regulatory checks"
+    },
+    {
+      "name": "AutoMatch IQ",
+      "category": "Marketplace Telemetry & SQL Analytics",
+      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#hub",
+      "summary": "Two-sided marketplace funnel telemetry system with an embedded SQL runner analyzing match rate drop-offs and liquidity dynamics.",
+      "key_metrics": "Pinpointed 24% conversion bottleneck in liquidity allocation"
+    },
+    {
+      "name": "Ketto Campaign Assistant",
+      "category": "Donor Engagement AI",
+      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#hub",
+      "summary": "Conversational assistive interface for medical crowdfunding campaign creation, guiding organizers through high-conversion storytelling.",
+      "key_metrics": "Drafting time reduced from 45 minutes to 7 minutes"
+    },
+    {
+      "name": "Lead Radar",
+      "category": "B2B Intent & Pipeline Engine",
+      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#hub",
+      "summary": "B2B intent scoring and lead discovery tool that enriches firmographic data and prioritizes high-propensity target accounts.",
+      "key_metrics": "Ranked 5,000+ domain prospects with customizable ICP filters"
+    }
+  ],
+  "skills": {
+    "product_management": [
+      "Product Discovery & Customer Interviews",
+      "Technical PRD Authoring & User Stories",
+      "Sprint Planning & Backlog Grooming",
+      "User Journey Mapping & Wireframing",
+      "Funnel Telemetry & Conversion Analytics",
+      "A/B Hypothesis Testing & Experimentation",
+      "Release Management & Launch Roadmaps"
+    ],
+    "ai_and_technical": [
+      "LLM Evaluation & Benchmarking",
+      "NVIDIA NIM & Local Model Deployment",
+      "Token Unit Economics & Latency Optimization",
+      "JSON Schema Enforcement & Guardrails",
+      "Prompt Engineering & Few-Shot Design",
+      "SQL Data Extraction & Analytics",
+      "FastAPI & RESTful API Architecture",
+      "Git & Technical Workflow Automation"
+    ],
+    "operations_and_business": [
+      "B2B Enterprise Client Acquisition",
+      "P&L and Unit Economics Discipline",
+      "Field Logistics & Shift Scheduling",
+      "SLA Formulation & Compliance",
+      "Vendor Negotiation & Contract Management",
+      "Cross-Functional Team Leadership"
+    ],
+    "tools": [
+      "Jira",
+      "Figma",
+      "Linear",
+      "Notion",
+      "Postman",
+      "Mixpanel",
+      "SQL (PostgreSQL)",
+      "Playwright",
+      "Python",
+      "Google Workspace"
+    ]
+  },
+  "education": [
+    {
+      "degree": "Bachelor of Commerce (B.Com)",
+      "institution": "University of Mumbai",
+      "specialization": "Commercial Management, Accounting & Finance",
+      "location": "Mumbai, India"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Certified International Project Manager (CIPM)",
+      "issuer": "Project Management Institute (PMI)"
+    },
+    {
+      "name": "Operations Management",
+      "issuer": "Saylor University"
+    },
+    {
+      "name": "Business Analytics",
+      "issuer": "upGrad"
+    },
+    {
+      "name": "Product Management Certified",
+      "issuer": "Pendo.io"
+    },
+    {
+      "name": "Prompt Engineering for Developers",
+      "issuer": "DeepLearning.AI"
+    },
+    {
+      "name": "Summer of Product 2025",
+      "issuer": "HelloPM"
+    }
+  ],
+  "tone_rules": {
+    "style": "Early-career builder, founder-operator mindset, concise, outcome-oriented",
+    "forbidden_patterns": [
+      "em dash (—)",
+      "double dash (-- used as punctuation)",
+      "corporate buzzwords (spearheaded synergistic paradigms, leverage holistic cross-functional synergies)",
+      "robotic cover letter openings (I am writing to express my enthusiasm, My name is...)",
+      "fabricated corporate tenures or claiming 10+ years of corporate enterprise PM experience"
+    ],
+    "required_framing": "Emphasize hands-on technical product execution (PRDs, Llama 3.1 cost reduction, NVIDIA NIM, EvalGuard AI, SQL funnel analysis) backed by real-world operational grit (NeoManpower 50+ B2B clients, 133 personnel, zero SLA breaches)."
+  }
+}

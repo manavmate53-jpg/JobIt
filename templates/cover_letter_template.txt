@@ -1,0 +1,14 @@
+Hi {{ hiring_person }},
+
+I noticed {{ company }} is scaling {{ role }}, focused on {{ product_focus }}.
+
+At HireFlo India, I owned product discovery and shipped our Llama 3.1 inference pipeline via NVIDIA NIM, cutting compute costs by 40% while building a 1,000-doc parsing workflow in 10 minutes. Previously, I bootstrapped NeoManpower from zero, acquiring 50+ B2B corporate clients and managing 200+ on-ground deployments across Mumbai with zero SLA breaches.
+
+I also built working interactive systems in my PM Product Lab, including EvalGuard AI (schema guardrails) and AutoMatch IQ (funnel telemetry).
+
+I would love to discuss how my technical PRD execution and operational discipline can support {{ company }}.
+
+Best regards,
+Manav Mate
++91 85915 95889 | manavmate53@gmail.com
+Live Builds: https://manavmate53-jpg.github.io/pm-product-lab/#hub
