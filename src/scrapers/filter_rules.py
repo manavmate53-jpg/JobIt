@@ -97,9 +97,19 @@ def check_negative_filters(
             return False, f"Domain Trap: Offline vehicle/equipment NBFC financing ({pat})"
 
     # 4. Check mandatory 5+ years corporate PM gate
-    # Check title first (e.g. VP, Director, Head of Product)
+    # Check title first (e.g. Vice President, VP, Director, Head of Product, Principal)
     title_lower = title.lower()
-    for pat in [r"\b(?:director|vp|vice\s+president|head)\s+of\s+product\b", r"\bchief\s+product\s+officer\b", r"\bgroup\s+product\s+manager\b"]:
+    senior_title_patterns = [
+        r"\bvice\s+president\b",
+        r"\bvp\b",
+        r"\bdirector\b",
+        r"\bhead\s+of\s+product\b",
+        r"\bchief\s+product\s+officer\b",
+        r"\bprincipal\s+(?:product|pm)\b",
+        r"\bgroup\s+product\s+manager\b",
+        r"\bgeneral\s+manager\b",
+    ]
+    for pat in senior_title_patterns:
         if re.search(pat, title_lower, flags=re.IGNORECASE):
             return False, f"Seniority Trap: Title indicates executive hierarchy ({pat})"
 

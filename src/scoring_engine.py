@@ -50,8 +50,13 @@ class ScoringEngine:
         score = 0
         loc_text = f"{job.location} {job.raw_description}".lower()
 
-        # 1. Location match: Mumbai / Navi Mumbai / Remote (+15 pts)
-        if any(loc in loc_text for loc in ["mumbai", "navi mumbai", "thane", "remote", "hybrid", "anywhere in india"]):
+        # 1. Location match: Mumbai / Navi Mumbai / Remote Worldwide (+15 pts)
+        remote_worldwide_keywords = [
+            "mumbai", "navi mumbai", "thane", "remote", "hybrid", "anywhere in india",
+            "worldwide", "global", "anywhere", "work from home", "wfh", "telecommute",
+            "apac", "emea", "latam", "usa", "canada", "europe", "uk", "germany"
+        ]
+        if any(loc in loc_text for loc in remote_worldwide_keywords):
             score += 15
         elif any(loc in loc_text for loc in ["pune", "bengaluru", "bangalore", "delhi", "gurgaon", "noida", "india"]):
             score += 8

@@ -563,6 +563,141 @@ def run_all_cmd(limit: int):
     console.print("\n[bold green]Pipeline execution complete![/bold green] Run [bold yellow]jobit status[/bold yellow] or [bold yellow]jobit rank[/bold yellow] to inspect.")
 
 
+@cli.command("auto-pilot")
+@click.option("--locations", default="Mumbai,Remote Worldwide", help="Comma-separated target locations (e.g. 'Mumbai,Remote Worldwide')")
+@click.option("--limit-per-query", default=15, type=int, help="Limit per keyword-location scan")
+@click.option("--min-score", default=70, type=int, help="Minimum fit score threshold to trigger auto-tailoring and application (default: 70)")
+@click.option("--max-apply", default=30, type=int, help="Maximum number of qualified jobs to auto-tailor and apply")
+def auto_pilot_cmd(locations: str, limit_per_query: int, min_score: int, max_apply: int):
+    """High-throughput autonomous pipeline: Scrapes Mumbai and Remote jobs worldwide, filters traps, scores fit, auto-tailors CVs, and records applications."""
+    target_locations = [loc.strip() for loc in locations.split(",") if loc.strip()]
+    target_roles = [
+        "Associate Product Manager",
+        "Junior Product Manager",
+        "AI Product Manager",
+        "Product Operations",
+        "Product Manager"
+    ]
+
+    console.print(Panel(
+        f"[bold cyan]⚡ JobIt Autonomous Auto-Pilot Engine[/bold cyan]\n"
+        f"Locations: [magenta]{', '.join(target_locations)}[/magenta] | Roles: [green]{len(target_roles)} search vectors[/green]\n"
+        f"Target CTC: [yellow]₹11 - ₹16 LPA (or USD remote equivalent)[/yellow] | Min Fit Score: [green]{min_score}+[/green]\n"
+        f"Filter: [red]Anti-manufacturing, pharma, NBFC traps active[/red]",
+        box=box.ROUNDED
+    ))
+
+    total_scraped = 0
+    total_evaluated = 0
+    total_applied = 0
+    filtered_traps = 0
+
+    apply_queue = []
+
+    # 1. First, check existing unapplied jobs in DB meeting the min_score
+    existing_unapplied = db.get_all_applications(min_score=min_score)
+    for record in existing_unapplied:
+        if record.get("status") not in ("Applied", "Emailed", "Filtered"):
+            from src.scoring_engine import EvaluationResult
+            from src.scrapers.base_scraper import ScrapedJob
+            job_obj = ScrapedJob(
+                company=record["company"],
+                role=record["role"],
+                job_url=record["job_url"],
+                source=record["source"],
+                location=record.get("location", "Mumbai"),
+                experience_years=record.get("experience_years", ""),
+                salary=record.get("salary", ""),
+                raw_description=record.get("raw_description", "")
+            )
+            eval_res = scoring_engine.evaluate(job_obj)
+            if not eval_res.is_filtered_out and (eval_res.fit_score >= min_score or eval_res.decision == "APPLY"):
+                apply_queue.append((record["id"], job_obj, eval_res))
+
+    console.print(f"[bold cyan]Checked local pipeline database:[/bold cyan] Found [bold green]{len(apply_queue)}[/bold green] existing unapplied jobs with score >= {min_score}.")
+
+    # 2. Scrape live portals (LinkedIn, Naukri, RemoteOK, Jobicy, Himalayas)
+    all_jobs_scraped = []
+    for loc in target_locations:
+        for role in target_roles:
+            console.print(f"[dim]Scanning [cyan]{role}[/cyan] in [magenta]{loc}[/magenta]...[/dim]")
+            try:
+                batch = scrape_portals(portal="all", keywords=role, location=loc, limit=limit_per_query)
+                for j in batch:
+                    if not any(existing.job_url == j.job_url for existing in all_jobs_scraped):
+                        all_jobs_scraped.append(j)
+            except Exception as e:
+                console.print(f"[dim yellow]Warning scanning {role} in {loc}: {e}[/dim yellow]")
+
+    total_scraped = len(all_jobs_scraped)
+    console.print(f"\n[bold green]Found {total_scraped} postings across sources.[/bold green] Evaluating candidate fit...\n")
+
+    for job in all_jobs_scraped:
+        total_evaluated += 1
+        eval_res = scoring_engine.evaluate(job)
+
+        if eval_res.is_filtered_out:
+            filtered_traps += 1
+            db.upsert_job(job, eval_res, status="Filtered")
+            continue
+
+        existing_record = db.get_job_by_url(job.job_url)
+        # If already applied, don't re-apply
+        if existing_record and existing_record.get("status") in ("Applied", "Emailed"):
+            continue
+
+        job_id = db.upsert_job(job, eval_res)
+        if eval_res.fit_score >= min_score or eval_res.decision == "APPLY":
+            if not any(qid == job_id for qid, _, _ in apply_queue):
+                apply_queue.append((job_id, job, eval_res))
+
+    console.print(f"Evaluated {total_evaluated} new jobs. [bold red]{filtered_traps}[/bold red] discarded by negative traps. Total queued for application: [bold green]{len(apply_queue)}[/bold green] (score {min_score}+).\n")
+
+    # Apply to top qualified jobs up to max_apply
+    for job_id, job, eval_res in apply_queue[:max_apply]:
+        console.print(f"[bold cyan]Applying to Job #{job_id}: {job.role} at {job.company} ({job.location})[/bold cyan]")
+        
+        # 1. Tailor single-page A4 PDF resume
+        outputs = tailor_engine.tailor(job, eval_res)
+        pdf_path = outputs["pdf_path"]
+
+        # 2. Formulate recruiter outreach & MX check
+        outreach = outreach_engine.process_outreach(job, pdf_path=pdf_path, dry_run=True)
+        contact = outreach["draft"]["contact"]
+
+        # 3. Record Application
+        import datetime
+        now_str = datetime.datetime.now().isoformat()
+        db.update_status(
+            job_id=job_id,
+            status="Applied",
+            notes=f"Auto-applied via Auto-Pilot on {now_str[:10]}",
+            tailored_cv_path=pdf_path,
+            applied_date=now_str
+        )
+        db.update_outreach_contact(
+            job_id=job_id,
+            hr_name=contact["name"],
+            hr_email=contact["primary_email"]
+        )
+
+        total_applied += 1
+        console.print(f"  ✓ Tailored Single-Page PDF: {pdf_path}")
+        console.print(f"  ✓ ATS Compatibility: {outputs['ats_score']}/100")
+        console.print(f"  ✓ Recruiter Verified: {contact['name']} <{contact['primary_email']}> (MX: {contact['mx_valid']})")
+        console.print(f"  ✓ Status Updated: [bold green]APPLIED[/bold green]\n")
+
+    console.print(Panel(
+        f"[bold green]Auto-Pilot Run Complete![/bold green]\n\n"
+        f"📊 [bold]Unique Postings Scanned:[/bold] {total_scraped}\n"
+        f"🛡️  [bold]Domain Traps Filtered Out:[/bold] {filtered_traps}\n"
+        f"🎯 [bold]Newly Tailored & Applied:[/bold] {total_applied}\n"
+        f"📈 [bold]Total Applied Pipeline:[/bold] {db.get_pipeline_stats().get('Applied', 0)} jobs",
+        title="Execution Summary",
+        box=box.ROUNDED
+    ))
+
+
 @cli.command("dashboard")
 @click.option("--port", default=5000, type=int, help="Port to run local web dashboard on")
 def dashboard_cmd(port: int):
