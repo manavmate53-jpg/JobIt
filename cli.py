@@ -280,6 +280,71 @@ def match_cmd(job_id: int):
     ))
 
 
+@cli.command("apply")
+@click.argument("job_id", type=int)
+@click.option("--notes", default="Applied via JobIt automated pipeline", help="Notes regarding application submission")
+def apply_cmd(job_id: int, notes: str):
+    """Marks a job as Applied, auto-tailoring CV and drafting recruiter outreach if needed."""
+    app = db.get_job_by_id(job_id)
+    if not app:
+        console.print(f"[bold red]Error:[/bold red] Job #{job_id} not found.")
+        return
+
+    job = ScrapedJob(
+        company=app["company"],
+        role=app["role"],
+        job_url=app["job_url"],
+        source=app["source"],
+        location=app.get("location", "Mumbai"),
+        raw_description=app.get("raw_description", ""),
+        hr_name=app.get("hr_name"),
+        hr_email=app.get("hr_email"),
+    )
+
+    pdf_cv = app.get("tailored_cv_path")
+
+    # If CV not yet tailored, tailor it now
+    if not pdf_cv or not os.path.exists(pdf_cv):
+        console.print(f"[bold cyan]Auto-tailoring CV for {job.role} at {job.company}...[/bold cyan]")
+        eval_result = scoring_engine.evaluate(job)
+        outputs = tailor_engine.tailor(job, eval_result)
+        pdf_cv = outputs["pdf_path"]
+
+    # Generate outreach draft for safety
+    outreach = outreach_engine.process_outreach(job, pdf_path=pdf_cv, dry_run=True)
+    contact = outreach["draft"]["contact"]
+
+    import datetime
+    now_str = datetime.datetime.now().isoformat()
+
+    db.update_status(
+        job_id=job_id,
+        status="Applied",
+        notes=notes,
+        tailored_cv_path=pdf_cv,
+        applied_date=now_str
+    )
+    db.update_outreach_contact(
+        job_id=job_id,
+        hr_name=contact["name"],
+        hr_email=contact["primary_email"]
+    )
+
+    console.print(Panel(
+        f"[bold green]Application Successfully Recorded for Job #[/bold green][bold white]{job_id}[/bold white]\n\n"
+        f"🏢 [bold]Company:[/bold] {job.company}\n"
+        f"💼 [bold]Role:[/bold] {job.role} ({job.location})\n"
+        f"📊 [bold]Fit Score:[/bold] [bold green]{app.get('fit_score')}/100[/bold green] | [bold]Status:[/bold] [bold green]APPLIED[/bold green]\n"
+        f"🌐 [bold]Application Portal URL:[/bold] [link={job.job_url}]{job.job_url}[/link]\n\n"
+        f"📄 [bold]Tailored A4 PDF Resume:[/bold] {pdf_cv}\n"
+        f"👤 [bold]Target Recruiter:[/bold] {contact['name']} <{contact['primary_email']}>\n"
+        f"💬 [bold]LinkedIn Note Drafted:[/bold] \"{outreach['draft']['linkedin_note']}\"\n"
+        f"💾 [bold]Outreach Draft Path:[/bold] {outreach['draft_txt_path']}",
+        title="Application Confirmed",
+        box=box.ROUNDED
+    ))
+
+
 @cli.command("outreach")
 @click.argument("job_id", type=int)
 @click.option("--dry-run/--send", default=True, help="Deterministic safe dry-run (default: true) vs live SMTP dispatch")

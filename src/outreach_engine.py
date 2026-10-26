@@ -176,14 +176,16 @@ class OutreachEngine:
             f"at NeoManpower with zero SLA breaches. Would love to connect and share my interactive PM Lab builds: "
             f"https://manavmate53-jpg.github.io/pm-product-lab/#hub"
         )
-        linkedin_note = sanitize_builder_text(linkedin_note)
-        if len(linkedin_note) > 298:
-            # Compact version
+        short_role = job.role.split(" - ")[0].split(" (")[0]
+        if len(linkedin_note) > 295:
+            # Compact version using clean shortened role
             linkedin_note = (
-                f"Hi {first_name}, saw {job.company}'s {job.role} role. At HireFlo I cut Llama 3.1 compute costs by 40% "
+                f"Hi {first_name}, saw {job.company}'s {short_role} role. At HireFlo I cut Llama 3.1 compute costs by 40% "
                 f"and led 200+ ops deployments at NeoManpower with 0 SLA breaches. "
-                f"Would love to connect and share my PM Lab builds: https://manavmate53-jpg.github.io/pm-product-lab/#hub"
+                f"Would love to connect and share my PM builds: https://manavmate53-jpg.github.io/pm-product-lab/#hub"
             )
+        if len(linkedin_note) > 295:
+            linkedin_note = linkedin_note[:292] + "..."
 
         # Cold Email Subject & Body
         email_subject = f"{job.role} - Manav Mate | Builder & Product Manager"
