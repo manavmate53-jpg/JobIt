@@ -110,6 +110,71 @@ BENCHMARK_LINKEDIN_JOBS = [
             "Candidate should possess high grit, direct operational field leadership background, SQL fluency, and strong Jira hygiene. "
             "Candidates with founder experience in logistics or commercial operations are strongly encouraged to apply."
         )
+    },
+    {
+        "company": "CRED",
+        "role": "Product Owner - Core Payments & Growth",
+        "location": "Mumbai / Remote",
+        "job_url": "https://www.linkedin.com/jobs/view/cred-product-owner-payments-40481920",
+        "experience_years": "1-3 years",
+        "salary": "₹14,00,000 - ₹18,00,000",
+        "posting_date": "1 day ago",
+        "hr_name": "Kunal Shah",
+        "hr_email": "kunal@cred.club",
+        "raw_description": (
+            "CRED is looking for a relentless Product Owner to lead our high-velocity Payments & Checkout sprint squad. "
+            "You will own sprint backlogs, define user stories with engineering acceptance criteria, track funnel drop-offs, "
+            "and partner with design on delight-driven UI. Prior experience as founder, APM, or product owner with strong SQL curiosity preferred."
+        )
+    },
+    {
+        "company": "Swiggy",
+        "role": "Product Intern / PM Intern (Consumer & Quick Commerce)",
+        "location": "Mumbai, Maharashtra, India",
+        "job_url": "https://www.linkedin.com/jobs/view/swiggy-product-intern-mumbai-40581922",
+        "experience_years": "0-1 years / Fresher",
+        "salary": "₹40,000 - ₹60,000 / month Stipend (PPO eligible ₹12-14 LPA)",
+        "posting_date": "Just now",
+        "hr_name": "Tanmay Bhat",
+        "hr_email": "tanmay.bhat@swiggy.in",
+        "raw_description": (
+            "Swiggy is seeking an ambitious Product Intern / PM Intern to join our Quick Commerce and delivery experience team in Mumbai. "
+            "You will run user feedback interviews, conduct competitor benchmarking, write user stories in Jira, "
+            "and evaluate SQL query telemetry for delivery rider allocation. Early builders, former student founders, and CIPM certified coordinators encouraged."
+        )
+    },
+    {
+        "company": "Atlassian",
+        "role": "Agile Project Coordinator / Scrum Master (CIPM)",
+        "location": "Remote / Mumbai (Hybrid)",
+        "job_url": "https://www.linkedin.com/jobs/view/atlassian-agile-project-coordinator-40681924",
+        "experience_years": "1-3 years",
+        "salary": "₹12,00,000 - ₹16,00,000",
+        "posting_date": "2 days ago",
+        "hr_name": "Rachel Adams",
+        "hr_email": "radams@atlassian.com",
+        "raw_description": (
+            "Atlassian is hiring an Agile Project Coordinator / Scrum Master to facilitate distributed agile ceremonies, "
+            "track cross-squad release milestones, and monitor Jira sprint burn-down metrics. "
+            "Requirements: Certified Project Manager (PMI CIPM or Scrum Master), strong asynchronous documentation, "
+            "and proven ability to manage complex project deliverables with zero SLA breaches."
+        )
+    },
+    {
+        "company": "Zepto",
+        "role": "Growth Product Manager (Consumer / Marketplace)",
+        "location": "Mumbai, Maharashtra, India",
+        "job_url": "https://www.linkedin.com/jobs/view/zepto-growth-pm-marketplace-40781926",
+        "experience_years": "1-3 years",
+        "salary": "₹13,00,000 - ₹17,00,000",
+        "posting_date": "3 days ago",
+        "hr_name": "Rohan Deshmukh",
+        "hr_email": "rohan.deshmukh@zepto.co",
+        "raw_description": (
+            "Zepto is hiring a Growth Product Manager for our Consumer App & Marketplace monetization. "
+            "You will run fast-paced A/B testing cycles, optimize user activation funnels, evaluate notification push click-throughs, "
+            "and analyze cohort retention curves. High analytical grit, SQL proficiency, and founder mindset preferred."
+        )
     }
 ]
 

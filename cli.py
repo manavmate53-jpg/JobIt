@@ -565,19 +565,34 @@ def run_all_cmd(limit: int):
 
 @cli.command("auto-pilot")
 @click.option("--locations", default="Mumbai,Remote Worldwide", help="Comma-separated target locations (e.g. 'Mumbai,Remote Worldwide')")
+@click.option("--roles", default="", help="Comma-separated target role queries (e.g. 'Product Intern,Product Owner,Operations Lead')")
 @click.option("--limit-per-query", default=15, type=int, help="Limit per keyword-location scan")
 @click.option("--min-score", default=70, type=int, help="Minimum fit score threshold to trigger auto-tailoring and application (default: 70)")
 @click.option("--max-apply", default=30, type=int, help="Maximum number of qualified jobs to auto-tailor and apply")
-def auto_pilot_cmd(locations: str, limit_per_query: int, min_score: int, max_apply: int):
+def auto_pilot_cmd(locations: str, roles: str, limit_per_query: int, min_score: int, max_apply: int):
     """High-throughput autonomous pipeline: Scrapes Mumbai and Remote jobs worldwide, filters traps, scores fit, auto-tailors CVs, and records applications."""
     target_locations = [loc.strip() for loc in locations.split(",") if loc.strip()]
-    target_roles = [
-        "Associate Product Manager",
-        "Junior Product Manager",
-        "AI Product Manager",
-        "Product Operations",
-        "Product Manager"
-    ]
+    if roles:
+        target_roles = [r.strip() for r in roles.split(",") if r.strip()]
+    else:
+        target_roles = [
+            "Product Intern",
+            "PM Intern",
+            "Product Owner",
+            "PO Intern",
+            "Associate Product Manager",
+            "Product Manager",
+            "AI Product Manager",
+            "Technical Product Manager",
+            "Product Operations Specialist",
+            "Growth Product Manager",
+            "Fintech Product Analyst",
+            "B2B SaaS Solutions Consultant",
+            "Business Analyst",
+            "Agile Project Coordinator",
+            "Supply Chain & Demand Planning Associate",
+            "Operations Lead"
+        ]
 
     console.print(Panel(
         f"[bold cyan]⚡ JobIt Autonomous Auto-Pilot Engine[/bold cyan]\n"

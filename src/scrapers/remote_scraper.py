@@ -255,18 +255,23 @@ class RemoteJobScraper(BaseScraper):
         if any(x in t for x in negative_roles):
             return False
 
-        # Positive target PM and product ops titles
+        # Positive target PM, Ops, Agile, BA, and Supply Chain titles
         target_patterns = [
-            "product manager", "associate product", "junior product",
-            "product operations", "product lead", "product owner",
-            "technical product", "ai product", "apm", "product analyst",
-            "growth product", "head of product", "lead product", "chief of staff - product"
+            "product manager", "associate product", "junior product", "product intern", "pm intern",
+            "product operations", "product ops", "product lead", "product owner", "po intern",
+            "technical product", "ai product", "genai", "apm", "product analyst",
+            "growth product", "chief of staff - product",
+            "solutions consultant", "solutions associate", "saas consultant",
+            "business analyst", "systems analyst", "product systems",
+            "project manager", "agile project coordinator", "project coordinator", "scrum master",
+            "supply chain", "demand planning", "s&op",
+            "operations lead", "project operations manager", "operations specialist", "operations manager"
         ]
         if any(p in t for p in target_patterns):
             return True
 
-        # Check if title has 'product' and ('manager' or 'lead' or 'specialist' or 'associate')
-        if "product" in t and any(w in t for w in ["manager", "lead", "associate", "specialist", "owner", "analyst", "ops", "operations"]):
+        # Check if title has 'product' and ('manager' or 'lead' or 'specialist' or 'associate' or 'intern')
+        if "product" in t and any(w in t for w in ["manager", "lead", "associate", "specialist", "owner", "analyst", "ops", "operations", "intern"]):
             return True
 
         return False

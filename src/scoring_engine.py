@@ -61,33 +61,35 @@ class ScoringEngine:
         elif any(loc in loc_text for loc in ["pune", "bengaluru", "bangalore", "delhi", "gurgaon", "noida", "india"]):
             score += 8
 
-        # 2. Experience band match: 0-3 years / fresher / entry-level (+15 pts)
+        # 2. Experience band match: 0-3 years / fresher / entry-level / intern (+15 pts)
         exp_text = f"{job.experience_years} {job.raw_description}".lower()
-        if any(w in exp_text for w in ["0-", "1-", "2-", "0 to", "1 to", "2 to", "entry level", "associate", "junior", "fresher", "early career", "1-3", "2-3", "1-2"]):
+        if any(w in exp_text for w in ["0-", "1-", "2-", "0 to", "1 to", "2 to", "entry level", "associate", "junior", "fresher", "intern", "trainee", "early career", "1-3", "2-3", "1-2"]):
             score += 15
         elif any(w in exp_text for w in ["3-4", "3-5", "2-4", "2-5", "mid level"]):
             score += 10
         elif any(w in exp_text for w in ["5+", "6+", "7+", "8+", "10+"]):
             score += 0
         else:
-            # Default for unspecified experience if title says APM or Junior
+            # Default for unspecified experience if title indicates early career or specialist
             title_lower = job.role.lower()
-            if any(t in title_lower for t in ["associate", "junior", "apm", "coordinator", "analyst"]):
+            if any(t in title_lower for t in ["associate", "junior", "apm", "coordinator", "analyst", "intern", "specialist", "trainee", "lead"]):
                 score += 15
             else:
                 score += 10
 
-        # 3. Domain match: Software, AI, Fintech, B2B SaaS, Marketplaces, Supply Chain (+10 pts)
+        # 3. Domain match: Software, AI, Fintech, B2B SaaS, Marketplaces, Supply Chain, Operations (+10 pts)
         domain_text = f"{job.role} {job.company} {job.raw_description}".lower()
         target_domains = [
             "ai", "llm", "genai", "software", "saas", "b2b", "fintech",
             "marketplace", "logistics", "supply chain", "fleet", "operations",
-            "kyc", "compliance", "developer tools", "product operations", "data"
+            "kyc", "compliance", "developer tools", "product operations", "data",
+            "s&op", "demand planning", "project management", "agile", "business analyst",
+            "solutions", "systems", "growth", "product owner"
         ]
         matches = [d for d in target_domains if d in domain_text]
         if matches:
             score += 10
-        elif any(d in domain_text for d in ["tech", "digital", "internet", "e-commerce"]):
+        elif any(d in domain_text for d in ["tech", "digital", "internet", "e-commerce", "analytics"]):
             score += 6
 
         return min(40, score)
@@ -167,6 +169,11 @@ class ScoringEngine:
             "B2B Enterprise Discovery": ["b2b", "enterprise", "client", "stakeholder", "vendor", "account", "contract"],
             "Jira & Agile Sprint Planning": ["jira", "agile", "scrum", "sprint", "grooming", "standup", "velocity"],
             "Document Parsing & KYC": ["kyc", "document", "parsing", "verification", "gst", "gstin", "compliance", "fraud"],
+            "Agile Project Coordination (CIPM)": ["cipm", "project management", "project coordinator", "milestones", "pmi", "deliverables", "gantt"],
+            "Supply Chain & S&OP Planning": ["supply chain", "demand planning", "s&op", "inventory", "procurement", "dispatch"],
+            "Business & Systems Analysis": ["business analyst", "systems analyst", "solutions", "functional specs", "workflows", "gap analysis"],
+            "Growth & Marketplace Mechanics": ["growth", "marketplace", "retention", "activation", "experimentation", "monetization"],
+            "Product Ownership & Backlog": ["product owner", "user stories", "acceptance criteria", "po intern", "backlog"]
         }
 
         matched_skills = []
@@ -178,7 +185,7 @@ class ScoringEngine:
             matched_skills = ["Technical PRDs", "Jira & Agile", "SQL & Telemetry", "Operations Planning"]
 
         # Calculate semantic score based on matches and relevance
-        base_sem = 30
+        base_sem = 32
         bonus = min(28, len(matched_skills) * 4)
         sem_score = base_sem + bonus
 
@@ -193,7 +200,15 @@ class ScoringEngine:
                 "Lead with HireFlo India NVIDIA NIM optimization, 1,000-doc parsing pipeline, "
                 "and live EvalGuard AI token economics demo."
             )
-        elif "logistics" in job_text or "operations" in job_text or "supply" in job_text:
+        elif "cipm" in job_text or "project manager" in job_text or "project coordinator" in job_text or "agile" in job_text:
+            gap = (
+                "Role requires disciplined milestone tracking and agile sprint cadence. "
+                "Candidate's PMI CIPM certification and NeoManpower track record managing 200+ projects with zero SLA breaches proves delivery rigor."
+            )
+            angle = (
+                "Highlight CIPM project certification, Jira sprint hygiene, and hands-on SLA adherence."
+            )
+        elif "supply" in job_text or "s&op" in job_text or "demand" in job_text or "logistics" in job_text or "operations" in job_text:
             gap = (
                 "Role seeks deep operational empathy alongside software tools. "
                 "Candidate's NeoManpower track record (50+ B2B clients, 133 personnel, 200+ projects with zero SLA breaches) "
@@ -201,6 +216,14 @@ class ScoringEngine:
             )
             angle = (
                 "Highlight NeoManpower commercial operations leadership and AutoMatch IQ marketplace funnel telemetry."
+            )
+        elif "business analyst" in job_text or "systems" in job_text or "solutions" in job_text:
+            gap = (
+                "Role requires bridging business workflows with technical specifications. "
+                "Candidate's B.Com commercial background, upGrad Business Analytics certification, and technical PRD authoring bridges this seamlessly."
+            )
+            angle = (
+                "Emphasize business analytics, SQL data querying, and clear functional specification drafting."
             )
         elif "fintech" in job_text or "kyc" in job_text or "b2b" in job_text:
             gap = (
