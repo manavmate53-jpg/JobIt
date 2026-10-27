@@ -721,5 +721,56 @@ def dashboard_cmd(port: int):
     run_dashboard(port=port)
 
 
+@cli.command("check-replies")
+@click.option("--max-emails", default=50, type=int, help="Number of recent emails to scan")
+def check_replies_cmd(max_emails: int):
+    """Scans inbox for responses, interview invites, and status updates from recruiters."""
+    from src.inbox_monitor import InboxMonitor
+    monitor = InboxMonitor()
+
+    if not monitor.is_configured():
+        console.print(Panel(
+            "[bold yellow]⚠️  Inbox Monitor Not Configured[/bold yellow]\n\n"
+            "To automatically track recruiter replies from [bold]manavmate53@gmail.com[/bold], add your credentials to [bold].env[/bold]:\n\n"
+            "  [cyan]SMTP_USER=manavmate53@gmail.com[/cyan]\n"
+            "  [cyan]SMTP_PASSWORD=your_16_char_google_app_password[/cyan]\n\n"
+            "[dim]Note: All 122 job applications are tracked locally in data/jobit.db, and 143 outreach drafts are ready in exports/outreach_drafts/.\n"
+            "Outbound emails are held in dry-run mode until you run 'cli.py outreach <ID> --send'.[/dim]",
+            title="Inbox Monitor Setup",
+            box=box.ROUNDED
+        ))
+        return
+
+    applied_jobs = [j for j in db.get_all_applications() if j.get("status") == "Applied"]
+    tracked_companies = list({j["company"] for j in applied_jobs if j.get("company")})
+
+    with console.status(f"[bold green]Scanning inbox for replies across {len(tracked_companies)} tracked companies...[/bold green]"):
+        replies = monitor.check_for_replies(tracked_companies, max_emails=max_emails)
+
+    if not replies:
+        console.print(Panel(
+            f"[bold green]✓ Inbox Scan Complete[/bold green]\n\n"
+            f"Scanned latest {max_emails} emails for {len(tracked_companies)} tracked companies.\n"
+            "[bold white]No new recruiter replies or interview invites detected.[/bold white]",
+            title="Reply Status",
+            box=box.ROUNDED
+        ))
+        return
+
+    table = Table(title="📬 Recruiter Responses & Updates Detected", box=box.ROUNDED)
+    table.add_column("Company", style="cyan", font_style="bold")
+    table.add_column("Sender", style="white")
+    table.add_column("Subject", style="yellow")
+    table.add_column("Date", style="dim")
+    table.add_column("Type", style="magenta")
+
+    for rep in replies:
+        rtype = "[green]Interview[/green]" if rep["is_interview"] else ("[red]Rejection[/red]" if rep["is_rejection"] else "Response")
+        table.add_row(rep["company"], rep["sender"], rep["subject"][:40], rep["date"], rtype)
+
+    console.print(table)
+
+
 if __name__ == "__main__":
     cli()
+
