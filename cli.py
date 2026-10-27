@@ -8,11 +8,15 @@ import os
 import sys
 from pathlib import Path
 import click
+from dotenv import load_dotenv
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from rich import box
+
+load_dotenv()
+
 
 from src.profile_engine import ProfileEngine
 from src.scrapers import scrape_portals
@@ -758,7 +762,7 @@ def check_replies_cmd(max_emails: int):
         return
 
     table = Table(title="📬 Recruiter Responses & Updates Detected", box=box.ROUNDED)
-    table.add_column("Company", style="cyan", font_style="bold")
+    table.add_column("Company", style="bold cyan")
     table.add_column("Sender", style="white")
     table.add_column("Subject", style="yellow")
     table.add_column("Date", style="dim")
@@ -766,9 +770,10 @@ def check_replies_cmd(max_emails: int):
 
     for rep in replies:
         rtype = "[green]Interview[/green]" if rep["is_interview"] else ("[red]Rejection[/red]" if rep["is_rejection"] else "Response")
-        table.add_row(rep["company"], rep["sender"], rep["subject"][:40], rep["date"], rtype)
+        table.add_row(rep["company"], rep["sender"][:30], rep["subject"][:45], rep["date"][:25], rtype)
 
     console.print(table)
+
 
 
 if __name__ == "__main__":

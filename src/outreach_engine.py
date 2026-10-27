@@ -25,12 +25,16 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+from dotenv import load_dotenv
 import requests
+
+load_dotenv()
 
 from src.profile_engine import ProfileEngine, sanitize_builder_text
 from src.scrapers.base_scraper import ScrapedJob
 
 logger = logging.getLogger(__name__)
+
 
 
 def derive_domain_from_company_or_url(company: str, job_url: str = "") -> str:
@@ -273,8 +277,10 @@ class OutreachEngine:
     def _dispatch_smtp(self, draft: Dict[str, Any]) -> Dict[str, Any]:
         """Dispatches email via standard SMTP."""
         smtp_user = os.getenv("SMTP_USER") or os.getenv("EMAIL_USER")
-        smtp_password = os.getenv("SMTP_PASSWORD") or os.getenv("EMAIL_PASSWORD")
+        raw_pw = os.getenv("SMTP_PASSWORD") or os.getenv("EMAIL_PASSWORD")
+        smtp_password = raw_pw.replace(" ", "") if raw_pw else None
         smtp_host = os.getenv("SMTP_HOST", "smtp.gmail.com")
+
         smtp_port = int(os.getenv("SMTP_PORT", "587"))
 
         recipient = draft["contact"]["primary_email"]
