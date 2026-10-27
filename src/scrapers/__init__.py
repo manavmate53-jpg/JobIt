@@ -9,12 +9,21 @@ from src.scrapers.filter_rules import check_negative_filters
 from src.scrapers.linkedin_scraper import LinkedInScraper
 from src.scrapers.naukri_scraper import NaukriScraper
 from src.scrapers.remote_scraper import RemoteJobScraper
+from src.scrapers.startup_scraper import (
+    WeWorkRemotelyScraper,
+    WellfoundScraper,
+    CutshortScraper,
+    InstahyreScraper,
+    LevelsFyiScraper,
+    ArcDevScraper,
+    IndeedScraper,
+)
 
 logger = logging.getLogger(__name__)
 
 
 def scrape_portals(portal: str = "all", keywords: str = "Product Manager", location: str = "Mumbai", limit: int = 20) -> List[ScrapedJob]:
-    """Unified entrypoint to scrape jobs across LinkedIn, Naukri, Remote Worldwide, or all."""
+    """Unified entrypoint to scrape jobs across LinkedIn, Naukri, Wellfound, Cutshort, Instahyre, WeWorkRemotely, Levels.fyi, Arc.dev, and Indeed."""
     scrapers: List[BaseScraper] = []
     p = portal.lower()
     loc_lower = location.lower()
@@ -27,9 +36,23 @@ def scrape_portals(portal: str = "all", keywords: str = "Product Manager", locat
         scrapers.append(NaukriScraper())
     if p in ("remote", "all") or is_remote_search:
         scrapers.append(RemoteJobScraper())
+    if p in ("weworkremotely", "wwr", "remote", "all", "startups") or is_remote_search:
+        scrapers.append(WeWorkRemotelyScraper())
+    if p in ("wellfound", "all", "startups"):
+        scrapers.append(WellfoundScraper())
+    if p in ("cutshort", "all", "startups"):
+        scrapers.append(CutshortScraper())
+    if p in ("instahyre", "all", "startups"):
+        scrapers.append(InstahyreScraper())
+    if p in ("levels", "levelsfyi", "all", "startups"):
+        scrapers.append(LevelsFyiScraper())
+    if p in ("arc", "arcdev", "all", "startups") or is_remote_search:
+        scrapers.append(ArcDevScraper())
+    if p in ("indeed", "all"):
+        scrapers.append(IndeedScraper())
 
     results: List[ScrapedJob] = []
-    per_scraper_limit = limit if len(scrapers) == 1 else (limit // len(scrapers) + 3)
+    per_scraper_limit = limit if len(scrapers) == 1 else max(3, limit // len(scrapers) + 2)
 
     for scraper in scrapers:
         try:
@@ -47,3 +70,4 @@ def scrape_portals(portal: str = "all", keywords: str = "Product Manager", locat
             deduped.append(j)
 
     return deduped
+

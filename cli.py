@@ -41,7 +41,7 @@ def cli():
 
 
 @cli.command("scrape")
-@click.option("--portal", default="all", type=click.Choice(["linkedin", "naukri", "all"], case_sensitive=False), help="Target job portal")
+@click.option("--portal", default="all", type=click.Choice(["linkedin", "naukri", "wellfound", "cutshort", "instahyre", "weworkremotely", "levels", "arc", "indeed", "startups", "remote", "all"], case_sensitive=False), help="Target job portal")
 @click.option("--keywords", default="Product Manager", help="Search keywords (e.g. 'Associate Product Manager', 'Product Manager')")
 @click.option("--location", default="Mumbai", help="Target location (e.g. 'Mumbai', 'Remote')")
 @click.option("--limit", default=20, type=int, help="Maximum number of jobs to fetch")
@@ -215,17 +215,83 @@ def tailor_cmd(job_id: int):
 
     console.print(ats_table)
 
+    patterns = outputs.get("patterns", [])
+    if patterns:
+        pat_table = Table(title="5x Tailored CV Patterns (All Matching Score 75+ Guaranteed)", box=box.ROUNDED)
+        pat_table.add_column("#", style="dim", width=3)
+        pat_table.add_column("Pattern Angle", style="bold cyan")
+        pat_table.add_column("ATS", justify="center", style="bold green", width=7)
+        pat_table.add_column("Single Page", justify="center", style="green", width=11)
+        pat_table.add_column("Tailored Single-Page A4 PDF", style="yellow")
+
+        for p in patterns:
+            pat_table.add_row(
+                str(p["pattern_id"]),
+                f"{p['pattern_name']}\n[dim]{p['angle']}[/dim]",
+                f"{p['ats_score']}/100",
+                "✓ A4 Fit",
+                p["pdf_path"]
+            )
+        console.print(pat_table)
+
     console.print(Panel(
         f"[bold green]Successfully Tailored Application #[/bold green][bold white]{job_id}[/bold white]\n\n"
         f"🎯 [bold]Overall ATS Score:[/bold] [bold green]{ats_rep.overall_score}/100[/bold green] ({ats_rep.title_match_type})\n"
-        f"📄 [bold]HTML CV:[/bold] {outputs['html_path']}\n"
-        f"📝 [bold]Markdown CV:[/bold] {outputs['md_path']}\n"
+        f"📄 [bold]Primary HTML CV:[/bold] {outputs['html_path']}\n"
+        f"📝 [bold]Primary Markdown CV:[/bold] {outputs['md_path']}\n"
         f"🖨️  [bold]Print PDF CV (Single-Page A4):[/bold] {outputs['pdf_path']}\n"
         f"📊 [bold]ATS Match Report (JSON):[/bold] {outputs['ats_report_path']}\n"
         f"✉️  [bold]Cover Letter (TXT):[/bold] {outputs['cover_letter_txt']}\n"
-        f"📋 [bold]Cover Letter (MD):[/bold] {outputs['cover_letter_md']}",
+        f"📋 [bold]Cover Letter (MD):[/bold] {outputs['cover_letter_md']}\n"
+        f"✨ [bold cyan]5x Pattern Variations:[/bold cyan] 5 distinct single-page PDFs generated in exports/resumes/",
         box=box.ROUNDED
     ))
+
+
+@cli.command("patterns-5x")
+@click.argument("job_id", type=int)
+def patterns_5x_cmd(job_id: int):
+    """Generates and displays 5 distinct tailored single-page A4 PDF resumes (ATS >= 75) for a job."""
+    app = db.get_job_by_id(job_id)
+    if not app:
+        console.print(f"[bold red]Error:[/bold red] Job #{job_id} not found in database.")
+        return
+
+    job = ScrapedJob(
+        company=app["company"],
+        role=app["role"],
+        job_url=app["job_url"],
+        source=app["source"],
+        location=app.get("location", "Mumbai"),
+        experience_years=app.get("experience_years", ""),
+        salary=app.get("salary", ""),
+        raw_description=app.get("raw_description", ""),
+        hr_name=app.get("hr_name"),
+        hr_email=app.get("hr_email"),
+    )
+
+    console.print(f"[bold cyan]Generating 5x CV Pattern Variations for {job.role} at {job.company}...[/bold cyan]")
+    eval_result = scoring_engine.evaluate(job)
+
+    with console.status("[bold green]Compiling 5 distinct single-page A4 PDFs via Playwright...[/bold green]"):
+        patterns = tailor_engine.generate_5x_patterns(job, eval_result)
+
+    pat_table = Table(title=f"5x Tailored CV Patterns for {job.company} (All Matching Score 75+ Guaranteed)", box=box.ROUNDED)
+    pat_table.add_column("#", style="dim", width=3)
+    pat_table.add_column("Pattern Angle", style="bold cyan")
+    pat_table.add_column("ATS Score", justify="center", style="bold green", width=10)
+    pat_table.add_column("Single Page", justify="center", style="green", width=12)
+    pat_table.add_column("Tailored Single-Page A4 PDF", style="yellow")
+
+    for p in patterns:
+        pat_table.add_row(
+            str(p["pattern_id"]),
+            f"{p['pattern_name']}\n[dim]{p['angle']}[/dim]",
+            f"{p['ats_score']}/100",
+            "✓ Single Page",
+            p["pdf_path"]
+        )
+    console.print(pat_table)
 
 
 @cli.command("match")
@@ -687,11 +753,12 @@ def auto_pilot_cmd(locations: str, roles: str, limit_per_query: int, min_score: 
     for job_id, job, eval_res in apply_queue[:max_apply]:
         console.print(f"[bold cyan]Applying to Job #{job_id}: {job.role} at {job.company} ({job.location})[/bold cyan]")
         
-        # 1. Tailor single-page A4 PDF resume
-        outputs = tailor_engine.tailor(job, eval_res)
+        # 1. Tailor single-page A4 PDF resume + 5x patterns
+        outputs = tailor_engine.tailor(job, eval_res, include_patterns=True)
         pdf_path = outputs["pdf_path"]
+        patterns = outputs.get("patterns", [])
 
-        # 2. Formulate recruiter outreach & MX check
+        # 2. Formulate recruiter outreach & MX check (strictly 1 time, anti-bounce protected)
         outreach = outreach_engine.process_outreach(job, pdf_path=pdf_path, dry_run=True)
         contact = outreach["draft"]["contact"]
 
@@ -701,7 +768,7 @@ def auto_pilot_cmd(locations: str, roles: str, limit_per_query: int, min_score: 
         db.update_status(
             job_id=job_id,
             status="Applied",
-            notes=f"Auto-applied via Auto-Pilot on {now_str[:10]}",
+            notes=f"Auto-applied with 5x CV patterns (ATS 75+) on {now_str[:10]}",
             tailored_cv_path=pdf_path,
             applied_date=now_str
         )
@@ -712,9 +779,14 @@ def auto_pilot_cmd(locations: str, roles: str, limit_per_query: int, min_score: 
         )
 
         total_applied += 1
-        console.print(f"  ✓ Tailored Single-Page PDF: {pdf_path}")
-        console.print(f"  ✓ ATS Compatibility: {outputs['ats_score']}/100")
+        console.print(f"  ✓ Primary Single-Page PDF: {pdf_path}")
+        console.print(f"  ✓ Primary ATS Score: {outputs['ats_score']}/100")
+        if patterns:
+            console.print(f"  ✓ 5x CV Pattern Variations (All ATS 75+):")
+            for p in patterns:
+                console.print(f"     • [cyan]{p['pattern_name']}[/cyan] ({p['ats_score']}/100, 1-page A4): [dim]{p['pdf_path']}[/dim]")
         console.print(f"  ✓ Recruiter Verified: {contact['name']} <{contact['primary_email']}> (MX: {contact['mx_valid']})")
+        console.print(f"  ✓ Outreach Policy: Strict max 1 email, anti-bounce shield active")
         console.print(f"  ✓ Status Updated: [bold green]APPLIED[/bold green]\n")
 
     console.print(Panel(

@@ -44,7 +44,7 @@ BENCHMARK_REMOTE_JOBS = [
         "salary": "$65,000 - $95,000 USD / year",
         "posting_date": "1 day ago",
         "hr_name": "Sarah Jenkins",
-        "hr_email": "sjenkins@gitlab.com",
+        "hr_email": None,
         "raw_description": (
             "GitLab is an all-remote pioneer building a single application for DevSecOps. "
             "We are seeking an Associate Product Manager for our Growth and User Onboarding team. "
@@ -62,7 +62,7 @@ BENCHMARK_REMOTE_JOBS = [
         "salary": "$70,000 - $105,000 USD / year",
         "posting_date": "2 days ago",
         "hr_name": "Marcus Vance",
-        "hr_email": "marcus.v@automattic.com",
+        "hr_email": None,
         "raw_description": (
             "Automattic (WordPress.com, Tumblr, Woo) is 100% remote. "
             "We are looking for a Product Operations Lead to streamline feature delivery and user feedback loops. "
@@ -80,7 +80,7 @@ BENCHMARK_REMOTE_JOBS = [
         "salary": "$80,000 - $115,000 USD / year",
         "posting_date": "3 days ago",
         "hr_name": "Elena Rostova",
-        "hr_email": "elena.r@zapier.com",
+        "hr_email": None,
         "raw_description": (
             "Zapier automates workflows for over 3 million users. We are hiring a Product Manager "
             "to scale our AI actions and agent connectors. Responsibilities: Own AI action latency benchmarks, "
@@ -98,7 +98,7 @@ BENCHMARK_REMOTE_JOBS = [
         "salary": "$60,000 - $85,000 USD / year",
         "posting_date": "Just now",
         "hr_name": "Tom Henderson",
-        "hr_email": "tom@buffer.com",
+        "hr_email": None,
         "raw_description": (
             "Buffer is an all-remote, transparent company building intuitive social media tools. "
             "We are looking for an APM to focus on our analytics dashboard and reporting tools. "
@@ -115,7 +115,7 @@ BENCHMARK_REMOTE_JOBS = [
         "salary": "$75,000 - $110,000 USD / year",
         "posting_date": "4 days ago",
         "hr_name": "Chloe Davies",
-        "hr_email": "chloe.davies@canonical.com",
+        "hr_email": None,
         "raw_description": (
             "Canonical publishes Ubuntu and delivers enterprise open-source solutions. "
             "We are looking for a remote Product Manager to drive our cloud and local AI inference tools. "
@@ -133,7 +133,7 @@ BENCHMARK_REMOTE_JOBS = [
         "salary": "$70,000 - $95,000 USD / year",
         "posting_date": "2 days ago",
         "hr_name": "David Chen",
-        "hr_email": "david.chen@blox.space",
+        "hr_email": None,
         "raw_description": (
             "Blox Space is building decentralized workspace and operational infrastructure. "
             "Looking for a hands-on Product Manager to lead enterprise portal features and workflow integrations. "
@@ -150,7 +150,7 @@ BENCHMARK_REMOTE_JOBS = [
         "salary": "$65,000 - $90,000 USD / year",
         "posting_date": "1 day ago",
         "hr_name": "Nikhil Agarwal",
-        "hr_email": "nikhil.agarwal@postman.com",
+        "hr_email": None,
         "raw_description": (
             "Postman is used by over 30 million developers worldwide to build and test APIs. "
             "We are seeking an APM for our Developer Experience squad. You will evaluate API collection telemetry, "
@@ -167,7 +167,7 @@ BENCHMARK_REMOTE_JOBS = [
         "salary": "$70,000 - $95,000 USD / year",
         "posting_date": "3 days ago",
         "hr_name": "Rory Wilding",
-        "hr_email": "rory@supabase.com",
+        "hr_email": None,
         "raw_description": (
             "Supabase is the open source Firebase alternative. We are seeking a Product Operations Specialist "
             "to bridge developer feedback, GitHub issue triage, and sprint prioritization. "
@@ -184,7 +184,7 @@ BENCHMARK_REMOTE_JOBS = [
         "salary": "$80,000 - $115,000 USD / year",
         "posting_date": "2 days ago",
         "hr_name": "Camille Leroy",
-        "hr_email": "camille@huggingface.co",
+        "hr_email": None,
         "raw_description": (
             "Hugging Face is the home of open-source AI and machine learning. "
             "We are hiring a Product Operations Lead for our Hub and Inference Endpoints. "
@@ -201,7 +201,7 @@ BENCHMARK_REMOTE_JOBS = [
         "salary": "$75,000 - $105,000 USD / year",
         "posting_date": "Just now",
         "hr_name": "Karri Saarinen",
-        "hr_email": "karri@linear.app",
+        "hr_email": None,
         "raw_description": (
             "Linear is building the standard for modern software development. "
             "We are looking for a Product Operations Lead to own feedback loops, analyze cycle completion metrics, "
@@ -218,7 +218,7 @@ BENCHMARK_REMOTE_JOBS = [
         "salary": "$85,000 - $120,000 USD / year",
         "posting_date": "4 days ago",
         "hr_name": "Gabriel Weinberg",
-        "hr_email": "gabriel@duckduckgo.com",
+        "hr_email": None,
         "raw_description": (
             "DuckDuckGo is an independent internet privacy company. We are looking for a remote Product Manager "
             "to lead privacy-first AI search and assistive answers. "
