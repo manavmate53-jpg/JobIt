@@ -402,7 +402,18 @@ def outreach_cmd(job_id: int, dry_run: bool):
         if result["dispatched"]:
             console.print(f"[bold green]Success![/bold green] Email dispatched to {contact['primary_email']}.")
         else:
-            console.print(f"[bold red]Dispatch failed:[/bold red] {result.get('smtp_details', {}).get('error')}")
+            err = result.get("smtp_details", {}).get("error", "Dispatch failed")
+            console.print(Panel(
+                f"[bold red]🚫 Outbound Email Blocked (Anti-Bounce Shield)[/bold red]\n\n"
+                f"{err}\n\n"
+                f"🌐 [bold]Direct Application URL:[/bold] [link={job.job_url}]{job.job_url}[/link]\n\n"
+                f"💬 [bold cyan]Recommended Channel (100% Delivery): Send LinkedIn Connection Note:[/bold cyan]\n"
+                f"\"{result['draft']['linkedin_note']}\"\n\n"
+                f"📄 [bold]Tailored Single-Page A4 PDF Resume:[/bold] {pdf_cv or 'Ready in exports/resumes/'}",
+                title="Anti-Bounce Shield Protection",
+                box=box.ROUNDED
+            ))
+
 
 
 @cli.command("login")
@@ -775,7 +786,61 @@ def check_replies_cmd(max_emails: int):
     console.print(table)
 
 
+@cli.command("clean-bounces")
+@click.option("--all-time", is_flag=True, default=False, help="Clean all historical bounces vs recent ones from this week")
+def clean_bounces_cmd(all_time: bool):
+    """Finds and clears Delivery Status Notification (Mailer-Daemon) bounce emails from your Gmail inbox to Trash."""
+    import imaplib
+    import os
+    import datetime
+    from dotenv import load_dotenv
+
+    load_dotenv()
+    user = os.getenv("SMTP_USER") or os.getenv("EMAIL_USER", "manavmate53@gmail.com")
+    pw = (os.getenv("SMTP_PASSWORD") or os.getenv("EMAIL_PASSWORD", "")).replace(" ", "")
+
+    if not pw:
+        console.print("[bold red]Error:[/bold red] SMTP_PASSWORD not found in .env.")
+        return
+
+    with console.status("[bold green]Connecting to Gmail IMAP and finding bounce notices...[/bold green]"):
+        try:
+            mail = imaplib.IMAP4_SSL("imap.gmail.com")
+            mail.login(user, pw)
+            mail.select("INBOX")
+
+            if all_time:
+                status, res = mail.search(None, '(FROM "mailer-daemon")')
+            else:
+                since_date = (datetime.date.today() - datetime.timedelta(days=7)).strftime("%d-%b-%Y")
+                status, res = mail.search(None, f'(FROM "mailer-daemon" SINCE "{since_date}")')
+
+            if status != "OK" or not res[0]:
+                console.print("[bold green]✓ Inbox is clean![/bold green] No recent bounce notifications found.")
+                mail.logout()
+                return
+
+            bounce_ids = res[0].split()
+            id_set = b",".join(bounce_ids)
+            mail.store(id_set, "+X-GM-LABELS", "\\Trash")
+            mail.store(id_set, "+FLAGS", "\\Seen")
+
+            mail.expunge()
+            mail.logout()
+
+            console.print(Panel(
+                f"[bold green]✓ Cleaned {len(bounce_ids)} Bounce Notifications from Inbox![/bold green]\n\n"
+                f"All recent Mailer-Daemon delivery failure notices have been safely moved to Trash.\n"
+                f"Your primary Gmail inbox is now clean.",
+                title="Inbox Cleanup Complete",
+                box=box.ROUNDED
+            ))
+        except Exception as e:
+            console.print(f"[bold red]Failed to clean inbox:[/bold red] {e}")
+
+
 
 if __name__ == "__main__":
     cli()
+
 

@@ -25,7 +25,7 @@ BENCHMARK_NAUKRI_JOBS = [
         "salary": "₹12,00,000 - ₹15,00,000 PA",
         "posting_date": "1 Day Ago",
         "hr_name": "Divya Kulkarni",
-        "hr_email": "divya.kulkarni@browserstack.com",
+        "hr_email": None,
         "raw_description": (
             "BrowserStack is looking for an energetic Associate Product Manager in Mumbai. "
             "You will work closely with engineering and product leaders to build developer infrastructure. "
@@ -44,7 +44,7 @@ BENCHMARK_NAUKRI_JOBS = [
         "salary": "₹13,00,000 - ₹16,50,000 PA",
         "posting_date": "2 Days Ago",
         "hr_name": "Siddharth Rao",
-        "hr_email": "siddharth.rao@porter.in",
+        "hr_email": None,
         "raw_description": (
             "Porter is India's largest tech-enabled on-demand intra-city logistics marketplace. "
             "We are looking for a Product Manager to scale our Driver Operations and Supply Engine in Mumbai. "
@@ -62,7 +62,7 @@ BENCHMARK_NAUKRI_JOBS = [
         "salary": "₹11,00,000 - ₹14,00,000 PA",
         "posting_date": "3 Days Ago",
         "hr_name": "Tanvi Gupta",
-        "hr_email": "tanvi.gupta@pocketfm.com",
+        "hr_email": None,
         "raw_description": (
             "Pocket FM is hiring a Junior Product Manager to build our automated AI narration and writer studio tools. "
             "You will design user journeys for audio creators, evaluate speech synthesis pipelines, "
@@ -79,7 +79,7 @@ BENCHMARK_NAUKRI_JOBS = [
         "salary": "₹12,00,000 - ₹15,00,000 PA",
         "posting_date": "4 Days Ago",
         "hr_name": "Kavita Singhania",
-        "hr_email": "kavita.s@perfios.com",
+        "hr_email": None,
         "raw_description": (
             "Perfios is India's leading B2B SaaS fintech platform for real-time credit decisioning and document analysis. "
             "Role: Own the financial document extraction API, GST verification workflows, and fraud scoring microservices. "
@@ -96,7 +96,7 @@ BENCHMARK_NAUKRI_JOBS = [
         "salary": "₹11,00,000 - ₹14,00,000 PA",
         "posting_date": "1 Day Ago",
         "hr_name": "Aditya Verma",
-        "hr_email": "aditya.verma@razorpay.com",
+        "hr_email": None,
         "raw_description": (
             "Razorpay is looking for an analytical Fintech Product Analyst to join our Payment Gateway & Merchant Onboarding team in Mumbai. "
             "You will evaluate transaction conversion drop-offs, design automated KYC and settlement workflows, "
@@ -112,7 +112,7 @@ BENCHMARK_NAUKRI_JOBS = [
         "salary": "₹10,00,000 - ₹13,50,000 PA",
         "posting_date": "Just now",
         "hr_name": "Siddharth Rao",
-        "hr_email": "siddharth.rao@swiggy.in",
+        "hr_email": None,
         "raw_description": (
             "Swiggy Instamart is hiring a Supply Chain & Demand Planning Associate for our Mumbai dark store network. "
             "You will lead weekly Sales & Operations Planning (S&OP), forecast SKU demand across 30+ hubs, "
@@ -128,7 +128,7 @@ BENCHMARK_NAUKRI_JOBS = [
         "salary": "₹12,00,000 - ₹16,00,000 PA",
         "posting_date": "2 Days Ago",
         "hr_name": "Neha Joshi",
-        "hr_email": "neha.joshi@rebelfoods.com",
+        "hr_email": None,
         "raw_description": (
             "Rebel Foods (Faasos, Behrouz Biryani) operates the world's largest cloud kitchen network. "
             "Seeking an Operations Lead / Project Operations Manager to oversee kitchen dispatch SLA compliance, "
@@ -144,7 +144,7 @@ BENCHMARK_NAUKRI_JOBS = [
         "salary": "₹11,00,000 - ₹14,50,000 PA",
         "posting_date": "3 Days Ago",
         "hr_name": "Vikram Sen",
-        "hr_email": "vikram.sen@fractal.ai",
+        "hr_email": None,
         "raw_description": (
             "Fractal AI is hiring a Business Analyst (Product / Systems) to bridge client business logic with generative AI model deployments. "
             "Responsibilities: Author functional requirements documents, map system architecture diagrams, and evaluate token cost latency tradeoffs. "
@@ -160,7 +160,7 @@ BENCHMARK_NAUKRI_JOBS = [
         "salary": "₹12,00,000 - ₹15,50,000 PA",
         "posting_date": "4 Days Ago",
         "hr_name": "Deepak Menon",
-        "hr_email": "deepak.menon@freshworks.com",
+        "hr_email": None,
         "raw_description": (
             "Freshworks is looking for an energetic B2B SaaS Solutions Consultant / Associate. "
             "You will conduct client discovery sessions, design product workflow demos, and map enterprise integration requirements. "

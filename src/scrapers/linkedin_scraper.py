@@ -28,7 +28,7 @@ BENCHMARK_LINKEDIN_JOBS = [
         "salary": "₹12,00,000 - ₹16,00,000",
         "posting_date": "2 days ago",
         "hr_name": "Rohan Deshmukh",
-        "hr_email": "rohan.deshmukh@zepto.co",
+        "hr_email": None,
         "raw_description": (
             "Zepto is building the quickest 10-minute grocery delivery network across India. "
             "We are looking for an Associate Product Manager for our Delivery Partner & Fleet team in Mumbai. "
@@ -48,7 +48,7 @@ BENCHMARK_LINKEDIN_JOBS = [
         "salary": "₹10,00,000 - ₹14,00,000",
         "posting_date": "1 day ago",
         "hr_name": "Priyanka Nair",
-        "hr_email": "priyanka.nair@kreditbee.in",
+        "hr_email": None,
         "raw_description": (
             "We are seeking an early-career Product Manager to lead our automated KYC and fraud detection pipeline. "
             "You will evaluate document parsing pipelines, optimize token latency and compute budgets for AI models, "
@@ -66,7 +66,7 @@ BENCHMARK_LINKEDIN_JOBS = [
         "salary": "₹14,00,000 - ₹18,00,000",
         "posting_date": "3 days ago",
         "hr_name": "Ananya Sharma",
-        "hr_email": "ananya.sharma@cleartax.in",
+        "hr_email": None,
         "raw_description": (
             "Clear is hiring a Product Manager for our enterprise B2B compliance suite in Mumbai. "
             "You will own the B2B enterprise client journey, reducing invoice reconciliation time for over 5,000 corporate clients. "
@@ -85,7 +85,7 @@ BENCHMARK_LINKEDIN_JOBS = [
         "salary": "₹13,00,000 - ₹17,00,000",
         "posting_date": "Just now",
         "hr_name": "Vikram Sen",
-        "hr_email": "vikram.sen@fractal.ai",
+        "hr_email": None,
         "raw_description": (
             "Fractal is looking for an AI Product Manager to build agentic workflows and LLM evaluation benchmarks. "
             "You will own model performance benchmarking (accuracy, hallucination checks, token unit economics), "
@@ -103,7 +103,7 @@ BENCHMARK_LINKEDIN_JOBS = [
         "salary": "₹11,00,000 - ₹15,00,000",
         "posting_date": "4 days ago",
         "hr_name": "Karan Mehta",
-        "hr_email": "karan.mehta@shiprocket.com",
+        "hr_email": None,
         "raw_description": (
             "Shiprocket is hiring a Product Operations Lead to bridge the gap between our engineering sprints and ground logistics partners. "
             "You will analyze fulfillment SLA breaches, lead root-cause retrospectives, and coordinate feature rollouts for merchant dispatch. "
@@ -120,7 +120,7 @@ BENCHMARK_LINKEDIN_JOBS = [
         "salary": "₹14,00,000 - ₹18,00,000",
         "posting_date": "1 day ago",
         "hr_name": "Kunal Shah",
-        "hr_email": "kunal@cred.club",
+        "hr_email": None,
         "raw_description": (
             "CRED is looking for a relentless Product Owner to lead our high-velocity Payments & Checkout sprint squad. "
             "You will own sprint backlogs, define user stories with engineering acceptance criteria, track funnel drop-offs, "
@@ -136,7 +136,7 @@ BENCHMARK_LINKEDIN_JOBS = [
         "salary": "₹40,000 - ₹60,000 / month Stipend (PPO eligible ₹12-14 LPA)",
         "posting_date": "Just now",
         "hr_name": "Tanmay Bhat",
-        "hr_email": "tanmay.bhat@swiggy.in",
+        "hr_email": None,
         "raw_description": (
             "Swiggy is seeking an ambitious Product Intern / PM Intern to join our Quick Commerce and delivery experience team in Mumbai. "
             "You will run user feedback interviews, conduct competitor benchmarking, write user stories in Jira, "
@@ -152,7 +152,7 @@ BENCHMARK_LINKEDIN_JOBS = [
         "salary": "₹12,00,000 - ₹16,00,000",
         "posting_date": "2 days ago",
         "hr_name": "Rachel Adams",
-        "hr_email": "radams@atlassian.com",
+        "hr_email": None,
         "raw_description": (
             "Atlassian is hiring an Agile Project Coordinator / Scrum Master to facilitate distributed agile ceremonies, "
             "track cross-squad release milestones, and monitor Jira sprint burn-down metrics. "
@@ -169,7 +169,7 @@ BENCHMARK_LINKEDIN_JOBS = [
         "salary": "₹13,00,000 - ₹17,00,000",
         "posting_date": "3 days ago",
         "hr_name": "Rohan Deshmukh",
-        "hr_email": "rohan.deshmukh@zepto.co",
+        "hr_email": None,
         "raw_description": (
             "Zepto is hiring a Growth Product Manager for our Consumer App & Marketplace monetization. "
             "You will run fast-paced A/B testing cycles, optimize user activation funnels, evaluate notification push click-throughs, "

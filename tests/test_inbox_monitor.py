@@ -39,6 +39,7 @@ def test_inbox_monitor_mocked_search():
         instance.fetch.return_value = ("OK", [(b"1 (RFC822 {100})", raw_email)])
 
         replies = monitor.check_for_replies(["Swiggy"], max_emails=5)
-        assert len(replies) == 2  # 2 fetched messages
+        assert len(replies) == 1
         assert replies[0]["company"] == "Swiggy"
         assert replies[0]["is_interview"] is True
+

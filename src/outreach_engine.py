@@ -122,16 +122,19 @@ class ContactEnricher:
 
         name = job.hr_name or "Talent Acquisition"
         primary_email = job.hr_email
+        is_verified = bool(primary_email)
 
         # If Hunter API key is provided, try enrichment
         if not primary_email and self.hunter_api_key and name != "Talent Acquisition":
             hunter_email = self._query_hunter(name, domain)
             if hunter_email:
                 primary_email = hunter_email
+                is_verified = True
 
         permutations = self.generate_permutations(name, domain)
         if not primary_email:
             primary_email = permutations[0]
+            is_verified = False
 
         return {
             "name": name,
@@ -140,7 +143,9 @@ class ContactEnricher:
             "permutations": permutations,
             "mx_valid": mx_valid,
             "mx_servers": mx_servers,
+            "is_verified": is_verified,
         }
+
 
     def _query_hunter(self, name: str, domain: str) -> Optional[str]:
         try:
@@ -284,12 +289,30 @@ class OutreachEngine:
         smtp_port = int(os.getenv("SMTP_PORT", "587"))
 
         recipient = draft["contact"]["primary_email"]
+        is_verified = draft["contact"].get("is_verified", False)
+
+        if not recipient or "@" not in recipient:
+            return {
+                "success": False,
+                "error": "No recipient email address available for this posting."
+            }
+
+        if not is_verified:
+            return {
+                "success": False,
+                "error": (
+                    f"Failsafe Deliverability Shield: Recipient '{recipient}' is an unverified estimate. "
+                    "Outbound SMTP is blocked to prevent bounces and protect your sender reputation. "
+                    "Please apply via the direct portal link or send the custom LinkedIn connection note instead."
+                )
+            }
 
         if not smtp_user or not smtp_password:
             return {
                 "success": False,
                 "error": "SMTP credentials not configured. Please set SMTP_USER and SMTP_PASSWORD in .env."
             }
+
 
         try:
             msg = MIMEMultipart()
