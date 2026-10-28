@@ -47,3 +47,4 @@ def test_network_natural_language_query(tmp_path):
     assert len(results) >= 1
     companies = [p.target.company for p in results]
     assert any("Perplexity" in c or "Dukaan" in c for c in companies)
+

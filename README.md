@@ -229,5 +229,5 @@ All 15 unit and integration tests validate profile parsing, filter traps, determ
 - **Main Portfolio**: [https://manavmate53-jpg.github.io/portfolio/#hero](https://manavmate53-jpg.github.io/portfolio/#hero)
 - **Interactive PM Product Lab**: [https://manavmate53-jpg.github.io/pm-product-lab/#hub](https://manavmate53-jpg.github.io/pm-product-lab/#hub)
 - **GitHub**: [https://github.com/manavmate53-jpg](https://github.com/manavmate53-jpg)
-- **LinkedIn**: [https://linkedin.com/in/manavmate](https://linkedin.com/in/manavmate)
+- **LinkedIn**: [https://www.linkedin.com/in/manav-mate-9448b1341/](https://www.linkedin.com/in/manav-mate-9448b1341/)
 - **Compensation Baseline**: Current CTC: ₹8 LPA | Target Expected: ₹11 - ₹16 LPA

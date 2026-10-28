@@ -2,7 +2,7 @@
 **{{ location }}** | **{{ phone }}** | **[{{ email }}](mailto:{{ email }})**
 - **Interactive PM Product Lab**: [{{ links.pm_product_lab }}]({{ links.pm_product_lab }})
 - **Portfolio**: [{{ links.portfolio }}]({{ links.portfolio }})
-- **GitHub**: [github.com/manavmate53-jpg]({{ links.github }}) | **LinkedIn**: [{{ links.linkedin }}](https://{{ links.linkedin }})
+- **GitHub**: [github.com/manavmate53-jpg]({{ links.github }}) | **LinkedIn**: [{{ links.linkedin }}]({{ links.linkedin }})
 
 ---
 
