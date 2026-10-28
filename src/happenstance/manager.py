@@ -6,6 +6,7 @@ import datetime
 import json
 import logging
 import os
+import zipfile
 from typing import Any, Dict, List, Optional
 
 from src.happenstance.models import (
@@ -247,12 +248,23 @@ class HappenstanceManager:
         parsed = self.parser.parse(prompt)
         return self.finder.search(parsed)
 
-    def import_linkedin_csv(self, file_path: str) -> int:
-        """Imports LinkedIn Connections.csv into the graph."""
+    def import_linkedin_archive(self, path: str) -> Dict[str, int]:
+        """Imports full LinkedIn data export directory or zip file."""
         ingester = LinkedInIngester(self.graph)
-        count = ingester.ingest_csv_file(file_path)
+        if zipfile.is_zipfile(path):
+            stats = ingester.ingest_zip(path)
+        elif os.path.isdir(path):
+            stats = ingester.ingest_archive_dir(path)
+        else:
+            count = ingester.ingest_csv_file(path)
+            stats = {"connections": count, "total_nodes_added": len(self.graph.nodes)}
         self._save_graph()
-        return count
+        return stats
+
+    def import_linkedin_csv(self, file_path: str) -> int:
+        """Imports LinkedIn export file (CSV, directory, or ZIP) into the graph."""
+        res = self.import_linkedin_archive(file_path)
+        return res.get("connections", 0) + res.get("invitations", 0) + res.get("messages", 0)
 
     def sync_gmail_headers(self, limit: int = 50) -> int:
         """Safely syncs email headers from user's Gmail using environment credentials."""

@@ -687,11 +687,21 @@ def network_query_cmd(prompt: str):
 
 
 @network_group.command("import-linkedin")
-@click.argument("csv_path", type=click.Path(exists=True))
-def network_import_linkedin_cmd(csv_path: str):
-    """Imports LinkedIn connections CSV into the relationship graph."""
-    count = happenstance_mgr.import_linkedin_csv(csv_path)
-    console.print(f"[bold green]Successfully imported {count} LinkedIn contacts into Happenstance relationship graph![/bold green]")
+@click.argument("path", type=click.Path(exists=True))
+def network_import_linkedin_cmd(path: str):
+    """Imports LinkedIn connections CSV, directory, or ZIP archive into the relationship graph."""
+    with console.status("[bold green]Ingesting LinkedIn network archive...[/bold green]"):
+        stats = happenstance_mgr.import_linkedin_archive(path)
+    console.print(Panel(
+        f"[bold green]Successfully Ingested LinkedIn Network Archive![/bold green]\n\n"
+        f"👥 [bold]Total Relationship Nodes:[/bold] {stats.get('total_nodes_added', len(happenstance_mgr.graph.nodes))}\n"
+        f"✉️  [bold]Messages & Threads Processed:[/bold] {stats.get('messages', 0)}\n"
+        f"🤝 [bold]Invitations & Requests Processed:[/bold] {stats.get('invitations', 0)}\n"
+        f"🏢 [bold]Company Follows Tracked:[/bold] {stats.get('company_follows', 0)}\n"
+        f"🔒 [bold]Privacy Guardrail:[/bold] [green]Active (Zero message body text stored)[/green]",
+        title="LinkedIn Ingestion Complete",
+        box=box.ROUNDED
+    ))
 
 
 @network_group.command("sync-gmail")
