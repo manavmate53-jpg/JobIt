@@ -232,11 +232,10 @@ class HappenstanceManager:
         """Scans the relationship graph for warm introduction paths matching the job opening."""
         # Clean company name
         company_clean = job.company.strip()
-        role_keywords = [w for w in job.role.split() if len(w) > 3]
 
         return self.finder.find_paths_to_company(
             company_name=company_clean,
-            target_role_keywords=role_keywords
+            target_role_keywords=None
         )
 
     def generate_referral_package(self, path: WarmIntroPath, job: ScrapedJob) -> Dict[str, Any]:
@@ -277,3 +276,4 @@ class HappenstanceManager:
         if count > 0:
             self._save_graph()
         return count
+
