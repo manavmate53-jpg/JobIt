@@ -25,6 +25,7 @@ from src.scoring_engine import ScoringEngine
 from src.tailor_engine import TailorEngine
 from src.outreach_engine import OutreachEngine
 from src.tracker_db import TrackerDB
+from src.happenstance.manager import HappenstanceManager
 
 console = Console()
 db = TrackerDB()
@@ -32,6 +33,7 @@ profile_engine = ProfileEngine()
 scoring_engine = ScoringEngine(profile_engine=profile_engine)
 tailor_engine = TailorEngine(profile_engine=profile_engine)
 outreach_engine = OutreachEngine(profile_engine=profile_engine)
+happenstance_mgr = HappenstanceManager()
 
 
 @click.group()
@@ -417,9 +419,10 @@ def apply_cmd(job_id: int, notes: str):
 
 @cli.command("outreach")
 @click.argument("job_id", type=int)
+@click.option("--target", default="both", type=click.Choice(["both", "founder", "ta"], case_sensitive=False), help="Outreach target: 'both' (default), 'founder', or 'ta'")
 @click.option("--dry-run/--send", default=True, help="Deterministic safe dry-run (default: true) vs live SMTP dispatch")
-def outreach_cmd(job_id: int, dry_run: bool):
-    """Drafts or sends recruiter outreach (LinkedIn connection note + Cold Email)."""
+def outreach_cmd(job_id: int, target: str, dry_run: bool):
+    """Drafts or sends Founder and/or TA recruiter outreach (LinkedIn connection note + Cold Email)."""
     app = db.get_job_by_id(job_id)
     if not app:
         console.print(f"[bold red]Error:[/bold red] Job #{job_id} not found.")
@@ -438,47 +441,292 @@ def outreach_cmd(job_id: int, dry_run: bool):
 
     pdf_cv = app.get("tailored_cv_path")
 
-    with console.status("[bold green]Enriching contact, checking DNS MX records, and formulating outreach drafts...[/bold green]"):
-        result = outreach_engine.process_outreach(job, pdf_path=pdf_cv, dry_run=dry_run)
-
-    contact = result["draft"]["contact"]
-    db.update_outreach_contact(
-        job_id=job_id,
-        hr_name=contact["name"],
-        hr_email=contact["primary_email"],
-        status="Emailed" if not dry_run and result["dispatched"] else "Drafted"
-    )
-
-    if dry_run:
+    # 0. Check Happenstance AI for Warm Referral Pathways
+    warm_paths = happenstance_mgr.find_warm_paths_for_job(job)
+    if warm_paths:
+        best_path = warm_paths[0]
+        ref_pkg = happenstance_mgr.generate_referral_package(best_path, job)
         console.print(Panel(
-            f"[bold yellow]SAFE DRY-RUN ACTIVE: No emails were sent.[/bold yellow]\n\n"
-            f"🎯 [bold]Target Recruiter:[/bold] {contact['name']} <{contact['primary_email']}>\n"
-            f"🌐 [bold]Domain:[/bold] {contact['domain']} | [bold]MX Valid:[/bold] {contact['mx_valid']}\n"
-            f"🔄 [bold]Permutations:[/bold] {', '.join(contact['permutations'][:3])}\n\n"
-            f"💬 [bold cyan]LinkedIn Note ({result['draft']['linkedin_note_chars']} chars - strictly under 300):[/bold cyan]\n"
-            f"\"{result['draft']['linkedin_note']}\"\n\n"
-            f"📧 [bold cyan]Cold Email Subject:[/bold cyan] {result['draft']['email_subject']}\n"
-            f"📎 [bold cyan]Attached PDF:[/bold cyan] {pdf_cv or 'None'}\n\n"
-            f"💾 [bold green]Draft Saved For Inspection:[/bold green] {result['draft_txt_path']}\n"
-            f"[dim]To send live via SMTP, re-run with: jobit outreach {job_id} --send[/dim]",
-            title="Outreach Formulation Result",
-            box=box.ROUNDED
+            f"[bold green]🔥 HAPPENSTANCE RELATIONSHIP INTELLIGENCE: WARM INTRODUCTION PATH FOUND![/bold green]\n\n"
+            f"🛣️  [bold]Pathway:[/bold] {ref_pkg['path_visual']}\n"
+            f"🎯 [bold]Target Decision Maker:[/bold] {best_path.target.name} ({best_path.target.headline or job.company})\n"
+            f"🤝 [bold]Bridge Contact:[/bold] {best_path.bridge.name if best_path.bridge else 'Direct 1st Degree'}\n\n"
+            f"💬 [bold cyan]LinkedIn Intro Note ({ref_pkg['linkedin_chars']} chars):[/bold cyan]\n"
+            f"\"{ref_pkg['linkedin_bridge_note']}\"\n\n"
+            f"📧 [bold cyan]Warm Intro Subject:[/bold cyan] {ref_pkg['intro_request_subject']}\n"
+            f"📄 [bold]Pre-drafted Forwardable Blurb:[/bold]\n"
+            f"[dim]{(ref_pkg.get('forwardable_blurb') or ref_pkg.get('intro_request_body') or '')[:250]}...[/dim]\n\n"
+            f"[yellow]💡 High-Priority Action: Contact your mutual friend before or alongside cold outreach! Run: jobit warm-intro {job_id}[/yellow]",
+            title=f"🤝 Warm Network Referral Available ({best_path.path_strength.category if best_path.path_strength else 'Direct'})",
+            box=box.DOUBLE
         ))
-    else:
-        if result["dispatched"]:
-            console.print(f"[bold green]Success![/bold green] Email dispatched to {contact['primary_email']}.")
+
+    with console.status("[bold green]Enriching contacts, checking DNS MX records, and formulating outreach drafts...[/bold green]"):
+        if target.lower() == "both":
+            dual_res = outreach_engine.process_dual_outreach(job, pdf_path=pdf_cv, dry_run=dry_run)
+            results_to_render = [
+                ("FOUNDER OUTREACH PACKAGE (Direct Founder & CEO Pitch)", dual_res["founder"]),
+                ("TALENT ACQUISITION / HR PACKAGE (Recruiter Alignment)", dual_res["ta"])
+            ]
+        elif target.lower() == "founder":
+            founder_res = outreach_engine.process_outreach(job, pdf_path=pdf_cv, dry_run=dry_run, recipient_type="FOUNDER")
+            results_to_render = [("FOUNDER OUTREACH PACKAGE", founder_res)]
         else:
-            err = result.get("smtp_details", {}).get("error", "Dispatch failed")
+            ta_res = outreach_engine.process_outreach(job, pdf_path=pdf_cv, dry_run=dry_run, recipient_type="TA")
+            results_to_render = [("TALENT ACQUISITION / HR PACKAGE", ta_res)]
+
+    for title, result in results_to_render:
+        contact = result["draft"]["contact"]
+        db.update_outreach_contact(
+            job_id=job_id,
+            hr_name=contact["name"],
+            hr_email=contact["primary_email"],
+            status="Emailed" if not dry_run and result.get("dispatched") else "Drafted"
+        )
+
+        if dry_run:
             console.print(Panel(
-                f"[bold red]🚫 Outbound Email Blocked (Anti-Bounce Shield)[/bold red]\n\n"
-                f"{err}\n\n"
-                f"🌐 [bold]Direct Application URL:[/bold] [link={job.job_url}]{job.job_url}[/link]\n\n"
-                f"💬 [bold cyan]Recommended Channel (100% Delivery): Send LinkedIn Connection Note:[/bold cyan]\n"
+                f"[bold yellow]SAFE DRY-RUN ACTIVE: No emails were sent (Anti-Bounce Shield Protected).[/bold yellow]\n\n"
+                f"🎯 [bold]Target Recipient:[/bold] {contact['name']} <{contact['primary_email']}>\n"
+                f"👔 [bold]Role / Title:[/bold] {contact.get('title', 'Leadership')}\n"
+                f"🌐 [bold]Domain:[/bold] {contact['domain']} | [bold]MX Valid:[/bold] {contact['mx_valid']}\n"
+                f"🔄 [bold]Permutations:[/bold] {', '.join(contact.get('permutations', [])[:3])}\n\n"
+                f"💬 [bold cyan]LinkedIn Note ({result['draft']['linkedin_note_chars']} chars - strictly under 300):[/bold cyan]\n"
                 f"\"{result['draft']['linkedin_note']}\"\n\n"
-                f"📄 [bold]Tailored Single-Page A4 PDF Resume:[/bold] {pdf_cv or 'Ready in exports/resumes/'}",
-                title="Anti-Bounce Shield Protection",
+                f"📧 [bold cyan]Cold Email Subject:[/bold cyan] {result['draft']['email_subject']}\n"
+                f"📄 [bold]Body Preview:[/bold]\n[dim]{result['draft']['email_body'][:260]}...[/dim]\n\n"
+                f"📎 [bold cyan]Attached PDF:[/bold cyan] {pdf_cv or 'Single-page A4 PDF generated'}\n"
+                f"💾 [bold green]Draft Saved For Inspection:[/bold green] {result['draft_txt_path']}\n"
+                f"[dim]To send live via SMTP, re-run with: jobit outreach {job_id} --target {target} --send[/dim]",
+                title=f"🎯 {title}",
                 box=box.ROUNDED
             ))
+        else:
+            if result.get("dispatched"):
+                console.print(f"[bold green]Success![/bold green] Email dispatched to {contact['primary_email']}.")
+            else:
+                err = result.get("smtp_details", {}).get("error", "Dispatch failed")
+                console.print(Panel(
+                    f"[bold red]🚫 Outbound Email Blocked (Anti-Bounce Shield)[/bold red]\n\n"
+                    f"{err}\n\n"
+                    f"🌐 [bold]Direct Application URL:[/bold] [link={job.job_url}]{job.job_url}[/link]\n\n"
+                    f"💬 [bold cyan]Recommended Channel (100% Delivery): Send LinkedIn Connection Note:[/bold cyan]\n"
+                    f"\"{result['draft']['linkedin_note']}\"\n\n"
+                    f"📄 [bold]Tailored Single-Page A4 PDF Resume:[/bold] {pdf_cv or 'Ready in exports/resumes/'}",
+                    title=f"Anti-Bounce Shield Protection: {title}",
+                    box=box.ROUNDED
+                ))
+
+
+
+@cli.command("warm-intro")
+@click.argument("job_id", type=int)
+def warm_intro_cmd(job_id: int):
+    """Finds warm introduction pathways through your professional network using Happenstance AI."""
+    app = db.get_job_by_id(job_id)
+    if not app:
+        console.print(f"[bold red]Error:[/bold red] Job #{job_id} not found.")
+        return
+
+    job = ScrapedJob(
+        company=app["company"],
+        role=app["role"],
+        job_url=app["job_url"],
+        source=app["source"],
+        location=app.get("location", "Mumbai"),
+        hr_name=app.get("hr_name"),
+        hr_email=app.get("hr_email"),
+        raw_description=app.get("raw_description", "")
+    )
+
+    console.print(Panel(
+        f"[bold cyan]🔍 Scanning Happenstance Relationship Graph for {job.company}...[/bold cyan]\n"
+        f"Target Role: {job.role} ({job.location})",
+        title="Happenstance Network Traversal",
+        box=box.ROUNDED
+    ))
+
+    paths = happenstance_mgr.find_warm_paths_for_job(job)
+    if not paths:
+        console.print(f"[yellow]No warm introduction paths found for {job.company}. Direct cold founder/TA outreach recommended (use: jobit outreach {job_id}).[/yellow]")
+        return
+
+    console.print(f"[bold green]Found {len(paths)} Warm Referral Pathway(s) for {job.company}:[/bold green]\n")
+    for idx, path in enumerate(paths, 1):
+        pkg = happenstance_mgr.generate_referral_package(path, job)
+        target = path.target
+        bridge = path.bridge
+        strength = path.path_strength
+
+        strength_style = "green" if strength and strength.score >= 75 else ("yellow" if strength and strength.score >= 45 else "dim")
+
+        if path.degree == 1:
+            path_visual = f"[bold green]You[/bold green] ➔ [bold cyan]{target.name}[/bold cyan] [dim]({target.headline or job.company})[/dim]"
+        else:
+            bridge_name = bridge.name if bridge else "Mutual Friend"
+            path_visual = (
+                f"[bold green]You[/bold green] ➔ "
+                f"[{strength_style}]{bridge_name}[/{strength_style}] [dim]({strength.category if strength else ''}, score {strength.score if strength else 0}/100)[/dim] ➔ "
+                f"[bold cyan]{target.name}[/bold cyan] [dim]({target.headline or job.company})[/dim]"
+            )
+
+        panel_content = (
+            f"🎯 [bold]Target Decision Maker:[/bold] {target.name} | [bold]Role:[/bold] {target.headline or 'Leadership'}\n"
+            f"🏢 [bold]Company:[/bold] {job.company}\n"
+            f"🛣️  [bold]Warm Path:[/bold] {path_visual}\n"
+        )
+        if bridge and strength:
+            panel_content += (
+                f"📊 [bold]Bridge Relationship Strength:[/bold] [{strength_style}]{strength.category}[/{strength_style}] "
+                f"({strength.score}/100 | {strength.total_touchpoints} touchpoints | {strength.days_since_interaction}d ago)\n\n"
+                f"💬 [bold cyan]LinkedIn Intro Request to {bridge.name.split()[0]} ({pkg['linkedin_chars']} chars):[/bold cyan]\n"
+                f"\"{pkg['linkedin_bridge_note']}\"\n\n"
+                f"📧 [bold cyan]Warm Intro Email Subject to {bridge.name.split()[0]}:[/bold cyan] {pkg['intro_request_subject']}\n\n"
+                f"📄 [bold]Pre-drafted Forwardable Blurb for {target.name.split()[0]}:[/bold]\n"
+                f"[dim]{pkg['forwardable_blurb'][:320]}...[/dim]\n\n"
+                f"✨ [bold green]Action Plan:[/bold green]\n" + "\n".join(f"  • {s}" for s in pkg["actionable_next_steps"])
+            )
+        else:
+            panel_content += (
+                f"💬 [bold cyan]Direct Outreach / Re-engagement Note ({pkg['linkedin_chars']} chars):[/bold cyan]\n"
+                f"\"{pkg['linkedin_bridge_note']}\"\n\n"
+                f"📧 [bold cyan]Re-engagement Email Subject:[/bold cyan] {pkg['intro_request_subject']}\n\n"
+                f"📄 [bold]Email Body Preview:[/bold]\n[dim]{pkg['intro_request_body'][:280]}...[/dim]"
+            )
+
+        console.print(Panel(panel_content, title=f"Warm Path #{idx} (Degree {path.degree})", box=box.ROUNDED))
+
+
+@cli.group("network")
+def network_group():
+    """Happenstance AI: Google Search for your professional relationships."""
+    pass
+
+
+@network_group.command("query")
+@click.argument("prompt", type=str)
+def network_query_cmd(prompt: str):
+    """Executes a plain English relationship search query over your network."""
+    console.print(Panel(
+        f"[bold cyan]🔍 Plain English Query:[/bold cyan] \"{prompt}\"",
+        title="Happenstance AI Network Search",
+        box=box.ROUNDED
+    ))
+
+    # NLP Step
+    parsed = happenstance_mgr.parser.parse(prompt)
+    nlp_table = Table(title="Step 2: NLP Intent & Entity Extraction", box=box.ROUNDED)
+    nlp_table.add_column("Constraint", style="bold cyan")
+    nlp_table.add_column("Parsed Values", style="white")
+
+    if parsed.target_roles:
+        nlp_table.add_row("Target Roles", ", ".join(parsed.target_roles))
+    if parsed.target_companies:
+        nlp_table.add_row("Target Companies", ", ".join(parsed.target_companies))
+    if parsed.target_locations:
+        nlp_table.add_row("Target Locations", ", ".join(parsed.target_locations))
+    if parsed.target_sectors:
+        nlp_table.add_row("Target Sectors", ", ".join(parsed.target_sectors))
+    if parsed.min_days_since_interaction:
+        nlp_table.add_row("Temporal (Min Silence)", f"> {parsed.min_days_since_interaction} days ago")
+    if parsed.max_days_since_interaction:
+        nlp_table.add_row("Temporal (Max Silence)", f"< {parsed.max_days_since_interaction} days")
+    nlp_table.add_row("Path Constraint", f"Max {parsed.max_degree}-degree" + (" (Mutual required)" if parsed.require_mutual else ""))
+    if parsed.min_strength_category:
+        nlp_table.add_row("Bridge Threshold", parsed.min_strength_category)
+
+    console.print(nlp_table)
+
+    paths = happenstance_mgr.finder.search(parsed)
+    if not paths:
+        console.print("[yellow]No matching paths found. Broaden your search query or import more contacts.[/yellow]")
+        return
+
+    console.print(f"\n[bold green]Found {len(paths)} Warm Referral Pathway(s):[/bold green]\n")
+    for idx, path in enumerate(paths[:5], 1):
+        target = path.target
+        bridge = path.bridge
+        strength = path.path_strength
+
+        strength_style = "green" if strength and strength.score >= 75 else ("yellow" if strength and strength.score >= 45 else "dim")
+
+        if path.degree == 1:
+            path_visual = f"[bold green]You[/bold green] ➔ [bold cyan]{target.name}[/bold cyan] [dim]({target.headline or target.company or 'Direct'})[/dim]"
+        else:
+            bridge_name = bridge.name if bridge else "Mutual Friend"
+            path_visual = (
+                f"[bold green]You[/bold green] ➔ "
+                f"[{strength_style}]{bridge_name}[/{strength_style}] [dim]({strength.category if strength else ''}, score {strength.score if strength else 0}/100)[/dim] ➔ "
+                f"[bold cyan]{target.name}[/bold cyan] [dim]({target.headline or target.company})[/dim]"
+            )
+
+        pkg = happenstance_mgr.generator.generate_referral_package(path, target_role=target.headline)
+
+        panel_content = (
+            f"🎯 [bold]Target:[/bold] {target.name} | [bold]Company:[/bold] {target.company or 'N/A'} | [bold]Location:[/bold] {target.location or 'Global'}\n"
+            f"👔 [bold]Headline:[/bold] {target.headline or 'N/A'}\n"
+            f"🛣️  [bold]Path:[/bold] {path_visual}\n"
+        )
+        if bridge and strength:
+            panel_content += (
+                f"📊 [bold]Bridge Relationship Strength:[/bold] [{strength_style}]{strength.category}[/{strength_style}] "
+                f"({strength.score}/100 | {strength.total_touchpoints} touchpoints | {strength.days_since_interaction}d ago)\n\n"
+                f"💬 [bold cyan]LinkedIn Intro Request to {bridge.name.split()[0]} ({pkg['linkedin_chars']} chars):[/bold cyan]\n"
+                f"\"{pkg['linkedin_bridge_note']}\"\n\n"
+                f"📧 [bold cyan]Warm Intro Subject:[/bold cyan] {pkg['intro_request_subject']}\n"
+                f"📄 [bold]Pre-drafted Forwardable Blurb:[/bold]\n"
+                f"[dim]{pkg['forwardable_blurb'][:250]}...[/dim]"
+            )
+        else:
+            panel_content += (
+                f"💬 [bold cyan]Direct Outreach Note ({pkg['linkedin_chars']} chars):[/bold cyan]\n"
+                f"\"{pkg['linkedin_bridge_note']}\"\n"
+            )
+
+        console.print(Panel(panel_content, title=f"Result #{idx} (Degree {path.degree})", box=box.ROUNDED))
+
+
+@network_group.command("import-linkedin")
+@click.argument("csv_path", type=click.Path(exists=True))
+def network_import_linkedin_cmd(csv_path: str):
+    """Imports LinkedIn connections CSV into the relationship graph."""
+    count = happenstance_mgr.import_linkedin_csv(csv_path)
+    console.print(f"[bold green]Successfully imported {count} LinkedIn contacts into Happenstance relationship graph![/bold green]")
+
+
+@network_group.command("sync-gmail")
+@click.option("--limit", default=50, type=int, help="Number of recent emails to scan")
+def network_sync_gmail_cmd(limit: int):
+    """Safely syncs email headers from Gmail via IMAP without reading bodies."""
+    with console.status("[bold green]Syncing email headers safely from Gmail (headers only, zero bodies read)...[/bold green]"):
+        count = happenstance_mgr.sync_gmail_headers(limit=limit)
+    console.print(f"[bold green]Successfully synced {count} communication touchpoints into Happenstance graph![/bold green]")
+
+
+@network_group.command("status")
+def network_status_cmd():
+    """Displays Happenstance relationship intelligence graph statistics."""
+    graph = happenstance_mgr.graph
+    direct = len(graph.get_1st_degree_connections())
+    total_edges = sum(len(e) for e in graph.edges.values())
+
+    console.print(Panel(
+        f"📁 [bold]Store:[/bold] {happenstance_mgr.graph_path}\n"
+        f"👥 [bold]Total People Nodes:[/bold] {len(graph.nodes)}\n"
+        f"🤝 [bold]Direct 1st-Degree Connections:[/bold] {direct}\n"
+        f"⚡ [bold]Total Communication Edges:[/bold] {total_edges}\n"
+        f"🔒 [bold]Privacy Guardrail:[/bold] [green]Active (Zero email bodies stored)[/green]",
+        title="Happenstance AI Relationship Graph Status",
+        box=box.ROUNDED
+    ))
+
+
+@network_group.command("demo-seed")
+def network_demo_seed_cmd():
+    """Resets and seeds demo network with high-trust bridges and startup founders."""
+    happenstance_mgr._seed_default_network(happenstance_mgr.graph)
+    happenstance_mgr._save_graph()
+    console.print("[bold green]Demo network successfully seeded in JobIt![/bold green]")
 
 
 
@@ -758,9 +1006,10 @@ def auto_pilot_cmd(locations: str, roles: str, limit_per_query: int, min_score: 
         pdf_path = outputs["pdf_path"]
         patterns = outputs.get("patterns", [])
 
-        # 2. Formulate recruiter outreach & MX check (strictly 1 time, anti-bounce protected)
-        outreach = outreach_engine.process_outreach(job, pdf_path=pdf_path, dry_run=True)
-        contact = outreach["draft"]["contact"]
+        # 2. Formulate dual outreach (Founder & TA) with MX check (strictly 1 time, anti-bounce protected)
+        dual_outreach = outreach_engine.process_dual_outreach(job, pdf_path=pdf_path, dry_run=True)
+        founder_contact = dual_outreach["founder"]["draft"]["contact"]
+        ta_contact = dual_outreach["ta"]["draft"]["contact"]
 
         # 3. Record Application
         import datetime
@@ -774,8 +1023,8 @@ def auto_pilot_cmd(locations: str, roles: str, limit_per_query: int, min_score: 
         )
         db.update_outreach_contact(
             job_id=job_id,
-            hr_name=contact["name"],
-            hr_email=contact["primary_email"]
+            hr_name=founder_contact["name"] if founder_contact.get("is_verified") else ta_contact["name"],
+            hr_email=founder_contact["primary_email"] if founder_contact.get("is_verified") else ta_contact["primary_email"]
         )
 
         total_applied += 1
@@ -785,8 +1034,9 @@ def auto_pilot_cmd(locations: str, roles: str, limit_per_query: int, min_score: 
             console.print(f"  ✓ 5x CV Pattern Variations (All ATS 75+):")
             for p in patterns:
                 console.print(f"     • [cyan]{p['pattern_name']}[/cyan] ({p['ats_score']}/100, 1-page A4): [dim]{p['pdf_path']}[/dim]")
-        console.print(f"  ✓ Recruiter Verified: {contact['name']} <{contact['primary_email']}> (MX: {contact['mx_valid']})")
-        console.print(f"  ✓ Outreach Policy: Strict max 1 email, anti-bounce shield active")
+        console.print(f"  ✓ Target Founder: [bold white]{founder_contact['name']}[/bold white] <{founder_contact['primary_email']}> (MX: {founder_contact['mx_valid']})")
+        console.print(f"  ✓ Target TA/HR: [bold white]{ta_contact['name']}[/bold white] <{ta_contact['primary_email']}> (MX: {ta_contact['mx_valid']})")
+        console.print(f"  ✓ Outreach Policy: Strict max 1 email to each, anti-bounce shield active")
         console.print(f"  ✓ Status Updated: [bold green]APPLIED[/bold green]\n")
 
     console.print(Panel(

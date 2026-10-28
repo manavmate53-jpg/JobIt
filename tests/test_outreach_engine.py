@@ -46,3 +46,34 @@ def test_anti_bounce_shield_blocks_unverified():
     result = engine.process_outreach(job, pdf_path=None, dry_run=False)
     assert result["dispatched"] is False
     assert "Failsafe Deliverability Shield" in result["smtp_details"]["error"]
+
+
+def test_dual_outreach_generation():
+    engine = OutreachEngine()
+    job = ScrapedJob(
+        company="Perplexity AI",
+        role="AI Product Manager - LLM Evaluation & Search Quality",
+        job_url="https://wellfound.com/jobs/perplexity-ai-pm-llm-eval-search-948101",
+        source="Wellfound",
+        founder_name="Aravind Srinivas",
+        hr_name="Talent Team"
+    )
+
+    dual = engine.process_dual_outreach(job, pdf_path=None, dry_run=True)
+    assert "founder" in dual
+    assert "ta" in dual
+
+    # Check founder outreach
+    founder_draft = dual["founder"]["draft"]
+    assert founder_draft["contact"]["name"] == "Aravind Srinivas"
+    assert founder_draft["linkedin_note_chars"] <= 300
+    assert "bootstrapped" in founder_draft["email_body"].lower() or "nvidia nim" in founder_draft["email_body"].lower()
+    assert "—" not in founder_draft["email_body"]
+
+    # Check TA outreach
+    ta_draft = dual["ta"]["draft"]
+    assert ta_draft["contact"]["name"] == "Talent Acquisition Team" or "Talent" in ta_draft["contact"]["name"]
+    assert ta_draft["linkedin_note_chars"] <= 300
+    assert "—" not in ta_draft["email_body"]
+    assert os.path.exists(dual["founder"]["draft_txt_path"])
+    assert os.path.exists(dual["ta"]["draft_txt_path"])

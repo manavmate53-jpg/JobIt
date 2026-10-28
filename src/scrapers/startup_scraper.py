@@ -175,10 +175,75 @@ class WellfoundScraper(BaseScraper):
             "job_url": "https://wellfound.com/jobs/zepto-product-intern-dark-store-ops-849510",
             "experience_years": "0-1 years",
             "salary": "₹45,000 - ₹65,000 / month",
+            "founder_name": "Aadit Palicha",
+            "hr_name": "Talent Team",
             "raw_description": (
                 "Zepto is hiring a Product Intern / PM Intern in Mumbai to optimize 10-minute grocery delivery dispatch. "
                 "You will shadow Senior PMs, audit picker/packer telemetry in dark stores, write user journey PRDs, "
                 "and design rider batching logic. Strong curiosity, SQL/Python skills, and operational stamina required."
+            )
+        },
+        {
+            "company": "Perplexity AI",
+            "role": "AI Product Manager - LLM Evaluation & Search Quality",
+            "location": "Remote Worldwide",
+            "job_url": "https://wellfound.com/jobs/perplexity-ai-pm-llm-eval-search-948101",
+            "experience_years": "1-3 years",
+            "salary": "$90,000 - $135,000 USD / year + Equity",
+            "founder_name": "Aravind Srinivas",
+            "hr_name": "Talent Team",
+            "raw_description": (
+                "Perplexity AI is building the next-generation conversational search engine. "
+                "Seeking an AI Product Manager to lead benchmark evaluation pipelines, token latency budgets, "
+                "and hallucination guardrails. You will partner with research engineers on model fine-tuning, "
+                "define offline and online LLM evaluation datasets, and author technical PRDs for citation rendering."
+            )
+        },
+        {
+            "company": "Together AI",
+            "role": "Technical Product Manager - Inference Engine & Microservices",
+            "location": "Remote Worldwide",
+            "job_url": "https://wellfound.com/jobs/together-ai-technical-product-manager-inference-948102",
+            "experience_years": "1-3 years",
+            "salary": "$95,000 - $140,000 USD / year + Equity",
+            "founder_name": "Vipul Ved Prakash",
+            "hr_name": "Talent Acquisition",
+            "raw_description": (
+                "Together AI enables researchers and developers to run, train, and fine-tune open-source AI models. "
+                "Hiring a Technical Product Manager to oversee serverless inference endpoints, token caching, "
+                "and API latency SLAs. Strong background in NVIDIA NIM, vLLM, Python microservices, and token unit economics."
+            )
+        },
+        {
+            "company": "LlamaIndex",
+            "role": "Product Manager - Agentic Workflows & Developer Tooling",
+            "location": "Remote Worldwide",
+            "job_url": "https://wellfound.com/jobs/llamaindex-product-manager-agentic-rag-948103",
+            "experience_years": "1-3 years",
+            "salary": "$85,000 - $125,000 USD / year + Equity",
+            "founder_name": "Jerry Liu",
+            "hr_name": "Talent Team",
+            "raw_description": (
+                "LlamaIndex is the leading data framework for building LLM applications. "
+                "We need a Product Manager to drive agentic workflow telemetry, schema guardrails, "
+                "and developer onboarding loops. You will build developer telemetry dashboards in SQL/PostHog, "
+                "author technical specifications for multi-agent orchestration, and streamline API integration funnels."
+            )
+        },
+        {
+            "company": "PostHog",
+            "role": "Product Manager - Funnel Telemetry & Event Analytics",
+            "location": "Remote Worldwide",
+            "job_url": "https://wellfound.com/jobs/posthog-product-manager-funnel-telemetry-948104",
+            "experience_years": "1-3 years",
+            "salary": "$80,000 - $120,000 USD / year",
+            "founder_name": "James Hawkins",
+            "hr_name": "Talent Team",
+            "raw_description": (
+                "PostHog is the all-in-one developer platform for product analytics, session replay, and feature flags. "
+                "Seeking a Product Manager to optimize event query performance, cohort funnels, and data warehouse syncs. "
+                "Requirements: SQL fluency, deep developer empathy, experience analyzing conversion bottlenecks, "
+                "and ability to write crisp, transparent PRDs."
             )
         }
     ]
@@ -213,8 +278,10 @@ class WellfoundScraper(BaseScraper):
                         salary=s.get("salary", "Competitive"),
                         posting_date="Recent",
                         raw_description=s["raw_description"],
-                        hr_name=None,
-                        hr_email=None
+                        hr_name=s.get("hr_name"),
+                        hr_email=s.get("hr_email"),
+                        founder_name=s.get("founder_name"),
+                        founder_email=s.get("founder_email")
                     ))
                     if len(results) >= limit:
                         break
@@ -272,10 +339,44 @@ class CutshortScraper(BaseScraper):
             "job_url": "https://cutshort.io/job/fashinza-supply-chain-demand-planning-associate-718294",
             "experience_years": "1-3 years",
             "salary": "₹11,00,000 - ₹14,50,000 PA",
+            "founder_name": "Pawan Gupta",
+            "hr_name": "Talent Team",
             "raw_description": (
                 "Fashinza is an AI-driven B2B manufacturing marketplace connecting fashion brands with factories. "
                 "Looking for a Supply Chain & Demand Planning Associate in Mumbai to coordinate S&OP schedules, "
                 "forecast mill production capacities, and track on-time factory delivery SLAs using SQL and Python dashboards."
+            )
+        },
+        {
+            "company": "Sarvam AI",
+            "role": "GenAI Product Manager - Indic Language Models & Voice Agents",
+            "location": "Mumbai / Remote",
+            "job_url": "https://cutshort.io/job/sarvam-ai-product-manager-indic-models-718295",
+            "experience_years": "1-3 years",
+            "salary": "₹16,00,000 - ₹24,00,000 PA + Equity",
+            "founder_name": "Pratyush Kumar",
+            "hr_name": "Talent Acquisition",
+            "raw_description": (
+                "Sarvam AI is developing foundational AI models customized for Indian languages and enterprise workflows. "
+                "We are hiring a GenAI Product Manager in Mumbai/Remote to lead Indic voice agent orchestration, "
+                "token latency budgets, and speech-to-text benchmark evaluations. Experience in LLM fine-tuning, "
+                "model inference pipelines, and technical PRD writing required."
+            )
+        },
+        {
+            "company": "Klub",
+            "role": "Fintech Product Manager - Revenue Based Financing & Risk Engines",
+            "location": "Mumbai, Maharashtra (Hybrid)",
+            "job_url": "https://cutshort.io/job/klub-fintech-product-manager-rbf-mumbai-718296",
+            "experience_years": "1-3 years",
+            "salary": "₹13,00,000 - ₹17,00,000 PA",
+            "founder_name": "Anurakt Jain",
+            "hr_name": "Talent Team",
+            "raw_description": (
+                "Klub provides revenue-based embedded financing to fast-growing digital brands. "
+                "Hiring a Fintech Product Manager in Mumbai to scale our underwriting risk engine, "
+                "GSTIN/banking verification telemetry, and borrower repayment funnels. Strong SQL analytics, "
+                "financial workflow modeling, and B2B user journey mapping required."
             )
         }
     ]
@@ -298,8 +399,10 @@ class CutshortScraper(BaseScraper):
                         salary=s.get("salary", "Competitive"),
                         posting_date="Recent",
                         raw_description=s["raw_description"],
-                        hr_name=None,
-                        hr_email=None
+                        hr_name=s.get("hr_name"),
+                        hr_email=s.get("hr_email"),
+                        founder_name=s.get("founder_name"),
+                        founder_email=s.get("founder_email")
                     ))
                     if len(results) >= limit:
                         break
@@ -344,10 +447,43 @@ class InstahyreScraper(BaseScraper):
             "job_url": "https://www.instahyre.com/job-182943-product-operations-lead-at-shiprocket-mumbai/",
             "experience_years": "1-3 years",
             "salary": "₹12,00,000 - ₹16,00,000 PA",
+            "founder_name": "Saahil Goel",
+            "hr_name": "Talent Team",
             "raw_description": (
                 "Shiprocket powers ecommerce logistics for 100k+ D2C brands. "
                 "We need a Product Operations Lead to oversee courier API integrations (Blue Dart, Delhivery), "
                 "audit first-mile dispatch SLA compliance, and resolve telemetry sync discrepancies across logistics hubs."
+            )
+        },
+        {
+            "company": "Groww",
+            "role": "Associate Product Manager - Wealth Management & Direct Mutual Funds",
+            "location": "Mumbai / Remote",
+            "job_url": "https://www.instahyre.com/job-182944-apm-wealth-mutual-funds-groww-mumbai/",
+            "experience_years": "1-3 years",
+            "salary": "₹15,00,000 - ₹20,00,000 PA",
+            "founder_name": "Lalit Keshre",
+            "hr_name": "Talent Acquisition",
+            "raw_description": (
+                "Groww empowers millions of retail investors across India to invest simply. "
+                "Looking for an APM to drive our direct mutual fund onboarding, SIP automation loops, "
+                "and portfolio rebalancing workflows. You will design user journeys in Figma, author engineering PRDs, "
+                "and analyze transaction conversion funnels in SQL."
+            )
+        },
+        {
+            "company": "CashFlo",
+            "role": "Fintech Product Operations Specialist - Supply Chain Finance",
+            "location": "Mumbai, Maharashtra",
+            "job_url": "https://www.instahyre.com/job-182945-product-operations-cashflo-mumbai/",
+            "experience_years": "1-3 years",
+            "salary": "₹11,00,000 - ₹15,00,000 PA",
+            "founder_name": "Ankur Bhageria",
+            "hr_name": "Talent Acquisition",
+            "raw_description": (
+                "CashFlo is India's leading supply chain financing and dynamic discounting platform. "
+                "Seeking a Product Operations Specialist in Mumbai to oversee ERP integration telemetry, "
+                "vendor invoice reconciliation cycles, and client SLA compliance across multi-crore disbursement flows."
             )
         }
     ]
@@ -370,8 +506,10 @@ class InstahyreScraper(BaseScraper):
                         salary=s.get("salary", "Competitive"),
                         posting_date="Recent",
                         raw_description=s["raw_description"],
-                        hr_name=None,
-                        hr_email=None
+                        hr_name=s.get("hr_name"),
+                        hr_email=s.get("hr_email"),
+                        founder_name=s.get("founder_name"),
+                        founder_email=s.get("founder_email")
                     ))
                     if len(results) >= limit:
                         break
@@ -449,11 +587,58 @@ class ArcDevScraper(BaseScraper):
             "job_url": "https://arc.dev/jobs/cursor-technical-product-manager-ai-editor-telemetry-9102",
             "experience_years": "1-3 years",
             "salary": "$85,000 - $120,000 USD / year + Equity",
+            "founder_name": "Michael Truell",
+            "hr_name": "Talent Team",
             "raw_description": (
                 "Cursor is the AI-first code editor used by engineers worldwide. "
                 "Seeking a Technical Product Manager to oversee model inference latency, multi-file diff accuracy metrics, "
                 "and telemetry dashboards. You will work closely with ML researchers to benchmark code generation models "
                 "and author technical feature specifications."
+            )
+        },
+        {
+            "company": "Replit",
+            "role": "Technical Product Manager - AI Cloud Workspaces & Agentic Coding",
+            "location": "Remote Worldwide",
+            "job_url": "https://arc.dev/jobs/replit-technical-product-manager-ai-workspace-9103",
+            "experience_years": "1-3 years",
+            "salary": "$90,000 - $130,000 USD / year + Equity",
+            "founder_name": "Amjad Masad",
+            "hr_name": "Talent Team",
+            "raw_description": (
+                "Replit is empowering the next billion software creators through AI-native cloud workspaces. "
+                "Hiring a Technical Product Manager to oversee model code generation latency, terminal telemetry, "
+                "and container provisioning SLAs. Prior hands-on experience with API schemas, Git workflows, and LLMs."
+            )
+        },
+        {
+            "company": "ElevenLabs",
+            "role": "Product Operations & Voice AI Specialist",
+            "location": "Remote Worldwide",
+            "job_url": "https://arc.dev/jobs/elevenlabs-product-operations-voice-ai-9104",
+            "experience_years": "1-3 years",
+            "salary": "$80,000 - $115,000 USD / year",
+            "founder_name": "Mati Staniszewski",
+            "hr_name": "Talent Team",
+            "raw_description": (
+                "ElevenLabs creates the most realistic AI audio and voice models. "
+                "We need a Product Operations Specialist to manage audio generation latency benchmarks, "
+                "developer API feedback loops, and enterprise rollout SLA tracking across global client accounts."
+            )
+        },
+        {
+            "company": "Deel",
+            "role": "Product Operations Specialist - Global Payouts & Compliance",
+            "location": "Remote Worldwide",
+            "job_url": "https://arc.dev/jobs/deel-product-operations-global-payouts-9105",
+            "experience_years": "1-3 years",
+            "salary": "$75,00,000 - $105,000 USD / year",
+            "founder_name": "Alex Bouaziz",
+            "hr_name": "Talent Team",
+            "raw_description": (
+                "Deel is the all-in-one HR and payroll platform for global teams. "
+                "Seeking a Product Operations Specialist to audit cross-border payment rails, "
+                "streamline compliance verification workflows, and maintain 99.9% disbursement SLA adherence."
             )
         }
     ]
@@ -476,8 +661,10 @@ class ArcDevScraper(BaseScraper):
                         salary=s.get("salary", "Competitive"),
                         posting_date="Recent",
                         raw_description=s["raw_description"],
-                        hr_name=None,
-                        hr_email=None
+                        hr_name=s.get("hr_name"),
+                        hr_email=s.get("hr_email"),
+                        founder_name=s.get("founder_name"),
+                        founder_email=s.get("founder_email")
                     ))
                     if len(results) >= limit:
                         break

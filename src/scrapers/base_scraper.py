@@ -20,6 +20,8 @@ class ScrapedJob(BaseModel):
     raw_description: str = ""
     hr_name: Optional[str] = None
     hr_email: Optional[str] = None
+    founder_name: Optional[str] = None
+    founder_email: Optional[str] = None
     scraped_at: str = Field(default_factory=lambda: datetime.datetime.now().isoformat())
 
 

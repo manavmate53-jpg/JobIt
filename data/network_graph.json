@@ -1,0 +1,229 @@
+{
+  "root_id": "me",
+  "nodes": [
+    {
+      "id": "me",
+      "name": "Manav Mate",
+      "primary_email": "manavmate53@gmail.com",
+      "headline": "Product Manager | 0-to-1 Builder (CIPM Certified)",
+      "company": null,
+      "location": null,
+      "domain": null,
+      "tags": [
+        "Product Manager",
+        "Founder",
+        "Candidate"
+      ],
+      "notes": null,
+      "linkedin_url": null,
+      "metadata": {}
+    },
+    {
+      "id": "rohan.deshmukh@gmail.com",
+      "name": "Rohan Deshmukh",
+      "primary_email": "rohan.deshmukh@gmail.com",
+      "headline": "Staff Machine Learning Engineer at AI Labs",
+      "company": "AI Labs",
+      "location": "San Francisco / Mumbai",
+      "domain": null,
+      "tags": [
+        "Friend",
+        "Engineer",
+        "AI",
+        "Infrastructure"
+      ],
+      "notes": null,
+      "linkedin_url": null,
+      "metadata": {}
+    },
+    {
+      "id": "sneha.kapoor@venture.com",
+      "name": "Sneha Kapoor",
+      "primary_email": "sneha.kapoor@venture.com",
+      "headline": "Principal at Nexus Venture Partners",
+      "company": "Nexus Venture Partners",
+      "location": "Mumbai",
+      "domain": null,
+      "tags": [
+        "VC",
+        "Investor",
+        "Fintech",
+        "SaaS"
+      ],
+      "notes": null,
+      "linkedin_url": null,
+      "metadata": {}
+    },
+    {
+      "id": "amit.verma@neomanpower.in",
+      "name": "Amit Verma",
+      "primary_email": "amit.verma@neomanpower.in",
+      "headline": "Head of Business Operations",
+      "company": "NeoManpower",
+      "location": "Mumbai",
+      "domain": null,
+      "tags": [
+        "Operations",
+        "Colleague",
+        "B2B"
+      ],
+      "notes": null,
+      "linkedin_url": null,
+      "metadata": {}
+    },
+    {
+      "id": "aravind@perplexity.ai",
+      "name": "Aravind Srinivas",
+      "primary_email": "aravind@perplexity.ai",
+      "headline": "Founder & CEO",
+      "company": "Perplexity AI",
+      "location": "San Francisco / Remote",
+      "domain": "perplexity.ai",
+      "tags": [
+        "Founder",
+        "CEO",
+        "AI",
+        "Search"
+      ],
+      "notes": null,
+      "linkedin_url": null,
+      "metadata": {}
+    },
+    {
+      "id": "suumit@mydukaan.io",
+      "name": "Suumit Shah",
+      "primary_email": "suumit@mydukaan.io",
+      "headline": "Founder & CEO",
+      "company": "Dukaan",
+      "location": "Mumbai / Remote",
+      "domain": "mydukaan.io",
+      "tags": [
+        "Founder",
+        "CEO",
+        "Ecommerce",
+        "AI"
+      ],
+      "notes": null,
+      "linkedin_url": null,
+      "metadata": {}
+    },
+    {
+      "id": "aadit@zepto.co",
+      "name": "Aadit Palicha",
+      "primary_email": "aadit@zepto.co",
+      "headline": "Founder & CEO",
+      "company": "Zepto",
+      "location": "Mumbai",
+      "domain": "zepto.co",
+      "tags": [
+        "Founder",
+        "CEO",
+        "Quick Commerce",
+        "Logistics"
+      ],
+      "notes": null,
+      "linkedin_url": null,
+      "metadata": {}
+    },
+    {
+      "id": "lalit@groww.in",
+      "name": "Lalit Keshre",
+      "primary_email": "lalit@groww.in",
+      "headline": "Founder & CEO",
+      "company": "Groww",
+      "location": "Mumbai / Remote",
+      "domain": "groww.in",
+      "tags": [
+        "Founder",
+        "CEO",
+        "Fintech",
+        "Investments"
+      ],
+      "notes": null,
+      "linkedin_url": null,
+      "metadata": {}
+    }
+  ],
+  "edges": [
+    {
+      "source_id": "me",
+      "target_id": "rohan.deshmukh@gmail.com",
+      "interaction_type": "calendar",
+      "timestamp": "2026-10-21T09:21:03.854590+00:00",
+      "direction": "bidirectional",
+      "thread_count": 3,
+      "subject_summary": "AI Inference Architecture Catch-up",
+      "metadata": {}
+    },
+    {
+      "source_id": "me",
+      "target_id": "rohan.deshmukh@gmail.com",
+      "interaction_type": "email",
+      "timestamp": "2026-10-26T09:21:03.854590+00:00",
+      "direction": "bidirectional",
+      "thread_count": 5,
+      "subject_summary": "Re: Llama 3.1 fine-tuning benchmarks",
+      "metadata": {}
+    },
+    {
+      "source_id": "me",
+      "target_id": "sneha.kapoor@venture.com",
+      "interaction_type": "email",
+      "timestamp": "2026-09-13T09:21:03.854590+00:00",
+      "direction": "bidirectional",
+      "thread_count": 2,
+      "subject_summary": "B2B SaaS Market Trends",
+      "metadata": {}
+    },
+    {
+      "source_id": "me",
+      "target_id": "amit.verma@neomanpower.in",
+      "interaction_type": "email",
+      "timestamp": "2026-10-23T09:21:03.854590+00:00",
+      "direction": "bidirectional",
+      "thread_count": 6,
+      "subject_summary": "Quarterly Operations & SLA Audit",
+      "metadata": {}
+    },
+    {
+      "source_id": "rohan.deshmukh@gmail.com",
+      "target_id": "aravind@perplexity.ai",
+      "interaction_type": "email",
+      "timestamp": "2026-10-16T09:21:03.854590+00:00",
+      "direction": "bidirectional",
+      "thread_count": 4,
+      "subject_summary": "Search evaluation benchmarks",
+      "metadata": {}
+    },
+    {
+      "source_id": "sneha.kapoor@venture.com",
+      "target_id": "suumit@mydukaan.io",
+      "interaction_type": "calendar",
+      "timestamp": "2026-09-28T09:21:03.854590+00:00",
+      "direction": "bidirectional",
+      "thread_count": 2,
+      "subject_summary": "Dukaan Merchant Growth Review",
+      "metadata": {}
+    },
+    {
+      "source_id": "sneha.kapoor@venture.com",
+      "target_id": "lalit@groww.in",
+      "interaction_type": "email",
+      "timestamp": "2026-10-03T09:21:03.854590+00:00",
+      "direction": "bidirectional",
+      "thread_count": 2,
+      "subject_summary": "Fintech market discussion",
+      "metadata": {}
+    },
+    {
+      "source_id": "amit.verma@neomanpower.in",
+      "target_id": "aadit@zepto.co",
+      "interaction_type": "email",
+      "timestamp": "2026-10-08T09:21:03.854590+00:00",
+      "direction": "bidirectional",
+      "thread_count": 3,
+      "subject_summary": "Dark store staffing and logistics dispatch",
+      "metadata": {}
+    }
+  ]
+}

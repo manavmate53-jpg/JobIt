@@ -52,7 +52,7 @@ def scrape_portals(portal: str = "all", keywords: str = "Product Manager", locat
         scrapers.append(IndeedScraper())
 
     results: List[ScrapedJob] = []
-    per_scraper_limit = limit if len(scrapers) == 1 else max(3, limit // len(scrapers) + 2)
+    per_scraper_limit = limit if len(scrapers) == 1 else max(10, limit)
 
     for scraper in scrapers:
         try:

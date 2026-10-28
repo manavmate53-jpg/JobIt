@@ -69,6 +69,47 @@ def derive_domain_from_company_or_url(company: str, job_url: str = "") -> str:
     return "company.com"
 
 
+FOUNDER_DIRECTORY: Dict[str, Dict[str, str]] = {
+    "perplexity": {"founder": "Aravind Srinivas", "role": "Founder & CEO", "domain": "perplexity.ai"},
+    "sarvam": {"founder": "Pratyush Kumar", "role": "Co-Founder", "domain": "sarvam.ai"},
+    "together": {"founder": "Vipul Ved Prakash", "role": "Co-Founder & CEO", "domain": "together.ai"},
+    "llamaindex": {"founder": "Jerry Liu", "role": "Co-Founder & CEO", "domain": "llamaindex.ai"},
+    "posthog": {"founder": "James Hawkins", "role": "Co-Founder & CEO", "domain": "posthog.com"},
+    "korbit": {"founder": "Anson Vanduren", "role": "Co-Founder & CEO", "domain": "korbit.ai"},
+    "invideo": {"founder": "Sanket Shah", "role": "Founder & CEO", "domain": "invideo.io"},
+    "dukaan": {"founder": "Suumit Shah", "role": "Founder & CEO", "domain": "mydukaan.io"},
+    "superops": {"founder": "Arvind Parthiban", "role": "Co-Founder & CEO", "domain": "superops.ai"},
+    "zepto": {"founder": "Aadit Palicha", "role": "Co-Founder & CEO", "domain": "zepto.co"},
+    "landeed": {"founder": "Sanjay Mandava", "role": "Founder & CEO", "domain": "landeed.com"},
+    "gupshup": {"founder": "Beerud Sheth", "role": "Co-Founder & CEO", "domain": "gupshup.io"},
+    "sprinto": {"founder": "Girish Redekar", "role": "Co-Founder & CEO", "domain": "sprinto.com"},
+    "fashinza": {"founder": "Pawan Gupta", "role": "Co-Founder & CEO", "domain": "fashinza.com"},
+    "cred": {"founder": "Kunal Shah", "role": "Founder", "domain": "cred.club"},
+    "jupiter": {"founder": "Jitendra Gupta", "role": "Founder & CEO", "domain": "jupitermoney.com"},
+    "shiprocket": {"founder": "Saahil Goel", "role": "Co-Founder & CEO", "domain": "shiprocket.in"},
+    "cursor": {"founder": "Michael Truell", "role": "Co-Founder & CEO", "domain": "cursor.com"},
+    "anysphere": {"founder": "Michael Truell", "role": "Co-Founder & CEO", "domain": "anysphere.co"},
+    "linear": {"founder": "Karri Saarinen", "role": "Co-Founder & CEO", "domain": "linear.app"},
+    "elevenlabs": {"founder": "Mati Staniszewski", "role": "Co-Founder & CEO", "domain": "elevenlabs.io"},
+    "replit": {"founder": "Amjad Masad", "role": "Founder & CEO", "domain": "replit.com"},
+    "deel": {"founder": "Alex Bouaziz", "role": "Co-Founder & CEO", "domain": "deel.com"},
+    "groww": {"founder": "Lalit Keshre", "role": "Co-Founder & CEO", "domain": "groww.in"},
+    "klub": {"founder": "Anurakt Jain", "role": "Co-Founder & CEO", "domain": "klubworks.com"},
+    "cashflo": {"founder": "Ankur Bhageria", "role": "Founder & CEO", "domain": "cashflo.io"},
+    "porter": {"founder": "Pranav Goel", "role": "Co-Founder & CEO", "domain": "porter.in"},
+    "pocket fm": {"founder": "Rohan Nayak", "role": "Co-Founder & CEO", "domain": "pocketfm.com"},
+    "perfios": {"founder": "V.R. Govindarajan", "role": "Co-Founder", "domain": "perfios.com"},
+    "kreditbee": {"founder": "Madhusudan Ekambaram", "role": "Co-Founder & CEO", "domain": "kreditbee.in"},
+    "swiggy": {"founder": "Sriharsha Majety", "role": "Group CEO & Co-Founder", "domain": "swiggy.in"},
+    "razorpay": {"founder": "Harshil Mathur", "role": "Co-Founder & CEO", "domain": "razorpay.com"},
+    "atlassian": {"founder": "Mike Cannon-Brookes", "role": "Co-Founder & Co-CEO", "domain": "atlassian.com"},
+    "stripe": {"founder": "Patrick Collison", "role": "Co-Founder & CEO", "domain": "stripe.com"},
+    "gitlab": {"founder": "Sid Sijbrandij", "role": "Co-Founder & CEO", "domain": "gitlab.com"},
+    "automattic": {"founder": "Matt Mullenweg", "role": "Founder & CEO", "domain": "automattic.com"},
+    "zapier": {"founder": "Wade Foster", "role": "Co-Founder & CEO", "domain": "zapier.com"},
+}
+
+
 class ContactEnricher:
     """Generates email permutations and verifies MX records."""
 
@@ -147,6 +188,37 @@ class ContactEnricher:
         }
 
 
+    def find_founder_contact(self, job: ScrapedJob) -> Dict[str, Any]:
+        """Resolves company founder name, corporate domain, and permutations."""
+        comp_lower = job.company.lower()
+        founder_name = job.founder_name
+        domain = derive_domain_from_company_or_url(job.company, job.job_url)
+
+        for key, info in FOUNDER_DIRECTORY.items():
+            if key in comp_lower:
+                founder_name = info["founder"]
+                domain = info.get("domain", domain)
+                break
+
+        if not founder_name:
+            founder_name = f"Founder of {job.company}"
+
+        mx_valid, mx_servers = self.check_mx_records(domain)
+        permutations = self.generate_permutations(founder_name, domain)
+        primary_email = job.founder_email or permutations[0]
+        is_verified = bool(job.founder_email)
+
+        return {
+            "name": founder_name,
+            "domain": domain,
+            "primary_email": primary_email,
+            "permutations": permutations,
+            "mx_valid": mx_valid,
+            "mx_servers": mx_servers,
+            "is_verified": is_verified,
+            "type": "FOUNDER"
+        }
+
     def _query_hunter(self, name: str, domain: str) -> Optional[str]:
         try:
             parts = name.split()
@@ -172,53 +244,93 @@ class OutreachEngine:
         self.drafts_dir = self.base_dir / "exports" / "outreach_drafts"
         self.drafts_dir.mkdir(parents=True, exist_ok=True)
 
-    def draft_outreach(self, job: ScrapedJob, pdf_path: Optional[str] = None) -> Dict[str, Any]:
-        """Drafts LinkedIn connection note and cold email."""
-        contact = self.enricher.find_or_enrich_contact(job)
-        hr_name = contact["name"]
-        first_name = hr_name.split()[0] if hr_name else "there"
-
-        # LinkedIn Note: strictly under 300 characters
-        linkedin_note = (
-            f"Hi {first_name}, saw {job.company}'s {job.role} opening. "
-            f"At HireFlo I cut Llama 3.1 inference compute costs by 40% via NVIDIA NIM and previously led 200+ ops deployments "
-            f"at NeoManpower with zero SLA breaches. Would love to connect and share my interactive PM Lab builds: "
-            f"https://manavmate53-jpg.github.io/pm-product-lab/#hub"
-        )
+    def draft_outreach(self, job: ScrapedJob, pdf_path: Optional[str] = None, recipient_type: str = "TA") -> Dict[str, Any]:
+        """Drafts LinkedIn connection note and cold email tailored for either FOUNDER or TA/HR."""
         short_role = job.role.split(" - ")[0].split(" (")[0]
-        if len(linkedin_note) > 295:
-            # Compact version using clean shortened role
-            linkedin_note = (
-                f"Hi {first_name}, saw {job.company}'s {short_role} role. At HireFlo I cut Llama 3.1 compute costs by 40% "
-                f"and led 200+ ops deployments at NeoManpower with 0 SLA breaches. "
-                f"Would love to connect and share my PM builds: https://manavmate53-jpg.github.io/pm-product-lab/#hub"
-            )
-        if len(linkedin_note) > 295:
-            linkedin_note = linkedin_note[:292] + "..."
+        
+        if recipient_type.upper() == "FOUNDER":
+            contact = self.enricher.find_founder_contact(job)
+            full_name = contact["name"]
+            first_name = full_name.split()[0] if full_name else "there"
 
-        # Cold Email Subject & Body
-        email_subject = f"{job.role} - Manav Mate | Builder & Product Manager"
-        email_body = (
-            f"Hi {hr_name},\n\n"
-            f"I noticed {job.company} is hiring for {job.role}.\n\n"
-            f"I am an early-career product manager and former bootstrapped founder. At HireFlo India, "
-            f"I owned product discovery and shipped our Llama 3.1 inference pipeline on NVIDIA NIM, "
-            f"cutting compute costs by 40% while building a 1,000-document parsing workflow in 10 minutes. "
-            f"Prior to that, I bootstrapped NeoManpower to 50+ B2B corporate clients and led 200+ ground "
-            f"deployments across Mumbai with zero SLA breaches.\n\n"
-            f"I have also built live systems in my PM Product Lab, including EvalGuard AI (schema guardrails) "
-            f"and AutoMatch IQ (marketplace funnel telemetry): https://manavmate53-jpg.github.io/pm-product-lab/#hub\n\n"
-            f"I have attached my tailored resume for your review. I would welcome the opportunity to discuss "
-            f"how my technical PRD execution and operational discipline can support {job.company}.\n\n"
-            f"Best regards,\n"
-            f"Manav Mate\n"
-            f"+91 85915 95889 | manavmate53@gmail.com\n"
-            f"Portfolio: https://manavmate53-jpg.github.io/portfolio/#hero"
-        )
+            # LinkedIn Note: strictly under 300 characters
+            linkedin_note = (
+                f"Hi {first_name}, saw {job.company}'s {short_role} role. Ex-bootstrapped founder (NeoManpower: 50+ B2B clients, 200+ field deployments, 0 SLA breaches). "
+                f"At HireFlo I cut Llama 3.1 compute costs 40% via NVIDIA NIM. Built live PM Lab demos: "
+                f"https://manavmate53-jpg.github.io/pm-product-lab/#hub - would love 15 mins to connect!"
+            )
+            if len(linkedin_note) > 295:
+                linkedin_note = (
+                    f"Hi {first_name}, saw {job.company}'s {short_role} role. Ex-founder (50+ B2B clients, 200+ ops projects 0 SLA breaches). "
+                    f"At HireFlo cut Llama 3.1 compute 40% via NVIDIA NIM. Live PM Lab demos: "
+                    f"https://manavmate53-jpg.github.io/pm-product-lab/#hub - would love to connect!"
+                )
+            if len(linkedin_note) > 295:
+                linkedin_note = linkedin_note[:292] + "..."
+
+            email_subject = f"{job.role} - Manav Mate | 0-to-1 Builder & Bootstrapped Founder"
+            email_body = (
+                f"Hi {first_name},\n\n"
+                f"I noticed {job.company} is scaling and hiring for {job.role}.\n\n"
+                f"As a former bootstrapped founder, I understand the focus required on high-velocity execution without overhead. "
+                f"I bootstrapped NeoManpower from zero to 50+ B2B corporate enterprise clients and orchestrated 200+ commercial operations "
+                f"across Mumbai with zero SLA breaches.\n\n"
+                f"Transitioning to tech product management at HireFlo India, I owned product discovery and shipped our Llama 3.1 inference pipeline "
+                f"on NVIDIA NIM, reducing compute costs by 40% while engineering a 1,000-document resume parsing pipeline in under 10 minutes (98% precision). "
+                f"I also improved candidate self-serve onboarding completion by 30% through UX friction audits.\n\n"
+                f"I also built live interactive systems in my PM Product Lab, including EvalGuard AI (schema guardrails & evaluation) "
+                f"and AutoMatch IQ (marketplace funnel telemetry): https://manavmate53-jpg.github.io/pm-product-lab/#hub\n\n"
+                f"I have attached my tailored single-page A4 resume. I would value a brief 15-minute conversation before the end of October "
+                f"to discuss how my technical PRD execution and founder grit can immediately unblock roadmap priorities for {job.company}.\n\n"
+                f"Best regards,\n"
+                f"Manav Mate\n"
+                f"+91 85915 95889 | manavmate53@gmail.com\n"
+                f"Portfolio: https://manavmate53-jpg.github.io/portfolio/#hero"
+            )
+        else:
+            contact = self.enricher.find_or_enrich_contact(job)
+            hr_name = contact["name"]
+            first_name = hr_name.split()[0] if hr_name else "there"
+
+            # LinkedIn Note: strictly under 300 characters
+            linkedin_note = (
+                f"Hi {first_name}, saw your {job.company} {short_role} opening. Early-career PM & CIPM delivery lead. "
+                f"At HireFlo I cut Llama 3.1 compute costs by 40% via NVIDIA NIM and led 14+ PRDs in Jira. "
+                f"Would love to connect and share my interactive PM builds: https://manavmate53-jpg.github.io/pm-product-lab/#hub"
+            )
+            if len(linkedin_note) > 295:
+                linkedin_note = (
+                    f"Hi {first_name}, saw {job.company}'s {short_role} role. At HireFlo I cut Llama 3.1 compute costs by 40% "
+                    f"and led 200+ ops deployments at NeoManpower with 0 SLA breaches. "
+                    f"Would love to connect and share my PM builds: https://manavmate53-jpg.github.io/pm-product-lab/#hub"
+                )
+            if len(linkedin_note) > 295:
+                linkedin_note = linkedin_note[:292] + "..."
+
+            email_subject = f"Application: {job.role} - Manav Mate (ATS 80+ Match | Single-Page CV Attached)"
+            email_body = (
+                f"Hi {hr_name},\n\n"
+                f"I am writing to apply for the {job.role} opening at {job.company}.\n\n"
+                f"I am an early-career product manager and Certified International Project Manager (CIPM) with hands-on experience "
+                f"in 0-to-1 product discovery, technical PRD authoring, and sprint execution directly with engineering squads.\n\n"
+                f"Key highlights relevant to {job.company}:\n"
+                f"- Model Compute Optimization: Cut inference compute costs by 40% on Llama 3.1 at HireFlo India by deploying self-hosted microservices via NVIDIA NIM.\n"
+                f"- Data Pipeline Engineering: Built and shipped a 1,000-document parsing and extraction pipeline completing runs in under 10 minutes with 98% field precision.\n"
+                f"- User Funnel Growth: Improved candidate platform onboarding completion by 30% through UX friction audits.\n"
+                f"- Operational Scale: Bootstrapped NeoManpower to 50+ B2B enterprise clients and 200+ projects across Mumbai with zero SLA breaches.\n\n"
+                f"Live interactive builds in my PM Product Lab: https://manavmate53-jpg.github.io/pm-product-lab/#hub\n\n"
+                f"My tailored single-page A4 resume is attached. I am available for an introductory interview at your earliest convenience this week before October ends.\n\n"
+                f"Warm regards,\n"
+                f"Manav Mate\n"
+                f"+91 85915 95889 | manavmate53@gmail.com\n"
+                f"Portfolio: https://manavmate53-jpg.github.io/portfolio/#hero"
+            )
+
         email_body = sanitize_builder_text(email_body)
 
         return {
             "contact": contact,
+            "recipient_type": recipient_type.upper(),
             "linkedin_note": linkedin_note,
             "linkedin_note_chars": len(linkedin_note),
             "email_subject": email_subject,
@@ -226,18 +338,25 @@ class OutreachEngine:
             "attachment_pdf": pdf_path,
         }
 
-    def process_outreach(self, job: ScrapedJob, pdf_path: Optional[str] = None, dry_run: bool = True) -> Dict[str, Any]:
+    def process_outreach(
+        self,
+        job: ScrapedJob,
+        pdf_path: Optional[str] = None,
+        dry_run: bool = True,
+        recipient_type: str = "TA"
+    ) -> Dict[str, Any]:
         """Failsafe outreach dispatcher. If dry_run is True (default), writes draft to file. If False, sends via SMTP."""
-        draft = self.draft_outreach(job, pdf_path)
+        draft = self.draft_outreach(job, pdf_path, recipient_type=recipient_type)
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         safe_comp = re.sub(r"[^\w-]", "_", job.company)
+        recip_slug = recipient_type.upper()
 
         # Save draft inspection payload
-        draft_txt_path = self.drafts_dir / f"draft_{safe_comp}_{timestamp}.txt"
-        draft_json_path = self.drafts_dir / f"draft_{safe_comp}_{timestamp}.json"
+        draft_txt_path = self.drafts_dir / f"draft_{safe_comp}_{recip_slug}_{timestamp}.txt"
+        draft_json_path = self.drafts_dir / f"draft_{safe_comp}_{recip_slug}_{timestamp}.json"
 
         with open(draft_txt_path, "w", encoding="utf-8") as f:
-            f.write(f"=== RECIPIENT DETAILS ===\n")
+            f.write(f"=== RECIPIENT DETAILS ({recip_slug}) ===\n")
             f.write(f"Target: {draft['contact']['name']} <{draft['contact']['primary_email']}>\n")
             f.write(f"Company: {job.company} | Role: {job.role}\n")
             f.write(f"Domain: {draft['contact']['domain']} (MX Valid: {draft['contact']['mx_valid']})\n")
@@ -252,16 +371,18 @@ class OutreachEngine:
         with open(draft_json_path, "w", encoding="utf-8") as f:
             json.dump({
                 "job": job.model_dump(),
+                "recipient_type": recip_slug,
                 "draft": draft,
                 "timestamp": timestamp,
                 "status": "DRAFTED" if dry_run else "DISPATCHED"
             }, f, indent=2)
 
         if dry_run:
-            logger.info(f"[DRY-RUN] Outreach drafted and logged safely to {draft_txt_path}")
+            logger.info(f"[DRY-RUN] {recip_slug} outreach drafted and logged safely to {draft_txt_path}")
             return {
                 "dispatched": False,
                 "mode": "DRY_RUN",
+                "recipient_type": recip_slug,
                 "draft_txt_path": str(draft_txt_path),
                 "draft_json_path": str(draft_json_path),
                 "draft": draft,
@@ -273,11 +394,28 @@ class OutreachEngine:
             return {
                 "dispatched": send_result["success"],
                 "mode": "LIVE_SEND",
+                "recipient_type": recip_slug,
                 "draft_txt_path": str(draft_txt_path),
                 "draft_json_path": str(draft_json_path),
                 "draft": draft,
                 "smtp_details": send_result
             }
+
+    def process_dual_outreach(
+        self,
+        job: ScrapedJob,
+        pdf_path: Optional[str] = None,
+        dry_run: bool = True
+    ) -> Dict[str, Any]:
+        """Formulates outreach for BOTH the company Founder and the TA/HR lead."""
+        founder_res = self.process_outreach(job, pdf_path=pdf_path, dry_run=dry_run, recipient_type="FOUNDER")
+        ta_res = self.process_outreach(job, pdf_path=pdf_path, dry_run=dry_run, recipient_type="TA")
+        return {
+            "company": job.company,
+            "role": job.role,
+            "founder": founder_res,
+            "ta": ta_res
+        }
 
     def _dispatch_smtp(self, draft: Dict[str, Any]) -> Dict[str, Any]:
         """Dispatches email via standard SMTP."""
