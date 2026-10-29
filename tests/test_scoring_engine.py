@@ -51,3 +51,20 @@ def test_evaluation_pipeline_filtered_out():
     assert res.is_filtered_out is True
     assert res.fit_score == 0
     assert res.decision == "SKIP"
+
+
+def test_technical_pm_system_architecture_scoring():
+    engine = ScoringEngine()
+    job = ScrapedJob(
+        company="ScaleInfra",
+        role="Technical Product Manager - API Platform",
+        job_url="https://example.com/tpm-scale",
+        source="Arc.dev",
+        location="Remote",
+        raw_description="Own microservices API platform, evaluating system architecture, latency trade-offs, and database scaling."
+    )
+    res = engine.evaluate(job)
+    assert res.fit_score >= 80
+    assert res.decision == "APPLY"
+    assert any("System Architecture" in s for s in res.matching_skills)
+    assert "Scaler" in res.gap_analysis or "Scaler" in res.recommended_angle

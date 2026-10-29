@@ -84,7 +84,9 @@ class ScoringEngine:
             "marketplace", "logistics", "supply chain", "fleet", "operations",
             "kyc", "compliance", "developer tools", "product operations", "data",
             "s&op", "demand planning", "project management", "agile", "business analyst",
-            "solutions", "systems", "growth", "product owner"
+            "solutions", "systems", "growth", "product owner", "system architecture",
+            "scalability", "distributed systems", "api platforms", "microservices",
+            "platform pm", "technical product manager", "tpm"
         ]
         matches = [d for d in target_domains if d in domain_text]
         if matches:
@@ -173,7 +175,12 @@ class ScoringEngine:
             "Supply Chain & S&OP Planning": ["supply chain", "demand planning", "s&op", "inventory", "procurement", "dispatch"],
             "Business & Systems Analysis": ["business analyst", "systems analyst", "solutions", "functional specs", "workflows", "gap analysis"],
             "Growth & Marketplace Mechanics": ["growth", "marketplace", "retention", "activation", "experimentation", "monetization"],
-            "Product Ownership & Backlog": ["product owner", "user stories", "acceptance criteria", "po intern", "backlog"]
+            "Product Ownership & Backlog": ["product owner", "user stories", "acceptance criteria", "po intern", "backlog"],
+            "System Architecture & Distributed Scaling (Scaler)": [
+                "system architecture", "scalability", "distributed systems", "api platform", "api platforms",
+                "microservices", "caching", "cdn", "database scaling", "replication", "asynchronous",
+                "message queue", "queues", "cap theorem", "latency", "throughput", "infrastructure sizing"
+            ]
         }
 
         matched_skills = []
@@ -184,13 +191,50 @@ class ScoringEngine:
         if not matched_skills:
             matched_skills = ["Technical PRDs", "Jira & Agile", "SQL & Telemetry", "Operations Planning"]
 
+        # Check for Technical Product Manager (TPM), APM, Platform PM roles emphasizing architecture
+        tech_arch_keywords = [
+            "system architecture", "scalability", "distributed systems", "api platforms",
+            "api platform", "microservices", "caching", "cdn", "database scaling",
+            "replication", "asynchronous", "message queue", "cap theorem"
+        ]
+        is_tech_pm_role = any(t in job.role.lower() for t in [
+            "technical product manager", "tpm", "platform pm", "platform product manager",
+            "api product manager", "associate product manager", "apm", "technical", "platform"
+        ])
+        has_arch_emphasis = any(kw in job_text for kw in tech_arch_keywords)
+
+        # Increase match weights (+10 to +15 pts) for TPM, APM, and Platform PM roles that emphasize System Architecture
+        arch_bonus = 0
+        if has_arch_emphasis:
+            if "System Architecture & Distributed Scaling (Scaler)" not in matched_skills:
+                matched_skills.insert(0, "System Architecture & Distributed Scaling (Scaler)")
+            else:
+                # Prioritize at top of matched skills
+                matched_skills.remove("System Architecture & Distributed Scaling (Scaler)")
+                matched_skills.insert(0, "System Architecture & Distributed Scaling (Scaler)")
+            
+            if is_tech_pm_role or any(r in job_text for r in ["tpm", "technical product manager", "platform pm", "platform"]):
+                arch_bonus = 14
+            else:
+                arch_bonus = 10
+
         # Calculate semantic score based on matches and relevance
         base_sem = 32
-        bonus = min(28, len(matched_skills) * 4)
-        sem_score = base_sem + bonus
+        bonus = min(28, (len(matched_skills) * 4) + arch_bonus)
+        sem_score = min(60, base_sem + bonus)
 
         # Generate grounded gap analysis
-        if "ai" in job_text or "llm" in job_text:
+        if has_arch_emphasis or (is_tech_pm_role and any(w in job_text for w in ["system", "api", "architecture", "scale"])):
+            gap = (
+                "Role prioritizes system architecture, scalability trade-offs, and technical cross-functional alignment. "
+                "Candidate's Scaler Quora System Design certification (distributed scaling, caching & CDN, database replication, asynchronous queues, CAP theorem) "
+                "validates technical product management comprehension for evaluating latency/cost trade-offs and API schemas without writing production code from scratch."
+            )
+            angle = (
+                "Lead with Scaler System Design certification and HireFlo NVIDIA NIM latency/cost trade-off optimization, "
+                "highlighting quantitative infrastructure sizing, API schemas, and architectural alignment with engineering teams."
+            )
+        elif "ai" in job_text or "llm" in job_text:
             gap = (
                 "Role emphasizes production AI and prompt reliability. "
                 "Candidate's HireFlo India achievement cutting Llama 3.1 compute costs by 40% via NVIDIA NIM "

@@ -31,3 +31,15 @@ def test_grounding_prompt_context():
     assert "HireFlo India" in prompt
     assert "NeoManpower" in prompt
     assert "EvalGuard AI" in prompt
+
+
+def test_scaler_system_design_certification():
+    pe = ProfileEngine()
+    profile = pe.profile
+    scaler_cert = next((c for c in profile.certifications if "Scaler" in c.issuer), None)
+    assert scaler_cert is not None
+    assert "Quora System Design" in scaler_cert.name
+    assert "System Architecture" in scaler_cert.core_competencies
+    assert profile.skills.system_architecture is not None
+    assert "CAP Theorem Trade-Offs" in profile.skills.system_architecture
+    assert "system_architecture" in profile.skills.technical

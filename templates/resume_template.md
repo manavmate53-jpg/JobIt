@@ -13,7 +13,11 @@
 
 ### CORE COMPETENCIES & TOOLING
 - **Product Execution**: {{ skills.product_management | join(', ') }}
+{% if is_technical_role and skills.system_architecture %}
+- **Technical Architecture & Systems**: {{ skills.system_architecture | join(', ') }}
+{% else %}
 - **AI & Data Systems**: {{ skills.ai_and_technical | join(', ') }}
+{% endif %}
 - **Operations & Scale**: {{ skills.operations_and_business | join(', ') }}
 - **Platforms & Tools**: {{ skills.tools | join(', ') }}
 

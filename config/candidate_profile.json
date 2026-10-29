@@ -153,6 +153,26 @@
       "Playwright",
       "Python",
       "Google Workspace"
+    ],
+    "technical": {
+      "system_architecture": [
+        "System Architecture Design",
+        "Distributed Systems Concepts",
+        "Caching & CDN Strategies",
+        "Database Replication & Scaling",
+        "Asynchronous Messaging & Queues",
+        "CAP Theorem Trade-Offs",
+        "API Architecture & Webhooks"
+      ]
+    },
+    "system_architecture": [
+      "System Architecture Design",
+      "Distributed Systems Concepts",
+      "Caching & CDN Strategies",
+      "Database Replication & Scaling",
+      "Asynchronous Messaging & Queues",
+      "CAP Theorem Trade-Offs",
+      "API Architecture & Webhooks"
     ]
   },
   "education": [
@@ -164,6 +184,22 @@
     }
   ],
   "certifications": [
+    {
+      "name": "Quora System Design Course",
+      "issuer": "Scaler",
+      "issue_date": "Oct 2026",
+      "credential_url": "",
+      "core_competencies": [
+        "System Architecture",
+        "Distributed Scaling",
+        "Caching & CDN Strategies",
+        "Database Scaling & Replication",
+        "Asynchronous Messaging",
+        "The CAP Theorem",
+        "Quantitative Infrastructure Sizing",
+        "Sector-Specific System Patterns"
+      ]
+    },
     {
       "name": "Certified International Project Manager (CIPM)",
       "issuer": "Project Management Institute (PMI)"

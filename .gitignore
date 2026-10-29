@@ -50,5 +50,6 @@ exports/outreach_drafts/*.json
 
 # Browser Sessions & Application Artifacts
 data/browser_sessions/
+data/linkedin_export/
 exports/applications/*.png
 !exports/applications/.gitkeep

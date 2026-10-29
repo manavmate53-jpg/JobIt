@@ -147,10 +147,11 @@ class TailorEngine:
                 "slug": "Pattern3_Technical_PM",
                 "headline": f"Technical {job.role} | Systems Architecture & APIs",
                 "summary": (
-                    f"Technical {job.role} with a strong systems architecture and data engineering foundation. "
+                    f"Technical {job.role} with strong architectural and systems comprehension. "
+                    f"Completed Scaler Quora System Design Course (distributed scaling, caching & CDN, database replication, asynchronous queues, CAP theorem). "
                     f"Authored 14+ technical PRDs, API schemas, and JSON data contracts at HireFlo India, alongside deploying microservices on NVIDIA NIM to cut compute costs by 40%. "
                     f"Engineered an automated 1,000-document parsing pipeline in under 10 minutes with 98% field precision. "
-                    f"Previously built custom operational shift trackers at NeoManpower. Adept at SQL telemetry and developer empathy."
+                    f"Skilled in evaluating latency/cost trade-offs and cross-functional engineering alignment."
                 ),
                 "primary_project": "EvalGuard AI",
                 "primary_skill_category": "ai_and_technical",
@@ -233,11 +234,20 @@ class TailorEngine:
             p_projects.sort(key=lambda pr: 0 if pr.get("name") == p_cfg["primary_project"] else 1)
             p_context["featured_projects"] = p_projects[:3]
 
-            # Reorder certifications if agile/CIPM
-            if p_cfg["bullet_bias"] == "agile":
-                p_certs = list(base_ctx["certifications"])
-                p_certs.sort(key=lambda c: 0 if "CIPM" in c.get("name", "") else 1)
+            # Reorder certifications and set technical role flag
+            p_certs = list(base_ctx["certifications"])
+            if p_cfg["bullet_bias"] == "tech" or p_cfg["slug"] == "Pattern3_Technical_PM":
+                p_certs.sort(key=lambda c: 0 if "System Design" in c.get("name", "") else (1 if "CIPM" in c.get("name", "") else 2))
                 p_context["certifications"] = p_certs
+                p_context["is_technical_role"] = True
+            elif p_cfg["bullet_bias"] == "agile":
+                p_certs.sort(key=lambda c: 0 if "CIPM" in c.get("name", "") else (1 if "System Design" in c.get("name", "") else 2))
+                p_context["certifications"] = p_certs
+                p_context["is_technical_role"] = False
+            else:
+                p_certs.sort(key=lambda c: 0 if "CIPM" in c.get("name", "") else (1 if "System Design" in c.get("name", "") else 2))
+                p_context["certifications"] = p_certs
+                p_context["is_technical_role"] = False
 
             # Single-page enforcement
             p_context = PageFitValidator.enforce_single_page(p_context)
@@ -347,12 +357,27 @@ class TailorEngine:
         )
         tailored_summary = WritingQualityAudit.clean_text(tailored_summary)
 
+        # Step 4.5: Technical / Platform Role Assessment & Certification Ordering
+        tech_indicators = [
+            "technical", "tpm", "platform", "systems", "architecture", "api",
+            "microservices", "infrastructure", "scalability", "developer", "distributed", "backend"
+        ]
+        is_technical_role = any(ind in f"{job.role} {job.raw_description}".lower() for ind in tech_indicators)
+
+        p_certs = list(base_ctx["certifications"])
+        if is_technical_role:
+            p_certs.sort(key=lambda c: 0 if "System Design" in c.get("name", "") else (1 if "CIPM" in c.get("name", "") else 2))
+        else:
+            p_certs.sort(key=lambda c: 0 if "CIPM" in c.get("name", "") else (1 if "System Design" in c.get("name", "") else 2))
+
         # Step 5: Assemble tailored context
         context = dict(base_ctx)
         context["summary"] = tailored_summary
         context["skills"] = tailored_skills
         context["work_experience"] = tailored_experience
         context["featured_projects"] = tailored_projects
+        context["certifications"] = p_certs
+        context["is_technical_role"] = is_technical_role
 
         # Step 6: Single-Page Budget Enforcement (PageFitValidator)
         context = PageFitValidator.enforce_single_page(context)

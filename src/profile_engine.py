@@ -64,6 +64,8 @@ class SkillsCollection(BaseModel):
     ai_and_technical: List[str]
     operations_and_business: List[str]
     tools: List[str]
+    technical: Optional[Dict[str, List[str]]] = None
+    system_architecture: Optional[List[str]] = None
 
 
 class Education(BaseModel):
@@ -76,6 +78,9 @@ class Education(BaseModel):
 class Certification(BaseModel):
     name: str
     issuer: str
+    issue_date: Optional[str] = None
+    credential_url: Optional[str] = None
+    core_competencies: Optional[List[str]] = None
 
 
 class ToneRules(BaseModel):
@@ -170,6 +175,7 @@ class ProfileEngine:
             lines.append(f"  * {edu.degree}, {edu.institution} ({edu.specialization})")
         cert_names = [f"{c.name} ({c.issuer})" for c in p.certifications]
         lines.append(f"  * Certifications: {', '.join(cert_names)}")
+        lines.append(f"  * Technical Architecture Comprehension: Scaler Quora System Design Course (distributed scaling, caching & CDN, database replication, asynchronous queues, CAP theorem, API architecture). Candidate boundary: Early-career Product Manager / Builder with strong architectural comprehension, evaluating latency/cost trade-offs and cross-functional engineering alignment, NOT a software engineer writing production code from scratch.")
 
         lines.append("\nTONE GUIDELINES:")
         lines.append(f"  * {p.tone_rules.required_framing}")

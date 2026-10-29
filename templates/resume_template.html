@@ -6,8 +6,8 @@
 <title>{{ name }} - Tailored Product Manager Resume</title>
 <style>
   @page {
-    size: A4;
-    margin: 8.5mm 10.5mm;
+    size: A4 portrait;
+    margin: 6mm 8mm 5mm 8mm;
   }
   * {
     box-sizing: border-box;
@@ -218,8 +218,13 @@
         <span class="skill-items">{{ skills.product_management | join(', ') }}</span>
       </div>
       <div class="skill-row">
+        {% if is_technical_role and skills.system_architecture %}
+        <span class="skill-category">Technical Architecture & Systems:</span>
+        <span class="skill-items">{{ skills.system_architecture | join(', ') }}</span>
+        {% else %}
         <span class="skill-category">AI & Data Systems:</span>
         <span class="skill-items">{{ skills.ai_and_technical | join(', ') }}</span>
+        {% endif %}
       </div>
       <div class="skill-row">
         <span class="skill-category">Operations & Scale:</span>
