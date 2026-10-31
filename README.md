@@ -177,6 +177,36 @@ Open [http://127.0.0.1:5000](http://127.0.0.1:5000) to view your active applicat
 
 ---
 
+## ☯️ Project YING-YANG: Autonomous Recruitment Engine (4 Tactical Vectors)
+
+JobIt now features **Project YING-YANG**, an aggressive automated LinkedIn & GitHub job acquisition engine running on scheduled GitHub Actions:
+
+### 1. The 4 Tactical Vectors
+1. **Vector 1 (Reverse-Engineered Profiles):** Scrapes the last 5 people hired into target roles. Extracts skills, project architectures, and tech stacks.
+2. **Vector 2 (Shadow Engagement & DM Infiltration):** Tracks posts by hiring managers and recruiters within 48h. Automatically likes and posts high-signal, context-aware comments matching their linguistic tone.
+3. **Vector 3 (The "Fixed Your Bug" Value-Drop):** Inspects target company touchpoints and generates structured teardowns:
+   * Subject: `I fixed your [problem] for free — Future [Role]`
+   * Content: Specific flaw identified, architectural fix, link to interactive prototype, low-friction close.
+4. **Vector 4 (Direct Executive & HM Outreach + Data Refinery):** Automated contact refinery with corporate domain normalization, email permutation matrix, DNS MX discovery, and simulated SMTP handshakes.
+
+### 2. Autonomous GitHub Actions Loops
+* **`.github/workflows/ying_recon.yml`**: Runs every 6 hours (`0 */6 * * *`) to harvest leads, reverse-engineer hires, and commit `reports/recon_latest.json` & `reports/recon_latest.md`.
+* **`.github/workflows/yang_execution.yml`**: Runs every 3 hours (`0 */3 * * *`) for shadow engagement, connection requests, value-drop DMs, and auto-scaffolding vibe-coded prototype repos into `portfolio_lab/generated_repos/`.
+
+### 3. YING-YANG CLI Commands
+```bash
+# Run 6-hour reconnaissance cycle
+python3 cli.py ying-recon --dry-run
+
+# Run 3-hour execution cycle
+python3 cli.py yang-execution --dry-run
+
+# Scaffold a functional MVP prototype matching recent hires
+python3 cli.py vibe-clone --company "PostHog" --role "Product Manager" --title "Telemetry Scale Engine"
+```
+
+---
+
 ## 🛡️ Negative Filtering & Domain Trap Detector
 
 JobIt automatically filters out irrelevant or mislabeled postings before scoring:

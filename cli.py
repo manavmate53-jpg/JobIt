@@ -1171,6 +1171,54 @@ def clean_bounces_cmd(all_time: bool):
             console.print(f"[bold red]Failed to clean inbox:[/bold red] {e}")
 
 
+@cli.command("ying-recon")
+@click.option("--dry-run/--live", default=True, help="Run in dry-run mode (default) or live reconnaissance mode")
+def ying_recon_cmd(dry_run: bool):
+    """Engine YING: 6-hour reconnaissance loop (Vector 1, 2, 3, 4 harvesting)."""
+    from engines.ying_recon import YingReconEngine
+    console.print("[bold cyan]Starting Project YING-YANG: Engine YING (Reconnaissance)...[/bold cyan]")
+    engine = YingReconEngine(dry_run=dry_run)
+    res = engine.run()
+    console.print(f"[bold green]✓ YING Recon Complete![/bold green] Enriched {len(res['leads'])} leads and {len(res['reverse_engineered_profiles'])} reverse-engineered hires.")
+
+
+@cli.command("yang-execution")
+@click.option("--dry-run/--live", default=True, help="Run in dry-run mode (default) or live execution mode")
+@click.option("--max-actions", default=10, type=int, help="Maximum outreach actions")
+def yang_execution_cmd(dry_run: bool, max_actions: int):
+    """Engine YANG: 3-hour execution loop (Shadow engagement, value-drops, vibe-cloning)."""
+    from engines.yang_execution import YangExecutionEngine
+    console.print("[bold cyan]Starting Project YING-YANG: Engine YANG (Execution & Vibe-Coding)...[/bold cyan]")
+    engine = YangExecutionEngine(dry_run=dry_run)
+    res = engine.run(max_actions=max_actions)
+    console.print(f"[bold green]✓ YANG Execution Complete![/bold green] Actions: {res['actions_taken']}")
+
+
+@cli.command("vibe-clone")
+@click.option("--company", required=True, help="Target company name (e.g. 'PostHog', 'Zepto')")
+@click.option("--role", default="Product Manager", help="Target role")
+@click.option("--title", default="Telemetry Scale Engine", help="Project title")
+def vibe_clone_cmd(company: str, role: str, title: str):
+    """Vibe-Code Cloner: Auto-scaffolds functional prototype repos & PRD teardowns."""
+    from portfolio_lab.cloner import PortfolioCloner
+    cloner = PortfolioCloner()
+    bp = cloner.scaffold_project(
+        project_title=title,
+        target_company=company,
+        target_role=role,
+        tech_stack=["Python", "FastAPI", "Redis", "Supabase"],
+        architecture_theme="High-throughput asynchronous telemetry buffer",
+    )
+    console.print(Panel(
+        f"[bold green]Vibe-Coded Prototype Repository Generated![/bold green]\n\n"
+        f"🏢 [bold]Company:[/bold] {company}\n"
+        f"💼 [bold]Role:[/bold] {role}\n"
+        f"📁 [bold]Path:[/bold] {bp['path']}\n"
+        f"📄 [bold]Files:[/bold] README.md (Mermaid Architecture), main.py, teardown_spec.md",
+        title="Vibe-Code Blueprint Complete",
+        box=box.ROUNDED
+    ))
+
 
 if __name__ == "__main__":
     cli()

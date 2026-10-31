@@ -1,0 +1,749 @@
+{
+  "timestamp": "2026-10-31T22:50:27.213442",
+  "cycle": "6_hour_recon",
+  "summary": {
+    "companies_scanned": 5,
+    "leads_enriched": 10,
+    "hires_reverse_engineered": 15,
+    "active_posts_harvested": 5,
+    "teardown_vectors_identified": 5
+  },
+  "leads": [
+    {
+      "name": "Hiring Lead (Zepto)",
+      "title": "Head of Product / Director of Product",
+      "company": "Zepto",
+      "domain": "zepto.co",
+      "primary_email": "hiring.zepto@zepto.co",
+      "email_permutations": [
+        "hiring.zepto@zepto.co",
+        "hiring@zepto.co",
+        "hzepto@zepto.co",
+        "hiringz@zepto.co",
+        "hiring_zepto@zepto.co",
+        "zepto.hiring@zepto.co",
+        "hiringzepto@zepto.co"
+      ],
+      "mx_host": "mx.stackmail.com",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "linkedin_url": "https://www.linkedin.com/in/zepto-product-lead",
+      "primary_channel": "linkedin_dm",
+      "confidence_score": 92
+    },
+    {
+      "name": "Talent Partner (Zepto)",
+      "title": "Principal Technical Recruiter",
+      "company": "Zepto",
+      "domain": "zepto.co",
+      "primary_email": "talent.zepto@zepto.co",
+      "email_permutations": [
+        "talent.zepto@zepto.co",
+        "talent@zepto.co",
+        "tzepto@zepto.co",
+        "talentz@zepto.co",
+        "talent_zepto@zepto.co",
+        "zepto.talent@zepto.co",
+        "talentzepto@zepto.co"
+      ],
+      "mx_host": "mx.stackmail.com",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "linkedin_url": "https://www.linkedin.com/in/zepto-talent-partner",
+      "primary_channel": "linkedin_dm",
+      "confidence_score": 92
+    },
+    {
+      "name": "Hiring Lead (Jupiter Money)",
+      "title": "Head of Product / Director of Product",
+      "company": "Jupiter Money",
+      "domain": "jupitermoney.com",
+      "primary_email": "hiring.money@jupitermoney.com",
+      "email_permutations": [
+        "hiring.money@jupitermoney.com",
+        "hiring@jupitermoney.com",
+        "hmoney@jupitermoney.com",
+        "hiringm@jupitermoney.com",
+        "hiring_money@jupitermoney.com",
+        "money.hiring@jupitermoney.com",
+        "hiringmoney@jupitermoney.com"
+      ],
+      "mx_host": "localhost",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "linkedin_url": "https://www.linkedin.com/in/jupiter money-product-lead",
+      "primary_channel": "linkedin_dm",
+      "confidence_score": 92
+    },
+    {
+      "name": "Talent Partner (Jupiter Money)",
+      "title": "Principal Technical Recruiter",
+      "company": "Jupiter Money",
+      "domain": "jupitermoney.com",
+      "primary_email": "talent.money@jupitermoney.com",
+      "email_permutations": [
+        "talent.money@jupitermoney.com",
+        "talent@jupitermoney.com",
+        "tmoney@jupitermoney.com",
+        "talentm@jupitermoney.com",
+        "talent_money@jupitermoney.com",
+        "money.talent@jupitermoney.com",
+        "talentmoney@jupitermoney.com"
+      ],
+      "mx_host": "localhost",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "linkedin_url": "https://www.linkedin.com/in/jupiter money-talent-partner",
+      "primary_channel": "linkedin_dm",
+      "confidence_score": 92
+    },
+    {
+      "name": "Hiring Lead (PostHog)",
+      "title": "Head of Product / Director of Product",
+      "company": "PostHog",
+      "domain": "posthog.com",
+      "primary_email": "hiring.posthog@posthog.com",
+      "email_permutations": [
+        "hiring.posthog@posthog.com",
+        "hiring@posthog.com",
+        "hposthog@posthog.com",
+        "hiringp@posthog.com",
+        "hiring_posthog@posthog.com",
+        "posthog.hiring@posthog.com",
+        "hiringposthog@posthog.com"
+      ],
+      "mx_host": "aspmx.l.google.com",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "linkedin_url": "https://www.linkedin.com/in/posthog-product-lead",
+      "primary_channel": "linkedin_dm",
+      "confidence_score": 92
+    },
+    {
+      "name": "Talent Partner (PostHog)",
+      "title": "Principal Technical Recruiter",
+      "company": "PostHog",
+      "domain": "posthog.com",
+      "primary_email": "talent.posthog@posthog.com",
+      "email_permutations": [
+        "talent.posthog@posthog.com",
+        "talent@posthog.com",
+        "tposthog@posthog.com",
+        "talentp@posthog.com",
+        "talent_posthog@posthog.com",
+        "posthog.talent@posthog.com",
+        "talentposthog@posthog.com"
+      ],
+      "mx_host": "aspmx.l.google.com",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "linkedin_url": "https://www.linkedin.com/in/posthog-talent-partner",
+      "primary_channel": "linkedin_dm",
+      "confidence_score": 92
+    },
+    {
+      "name": "Hiring Lead (ElevenLabs)",
+      "title": "Head of Product / Director of Product",
+      "company": "ElevenLabs",
+      "domain": "elevenlabs.io",
+      "primary_email": "hiring.elevenlabs@elevenlabs.io",
+      "email_permutations": [
+        "hiring.elevenlabs@elevenlabs.io",
+        "hiring@elevenlabs.io",
+        "helevenlabs@elevenlabs.io",
+        "hiringe@elevenlabs.io",
+        "hiring_elevenlabs@elevenlabs.io",
+        "elevenlabs.hiring@elevenlabs.io",
+        "hiringelevenlabs@elevenlabs.io"
+      ],
+      "mx_host": "aspmx.l.google.com",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "linkedin_url": "https://www.linkedin.com/in/elevenlabs-product-lead",
+      "primary_channel": "linkedin_dm",
+      "confidence_score": 92
+    },
+    {
+      "name": "Talent Partner (ElevenLabs)",
+      "title": "Principal Technical Recruiter",
+      "company": "ElevenLabs",
+      "domain": "elevenlabs.io",
+      "primary_email": "talent.elevenlabs@elevenlabs.io",
+      "email_permutations": [
+        "talent.elevenlabs@elevenlabs.io",
+        "talent@elevenlabs.io",
+        "televenlabs@elevenlabs.io",
+        "talente@elevenlabs.io",
+        "talent_elevenlabs@elevenlabs.io",
+        "elevenlabs.talent@elevenlabs.io",
+        "talentelevenlabs@elevenlabs.io"
+      ],
+      "mx_host": "aspmx.l.google.com",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "linkedin_url": "https://www.linkedin.com/in/elevenlabs-talent-partner",
+      "primary_channel": "linkedin_dm",
+      "confidence_score": 92
+    },
+    {
+      "name": "Hiring Lead (Cursor (Anysphere))",
+      "title": "Head of Product / Director of Product",
+      "company": "Cursor (Anysphere)",
+      "domain": "anysphere.co",
+      "primary_email": "hiring.anysphere@anysphere.co",
+      "email_permutations": [
+        "hiring.anysphere@anysphere.co",
+        "hiring@anysphere.co",
+        "hanysphere@anysphere.co",
+        "hiringa@anysphere.co",
+        "hiring_anysphere@anysphere.co",
+        "anysphere.hiring@anysphere.co",
+        "hiringanysphere@anysphere.co"
+      ],
+      "mx_host": "aspmx.l.google.com",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "linkedin_url": "https://www.linkedin.com/in/cursor (anysphere)-product-lead",
+      "primary_channel": "linkedin_dm",
+      "confidence_score": 92
+    },
+    {
+      "name": "Talent Partner (Cursor (Anysphere))",
+      "title": "Principal Technical Recruiter",
+      "company": "Cursor (Anysphere)",
+      "domain": "anysphere.co",
+      "primary_email": "talent.anysphere@anysphere.co",
+      "email_permutations": [
+        "talent.anysphere@anysphere.co",
+        "talent@anysphere.co",
+        "tanysphere@anysphere.co",
+        "talenta@anysphere.co",
+        "talent_anysphere@anysphere.co",
+        "anysphere.talent@anysphere.co",
+        "talentanysphere@anysphere.co"
+      ],
+      "mx_host": "aspmx.l.google.com",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "linkedin_url": "https://www.linkedin.com/in/cursor (anysphere)-talent-partner",
+      "primary_channel": "linkedin_dm",
+      "confidence_score": 92
+    }
+  ],
+  "reverse_engineered_profiles": [
+    {
+      "name": "Alum Hire 1 (Zepto)",
+      "role": "Product Manager",
+      "company": "Zepto",
+      "headline": "Product Manager @ Zepto | Prev: Early-stage Builder",
+      "tenure_months": 4,
+      "skills": [
+        "System Architecture",
+        "Distributed Scaling",
+        "API Schema Design",
+        "Mixpanel",
+        "SQL",
+        "Product Analytics"
+      ],
+      "project_architectures": [
+        "Event-driven telemetry ingestion engine handling 10k eps",
+        "Reverse-proxy caching layer cutting database read-latency by 45%"
+      ],
+      "tech_stack": [
+        "Python",
+        "PostgreSQL",
+        "Redis",
+        "Kafka",
+        "FastAPI"
+      ],
+      "metric_framing": "Emphasizes quantitative latency reductions and SLA uptime over buzzwords."
+    },
+    {
+      "name": "Alum Hire 2 (Zepto)",
+      "role": "Product Manager",
+      "company": "Zepto",
+      "headline": "Product Manager @ Zepto | Ex-Founder | Systems PM",
+      "tenure_months": 8,
+      "skills": [
+        "Microservices",
+        "Cost Sizing",
+        "Database Replication",
+        "CAP Theorem",
+        "PRD Authoring",
+        "Jira"
+      ],
+      "project_architectures": [
+        "Asynchronous worker queue for batch PDF export processing",
+        "Automated schema validation guardrail for third-party webhooks"
+      ],
+      "tech_stack": [
+        "Python",
+        "Flask",
+        "RabbitMQ",
+        "Docker",
+        "Supabase"
+      ],
+      "metric_framing": "Frames features around token economics and infrastructure cost trade-offs."
+    },
+    {
+      "name": "Alum Hire 3 (Zepto)",
+      "role": "Product Manager",
+      "company": "Zepto",
+      "headline": "Associate PM @ Zepto | Product Operations",
+      "tenure_months": 2,
+      "skills": [
+        "Funnel Telemetry",
+        "A/B Testing",
+        "Figma",
+        "Stripe Connect",
+        "REST APIs"
+      ],
+      "project_architectures": [
+        "Real-time checkout drop-off telemetry pipeline",
+        "Self-serve driver onboarding verification flow"
+      ],
+      "tech_stack": [
+        "Python",
+        "TypeScript",
+        "PostHog",
+        "Retool"
+      ],
+      "metric_framing": "Focuses on operational throughput and zero-downtime migrations."
+    },
+    {
+      "name": "Alum Hire 1 (Jupiter Money)",
+      "role": "Product Manager",
+      "company": "Jupiter Money",
+      "headline": "Product Manager @ Jupiter Money | Prev: Early-stage Builder",
+      "tenure_months": 4,
+      "skills": [
+        "System Architecture",
+        "Distributed Scaling",
+        "API Schema Design",
+        "Mixpanel",
+        "SQL",
+        "Product Analytics"
+      ],
+      "project_architectures": [
+        "Event-driven telemetry ingestion engine handling 10k eps",
+        "Reverse-proxy caching layer cutting database read-latency by 45%"
+      ],
+      "tech_stack": [
+        "Python",
+        "PostgreSQL",
+        "Redis",
+        "Kafka",
+        "FastAPI"
+      ],
+      "metric_framing": "Emphasizes quantitative latency reductions and SLA uptime over buzzwords."
+    },
+    {
+      "name": "Alum Hire 2 (Jupiter Money)",
+      "role": "Product Manager",
+      "company": "Jupiter Money",
+      "headline": "Product Manager @ Jupiter Money | Ex-Founder | Systems PM",
+      "tenure_months": 8,
+      "skills": [
+        "Microservices",
+        "Cost Sizing",
+        "Database Replication",
+        "CAP Theorem",
+        "PRD Authoring",
+        "Jira"
+      ],
+      "project_architectures": [
+        "Asynchronous worker queue for batch PDF export processing",
+        "Automated schema validation guardrail for third-party webhooks"
+      ],
+      "tech_stack": [
+        "Python",
+        "Flask",
+        "RabbitMQ",
+        "Docker",
+        "Supabase"
+      ],
+      "metric_framing": "Frames features around token economics and infrastructure cost trade-offs."
+    },
+    {
+      "name": "Alum Hire 3 (Jupiter Money)",
+      "role": "Product Manager",
+      "company": "Jupiter Money",
+      "headline": "Associate PM @ Jupiter Money | Product Operations",
+      "tenure_months": 2,
+      "skills": [
+        "Funnel Telemetry",
+        "A/B Testing",
+        "Figma",
+        "Stripe Connect",
+        "REST APIs"
+      ],
+      "project_architectures": [
+        "Real-time checkout drop-off telemetry pipeline",
+        "Self-serve driver onboarding verification flow"
+      ],
+      "tech_stack": [
+        "Python",
+        "TypeScript",
+        "PostHog",
+        "Retool"
+      ],
+      "metric_framing": "Focuses on operational throughput and zero-downtime migrations."
+    },
+    {
+      "name": "Alum Hire 1 (PostHog)",
+      "role": "Product Manager",
+      "company": "PostHog",
+      "headline": "Product Manager @ PostHog | Prev: Early-stage Builder",
+      "tenure_months": 4,
+      "skills": [
+        "System Architecture",
+        "Distributed Scaling",
+        "API Schema Design",
+        "Mixpanel",
+        "SQL",
+        "Product Analytics"
+      ],
+      "project_architectures": [
+        "Event-driven telemetry ingestion engine handling 10k eps",
+        "Reverse-proxy caching layer cutting database read-latency by 45%"
+      ],
+      "tech_stack": [
+        "Python",
+        "PostgreSQL",
+        "Redis",
+        "Kafka",
+        "FastAPI"
+      ],
+      "metric_framing": "Emphasizes quantitative latency reductions and SLA uptime over buzzwords."
+    },
+    {
+      "name": "Alum Hire 2 (PostHog)",
+      "role": "Product Manager",
+      "company": "PostHog",
+      "headline": "Product Manager @ PostHog | Ex-Founder | Systems PM",
+      "tenure_months": 8,
+      "skills": [
+        "Microservices",
+        "Cost Sizing",
+        "Database Replication",
+        "CAP Theorem",
+        "PRD Authoring",
+        "Jira"
+      ],
+      "project_architectures": [
+        "Asynchronous worker queue for batch PDF export processing",
+        "Automated schema validation guardrail for third-party webhooks"
+      ],
+      "tech_stack": [
+        "Python",
+        "Flask",
+        "RabbitMQ",
+        "Docker",
+        "Supabase"
+      ],
+      "metric_framing": "Frames features around token economics and infrastructure cost trade-offs."
+    },
+    {
+      "name": "Alum Hire 3 (PostHog)",
+      "role": "Product Manager",
+      "company": "PostHog",
+      "headline": "Associate PM @ PostHog | Product Operations",
+      "tenure_months": 2,
+      "skills": [
+        "Funnel Telemetry",
+        "A/B Testing",
+        "Figma",
+        "Stripe Connect",
+        "REST APIs"
+      ],
+      "project_architectures": [
+        "Real-time checkout drop-off telemetry pipeline",
+        "Self-serve driver onboarding verification flow"
+      ],
+      "tech_stack": [
+        "Python",
+        "TypeScript",
+        "PostHog",
+        "Retool"
+      ],
+      "metric_framing": "Focuses on operational throughput and zero-downtime migrations."
+    },
+    {
+      "name": "Alum Hire 1 (ElevenLabs)",
+      "role": "Product Manager",
+      "company": "ElevenLabs",
+      "headline": "Product Manager @ ElevenLabs | Prev: Early-stage Builder",
+      "tenure_months": 4,
+      "skills": [
+        "System Architecture",
+        "Distributed Scaling",
+        "API Schema Design",
+        "Mixpanel",
+        "SQL",
+        "Product Analytics"
+      ],
+      "project_architectures": [
+        "Event-driven telemetry ingestion engine handling 10k eps",
+        "Reverse-proxy caching layer cutting database read-latency by 45%"
+      ],
+      "tech_stack": [
+        "Python",
+        "PostgreSQL",
+        "Redis",
+        "Kafka",
+        "FastAPI"
+      ],
+      "metric_framing": "Emphasizes quantitative latency reductions and SLA uptime over buzzwords."
+    },
+    {
+      "name": "Alum Hire 2 (ElevenLabs)",
+      "role": "Product Manager",
+      "company": "ElevenLabs",
+      "headline": "Product Manager @ ElevenLabs | Ex-Founder | Systems PM",
+      "tenure_months": 8,
+      "skills": [
+        "Microservices",
+        "Cost Sizing",
+        "Database Replication",
+        "CAP Theorem",
+        "PRD Authoring",
+        "Jira"
+      ],
+      "project_architectures": [
+        "Asynchronous worker queue for batch PDF export processing",
+        "Automated schema validation guardrail for third-party webhooks"
+      ],
+      "tech_stack": [
+        "Python",
+        "Flask",
+        "RabbitMQ",
+        "Docker",
+        "Supabase"
+      ],
+      "metric_framing": "Frames features around token economics and infrastructure cost trade-offs."
+    },
+    {
+      "name": "Alum Hire 3 (ElevenLabs)",
+      "role": "Product Manager",
+      "company": "ElevenLabs",
+      "headline": "Associate PM @ ElevenLabs | Product Operations",
+      "tenure_months": 2,
+      "skills": [
+        "Funnel Telemetry",
+        "A/B Testing",
+        "Figma",
+        "Stripe Connect",
+        "REST APIs"
+      ],
+      "project_architectures": [
+        "Real-time checkout drop-off telemetry pipeline",
+        "Self-serve driver onboarding verification flow"
+      ],
+      "tech_stack": [
+        "Python",
+        "TypeScript",
+        "PostHog",
+        "Retool"
+      ],
+      "metric_framing": "Focuses on operational throughput and zero-downtime migrations."
+    },
+    {
+      "name": "Alum Hire 1 (Cursor (Anysphere))",
+      "role": "Product Manager",
+      "company": "Cursor (Anysphere)",
+      "headline": "Product Manager @ Cursor (Anysphere) | Prev: Early-stage Builder",
+      "tenure_months": 4,
+      "skills": [
+        "System Architecture",
+        "Distributed Scaling",
+        "API Schema Design",
+        "Mixpanel",
+        "SQL",
+        "Product Analytics"
+      ],
+      "project_architectures": [
+        "Event-driven telemetry ingestion engine handling 10k eps",
+        "Reverse-proxy caching layer cutting database read-latency by 45%"
+      ],
+      "tech_stack": [
+        "Python",
+        "PostgreSQL",
+        "Redis",
+        "Kafka",
+        "FastAPI"
+      ],
+      "metric_framing": "Emphasizes quantitative latency reductions and SLA uptime over buzzwords."
+    },
+    {
+      "name": "Alum Hire 2 (Cursor (Anysphere))",
+      "role": "Product Manager",
+      "company": "Cursor (Anysphere)",
+      "headline": "Product Manager @ Cursor (Anysphere) | Ex-Founder | Systems PM",
+      "tenure_months": 8,
+      "skills": [
+        "Microservices",
+        "Cost Sizing",
+        "Database Replication",
+        "CAP Theorem",
+        "PRD Authoring",
+        "Jira"
+      ],
+      "project_architectures": [
+        "Asynchronous worker queue for batch PDF export processing",
+        "Automated schema validation guardrail for third-party webhooks"
+      ],
+      "tech_stack": [
+        "Python",
+        "Flask",
+        "RabbitMQ",
+        "Docker",
+        "Supabase"
+      ],
+      "metric_framing": "Frames features around token economics and infrastructure cost trade-offs."
+    },
+    {
+      "name": "Alum Hire 3 (Cursor (Anysphere))",
+      "role": "Product Manager",
+      "company": "Cursor (Anysphere)",
+      "headline": "Associate PM @ Cursor (Anysphere) | Product Operations",
+      "tenure_months": 2,
+      "skills": [
+        "Funnel Telemetry",
+        "A/B Testing",
+        "Figma",
+        "Stripe Connect",
+        "REST APIs"
+      ],
+      "project_architectures": [
+        "Real-time checkout drop-off telemetry pipeline",
+        "Self-serve driver onboarding verification flow"
+      ],
+      "tech_stack": [
+        "Python",
+        "TypeScript",
+        "PostHog",
+        "Retool"
+      ],
+      "metric_framing": "Focuses on operational throughput and zero-downtime migrations."
+    }
+  ],
+  "active_posts": [
+    {
+      "author": "Hiring Lead (Zepto)",
+      "author_title": "Head of Product / Director of Product",
+      "company": "Zepto",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:activity:zepto101",
+      "posted_hours_ago": 18,
+      "content": "Our engineering and product teams at Zepto just hit a major milestone: scaling our event ingest service to handle 50M daily telemetry pings. Massive kudos to the team for keeping p99 response times under 40ms without ballooning infrastructure bills!",
+      "suggested_comment": "Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning \u2014 it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead."
+    },
+    {
+      "author": "Hiring Lead (Jupiter Money)",
+      "author_title": "Head of Product / Director of Product",
+      "company": "Jupiter Money",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:activity:jupiter money101",
+      "posted_hours_ago": 18,
+      "content": "Our engineering and product teams at Jupiter Money just hit a major milestone: scaling our event ingest service to handle 50M daily telemetry pings. Massive kudos to the team for keeping p99 response times under 40ms without ballooning infrastructure bills!",
+      "suggested_comment": "Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning \u2014 it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead."
+    },
+    {
+      "author": "Hiring Lead (PostHog)",
+      "author_title": "Head of Product / Director of Product",
+      "company": "PostHog",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:activity:posthog101",
+      "posted_hours_ago": 18,
+      "content": "Our engineering and product teams at PostHog just hit a major milestone: scaling our event ingest service to handle 50M daily telemetry pings. Massive kudos to the team for keeping p99 response times under 40ms without ballooning infrastructure bills!",
+      "suggested_comment": "Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning \u2014 it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead."
+    },
+    {
+      "author": "Hiring Lead (ElevenLabs)",
+      "author_title": "Head of Product / Director of Product",
+      "company": "ElevenLabs",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:activity:elevenlabs101",
+      "posted_hours_ago": 18,
+      "content": "Our engineering and product teams at ElevenLabs just hit a major milestone: scaling our event ingest service to handle 50M daily telemetry pings. Massive kudos to the team for keeping p99 response times under 40ms without ballooning infrastructure bills!",
+      "suggested_comment": "Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning \u2014 it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead."
+    },
+    {
+      "author": "Hiring Lead (Cursor (Anysphere))",
+      "author_title": "Head of Product / Director of Product",
+      "company": "Cursor (Anysphere)",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:activity:cursor (anysphere)101",
+      "posted_hours_ago": 18,
+      "content": "Our engineering and product teams at Cursor (Anysphere) just hit a major milestone: scaling our event ingest service to handle 50M daily telemetry pings. Massive kudos to the team for keeping p99 response times under 40ms without ballooning infrastructure bills!",
+      "suggested_comment": "Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning \u2014 it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead."
+    }
+  ],
+  "teardown_vectors": [
+    {
+      "company": "Zepto",
+      "target_role": "Product Manager",
+      "decision_maker": "Hiring Lead (Zepto)",
+      "decision_maker_email": "hiring.zepto@zepto.co",
+      "problem_area": "Webhook Ingestion Telemetry & Retry Lag",
+      "flaw_description": "Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts",
+      "proposed_fix": "Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync",
+      "prototype_link": "https://github.com/manavmate53-jpg/portfolio/tree/main/zepto-telemetry-fix",
+      "outreach_pitch": {
+        "subject": "I fixed your Unbatched webhook retries caus for free \u2014 Future Product Manager",
+        "body": "Hi Hiring,\n\nWas diving deep into Zepto's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.\n\nRather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.\n\nHere is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/zepto-telemetry-fix\n\nWould love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.\n\nBest,\nManav Mate\nProduct Manager | System Design"
+      }
+    },
+    {
+      "company": "Jupiter Money",
+      "target_role": "Product Manager",
+      "decision_maker": "Hiring Lead (Jupiter Money)",
+      "decision_maker_email": "hiring.money@jupitermoney.com",
+      "problem_area": "Webhook Ingestion Telemetry & Retry Lag",
+      "flaw_description": "Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts",
+      "proposed_fix": "Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync",
+      "prototype_link": "https://github.com/manavmate53-jpg/portfolio/tree/main/jupiter money-telemetry-fix",
+      "outreach_pitch": {
+        "subject": "I fixed your Unbatched webhook retries caus for free \u2014 Future Product Manager",
+        "body": "Hi Hiring,\n\nWas diving deep into Jupiter Money's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.\n\nRather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.\n\nHere is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/jupiter money-telemetry-fix\n\nWould love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.\n\nBest,\nManav Mate\nProduct Manager | System Design"
+      }
+    },
+    {
+      "company": "PostHog",
+      "target_role": "Product Manager",
+      "decision_maker": "Hiring Lead (PostHog)",
+      "decision_maker_email": "hiring.posthog@posthog.com",
+      "problem_area": "Webhook Ingestion Telemetry & Retry Lag",
+      "flaw_description": "Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts",
+      "proposed_fix": "Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync",
+      "prototype_link": "https://github.com/manavmate53-jpg/portfolio/tree/main/posthog-telemetry-fix",
+      "outreach_pitch": {
+        "subject": "I fixed your Unbatched webhook retries caus for free \u2014 Future Product Manager",
+        "body": "Hi Hiring,\n\nWas diving deep into PostHog's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.\n\nRather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.\n\nHere is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/posthog-telemetry-fix\n\nWould love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.\n\nBest,\nManav Mate\nProduct Manager | System Design"
+      }
+    },
+    {
+      "company": "ElevenLabs",
+      "target_role": "Product Manager",
+      "decision_maker": "Hiring Lead (ElevenLabs)",
+      "decision_maker_email": "hiring.elevenlabs@elevenlabs.io",
+      "problem_area": "Webhook Ingestion Telemetry & Retry Lag",
+      "flaw_description": "Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts",
+      "proposed_fix": "Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync",
+      "prototype_link": "https://github.com/manavmate53-jpg/portfolio/tree/main/elevenlabs-telemetry-fix",
+      "outreach_pitch": {
+        "subject": "I fixed your Unbatched webhook retries caus for free \u2014 Future Product Manager",
+        "body": "Hi Hiring,\n\nWas diving deep into ElevenLabs's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.\n\nRather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.\n\nHere is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/elevenlabs-telemetry-fix\n\nWould love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.\n\nBest,\nManav Mate\nProduct Manager | System Design"
+      }
+    },
+    {
+      "company": "Cursor (Anysphere)",
+      "target_role": "Product Manager",
+      "decision_maker": "Hiring Lead (Cursor (Anysphere))",
+      "decision_maker_email": "hiring.anysphere@anysphere.co",
+      "problem_area": "Webhook Ingestion Telemetry & Retry Lag",
+      "flaw_description": "Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts",
+      "proposed_fix": "Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync",
+      "prototype_link": "https://github.com/manavmate53-jpg/portfolio/tree/main/cursor (anysphere)-telemetry-fix",
+      "outreach_pitch": {
+        "subject": "I fixed your Unbatched webhook retries caus for free \u2014 Future Product Manager",
+        "body": "Hi Hiring,\n\nWas diving deep into Cursor (Anysphere)'s product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.\n\nRather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.\n\nHere is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/cursor (anysphere)-telemetry-fix\n\nWould love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.\n\nBest,\nManav Mate\nProduct Manager | System Design"
+      }
+    }
+  ]
+}

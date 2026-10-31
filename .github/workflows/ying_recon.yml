@@ -1,0 +1,76 @@
+name: "Ying Reconnaissance Loop (6-Hour Cycle)"
+
+on:
+  schedule:
+    # Runs every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Run in dry-run mode (no external network mutations)'
+        required: false
+        default: 'false'
+        type: boolean
+
+concurrency:
+  group: ying-recon-lock
+  cancel-in-progress: false
+
+jobs:
+  reconnaissance:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install System Dependencies & Python Packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Cache Playwright Chromium Binaries
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('requirements.txt') }}
+
+      - name: Install Playwright Browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: |
+          playwright install --with-deps chromium
+
+      - name: Execute Engine YING (Reconnaissance Sweep)
+        env:
+          LINKEDIN_COOKIE: ${{ secrets.LINKEDIN_COOKIE }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          APOLLO_API_KEY: ${{ secrets.APOLLO_API_KEY }}
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ] || [ -z "$LINKEDIN_COOKIE" ]; then
+            echo "Running in SAFE DRY-RUN mode..."
+            python engines/ying_recon.py --dry-run
+          else
+            echo "Running in LIVE RECONNAISSANCE mode..."
+            python engines/ying_recon.py --live
+          fi
+
+      - name: Commit & Push Recon Intelligence Artifacts
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(recon): automated intelligence update [skip ci]"
+          file_pattern: "reports/recon_latest.json reports/recon_latest.md"
+          commit_user_name: "Ying-Agent [Bot]"
+          commit_user_email: "ying-bot@users.noreply.github.com"
+

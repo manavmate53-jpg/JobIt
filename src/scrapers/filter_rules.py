@@ -58,6 +58,11 @@ OFFLINE_FINANCE_KEYWORDS = [
     r"\bbranch\s+credit\s+manager\b",
 ]
 
+FOUNDER_OFFICE_KEYWORDS = [
+    r"\bfounder'?s?\s+office\b",
+    r"\bchief\s+of\s+staff\b",
+]
+
 SENIOR_YEARS_PATTERNS = [
     r"\b(?:minimum|at\s+least|requires?)\s*(?:of\s*)?([5-9]|[1-2][0-9])\+?\s*years?\b",
     r"\b([5-9]|[1-2][0-9])\+?\s*years?(?:\s*of)?\s*(?:corporate\s+|enterprise\s+)?(?:product\s+management|pm\s+experience)\b",
@@ -96,7 +101,12 @@ def check_negative_filters(
         if re.search(pat, full_text, flags=re.IGNORECASE):
             return False, f"Domain Trap: Offline vehicle/equipment NBFC financing ({pat})"
 
-    # 4. Check mandatory 5+ years corporate PM gate
+    # 4. Check Founder's Office (Candidate Preference)
+    for pat in FOUNDER_OFFICE_KEYWORDS:
+        if re.search(pat, full_text, flags=re.IGNORECASE):
+            return False, f"Candidate Preference: Founder's Office skipped ({pat})"
+
+    # 5. Check mandatory 5+ years corporate PM gate
     # Check title first (e.g. Vice President, VP, Director, Head of Product, Principal)
     title_lower = title.lower()
     senior_title_patterns = [

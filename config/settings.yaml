@@ -1,0 +1,76 @@
+# ==============================================================================
+# PROJECT YING-YANG: CONFIGURATION SETTINGS
+# ==============================================================================
+
+project:
+  name: "Ying-Yang Autonomous Recruitment Engine"
+  version: "1.0.0"
+  mode: "AGGRESSIVE_TACTICAL"
+
+# Target roles, locations, and flagship companies
+targets:
+  roles:
+    - "Product Manager"
+    - "Associate Product Manager"
+    - "Technical Product Manager"
+    - "Product Operations Specialist"
+    - "Fintech Product Analyst"
+    - "Growth Product Manager"
+  locations:
+    - "Mumbai, India"
+    - "Remote Worldwide"
+  priority_companies:
+    - "Zepto"
+    - "Jupiter Money"
+    - "PostHog"
+    - "ElevenLabs"
+    - "Cursor (Anysphere)"
+    - "Together AI"
+    - "Miko"
+    - "Daxko"
+    - "Rippling"
+    - "Stripe"
+
+# Strict Human-Simulation Daily Throttles (Enforced to avoid LinkedIn bot flagging)
+throttles:
+  daily_limits:
+    max_connection_requests: 15
+    max_comments: 10
+    max_outreach_messages: 8
+    max_applications: 20
+  human_delay_profile:
+    min_action_delay: 4.5
+    max_action_delay: 14.2
+    typing_speed_min: 0.05
+    typing_speed_max: 0.18
+    scroll_step_min: 200
+    scroll_step_max: 600
+
+# Stealth Playwright Browser Profile
+browser:
+  headless: true
+  user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
+  viewport:
+    width: 1440
+    height: 900
+  stealth: true
+  cookie_name: "li_at"
+  timeout_ms: 30000
+
+# Reconnaissance Cycle Configurations (Engine YING)
+recon:
+  reverse_engineer_target_count: 5
+  post_lookback_hours: 48
+  search_limit_per_query: 10
+  teardown_inspection_enabled: true
+
+# Execution Cycle Configurations (Engine YANG)
+execution:
+  dry_run_default: false
+  enrichment:
+    mode: "internal_refinery" # "internal_refinery" or "apollo_api"
+    verify_smtp: true
+  vibe_cloner:
+    scaffold_repos: true
+    output_dir: "portfolio_lab/generated_repos"
+
