@@ -55,10 +55,14 @@ jobs:
       - name: Execute Engine YANG (Outreach & Vibe-Coding)
         env:
           LINKEDIN_COOKIE: ${{ secrets.LINKEDIN_COOKIE }}
+          LINKEDIN_STORAGE_STATE: ${{ secrets.LINKEDIN_STORAGE_STATE }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           APOLLO_API_KEY: ${{ secrets.APOLLO_API_KEY }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          IMAP_SERVER: ${{ secrets.IMAP_SERVER }}
         run: |
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ] || [ -z "$LINKEDIN_COOKIE" ]; then
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ] || ([ -z "$LINKEDIN_COOKIE" ] && [ -z "$LINKEDIN_STORAGE_STATE" ]); then
             echo "Running in SAFE DRY-RUN mode..."
             python engines/yang_execution.py --dry-run
           else
