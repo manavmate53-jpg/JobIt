@@ -136,7 +136,7 @@ class TailorEngine:
                     f"At HireFlo India, trimmed candidate onboarding drop-offs by 30% and authored 14+ technical PRDs. "
                     f"Deeply disciplined in P&L economics, multi-stakeholder SLA management, and rapid cross-functional execution."
                 ),
-                "primary_project": "Lead Radar",
+                "primary_project": "CrewRoster Dashboard",
                 "primary_skill_category": "operations_and_business",
                 "angle": "0-to-1 Scale, Enterprise Client Acquisition & SLA Rigor",
                 "bullet_bias": "ops"
@@ -153,7 +153,7 @@ class TailorEngine:
                     f"Engineered an automated 1,000-document parsing pipeline in under 10 minutes with 98% field precision. "
                     f"Skilled in evaluating latency/cost trade-offs and cross-functional engineering alignment."
                 ),
-                "primary_project": "EvalGuard AI",
+                "primary_project": "FlashQueue Simulator",
                 "primary_skill_category": "ai_and_technical",
                 "angle": "Technical PRDs, API Contracts & System Telemetry",
                 "bullet_bias": "tech"
@@ -185,7 +185,7 @@ class TailorEngine:
                     f"Managed 200+ multi-stakeholder commercial projects at NeoManpower with 100% on-time delivery and zero SLA breaches. "
                     f"Brings rigorous agile governance, Jira backlog grooming, and cross-functional team alignment."
                 ),
-                "primary_project": "VeriShield",
+                "primary_project": "PayRouter Engine",
                 "primary_skill_category": "product_management",
                 "angle": "Agile Sprint Delivery, CIPM Governance & Roadmapping",
                 "bullet_bias": "agile"
@@ -210,20 +210,20 @@ class TailorEngine:
                 achievements = list(exp.get("achievements", []))
                 
                 if p_cfg["bullet_bias"] == "ai":
-                    # Put NVIDIA NIM, 1000-doc parsing, token unit economics at top
-                    achievements.sort(key=lambda a: 0 if ("NVIDIA" in a or "parsing" in a or "token" in a) else 1)
+                    # Put NVIDIA NIM, 1000-doc parsing, JSON schema at top
+                    achievements.sort(key=lambda a: 0 if ("NVIDIA" in a or "parsing" in a or "JSON schema" in a) else 1)
                 elif p_cfg["bullet_bias"] == "ops":
-                    # Put 50+ B2B clients, 200+ projects, 133 personnel at top
-                    achievements.sort(key=lambda a: 0 if ("50+ B2B" in a or "200+" in a or "133 personnel" in a or "billing" in a) else 1)
+                    # Put 50+ enterprise, 200+ projects, 133 personnel at top
+                    achievements.sort(key=lambda a: 0 if ("50+ enterprise" in a or "200+" in a or "133 personnel" in a or "SLA compliance" in a) else 1)
                 elif p_cfg["bullet_bias"] == "tech":
                     # Put 14+ technical PRDs, 1000-doc parsing pipeline, microservices at top
-                    achievements.sort(key=lambda a: 0 if ("PRD" in a or "parsing" in a or "microservices" in a or "dashboards" in a) else 1)
+                    achievements.sort(key=lambda a: 0 if ("PRD" in a or "parsing" in a or "microservices" in a or "QR audit" in a) else 1)
                 elif p_cfg["bullet_bias"] == "growth":
-                    # Put 30% onboarding completion, 50+ clients, referral loops at top
-                    achievements.sort(key=lambda a: 0 if ("30%" in a or "50+ B2B" in a or "onboarding" in a) else 1)
+                    # Put 30% onboarding completion, 50+ enterprise, freemium at top
+                    achievements.sort(key=lambda a: 0 if ("30%" in a or "50+ enterprise" in a or "freemium" in a) else 1)
                 elif p_cfg["bullet_bias"] == "agile":
-                    # Put 14+ PRDs, agile cadences, 200+ projects zero SLA at top
-                    achievements.sort(key=lambda a: 0 if ("agile" in a or "PRD" in a or "zero client SLA" in a) else 1)
+                    # Put 14+ PRDs, weekly agile sprints, 200+ projects SLA at top
+                    achievements.sort(key=lambda a: 0 if ("agile" in a or "PRD" in a or "sprint" in a or "SLA compliance" in a) else 1)
 
                 exp_copy["achievements"] = achievements[:5]
                 p_experience.append(exp_copy)
@@ -434,8 +434,50 @@ class TailorEngine:
         }
 
 
+    def generate_master_cv(self, output_name: str = "Manav_Mate_Master_CV") -> Dict[str, Any]:
+        """Generates the master baseline CV (HTML, MD, PDF) containing 6 PM Lab builds and Scaler credentials."""
+        base_ctx = self.profile_engine.get_template_context()
+
+        # Prioritize top showcase builds representing core breadth (Fintech, Scale, AI)
+        projects = list(base_ctx.get("featured_projects", []))
+        priority_names = ["PayRouter Engine", "FlashQueue Simulator", "CrewRoster Dashboard", "EvalGuard AI"]
+        projects.sort(key=lambda p: priority_names.index(p["name"]) if p.get("name") in priority_names else 99)
+        base_ctx["featured_projects"] = projects[:3]
+
+        # Enforce single page guarantee
+        context = PageFitValidator.enforce_single_page(base_ctx)
+        is_fit, total_words, fit_warnings = PageFitValidator.audit_context(context)
+
+        html_template = self.jinja_env.get_template("resume_template.html")
+        html_content = html_template.render(**context)
+
+        md_template = self.jinja_env.get_template("resume_template.md")
+        md_content = md_template.render(**context)
+
+        html_path = self.exports_resumes_dir / f"{output_name}.html"
+        md_path = self.exports_resumes_dir / f"{output_name}.md"
+        pdf_path = self.exports_resumes_dir / f"{output_name}.pdf"
+
+        with open(html_path, "w", encoding="utf-8") as f:
+            f.write(html_content)
+
+        with open(md_path, "w", encoding="utf-8") as f:
+            f.write(md_content)
+
+        self._export_pdf(html_path, pdf_path)
+
+        logger.info(f"Master CV successfully compiled: {pdf_path}")
+        return {
+            "html_path": str(html_path),
+            "md_path": str(md_path),
+            "pdf_path": str(pdf_path),
+            "is_single_page": is_fit,
+            "total_words": total_words,
+            "warnings": fit_warnings
+        }
+
     def _export_pdf(self, html_path: Path, pdf_path: Path):
-        """Converts HTML resume to single-page PDF using Playwright headless Chromium."""
+        """Converts HTML resume to single-page PDF using Playwright headless Chromium adhering to @page CSS."""
         try:
             with sync_playwright() as p:
                 browser = p.chromium.launch(headless=True)
@@ -445,7 +487,7 @@ class TailorEngine:
                     path=str(pdf_path),
                     format="A4",
                     print_background=True,
-                    margin={"top": "8.5mm", "bottom": "8.5mm", "left": "10.5mm", "right": "10.5mm"},
+                    margin={"top": "6mm", "bottom": "5mm", "left": "8mm", "right": "8mm"},
                     prefer_css_page_size=True,
                 )
                 browser.close()

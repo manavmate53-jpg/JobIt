@@ -1,50 +1,14 @@
 {
-  "date": "2026-11-01",
+  "date": "2026-11-02",
   "counts": {
-    "connections": 15,
-    "comments": 10,
-    "messages": 8,
+    "connections": 0,
+    "comments": 0,
+    "messages": 0,
     "applications": 0
   },
   "processed_urls": [],
-  "engaged_posts": [
-    "https://www.linkedin.com/feed/update/urn:li:activity:zepto101",
-    "https://www.linkedin.com/feed/update/urn:li:activity:jupiter money101",
-    "https://www.linkedin.com/feed/update/urn:li:activity:posthog101",
-    "https://www.linkedin.com/feed/update/urn:li:activity:elevenlabs101",
-    "https://www.linkedin.com/feed/update/urn:li:activity:cursor (anysphere)101",
-    "https://www.linkedin.com/feed/update/urn:li:activity:datavruti101",
-    "https://www.linkedin.com/feed/update/urn:li:activity:purplle101",
-    "https://www.linkedin.com/feed/update/urn:li:activity:smartstream technologies101",
-    "https://www.linkedin.com/feed/update/urn:li:activity:sovos101",
-    "https://www.linkedin.com/feed/update/urn:li:activity:idfy101"
-  ],
-  "connected_profiles": [
-    "https://www.linkedin.com/in/zepto-product-lead",
-    "https://www.linkedin.com/in/zepto-talent-partner",
-    "https://www.linkedin.com/in/jupiter money-product-lead",
-    "https://www.linkedin.com/in/jupiter money-talent-partner",
-    "https://www.linkedin.com/in/posthog-product-lead",
-    "https://www.linkedin.com/in/posthog-talent-partner",
-    "https://www.linkedin.com/in/elevenlabs-product-lead",
-    "https://www.linkedin.com/in/elevenlabs-talent-partner",
-    "https://www.linkedin.com/in/cursor (anysphere)-product-lead",
-    "https://www.linkedin.com/in/cursor (anysphere)-talent-partner",
-    "https://www.linkedin.com/in/datavruti-product-lead",
-    "https://www.linkedin.com/in/datavruti-talent-partner",
-    "https://www.linkedin.com/in/purplle-product-lead",
-    "https://www.linkedin.com/in/purplle-talent-partner",
-    "https://www.linkedin.com/in/smartstream technologies-product-lead"
-  ],
-  "messaged_profiles": [
-    "https://www.linkedin.com/in/zepto-lead",
-    "https://www.linkedin.com/in/jupiter money-lead",
-    "https://www.linkedin.com/in/posthog-lead",
-    "https://www.linkedin.com/in/elevenlabs-lead",
-    "https://www.linkedin.com/in/cursor (anysphere)-lead",
-    "https://www.linkedin.com/in/datavruti-lead",
-    "https://www.linkedin.com/in/purplle-lead",
-    "https://www.linkedin.com/in/smartstream technologies-lead"
-  ],
-  "last_run": "2026-11-01T23:04:04.052686"
+  "engaged_posts": [],
+  "connected_profiles": [],
+  "messaged_profiles": [],
+  "last_run": "2026-11-02T00:31:36.016758"
 }

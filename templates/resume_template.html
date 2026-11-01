@@ -18,8 +18,8 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: #1a1a1a;
     background-color: #ffffff;
-    line-height: 1.32;
-    font-size: 9.2pt;
+    line-height: 1.28;
+    font-size: 8.9pt;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -29,26 +29,26 @@
   }
   header {
     border-bottom: 1.5px solid #0f172a;
-    padding-bottom: 4px;
-    margin-bottom: 6px;
+    padding-bottom: 3.5px;
+    margin-bottom: 4.5px;
     text-align: center;
   }
   h1 {
-    font-size: 17pt;
+    font-size: 16pt;
     font-weight: 700;
     letter-spacing: -0.3px;
     color: #0f172a;
     text-transform: uppercase;
-    margin-bottom: 2px;
+    margin-bottom: 1.5px;
   }
   .contact-bar {
-    font-size: 8.5pt;
+    font-size: 8.4pt;
     color: #334155;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 3px;
+    margin-bottom: 2.5px;
   }
   .contact-bar span {
     display: inline-flex;
@@ -60,10 +60,10 @@
     font-weight: 600;
   }
   .links-bar {
-    font-size: 8.5pt;
+    font-size: 8.2pt;
     display: flex;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
   }
   .links-bar a {
     color: #0369a1;
@@ -74,28 +74,28 @@
     text-decoration: underline;
   }
   section {
-    margin-bottom: 5.5px;
+    margin-bottom: 4.5px;
   }
   .section-title {
-    font-size: 9.8pt;
+    font-size: 9.4pt;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.5px;
     color: #0f172a;
     border-bottom: 1px solid #cbd5e1;
-    padding-bottom: 1.5px;
-    margin-bottom: 3.5px;
+    padding-bottom: 1px;
+    margin-bottom: 2.5px;
   }
   .summary-text {
-    font-size: 8.8pt;
+    font-size: 8.5pt;
     color: #1e293b;
     text-align: justify;
   }
   .skills-grid {
     display: flex;
     flex-direction: column;
-    gap: 1.5px;
-    font-size: 8.7pt;
+    gap: 1.2px;
+    font-size: 8.4pt;
   }
   .skill-row {
     display: flex;
@@ -103,7 +103,7 @@
   .skill-category {
     font-weight: 700;
     color: #0f172a;
-    width: 145px;
+    width: 140px;
     flex-shrink: 0;
   }
   .skill-items {
@@ -111,7 +111,7 @@
     flex: 1;
   }
   .job-block {
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
   .job-header {
     display: flex;
@@ -122,32 +122,32 @@
   .job-title {
     font-weight: 700;
     color: #0f172a;
-    font-size: 9.2pt;
+    font-size: 8.9pt;
   }
   .job-company {
     font-weight: 600;
     color: #0284c7;
   }
   .job-meta {
-    font-size: 8.4pt;
+    font-size: 8.2pt;
     color: #64748b;
     font-weight: 500;
   }
   .job-bullets {
     list-style-type: square;
-    padding-left: 14px;
-    margin-top: 1.5px;
+    padding-left: 13px;
+    margin-top: 1px;
   }
   .job-bullets li {
-    font-size: 8.6pt;
+    font-size: 8.3pt;
     color: #1e293b;
-    margin-bottom: 1px;
-    line-height: 1.28;
+    margin-bottom: 0.8px;
+    line-height: 1.24;
   }
   .project-item {
-    font-size: 8.6pt;
-    margin-bottom: 2px;
-    line-height: 1.28;
+    font-size: 8.3pt;
+    margin-bottom: 1.5px;
+    line-height: 1.24;
   }
   .project-title {
     font-weight: 700;
@@ -172,10 +172,10 @@
   .compact-list {
     list-style: none;
     padding: 0;
-    font-size: 8.5pt;
+    font-size: 8.2pt;
   }
   .compact-list li {
-    margin-bottom: 1px;
+    margin-bottom: 0.8px;
     color: #1e293b;
   }
   @media print {
@@ -198,10 +198,10 @@
       <span><a href="mailto:{{ email }}">{{ email }}</a></span>
     </div>
     <div class="links-bar">
-      <span>Interactive PM Product Lab: <a href="{{ links.pm_product_lab }}">{{ links.pm_product_lab }}</a></span> •
-      <span>Portfolio: <a href="{{ links.portfolio }}">{{ links.portfolio }}</a></span> •
+      <span>Portfolio: <a href="{{ links.portfolio }}">manavmate53-jpg.github.io/portfolio</a></span> •
+      <span>PM Product Lab: <a href="{{ links.pm_product_lab }}">manavmate53-jpg.github.io/pm-product-lab</a></span> •
       <span>GitHub: <a href="{{ links.github }}">github.com/manavmate53-jpg</a></span> •
-      <span>LinkedIn: <a href="{{ links.linkedin }}">{{ links.linkedin }}</a></span>
+      <span>LinkedIn: <a href="{{ links.linkedin }}">linkedin.com/in/manav-mate-9448b1341</a></span>
     </div>
   </header>
 
@@ -258,7 +258,7 @@
   </section>
 
   <section>
-    <div class="section-title">Interactive Builds (Live in PM Product Lab)</div>
+    <div class="section-title">Featured Product Simulations (Live in PM Product Lab)</div>
     {% for proj in featured_projects[:3] %}
     <div class="project-item">
       <span class="project-title">{{ proj.name }}</span> ({{ proj.category }}): 
@@ -281,8 +281,8 @@
       <div class="edu-cert-col">
         <div class="section-title">Certifications</div>
         <ul class="compact-list">
-          {% for cert in certifications[:4] %}
-          <li><strong>{{ cert.name }}</strong> ({{ cert.issuer }})</li>
+          {% for cert in certifications[:5] %}
+          <li><strong>{{ cert.name }}</strong> ({{ cert.issuer }}{% if cert.issue_date %}, {{ cert.issue_date }}{% endif %})</li>
           {% endfor %}
         </ul>
       </div>

@@ -1,7 +1,7 @@
 # {{ name }}
 **{{ location }}** | **{{ phone }}** | **[{{ email }}](mailto:{{ email }})**
-- **Interactive PM Product Lab**: [{{ links.pm_product_lab }}]({{ links.pm_product_lab }})
 - **Portfolio**: [{{ links.portfolio }}]({{ links.portfolio }})
+- **PM Product Lab**: [{{ links.pm_product_lab }}]({{ links.pm_product_lab }})
 - **GitHub**: [github.com/manavmate53-jpg]({{ links.github }}) | **LinkedIn**: [{{ links.linkedin }}]({{ links.linkedin }})
 
 ---
@@ -36,13 +36,13 @@
 
 ---
 
-### INTERACTIVE BUILDS (LIVE IN PM PRODUCT LAB)
+### FEATURED PRODUCT SIMULATIONS (LIVE IN PM PRODUCT LAB)
 {% for proj in featured_projects[:3] %}
-- **{{ proj.name }}** ({{ proj.category }}): {{ proj.summary }} **Key Metric: {{ proj.key_metrics }}.** [Live Demo]({{ proj.url }})
+- **{{ proj.name }}** ({{ proj.category }}): {{ proj.summary }} **Impact: {{ proj.key_metrics }}.** [Live Demo]({{ proj.url }})
 {% endfor %}
 
 ---
 
 ### EDUCATION & CERTIFICATIONS
 - **Education**: {% for edu in education %}{{ edu.degree }}, {{ edu.institution }} ({{ edu.specialization }}){% endfor %}
-- **Certifications**: {% for cert in certifications[:4] %}{{ cert.name }} ({{ cert.issuer }}){% if not loop.last %} | {% endif %}{% endfor %}
+- **Certifications**: {% for cert in certifications[:5] %}{{ cert.name }} ({{ cert.issuer }}{% if cert.issue_date %}, {{ cert.issue_date }}{% endif %}){% if not loop.last %} | {% endif %}{% endfor %}

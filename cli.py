@@ -250,6 +250,24 @@ def tailor_cmd(job_id: int):
     ))
 
 
+@cli.command("build-master-cv")
+def build_master_cv_cmd():
+    """Generates the master baseline CV (HTML, Markdown, and Single-Page A4 PDF) with 6 PM Lab builds and Scaler credentials."""
+    console.print("[bold cyan]Building Manav Mate Master CV...[/bold cyan]")
+    with console.status("[bold green]Compiling Master HTML, Markdown, and PDF via Playwright...[/bold green]"):
+        outputs = tailor_engine.generate_master_cv()
+
+    console.print(Panel(
+        f"[bold green]Master CV Generated Successfully[/bold green]\n\n"
+        f"📄 [bold]Master HTML:[/bold] {outputs['html_path']}\n"
+        f"📝 [bold]Master Markdown:[/bold] {outputs['md_path']}\n"
+        f"🖨️  [bold]Master Single-Page A4 PDF:[/bold] {outputs['pdf_path']}\n"
+        f"📊 [bold]Word Count:[/bold] {outputs['total_words']} words (Guaranteed Single Page: [bold green]{outputs['is_single_page']}[/bold green])",
+        title="Master CV Compilation",
+        box=box.ROUNDED
+    ))
+
+
 @cli.command("patterns-5x")
 @click.argument("job_id", type=int)
 def patterns_5x_cmd(job_id: int):

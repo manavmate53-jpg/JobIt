@@ -1,7 +1,7 @@
 {
   "personal": {
     "name": "Manav Mate",
-    "location": "Jogeshwari East, Mumbai, Maharashtra, India",
+    "location": "Jogeshwari East, Mumbai, Maharashtra",
     "phone": "+91 85915 95889",
     "email": "manavmate53@gmail.com",
     "headline": "Product Manager & Early-Career Builder | AI Systems, PRDs & Operations",
@@ -49,15 +49,15 @@
     {
       "company": "HireFlo India",
       "role": "Product Manager",
-      "duration": "2026 - Aug 2026",
+      "duration": "Jan 2026 - Aug 2026",
       "location": "Mumbai, India",
       "context": "Joined the founder early to own product discovery, PRDs, sprint planning, and core user journeys for an AI hiring intelligence platform.",
       "achievements": [
-        "Cut model inference compute costs by 40% on Llama 3.1 by deploying self-hosted microservices via NVIDIA NIM and optimizing token cache strategies.",
-        "Built and shipped a 1,000-document resume parsing and schema extraction pipeline completing runs in under 10 minutes with 98% field precision.",
-        "Improved candidate self-serve platform completion rates by 30% through end-to-end user friction audits and reworked onboarding funnels.",
-        "Authored 14+ technical PRDs, user journey maps, and sprint backlogs, leading weekly agile cadences directly alongside engineering.",
-        "Defined token unit economics, latency SLA budgets, and regression guardrails for production LLM workflows."
+        "Architected resume parsing/scoring pipeline ingesting 1,000 documents in under 10 minutes with 98% field extraction precision.",
+        "Cut model inference compute costs by 40% on Llama 3.1 via self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.",
+        "Redesigned onboarding and screening funnels in Figma, lifting workflow completion by 30%.",
+        "Restructured platform monetization to a 5-tier freemium model supporting enterprise tiers up to ₹59,999/month.",
+        "Authored 14+ technical PRDs, user stories, and acceptance criteria in Jira, driving weekly sprint deliveries."
       ],
       "technologies": ["Llama 3.1", "NVIDIA NIM", "Python", "FastAPI", "PostgreSQL", "Jira", "Figma", "JSON Schema"]
     },
@@ -68,71 +68,57 @@
       "location": "Mumbai, India",
       "context": "Bootstrapped a commercial operations and B2B workforce business from zero without external venture capital.",
       "achievements": [
-        "Acquired 50+ B2B corporate enterprise clients through direct founder sales, contract negotiations, and referral loops.",
-        "Orchestrated on-ground operations for 200+ commercial projects across the Mumbai metropolitan region with zero client SLA breaches.",
-        "Recruited, trained, and managed multidisciplinary field teams of up to 133 personnel across demanding multi-shift deployments.",
-        "Built internal operational dashboards and shift roster trackers that trimmed billing reconciliation cycles from 12 days to 48 hours.",
-        "Managed P&L, vendor contracts, regulatory compliance, and working capital cash flows to maintain sustainable operational margins."
+        "Bootstrapped B2B workforce operations from zero to 50+ enterprise clients and 200+ on-ground projects across Mumbai.",
+        "Scheduled and directed field teams of up to 133 personnel across demanding multi-shift commercial exhibitions and live events.",
+        "Maintained 100% contractual SLA compliance across 200+ projects via standby buffers and a 15-minute emergency fill protocol.",
+        "Built standardized shift check-in rosters and QR audit tracking tools, reducing reconciliation cycles from 12 days to 48 hours.",
+        "Managed commercial contracts, vendor reconciliations, regulatory compliance, and working capital cash flows."
       ],
       "technologies": ["Operational Logistics", "B2B Sales", "P&L Management", "SLA Control", "Client Account Management", "Field Operations"]
     }
   ],
   "featured_projects": [
     {
-      "name": "EvalGuard AI",
-      "category": "Agentic AI & Evaluation Guardrails",
-      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#hub",
-      "summary": "Agentic evaluation workflow implementing JSON schema guardrails, automated hallucination detection, and real-time token unit economics tracking.",
-      "key_metrics": "99.4% schema validation compliance, 35% lower evaluation latency"
-    },
-    {
-      "name": "VeriShield",
-      "category": "Fintech & Compliance Engine",
-      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#hub",
-      "summary": "B2B KYC and GSTIN verification risk engine that cross-references public registries, computes fraud anomaly scores, and flags shell entities.",
-      "key_metrics": "Sub-800ms verification response time across 12-point regulatory checks"
-    },
-    {
-      "name": "AutoMatch IQ",
-      "category": "Marketplace Telemetry & SQL Analytics",
-      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#hub",
-      "summary": "Two-sided marketplace funnel telemetry system with an embedded SQL runner analyzing match rate drop-offs and liquidity dynamics.",
-      "key_metrics": "Pinpointed 24% conversion bottleneck in liquidity allocation"
-    },
-    {
-      "name": "Ketto Campaign Assistant",
-      "category": "Donor Engagement AI",
-      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#hub",
-      "summary": "Conversational assistive interface for medical crowdfunding campaign creation, guiding organizers through high-conversion storytelling.",
-      "key_metrics": "Drafting time reduced from 45 minutes to 7 minutes"
-    },
-    {
-      "name": "Lead Radar",
-      "category": "B2B Intent & Pipeline Engine",
-      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#hub",
-      "summary": "B2B intent scoring and lead discovery tool that enriches firmographic data and prioritizes high-propensity target accounts.",
-      "key_metrics": "Ranked 5,000+ domain prospects with customizable ICP filters"
-    },
-    {
       "name": "PayRouter Engine",
-      "category": "Fintech & Multi-Gateway Payment Rails",
+      "category": "Fintech & Smart Routing",
       "url": "https://manavmate53-jpg.github.io/pm-product-lab/#payrouter",
-      "summary": "Smart cascading payment router with sub-200ms failover, real-time gateway health monitoring, MDR fee optimization, and automated refund idempotency locking.",
-      "key_metrics": "98.2%+ transaction success rate, 15 to 45 bps lower MDR processing costs"
+      "summary": "Smart cascading payment router with sub-200ms failover, gateway health monitoring, MDR optimization, and refund idempotency.",
+      "key_metrics": "Sub-200ms failover, 15-45 bps lower MDR fees"
     },
     {
       "name": "FlashQueue Simulator",
-      "category": "High Concurrency & Edge Origin Shielding",
+      "category": "High Scale & Infrastructure",
       "url": "https://manavmate53-jpg.github.io/pm-product-lab/#flashqueue",
-      "summary": "Edge-based token bucket virtual waiting room buffering 50,000+ user surges, mitigating database connection exhaustion, and isolating bot traffic into Captcha rooms.",
-      "key_metrics": "Zero 504 gateway timeouts, sub-5% user abandonment rate"
+      "summary": "High-concurrency virtual waiting room buffering 50,000+ user surges, mitigating 504 timeouts via token bucket rate limiting.",
+      "key_metrics": "50,000+ user surge buffer, zero 504 timeouts"
     },
     {
       "name": "CrewRoster Dashboard",
-      "category": "Operations PM & Field Logistics",
+      "category": "Operations PM & Workforce Tech",
       "url": "https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering",
-      "summary": "Frontline gig labor rostering and SLA escalation system with automated standby dispatch buffers and QR attendance audit, modeled on managing 133 staff across 200+ events.",
-      "key_metrics": "Zero SLA breaches across 200+ projects, 100% financial payout reconciliation"
+      "summary": "Frontline workforce rostering and SLA escalation system with automated standby dispatch buffers and QR attendance audit (modeled on NeoManpower).",
+      "key_metrics": "100% SLA compliance, 48-hr reconciliation"
+    },
+    {
+      "name": "VeriShield",
+      "category": "B2B KYC & Verification",
+      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#verishield",
+      "summary": "B2B KYC and GSTIN/PAN verification engine with fuzzy entity matching and risk routing.",
+      "key_metrics": "Sub-800ms verification, 12-point checks"
+    },
+    {
+      "name": "AutoMatch IQ",
+      "category": "Marketplace & Discovery",
+      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#automatch",
+      "summary": "Marketplace discovery flow with live event telemetry and embedded SQL runner.",
+      "key_metrics": "24% conversion bottleneck resolved"
+    },
+    {
+      "name": "EvalGuard AI",
+      "category": "B2B SaaS & Production AI",
+      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#evalguard",
+      "summary": "Production LLM agent with JSON schema guardrails, HITL escalation, and token unit economics.",
+      "key_metrics": "99.4% schema compliance, 40% cost reduction"
     }
   ],
   "skills": {
@@ -200,8 +186,8 @@
     {
       "degree": "Bachelor of Commerce (B.Com)",
       "institution": "University of Mumbai",
-      "specialization": "Commercial Management, Accounting & Finance",
-      "location": "Mumbai, India"
+      "specialization": "Accounting & Finance",
+      "location": "Mumbai, Maharashtra"
     }
   ],
   "certifications": [
@@ -223,27 +209,22 @@
     },
     {
       "name": "Certified International Project Manager (CIPM)",
-      "issuer": "Project Management Institute (PMI)"
+      "issuer": "PMI",
+      "issue_date": "Aug 2026"
     },
     {
       "name": "Operations Management",
-      "issuer": "Saylor University"
+      "issuer": "Saylor University",
+      "issue_date": "Oct 2026"
     },
     {
-      "name": "Business Analytics",
+      "name": "Business Analytics & Design Thinking",
       "issuer": "upGrad"
     },
     {
-      "name": "Product Management Certified",
-      "issuer": "Pendo.io"
-    },
-    {
-      "name": "Prompt Engineering for Developers",
-      "issuer": "DeepLearning.AI"
-    },
-    {
-      "name": "Summer of Product 2025",
-      "issuer": "HelloPM"
+      "name": "Product Management & AI for PM",
+      "issuer": "Pendo",
+      "issue_date": "2025"
     }
   ],
   "tone_rules": {
