@@ -111,8 +111,8 @@ class LLMOrchestrator:
             )
         elif "ai" in post_lower or "llm" in post_lower or "agent" in post_lower:
             return (
-                f"Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning "
-                f"— it's telemetry fidelity, token latency sizing, and deterministic output schema validation. "
+                f"Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning: "
+                f"it's telemetry fidelity, token latency sizing, and deterministic output schema validation. "
                 f"Evaluating compute boundaries early saves immense operational overhead."
             )
         else:
@@ -132,7 +132,7 @@ class LLMOrchestrator:
         prototype_link: str,
     ) -> Dict[str, str]:
         """Generates a Vector 3 'Fixed Your Bug' value-drop outreach pitch."""
-        subject = f"I fixed your {flaw_description[:30]} for free — Future {role}"
+        subject = f"I fixed your {flaw_description[:30]} for free: Future {role}"
 
         body = (
             f"Hi {decision_maker.split()[0]},\n\n"
@@ -163,7 +163,7 @@ class LLMOrchestrator:
         first = recipient_name.split()[0]
         dm = (
             f"Hi {first},\n\n"
-            f"Quick note — tracking {company}'s growth across {role}. "
+            f"Quick note: tracking {company}'s growth across {role}. "
             f"Recently completed Scaler's System Design certification, focusing on latency/cost "
             f"trade-offs, API schemas, and distributed scaling. {highlights}\n\n"
             f"If you are exploring early-career PM builders who speak engineering fluently, "

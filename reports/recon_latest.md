@@ -1,5 +1,5 @@
 # 🦅 YING RECONNAISSANCE INTELLIGENCE REPORT
-**Generated:** `2026-11-01T15:05:58.855749`  
+**Generated:** `2026-11-01T15:08:48.660512`  
 **Cycle Execution:** Every 6 Hours  
 
 ---
@@ -16,8 +16,8 @@
 ---
 
 ## 2. Vector 1: Reverse-Engineered Successful Hires
-### Alum Hire 1 (Zepto) · Product Manager at Zepto
-- **Headline:** Product Manager @ Zepto | Prev: Early-stage Builder
+### Alum Hire 1 (Datavruti) · Associate Product Manager at Datavruti
+- **Headline:** Associate Product Manager @ Datavruti | Prev: Early-stage Builder
 - **Extracted Skills:** `System Architecture, Distributed Scaling, API Schema Design, Mixpanel, SQL, Product Analytics`
 - **Tech Stack:** `Python, PostgreSQL, Redis, Kafka, FastAPI`
 - **Architectures Demonstrated:**
@@ -25,8 +25,8 @@
   * Reverse-proxy caching layer cutting database read-latency by 45%
 - **Metric Framing:** _Emphasizes quantitative latency reductions and SLA uptime over buzzwords._
 
-### Alum Hire 2 (Zepto) · Product Manager at Zepto
-- **Headline:** Product Manager @ Zepto | Ex-Founder | Systems PM
+### Alum Hire 2 (Datavruti) · Associate Product Manager at Datavruti
+- **Headline:** Associate Product Manager @ Datavruti | Ex-Founder | Systems PM
 - **Extracted Skills:** `Microservices, Cost Sizing, Database Replication, CAP Theorem, PRD Authoring, Jira`
 - **Tech Stack:** `Python, Flask, RabbitMQ, Docker, Supabase`
 - **Architectures Demonstrated:**
@@ -34,8 +34,8 @@
   * Automated schema validation guardrail for third-party webhooks
 - **Metric Framing:** _Frames features around token economics and infrastructure cost trade-offs._
 
-### Alum Hire 3 (Zepto) · Product Manager at Zepto
-- **Headline:** Associate PM @ Zepto | Product Operations
+### Alum Hire 3 (Datavruti) · Associate Product Manager at Datavruti
+- **Headline:** Associate PM @ Datavruti | Product Operations
 - **Extracted Skills:** `Funnel Telemetry, A/B Testing, Figma, Stripe Connect, REST APIs`
 - **Tech Stack:** `Python, TypeScript, PostHog, Retool`
 - **Architectures Demonstrated:**
@@ -43,8 +43,8 @@
   * Self-serve driver onboarding verification flow
 - **Metric Framing:** _Focuses on operational throughput and zero-downtime migrations._
 
-### Alum Hire 1 (Jupiter Money) · Product Manager at Jupiter Money
-- **Headline:** Product Manager @ Jupiter Money | Prev: Early-stage Builder
+### Alum Hire 1 (Purplle) · Associate Product Manager at Purplle
+- **Headline:** Associate Product Manager @ Purplle | Prev: Early-stage Builder
 - **Extracted Skills:** `System Architecture, Distributed Scaling, API Schema Design, Mixpanel, SQL, Product Analytics`
 - **Tech Stack:** `Python, PostgreSQL, Redis, Kafka, FastAPI`
 - **Architectures Demonstrated:**
@@ -52,8 +52,8 @@
   * Reverse-proxy caching layer cutting database read-latency by 45%
 - **Metric Framing:** _Emphasizes quantitative latency reductions and SLA uptime over buzzwords._
 
-### Alum Hire 2 (Jupiter Money) · Product Manager at Jupiter Money
-- **Headline:** Product Manager @ Jupiter Money | Ex-Founder | Systems PM
+### Alum Hire 2 (Purplle) · Associate Product Manager at Purplle
+- **Headline:** Associate Product Manager @ Purplle | Ex-Founder | Systems PM
 - **Extracted Skills:** `Microservices, Cost Sizing, Database Replication, CAP Theorem, PRD Authoring, Jira`
 - **Tech Stack:** `Python, Flask, RabbitMQ, Docker, Supabase`
 - **Architectures Demonstrated:**
@@ -61,8 +61,8 @@
   * Automated schema validation guardrail for third-party webhooks
 - **Metric Framing:** _Frames features around token economics and infrastructure cost trade-offs._
 
-### Alum Hire 3 (Jupiter Money) · Product Manager at Jupiter Money
-- **Headline:** Associate PM @ Jupiter Money | Product Operations
+### Alum Hire 3 (Purplle) · Associate Product Manager at Purplle
+- **Headline:** Associate PM @ Purplle | Product Operations
 - **Extracted Skills:** `Funnel Telemetry, A/B Testing, Figma, Stripe Connect, REST APIs`
 - **Tech Stack:** `Python, TypeScript, PostHog, Retool`
 - **Architectures Demonstrated:**
@@ -70,8 +70,8 @@
   * Self-serve driver onboarding verification flow
 - **Metric Framing:** _Focuses on operational throughput and zero-downtime migrations._
 
-### Alum Hire 1 (PostHog) · Product Manager at PostHog
-- **Headline:** Product Manager @ PostHog | Prev: Early-stage Builder
+### Alum Hire 1 (Smartstream Technologies) · Associate Product Manager at Smartstream Technologies
+- **Headline:** Associate Product Manager @ Smartstream Technologies | Prev: Early-stage Builder
 - **Extracted Skills:** `System Architecture, Distributed Scaling, API Schema Design, Mixpanel, SQL, Product Analytics`
 - **Tech Stack:** `Python, PostgreSQL, Redis, Kafka, FastAPI`
 - **Architectures Demonstrated:**
@@ -79,8 +79,8 @@
   * Reverse-proxy caching layer cutting database read-latency by 45%
 - **Metric Framing:** _Emphasizes quantitative latency reductions and SLA uptime over buzzwords._
 
-### Alum Hire 2 (PostHog) · Product Manager at PostHog
-- **Headline:** Product Manager @ PostHog | Ex-Founder | Systems PM
+### Alum Hire 2 (Smartstream Technologies) · Associate Product Manager at Smartstream Technologies
+- **Headline:** Associate Product Manager @ Smartstream Technologies | Ex-Founder | Systems PM
 - **Extracted Skills:** `Microservices, Cost Sizing, Database Replication, CAP Theorem, PRD Authoring, Jira`
 - **Tech Stack:** `Python, Flask, RabbitMQ, Docker, Supabase`
 - **Architectures Demonstrated:**
@@ -88,8 +88,8 @@
   * Automated schema validation guardrail for third-party webhooks
 - **Metric Framing:** _Frames features around token economics and infrastructure cost trade-offs._
 
-### Alum Hire 3 (PostHog) · Product Manager at PostHog
-- **Headline:** Associate PM @ PostHog | Product Operations
+### Alum Hire 3 (Smartstream Technologies) · Associate Product Manager at Smartstream Technologies
+- **Headline:** Associate PM @ Smartstream Technologies | Product Operations
 - **Extracted Skills:** `Funnel Telemetry, A/B Testing, Figma, Stripe Connect, REST APIs`
 - **Tech Stack:** `Python, TypeScript, PostHog, Retool`
 - **Architectures Demonstrated:**
@@ -97,8 +97,8 @@
   * Self-serve driver onboarding verification flow
 - **Metric Framing:** _Focuses on operational throughput and zero-downtime migrations._
 
-### Alum Hire 1 (ElevenLabs) · Product Manager at ElevenLabs
-- **Headline:** Product Manager @ ElevenLabs | Prev: Early-stage Builder
+### Alum Hire 1 (Sovos) · Associate Product Manager at Sovos
+- **Headline:** Associate Product Manager @ Sovos | Prev: Early-stage Builder
 - **Extracted Skills:** `System Architecture, Distributed Scaling, API Schema Design, Mixpanel, SQL, Product Analytics`
 - **Tech Stack:** `Python, PostgreSQL, Redis, Kafka, FastAPI`
 - **Architectures Demonstrated:**
@@ -106,8 +106,8 @@
   * Reverse-proxy caching layer cutting database read-latency by 45%
 - **Metric Framing:** _Emphasizes quantitative latency reductions and SLA uptime over buzzwords._
 
-### Alum Hire 2 (ElevenLabs) · Product Manager at ElevenLabs
-- **Headline:** Product Manager @ ElevenLabs | Ex-Founder | Systems PM
+### Alum Hire 2 (Sovos) · Associate Product Manager at Sovos
+- **Headline:** Associate Product Manager @ Sovos | Ex-Founder | Systems PM
 - **Extracted Skills:** `Microservices, Cost Sizing, Database Replication, CAP Theorem, PRD Authoring, Jira`
 - **Tech Stack:** `Python, Flask, RabbitMQ, Docker, Supabase`
 - **Architectures Demonstrated:**
@@ -115,8 +115,8 @@
   * Automated schema validation guardrail for third-party webhooks
 - **Metric Framing:** _Frames features around token economics and infrastructure cost trade-offs._
 
-### Alum Hire 3 (ElevenLabs) · Product Manager at ElevenLabs
-- **Headline:** Associate PM @ ElevenLabs | Product Operations
+### Alum Hire 3 (Sovos) · Associate Product Manager at Sovos
+- **Headline:** Associate PM @ Sovos | Product Operations
 - **Extracted Skills:** `Funnel Telemetry, A/B Testing, Figma, Stripe Connect, REST APIs`
 - **Tech Stack:** `Python, TypeScript, PostHog, Retool`
 - **Architectures Demonstrated:**
@@ -124,8 +124,8 @@
   * Self-serve driver onboarding verification flow
 - **Metric Framing:** _Focuses on operational throughput and zero-downtime migrations._
 
-### Alum Hire 1 (Cursor (Anysphere)) · Product Manager at Cursor (Anysphere)
-- **Headline:** Product Manager @ Cursor (Anysphere) | Prev: Early-stage Builder
+### Alum Hire 1 (IDfy) · Associate Product Manager at IDfy
+- **Headline:** Associate Product Manager @ IDfy | Prev: Early-stage Builder
 - **Extracted Skills:** `System Architecture, Distributed Scaling, API Schema Design, Mixpanel, SQL, Product Analytics`
 - **Tech Stack:** `Python, PostgreSQL, Redis, Kafka, FastAPI`
 - **Architectures Demonstrated:**
@@ -133,8 +133,8 @@
   * Reverse-proxy caching layer cutting database read-latency by 45%
 - **Metric Framing:** _Emphasizes quantitative latency reductions and SLA uptime over buzzwords._
 
-### Alum Hire 2 (Cursor (Anysphere)) · Product Manager at Cursor (Anysphere)
-- **Headline:** Product Manager @ Cursor (Anysphere) | Ex-Founder | Systems PM
+### Alum Hire 2 (IDfy) · Associate Product Manager at IDfy
+- **Headline:** Associate Product Manager @ IDfy | Ex-Founder | Systems PM
 - **Extracted Skills:** `Microservices, Cost Sizing, Database Replication, CAP Theorem, PRD Authoring, Jira`
 - **Tech Stack:** `Python, Flask, RabbitMQ, Docker, Supabase`
 - **Architectures Demonstrated:**
@@ -142,8 +142,8 @@
   * Automated schema validation guardrail for third-party webhooks
 - **Metric Framing:** _Frames features around token economics and infrastructure cost trade-offs._
 
-### Alum Hire 3 (Cursor (Anysphere)) · Product Manager at Cursor (Anysphere)
-- **Headline:** Associate PM @ Cursor (Anysphere) | Product Operations
+### Alum Hire 3 (IDfy) · Associate Product Manager at IDfy
+- **Headline:** Associate PM @ IDfy | Product Operations
 - **Extracted Skills:** `Funnel Telemetry, A/B Testing, Figma, Stripe Connect, REST APIs`
 - **Tech Stack:** `Python, TypeScript, PostHog, Retool`
 - **Architectures Demonstrated:**
@@ -155,60 +155,60 @@
 ---
 
 ## 3. Vector 2: Shadow Engagement Pipeline (Last 48 Hours)
-### Hiring Lead (Zepto) (Head of Product / Director of Product at Zepto)
-- **Post Link:** [https://www.linkedin.com/feed/update/urn:li:activity:zepto101](https://www.linkedin.com/feed/update/urn:li:activity:zepto101)
+### Hiring Lead (Datavruti) (Head of Product / Director of Product at Datavruti)
+- **Post Link:** [https://www.linkedin.com/feed/update/urn:li:activity:datavruti101](https://www.linkedin.com/feed/update/urn:li:activity:datavruti101)
 - **Age:** `18h ago`
-- **Original Content Snippet:** "Our engineering and product teams at Zepto just hit a major milestone: scaling our event ingest service to handle 50M daily telemetry pings...."
+- **Original Content Snippet:** "Our engineering and product teams at Datavruti just hit a major milestone: scaling our event ingest service to handle 50M daily telemetry pi..."
 - **Pre-Computed High-Signal Comment:**
-> Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning — it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead.
+> Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning: it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead.
 
-### Hiring Lead (Jupiter Money) (Head of Product / Director of Product at Jupiter Money)
-- **Post Link:** [https://www.linkedin.com/feed/update/urn:li:activity:jupiter money101](https://www.linkedin.com/feed/update/urn:li:activity:jupiter money101)
+### Hiring Lead (Purplle) (Head of Product / Director of Product at Purplle)
+- **Post Link:** [https://www.linkedin.com/feed/update/urn:li:activity:purplle101](https://www.linkedin.com/feed/update/urn:li:activity:purplle101)
 - **Age:** `18h ago`
-- **Original Content Snippet:** "Our engineering and product teams at Jupiter Money just hit a major milestone: scaling our event ingest service to handle 50M daily telemetr..."
+- **Original Content Snippet:** "Our engineering and product teams at Purplle just hit a major milestone: scaling our event ingest service to handle 50M daily telemetry ping..."
 - **Pre-Computed High-Signal Comment:**
-> Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning — it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead.
+> Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning: it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead.
 
-### Hiring Lead (PostHog) (Head of Product / Director of Product at PostHog)
-- **Post Link:** [https://www.linkedin.com/feed/update/urn:li:activity:posthog101](https://www.linkedin.com/feed/update/urn:li:activity:posthog101)
+### Hiring Lead (Smartstream Technologies) (Head of Product / Director of Product at Smartstream Technologies)
+- **Post Link:** [https://www.linkedin.com/feed/update/urn:li:activity:smartstream technologies101](https://www.linkedin.com/feed/update/urn:li:activity:smartstream technologies101)
 - **Age:** `18h ago`
-- **Original Content Snippet:** "Our engineering and product teams at PostHog just hit a major milestone: scaling our event ingest service to handle 50M daily telemetry ping..."
+- **Original Content Snippet:** "Our engineering and product teams at Smartstream Technologies just hit a major milestone: scaling our event ingest service to handle 50M dai..."
 - **Pre-Computed High-Signal Comment:**
-> Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning — it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead.
+> Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning: it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead.
 
-### Hiring Lead (ElevenLabs) (Head of Product / Director of Product at ElevenLabs)
-- **Post Link:** [https://www.linkedin.com/feed/update/urn:li:activity:elevenlabs101](https://www.linkedin.com/feed/update/urn:li:activity:elevenlabs101)
+### Hiring Lead (Sovos) (Head of Product / Director of Product at Sovos)
+- **Post Link:** [https://www.linkedin.com/feed/update/urn:li:activity:sovos101](https://www.linkedin.com/feed/update/urn:li:activity:sovos101)
 - **Age:** `18h ago`
-- **Original Content Snippet:** "Our engineering and product teams at ElevenLabs just hit a major milestone: scaling our event ingest service to handle 50M daily telemetry p..."
+- **Original Content Snippet:** "Our engineering and product teams at Sovos just hit a major milestone: scaling our event ingest service to handle 50M daily telemetry pings...."
 - **Pre-Computed High-Signal Comment:**
-> Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning — it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead.
+> Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning: it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead.
 
-### Hiring Lead (Cursor (Anysphere)) (Head of Product / Director of Product at Cursor (Anysphere))
-- **Post Link:** [https://www.linkedin.com/feed/update/urn:li:activity:cursor (anysphere)101](https://www.linkedin.com/feed/update/urn:li:activity:cursor (anysphere)101)
+### Hiring Lead (IDfy) (Head of Product / Director of Product at IDfy)
+- **Post Link:** [https://www.linkedin.com/feed/update/urn:li:activity:idfy101](https://www.linkedin.com/feed/update/urn:li:activity:idfy101)
 - **Age:** `18h ago`
-- **Original Content Snippet:** "Our engineering and product teams at Cursor (Anysphere) just hit a major milestone: scaling our event ingest service to handle 50M daily tel..."
+- **Original Content Snippet:** "Our engineering and product teams at IDfy just hit a major milestone: scaling our event ingest service to handle 50M daily telemetry pings. ..."
 - **Pre-Computed High-Signal Comment:**
-> Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning — it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead.
+> Strong perspective. The real bottleneck in production AI workflows is rarely model reasoning: it's telemetry fidelity, token latency sizing, and deterministic output schema validation. Evaluating compute boundaries early saves immense operational overhead.
 
 
 ---
 
 ## 4. Vector 3: 'Fixed Your Bug' Value-Drop Payloads
-### Zepto · Product Manager
-- **Decision Maker:** Hiring Lead (Zepto) (`hiring.zepto@zepto.co`)
+### Datavruti · Associate Product Manager
+- **Decision Maker:** Hiring Lead (Datavruti) (`hiring.datavruti@datavruti.com`)
 - **Friction Identified:** Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts
 - **Proposed Architectural Spec:** Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync
-- **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/zepto-telemetry-fix
-- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free — Future Product Manager`
+- **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/datavruti-telemetry-fix
+- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager`
 
 ```text
 Hi Hiring,
 
-Was diving deep into Zepto's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.
+Was diving deep into Datavruti's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.
 
 Rather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.
 
-Here is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/zepto-telemetry-fix
+Here is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/datavruti-telemetry-fix
 
 Would love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.
 
@@ -217,21 +217,21 @@ Manav Mate
 Product Manager | System Design
 ```
 
-### Jupiter Money · Product Manager
-- **Decision Maker:** Hiring Lead (Jupiter Money) (`hiring.money@jupitermoney.com`)
+### Purplle · Associate Product Manager
+- **Decision Maker:** Hiring Lead (Purplle) (`hiring.purplle@purplle.com`)
 - **Friction Identified:** Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts
 - **Proposed Architectural Spec:** Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync
-- **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/jupiter money-telemetry-fix
-- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free — Future Product Manager`
+- **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/purplle-telemetry-fix
+- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager`
 
 ```text
 Hi Hiring,
 
-Was diving deep into Jupiter Money's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.
+Was diving deep into Purplle's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.
 
 Rather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.
 
-Here is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/jupiter money-telemetry-fix
+Here is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/purplle-telemetry-fix
 
 Would love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.
 
@@ -240,21 +240,21 @@ Manav Mate
 Product Manager | System Design
 ```
 
-### PostHog · Product Manager
-- **Decision Maker:** Hiring Lead (PostHog) (`hiring.posthog@posthog.com`)
+### Smartstream Technologies · Associate Product Manager
+- **Decision Maker:** Hiring Lead (Smartstream Technologies) (`hiring.technologies@smartstream.com`)
 - **Friction Identified:** Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts
 - **Proposed Architectural Spec:** Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync
-- **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/posthog-telemetry-fix
-- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free — Future Product Manager`
+- **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/smartstream technologies-telemetry-fix
+- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager`
 
 ```text
 Hi Hiring,
 
-Was diving deep into PostHog's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.
+Was diving deep into Smartstream Technologies's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.
 
 Rather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.
 
-Here is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/posthog-telemetry-fix
+Here is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/smartstream technologies-telemetry-fix
 
 Would love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.
 
@@ -263,21 +263,21 @@ Manav Mate
 Product Manager | System Design
 ```
 
-### ElevenLabs · Product Manager
-- **Decision Maker:** Hiring Lead (ElevenLabs) (`hiring.elevenlabs@elevenlabs.io`)
+### Sovos · Associate Product Manager
+- **Decision Maker:** Hiring Lead (Sovos) (`hiring.sovos@sovos.com`)
 - **Friction Identified:** Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts
 - **Proposed Architectural Spec:** Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync
-- **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/elevenlabs-telemetry-fix
-- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free — Future Product Manager`
+- **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/sovos-telemetry-fix
+- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager`
 
 ```text
 Hi Hiring,
 
-Was diving deep into ElevenLabs's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.
+Was diving deep into Sovos's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.
 
 Rather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.
 
-Here is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/elevenlabs-telemetry-fix
+Here is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/sovos-telemetry-fix
 
 Would love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.
 
@@ -286,21 +286,21 @@ Manav Mate
 Product Manager | System Design
 ```
 
-### Cursor (Anysphere) · Product Manager
-- **Decision Maker:** Hiring Lead (Cursor (Anysphere)) (`hiring.anysphere@anysphere.co`)
+### IDfy · Associate Product Manager
+- **Decision Maker:** Hiring Lead (IDfy) (`hiring.idfy@idfy.com`)
 - **Friction Identified:** Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts
 - **Proposed Architectural Spec:** Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync
-- **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/cursor (anysphere)-telemetry-fix
-- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free — Future Product Manager`
+- **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/idfy-telemetry-fix
+- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager`
 
 ```text
 Hi Hiring,
 
-Was diving deep into Cursor (Anysphere)'s product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.
+Was diving deep into IDfy's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.
 
 Rather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.
 
-Here is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/cursor (anysphere)-telemetry-fix
+Here is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/idfy-telemetry-fix
 
 Would love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.
 

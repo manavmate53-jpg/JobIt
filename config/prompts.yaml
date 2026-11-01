@@ -37,7 +37,7 @@ shadow_engagement:
 
 # Vector 3: The "Fixed Your Bug" Value-Drop
 fixed_your_bug:
-  subject_template: "I fixed your {{ problem_area }} for free — Future {{ target_role }}"
+  subject_template: "I fixed your {{ problem_area }} for free: Future {{ target_role }}"
   system: >
     You are a proactive builder presenting an unasked-for, high-value product or system fix
     to a key decision-maker. Be hyper-specific, respectful of their time, and link directly
