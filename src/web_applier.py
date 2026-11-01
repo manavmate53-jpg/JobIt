@@ -71,23 +71,45 @@ class PortalWebApplier:
                 viewport={"width": 1280, "height": 850},
                 args=["--disable-blink-features=AutomationControlled"]
             )
-            page = context.new_page()
+            page = context.pages[0] if context.pages else context.new_page()
             page.goto(target_url)
 
-            # Wait for user to log in or auto-detect
-            print("\nWaiting for you to log in... (Window will automatically close once logged in)")
+            # Bring Chromium window to the front on macOS
+            try:
+                import subprocess
+                subprocess.run(["osascript", "-e", 'tell application "Chromium" to activate'], capture_output=True)
+            except Exception:
+                pass
+
+            # Pre-fill email if on login page
+            try:
+                page.wait_for_timeout(1500)
+                email_input = page.locator("#username, input[name='session_key'], input[type='email']").first
+                if email_input.is_visible(timeout=3000):
+                    curr_val = email_input.input_value()
+                    if not curr_val:
+                        email_input.fill("manavmate53@gmail.com")
+            except Exception:
+                pass
+
+            # Wait for user to log in or auto-detect (10 minutes)
+            print("\nWaiting for you to log in... (Window will automatically close once you reach your feed)")
             start_wait = time.time()
             logged_in = False
 
-            while time.time() - start_wait < 180:
-                curr_url = page.url.lower()
+            while time.time() - start_wait < 600:
+                try:
+                    curr_url = page.url.lower()
 
-                # Check if landed on authenticated feed/dashboard
-                if portal_lower == "linkedin" and any(k in curr_url for k in ["/feed", "/in/", "/mynetwork"]):
-                    logged_in = True
-                    break
-                elif portal_lower == "naukri" and any(k in curr_url for k in ["/mnjuser", "my.naukri.com"]):
-                    logged_in = True
+                    # Check if landed on authenticated feed/dashboard
+                    if portal_lower == "linkedin" and any(k in curr_url for k in ["/feed", "/in/", "/mynetwork", "/messaging"]):
+                        logged_in = True
+                        break
+                    elif portal_lower == "naukri" and any(k in curr_url for k in ["/mnjuser", "my.naukri.com"]):
+                        logged_in = True
+                        break
+                except Exception:
+                    # Page or context may have been closed manually by user
                     break
 
                 time.sleep(1.5)
