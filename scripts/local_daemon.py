@@ -75,16 +75,18 @@ def main():
     logger.info("⚡ JOBIT AUTONOMOUS LOCAL DAEMON INITIATED")
     logger.info(f"Workspace: {REPO_ROOT}")
     logger.info(f"Log Destination: {LOG_FILE}")
-    logger.info("Schedule: YANG (every 3h) | YING (every 6h) | Inbox Check (every 1h)")
+    logger.info("Schedule: YANG (every 3h) | YING (every 6h) | Auto-Pilot Apply (every 6h) | Inbox Check (every 1h)")
     logger.info("=" * 70)
 
     last_yang = 0.0
     last_ying = 0.0
     last_inbox = 0.0
+    last_autopilot = 0.0
 
     YANG_INTERVAL = 3 * 3600  # 3 hours
     YING_INTERVAL = 6 * 3600  # 6 hours
     INBOX_INTERVAL = 1 * 3600  # 1 hour
+    AUTOPILOT_INTERVAL = 6 * 3600  # 6 hours
 
     # Run initial cycle immediately upon launch
     python_bin = sys.executable
@@ -115,6 +117,14 @@ def main():
                 "Engine YING (6-Hour Reconnaissance)",
             )
             last_ying = now
+
+        # 4. Auto-Pilot: Auto-tailor & apply to qualified jobs (every 6 hours)
+        if now - last_autopilot >= AUTOPILOT_INTERVAL:
+            run_command(
+                [python_bin, "cli.py", "auto-pilot", "--min-score", "72", "--max-apply", "10"],
+                "JobIt Auto-Pilot Application Run",
+            )
+            last_autopilot = now
 
         # Heartbeat sleep for 60 seconds
         for _ in range(60):
