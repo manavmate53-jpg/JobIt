@@ -139,3 +139,4 @@ class EmailOTPListener:
 
         logger.warning(f"OTP polling timed out after {max_wait_seconds}s.")
         return None
+

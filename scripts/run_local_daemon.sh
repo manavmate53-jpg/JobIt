@@ -14,3 +14,4 @@ PID=$!
 echo "Daemon started successfully with PID: $PID"
 echo "To check live logs: tail -f reports/local_daemon.log"
 echo "To stop daemon: kill $PID"
+

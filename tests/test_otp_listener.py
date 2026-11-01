@@ -23,3 +23,4 @@ def test_otp_regex_extraction():
         m = re.search(r"(?:code|pin|otp|verification)[\s\:\-\w]*?\b(\d{4,6})\b", text, re.IGNORECASE)
         assert m is not None
         assert m.group(1) == expected
+
