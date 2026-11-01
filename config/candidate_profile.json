@@ -112,6 +112,27 @@
       "url": "https://manavmate53-jpg.github.io/pm-product-lab/#hub",
       "summary": "B2B intent scoring and lead discovery tool that enriches firmographic data and prioritizes high-propensity target accounts.",
       "key_metrics": "Ranked 5,000+ domain prospects with customizable ICP filters"
+    },
+    {
+      "name": "PayRouter Engine",
+      "category": "Fintech & Multi-Gateway Payment Rails",
+      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#payrouter",
+      "summary": "Smart cascading payment router with sub-200ms failover, real-time gateway health monitoring, MDR fee optimization, and automated refund idempotency locking.",
+      "key_metrics": "98.2%+ transaction success rate, 15 to 45 bps lower MDR processing costs"
+    },
+    {
+      "name": "FlashQueue Simulator",
+      "category": "High Concurrency & Edge Origin Shielding",
+      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#flashqueue",
+      "summary": "Edge-based token bucket virtual waiting room buffering 50,000+ user surges, mitigating database connection exhaustion, and isolating bot traffic into Captcha rooms.",
+      "key_metrics": "Zero 504 gateway timeouts, sub-5% user abandonment rate"
+    },
+    {
+      "name": "CrewRoster Dashboard",
+      "category": "Operations PM & Field Logistics",
+      "url": "https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering",
+      "summary": "Frontline gig labor rostering and SLA escalation system with automated standby dispatch buffers and QR attendance audit, modeled on managing 133 staff across 200+ events.",
+      "key_metrics": "Zero SLA breaches across 200+ projects, 100% financial payout reconciliation"
     }
   ],
   "skills": {
