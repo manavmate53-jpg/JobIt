@@ -53,6 +53,7 @@ data/browser_sessions/
 data/*storage_state.json
 *.storage_state.json
 data/*base64.txt
+reports/*.log
 data/linkedin_export/
 exports/applications/*.png
 !exports/applications/.gitkeep
