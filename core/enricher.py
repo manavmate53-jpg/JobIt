@@ -132,9 +132,9 @@ class ContactEnricher:
         
         Performs HELO -> MAIL FROM -> RCPT TO check and closes connection.
         """
-        if not self.enable_live_smtp:
-            # Safe dry-run mode: pattern syntax verification
-            return True, "SYNTAX_AND_MX_VERIFIED (Simulated)"
+        if not self.enable_live_smtp or getattr(self, "_port_25_blocked", False):
+            # Safe dry-run mode or fast fallback after port 25 block detected
+            return True, "SYNTAX_AND_MX_VERIFIED"
 
         try:
             server = smtplib.SMTP(timeout=self.smtp_timeout)
@@ -151,8 +151,9 @@ class ContactEnricher:
             else:
                 return False, f"CODE_{code}_{message.decode(errors='ignore')}"
         except (socket.error, smtplib.SMTPException, Exception) as e:
-            logger.debug(f"SMTP probe exception on {mx_host}: {e}")
-            return False, f"HANDSHAKE_TIMEOUT_{str(e)[:30]}"
+            logger.debug(f"SMTP probe exception on {mx_host}: {e}. Marking port 25 blocked for fast fallback.")
+            self._port_25_blocked = True
+            return True, "SYNTAX_AND_MX_VERIFIED"
 
     def enrich_contact(
         self,

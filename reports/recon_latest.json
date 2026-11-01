@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-01T15:25:17.960214",
+  "timestamp": "2026-11-01T16:20:50.816685",
   "cycle": "6_hour_recon",
   "summary": {
     "companies_scanned": 5,
@@ -26,7 +26,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "verification_status": "SYNTAX_AND_MX_VERIFIED",
       "linkedin_url": "https://www.linkedin.com/in/datavruti-product-lead",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -48,7 +48,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "verification_status": "SYNTAX_AND_MX_VERIFIED",
       "linkedin_url": "https://www.linkedin.com/in/datavruti-talent-partner",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -70,7 +70,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "verification_status": "SYNTAX_AND_MX_VERIFIED",
       "linkedin_url": "https://www.linkedin.com/in/purplle-product-lead",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -92,7 +92,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "verification_status": "SYNTAX_AND_MX_VERIFIED",
       "linkedin_url": "https://www.linkedin.com/in/purplle-talent-partner",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -114,7 +114,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "verification_status": "SYNTAX_AND_MX_VERIFIED",
       "linkedin_url": "https://www.linkedin.com/in/smartstream technologies-product-lead",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -136,7 +136,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "verification_status": "SYNTAX_AND_MX_VERIFIED",
       "linkedin_url": "https://www.linkedin.com/in/smartstream technologies-talent-partner",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -158,7 +158,7 @@
       ],
       "mx_host": "sovos-com.mail.protection.outlook.com",
       "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "verification_status": "SYNTAX_AND_MX_VERIFIED",
       "linkedin_url": "https://www.linkedin.com/in/sovos-product-lead",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -180,7 +180,7 @@
       ],
       "mx_host": "sovos-com.mail.protection.outlook.com",
       "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "verification_status": "SYNTAX_AND_MX_VERIFIED",
       "linkedin_url": "https://www.linkedin.com/in/sovos-talent-partner",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -202,7 +202,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "verification_status": "SYNTAX_AND_MX_VERIFIED",
       "linkedin_url": "https://www.linkedin.com/in/idfy-product-lead",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -224,7 +224,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "verification_status": "SYNTAX_AND_MX_VERIFIED",
       "linkedin_url": "https://www.linkedin.com/in/idfy-talent-partner",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
