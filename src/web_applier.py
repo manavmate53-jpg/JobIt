@@ -62,6 +62,8 @@ class PortalWebApplier:
         print(f"Session data will be preserved in: {session_path}")
         print("Please complete login / OTP in the opened browser window.")
 
+        storage_file = self.base_dir / "data" / f"{portal_lower}_storage_state.json"
+
         with sync_playwright() as p:
             context = p.chromium.launch_persistent_context(
                 user_data_dir=str(session_path),
@@ -72,16 +74,36 @@ class PortalWebApplier:
             page = context.new_page()
             page.goto(target_url)
 
-            # Wait for user to log in
-            print("\nWaiting for you to log in... (Press Enter in terminal once logged in successfully)")
-            try:
-                input(">> Press [ENTER] here once you see your logged-in dashboard/feed: ")
-            except Exception:
-                time.sleep(15)
+            # Wait for user to log in or auto-detect
+            print("\nWaiting for you to log in... (Window will automatically close once logged in)")
+            start_wait = time.time()
+            logged_in = False
+
+            while time.time() - start_wait < 180:
+                curr_url = page.url.lower()
+
+                # Check if landed on authenticated feed/dashboard
+                if portal_lower == "linkedin" and any(k in curr_url for k in ["/feed", "/in/", "/mynetwork"]):
+                    logged_in = True
+                    break
+                elif portal_lower == "naukri" and any(k in curr_url for k in ["/mnjuser", "my.naukri.com"]):
+                    logged_in = True
+                    break
+
+                time.sleep(1.5)
 
             # Save state
+            try:
+                context.storage_state(path=str(storage_file))
+                print(f"[Portal Login] Exported full storage state to: {storage_file}")
+            except Exception as e:
+                logger.debug(f"Could not export storage_state: {e}")
+
             context.close()
-            print(f"[Portal Login] Successfully saved {portal.upper()} browser session!")
+            if logged_in:
+                print(f"[Portal Login] Successfully authenticated and saved {portal.upper()} browser session!")
+            else:
+                print(f"[Portal Login] Session saved to {session_path}.")
 
     def apply(
         self,

@@ -82,17 +82,25 @@ class StealthBrowser:
             ],
         )
 
-        self._context = self._browser.new_context(
-            user_agent=self.user_agent,
-            viewport=self.viewport,
-            locale="en-US",
-            timezone_id="Asia/Kolkata",
-            permissions=["geolocation"],
-            geolocation={"latitude": 19.0760, "longitude": 72.8777}, # Mumbai coordinates
-            device_scale_factor=1.0,
-            has_touch=False,
-            is_mobile=False,
+        storage_file = os.path.join(
+            os.path.dirname(os.path.dirname(__file__)), "data", "linkedin_storage_state.json"
         )
+        context_kwargs: Dict[str, Any] = {
+            "user_agent": self.user_agent,
+            "viewport": self.viewport,
+            "locale": "en-US",
+            "timezone_id": "Asia/Kolkata",
+            "permissions": ["geolocation"],
+            "geolocation": {"latitude": 19.0760, "longitude": 72.8777},  # Mumbai coordinates
+            "device_scale_factor": 1.0,
+            "has_touch": False,
+            "is_mobile": False,
+        }
+        if os.path.exists(storage_file):
+            context_kwargs["storage_state"] = storage_file
+            logger.info(f"Loaded persistent browser storage state from {storage_file}")
+
+        self._context = self._browser.new_context(**context_kwargs)
 
         # Inject LinkedIn Authentication Cookie if available
         if self.cookie_value:
