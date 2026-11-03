@@ -19,7 +19,7 @@ from typing import Any, Dict, List, Optional
 from playwright.sync_api import Browser, BrowserContext, Page, sync_playwright
 
 try:
-    from playwright_stealth import stealth_sync
+    from playwright_stealth import Stealth
     HAS_PLAYWRIGHT_STEALTH = True
 except ImportError:
     HAS_PLAYWRIGHT_STEALTH = False
@@ -146,7 +146,8 @@ class StealthBrowser:
         """Applies playwright-stealth and manual JavaScript navigator evasions."""
         if HAS_PLAYWRIGHT_STEALTH:
             try:
-                stealth_sync(page)
+                stealth = Stealth(navigator_platform_override="MacIntel")
+                stealth.apply_stealth_sync(page)
                 logger.debug("Applied playwright-stealth to page.")
             except Exception as e:
                 logger.warning(f"Error applying playwright-stealth: {e}")
