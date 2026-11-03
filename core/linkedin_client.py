@@ -80,15 +80,22 @@ class LinkedInClient:
         with open(self.state_file, "w", encoding="utf-8") as f:
             json.dump(self.state, f, indent=2)
 
-    def _check_and_increment(self, action: str) -> None:
-        """Verifies daily throttle limit before taking an action."""
+    def _check_limit(self, action: str) -> None:
+        """Verifies daily throttle limit before attempting an action."""
         current_count = self.state["counts"].get(action, 0)
         max_allowed = self.limits.get(action, 999)
         if current_count >= max_allowed:
             raise DailyThrottleExceeded(
                 f"Daily limit for '{action}' reached ({current_count}/{max_allowed}). Halting to prevent detection."
             )
+
+    def _record_success(self, action: str, list_key: Optional[str] = None, item: Optional[str] = None) -> None:
+        """Increments action count and persists recorded URL only upon confirmed success."""
+        current_count = self.state["counts"].get(action, 0)
         self.state["counts"][action] = current_count + 1
+        if list_key and item and list_key in self.state:
+            if item not in self.state[list_key]:
+                self.state[list_key].append(item)
         self._save_state()
 
     def is_logged_in(self, page) -> bool:
@@ -168,13 +175,12 @@ class LinkedInClient:
             logger.info(f"Post already engaged: {post_url}. Skipping.")
             return False
 
-        self._check_and_increment("comments")
+        self._check_limit("comments")
 
         if dry_run:
             logger.info(f"[DRY-RUN] Would engage with post: {post_url}")
             logger.info(f"[DRY-RUN] Comment: {comment_text}")
-            self.state["engaged_posts"].append(post_url)
-            self._save_state()
+            self._record_success("comments", "engaged_posts", post_url)
             return True
 
         # In live mode, uses stealth browser to perform DOM actions
@@ -204,8 +210,7 @@ class LinkedInClient:
                 if submit_btn and submit_btn.is_enabled():
                     submit_btn.click()
                     logger.info(f"Successfully posted comment on {post_url}")
-                    self.state["engaged_posts"].append(post_url)
-                    self._save_state()
+                    self._record_success("comments", "engaged_posts", post_url)
                     return True
         except Exception as e:
             logger.warning(f"Error engaging on post {post_url}: {e}")
@@ -225,13 +230,12 @@ class LinkedInClient:
             logger.info(f"Already sent connection request to {profile_url}. Skipping.")
             return False
 
-        self._check_and_increment("connections")
+        self._check_limit("connections")
 
         if dry_run:
             logger.info(f"[DRY-RUN] Sending connection request to: {profile_url}")
             logger.info(f"[DRY-RUN] Note ({len(note)} chars): \"{note}\"")
-            self.state["connected_profiles"].append(profile_url)
-            self._save_state()
+            self._record_success("connections", "connected_profiles", profile_url)
             return True
 
         logger.info(f"Sending live connection request to {profile_url}...")
@@ -256,8 +260,7 @@ class LinkedInClient:
                     send_btn = page.query_selector("button:has-text('Send')")
                     if send_btn:
                         send_btn.click()
-                        self.state["connected_profiles"].append(profile_url)
-                        self._save_state()
+                        self._record_success("connections", "connected_profiles", profile_url)
                         return True
         except Exception as e:
             logger.warning(f"Error sending connection request to {profile_url}: {e}")
@@ -273,13 +276,12 @@ class LinkedInClient:
         if profile_url in self.state.get("messaged_profiles", []):
             return False
 
-        self._check_and_increment("messages")
+        self._check_limit("messages")
 
         if dry_run:
             logger.info(f"[DRY-RUN] Sending direct outreach message to: {profile_url}")
             logger.info(f"[DRY-RUN] Message:\n{message}")
-            self.state["messaged_profiles"].append(profile_url)
-            self._save_state()
+            self._record_success("messages", "messaged_profiles", profile_url)
             return True
 
         return False
