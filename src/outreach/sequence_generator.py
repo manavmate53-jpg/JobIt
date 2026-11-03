@@ -224,3 +224,4 @@ class SequenceGenerator:
             f.write("\n".join(lines))
 
         return pack_file
+

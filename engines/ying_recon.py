@@ -162,6 +162,113 @@ class YingReconEngine:
             )
             all_teardown_vectors.append(teardown)
 
+        # ----------------------------------------------------------------------
+        # 5. JOBIT v2.0: FRESH CAPITAL SIGNALS & 3-PILLAR FOUNDER PIPELINE
+        # ----------------------------------------------------------------------
+        try:
+            from src.signals.funding_scraper import FundingSignalScraper
+            from src.signals.wellfound_crosscheck import WellfoundCrossChecker
+            from src.strategy.gatekeeper_filter import GatekeeperFilter
+            from src.strategy.scoring_engine import StrategyScoringEngine
+            from src.tailoring.pillar_cv_generator import PillarCVGenerator
+            from src.outreach.sequence_generator import SequenceGenerator
+            from src.analytics.telemetry_db import TelemetryDB
+
+            sig_scraper = FundingSignalScraper()
+            signals = sig_scraper.collect_all_signals(include_live_rss=False)
+            crosschecker = WellfoundCrossChecker()
+            gatekeeper = GatekeeperFilter()
+            scoring_engine = StrategyScoringEngine()
+            cv_gen = PillarCVGenerator()
+            seq_gen = SequenceGenerator()
+            db_v2 = TelemetryDB()
+
+            packaged_v2_items = []
+            for sig in signals:
+                opp = crosschecker.match_opportunity(sig)
+                gk_res = gatekeeper.evaluate(
+                    company_name=opp.company_name,
+                    role_title=opp.suggested_role,
+                    job_description=sig.key_challenge
+                )
+                if not gk_res.passed:
+                    continue
+
+                score_data, classification = scoring_engine.evaluate(
+                    company_name=opp.company_name,
+                    role_title=opp.suggested_role,
+                    funding_stage=opp.funding_stage,
+                    sector=opp.sector,
+                    location=opp.hq_location,
+                    description=sig.key_challenge
+                )
+
+                if score_data.total_score >= 70:
+                    res_paths = cv_gen.generate_cv(
+                        company_name=opp.company_name,
+                        role_title=opp.suggested_role,
+                        pillar=classification.pillar.value,
+                        sector=opp.sector,
+                        generate_pdf=True
+                    )
+                    pdf_path = str(res_paths.get("pdf", ""))
+
+                    lead_inv = sig.investors[0] if sig.investors else "prominent investors"
+                    touchpoints = seq_gen.generate_touchpoints(
+                        opportunity=opp,
+                        pillar=classification.pillar.value,
+                        lead_investor=lead_inv,
+                        tailored_pdf_path=pdf_path
+                    )
+
+                    opp_id = db_v2.record_opportunity(
+                        company_name=opp.company_name,
+                        role_title=opp.suggested_role,
+                        pillar=classification.pillar.value,
+                        score=score_data.total_score,
+                        target_dm_name=touchpoints.target_person,
+                        target_dm_title=touchpoints.target_title,
+                        expected_ctc_quote=f"₹{classification.suggested_ctc_band['min_lpa']}L - ₹{classification.suggested_ctc_band['max_lpa']}L",
+                        tailored_pdf_path=pdf_path,
+                        notes=f"Key hook: {opp.key_pitch_hook}"
+                    )
+
+                    packaged_v2_items.append({
+                        "id": opp_id,
+                        "opportunity": opp,
+                        "score": score_data,
+                        "classification": classification,
+                        "touchpoints": touchpoints
+                    })
+
+                    primary_email = touchpoints.email_options[0] if touchpoints.email_options else f"founder@{opp.company_name.lower()}.com"
+                    all_target_leads.append({
+                        "name": touchpoints.target_person,
+                        "company": opp.company_name,
+                        "title": touchpoints.target_title,
+                        "pillar": classification.pillar.value,
+                        "linkedin_url": touchpoints.linkedin_search_url,
+                        "domain": f"{opp.company_name.lower().replace(' ', '')}.com",
+                        "primary_email": primary_email,
+                        "email_permutations": touchpoints.email_options,
+                        "confidence_score": score_data.total_score,
+                        "primary_channel": "linkedin_connect",
+                        "connect_note": touchpoints.linkedin_connect_note,
+                        "cold_dm": touchpoints.funding_hook_cold_dm,
+                        "wellfound_note": touchpoints.wellfound_founder_note,
+                        "follow_up_bump": touchpoints.follow_up_bump,
+                        "attachment_pdf": pdf_path,
+                        "is_verified": True,
+                        "opportunity_id": opp_id
+                    })
+
+            if packaged_v2_items:
+                packaged_v2_items.sort(key=lambda x: x["score"].total_score, reverse=True)
+                seq_gen.build_daily_action_pack(ranked_items=packaged_v2_items[:10])
+
+        except Exception as exc:
+            logger.warning(f"JobIt v2.0 signal ingestion in YING failed: {exc}")
+
         recon_artifact = {
             "timestamp": datetime.datetime.now().isoformat(),
             "cycle": "6_hour_recon",

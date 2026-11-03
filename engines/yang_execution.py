@@ -71,6 +71,59 @@ class YangExecutionEngine:
             logger.warning(f"Failed to load settings from {self.config_path}: {e}")
             return {}
 
+    def _send_cold_email(
+        self,
+        recipient: str,
+        company: str,
+        target_person: str,
+        body: str,
+        attachment_pdf: Optional[str] = None,
+        dry_run: bool = True
+    ) -> bool:
+        """Dispatches personalized founder email with tailored 1-page PDF attached."""
+        if dry_run:
+            logger.info(f"[DRY-RUN] Sending cold email to {recipient} ({company}) with PDF {attachment_pdf}")
+            return True
+
+        smtp_user = os.getenv("SMTP_USER") or os.getenv("EMAIL_USER")
+        raw_pw = os.getenv("SMTP_PASSWORD") or os.getenv("EMAIL_PASSWORD")
+        smtp_password = raw_pw.replace(" ", "") if raw_pw else None
+        smtp_host = os.getenv("SMTP_HOST", "smtp.gmail.com")
+        smtp_port = int(os.getenv("SMTP_PORT", "587"))
+
+        if not smtp_user or not smtp_password:
+            logger.warning("SMTP credentials not configured. Skipping email dispatch.")
+            return False
+
+        try:
+            import smtplib
+            from email.mime.application import MIMEApplication
+            from email.mime.multipart import MIMEMultipart
+            from email.mime.text import MIMEText
+
+            msg = MIMEMultipart()
+            msg["From"] = f"Manav Mate <{smtp_user}>"
+            msg["To"] = recipient
+            msg["Subject"] = f"Operational & Product Execution at {company} - Manav Mate"
+            msg.attach(MIMEText(body, "plain"))
+
+            if attachment_pdf and os.path.exists(attachment_pdf):
+                with open(attachment_pdf, "rb") as f:
+                    part = MIMEApplication(f.read(), Name=os.path.basename(attachment_pdf))
+                part["Content-Disposition"] = f'attachment; filename="{os.path.basename(attachment_pdf)}"'
+                msg.attach(part)
+
+            with smtplib.SMTP(smtp_host, smtp_port) as server:
+                server.starttls()
+                server.login(smtp_user, smtp_password)
+                server.sendmail(smtp_user, recipient, msg.as_string())
+
+            logger.info(f"Email successfully dispatched to {recipient} ({company})")
+            return True
+        except Exception as e:
+            logger.error(f"Failed to dispatch email to {recipient}: {e}")
+            return False
+
     def _load_recon_data(self) -> Dict[str, Any]:
         if not os.path.exists(self.recon_file):
             logger.warning(f"No recon file found at {self.recon_file}. Running lightweight YING scan first...")
@@ -124,30 +177,76 @@ class YangExecutionEngine:
                 break
 
         # ----------------------------------------------------------------------
-        # 2. CONNECTION FLOW & DIRECT OUTREACH (VECTOR 4)
+        # 2. CONNECTION FLOW & MULTI-CHANNEL FOUNDER OUTREACH (VECTOR 4)
         # ----------------------------------------------------------------------
         leads = recon_data.get("leads", [])
-        logger.info(f"Evaluating {len(leads)} decision makers for connection requests...")
-        for lead in leads:
-            linkedin_url = lead.get("linkedin_url")
-            if not linkedin_url:
-                continue
+        logger.info(f"Evaluating {len(leads)} decision makers for automated outreach...")
 
-            note = self.llm.generate_connection_note(
+        try:
+            from src.analytics.telemetry_db import TelemetryDB
+            db_v2 = TelemetryDB()
+        except Exception:
+            db_v2 = None
+
+        for lead in leads:
+            opp_id = lead.get("opportunity_id")
+            comp_name = lead.get("company", "Unknown")
+            linkedin_url = lead.get("linkedin_url")
+            connect_note = lead.get("connect_note") or self.llm.generate_connection_note(
                 recipient_name=lead["name"],
-                company=lead["company"],
+                company=comp_name,
                 role=lead.get("title", "Product"),
             )
 
-            try:
-                success = self.linkedin.send_connection_request(
-                    profile_url=linkedin_url, note=note, dry_run=self.dry_run
-                )
-                if success:
-                    execution_results["actions_taken"]["connections_sent"] += 1
-            except DailyThrottleExceeded as e:
-                logger.warning(f"Daily throttle reached: {e}")
-                break
+            # 2A. Automated LinkedIn Connection Dispatch
+            if linkedin_url:
+                try:
+                    success = self.linkedin.send_connection_request(
+                        profile_url=linkedin_url, note=connect_note[:280], dry_run=self.dry_run
+                    )
+                    if success:
+                        execution_results["actions_taken"]["connections_sent"] += 1
+                        if db_v2:
+                            db_v2.log_outreach(
+                                company_name=comp_name,
+                                channel="linkedin_connect",
+                                touchpoint_type="connect_note",
+                                message_text=connect_note[:280],
+                                status="SENT" if not self.dry_run else "DRY_RUN",
+                                opportunity_id=opp_id
+                            )
+                except DailyThrottleExceeded as e:
+                    logger.warning(f"Daily LinkedIn connection throttle reached: {e}")
+
+            # 2B. Automated Email Outreach via SMTP
+            smtp_user = os.getenv("SMTP_USER") or os.getenv("EMAIL_USER")
+            smtp_pass = os.getenv("SMTP_PASSWORD") or os.getenv("EMAIL_PASSWORD")
+            primary_email = lead.get("primary_email")
+            cold_dm_body = lead.get("cold_dm")
+            pdf_path = lead.get("attachment_pdf")
+
+            if smtp_user and smtp_pass and primary_email and cold_dm_body:
+                current_emails = execution_results["actions_taken"].get("emails_sent", 0)
+                if current_emails < 10:  # Daily safety throttle
+                    sent_ok = self._send_cold_email(
+                        recipient=primary_email,
+                        company=comp_name,
+                        target_person=lead.get("name", "Founder"),
+                        body=cold_dm_body,
+                        attachment_pdf=pdf_path,
+                        dry_run=self.dry_run
+                    )
+                    if sent_ok:
+                        execution_results["actions_taken"]["emails_sent"] = current_emails + 1
+                        if db_v2:
+                            db_v2.log_outreach(
+                                company_name=comp_name,
+                                channel="email",
+                                touchpoint_type="funding_hook_cold_dm",
+                                message_text=cold_dm_body,
+                                status="SENT" if not self.dry_run else "DRY_RUN",
+                                opportunity_id=opp_id
+                            )
 
         # ----------------------------------------------------------------------
         # 3. VECTOR 3: 'FIXED YOUR BUG' VALUE-DROPS

@@ -114,3 +114,4 @@ class WellfoundCrossChecker:
 
     def crosscheck_all(self, signals: List[FundingSignal]) -> List[StartupOpportunity]:
         return [self.match_opportunity(sig) for sig in signals]
+

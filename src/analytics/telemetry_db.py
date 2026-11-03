@@ -298,3 +298,4 @@ class TelemetryDB:
                 LIMIT ?
             """, (limit,))
             return [dict(r) for r in cur.fetchall()]
+

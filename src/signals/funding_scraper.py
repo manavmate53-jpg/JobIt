@@ -400,3 +400,4 @@ class FundingSignalScraper:
 
         all_signals.sort(key=location_score, reverse=True)
         return all_signals
+

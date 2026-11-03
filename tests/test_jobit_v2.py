@@ -216,3 +216,4 @@ def test_telemetry_database(tmp_path):
     assert summary["opportunities_identified"] == 1
     assert summary["qualified_opportunities"] == 1
     assert summary["outreach_sent"] == 1
+

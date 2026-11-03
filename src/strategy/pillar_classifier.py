@@ -147,3 +147,4 @@ class PillarClassifier:
             primary_pm_lab_ids=lab_ids,
             suggested_ctc_band=ctc_band
         )
+

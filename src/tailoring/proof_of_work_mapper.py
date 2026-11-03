@@ -120,3 +120,4 @@ class ProofOfWorkMapper:
                 selected_ids = ["evalguard", "payrouter", "flashqueue"]
 
         return [ALL_PM_LAB_BUILDS[bid] for bid in selected_ids if bid in ALL_PM_LAB_BUILDS]
+

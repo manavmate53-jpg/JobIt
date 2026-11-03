@@ -93,3 +93,4 @@ class StartupJobBoardScraper:
             surviving.append(job)
 
         return surviving
+

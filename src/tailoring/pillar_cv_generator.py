@@ -137,3 +137,4 @@ class PillarCVGenerator:
                 logger.warning("Playwright PDF generation skipped: %s. HTML saved at %s", exc, html_path)
 
         return {"html": html_path, "pdf": pdf_path if pdf_path.exists() else html_path}
+

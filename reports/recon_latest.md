@@ -1,5 +1,5 @@
 # 🦅 YING RECONNAISSANCE INTELLIGENCE REPORT
-**Generated:** `2026-11-04T01:28:19.840450`  
+**Generated:** `2026-11-04T01:47:25.313586`  
 **Cycle Execution:** Every 6 Hours  
 
 ---
@@ -8,7 +8,7 @@
 | Metric | Value |
 | :--- | :--- |
 | **Companies Analyzed** | `5` |
-| **Decision-Maker Leads Enriched** | `10` |
+| **Decision-Maker Leads Enriched** | `22` |
 | **Recent Hires Reverse-Engineered** | `15` |
 | **Active 48h Posts Queued for Engagement** | `5` |
 | **"Fixed Your Bug" Value Drops Prepared** | `5` |

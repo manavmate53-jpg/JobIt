@@ -101,3 +101,4 @@ class FunnelDashboard:
             self.console.print("  [green]&bull; Funnel telemetry healthy.[/green] Continue executing 10 Founder DMs + 5 Wellfound applications daily.")
 
         self.console.print("\n")
+

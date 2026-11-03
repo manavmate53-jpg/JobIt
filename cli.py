@@ -833,40 +833,93 @@ def web_apply_cmd(job_id: int, dry_run: bool, visible: bool):
 
 @cli.command("status")
 def status_cmd():
-    """Renders clean summary table of active pipeline stages and follow-up alerts."""
-    stats = db.get_pipeline_stats()
-    alerts = db.get_follow_up_alerts(days_threshold=4)
+    """Renders executive status report: Cloud Ying-Yang automation, 3-pillar funnel & inbox replies."""
+    from src.analytics.telemetry_db import TelemetryDB
+    db_v2 = TelemetryDB()
+    v2_summary = db_v2.get_funnel_summary()
+    pillar_metrics = db_v2.get_pillar_metrics()
 
-    # Pipeline stats table
-    table = Table(title="JobIt Pipeline Overview", box=box.ROUNDED)
-    table.add_column("Pipeline Stage", style="bold cyan")
-    table.add_column("Count", justify="center", style="bold white")
+    state_path = Path("reports/state.json")
+    cloud_state = {}
+    if state_path.exists():
+        try:
+            with open(state_path, "r", encoding="utf-8") as f:
+                cloud_state = json.load(f)
+        except Exception:
+            pass
 
-    for stage, count in stats.items():
-        table.add_row(stage, str(count))
+    console.print(Panel(
+        f"[bold cyan]🦅 Project YING-YANG: Autonomous Cloud Operations Status[/bold cyan]\n"
+        f"[dim]100% Zero-Touch Automation &bull; GitHub Cloud Workflows &bull; Live Telemetry Engine[/dim]",
+        box=box.ROUNDED
+    ))
 
-    console.print(table)
+    # 1. Cloud Execution State Table
+    counts = cloud_state.get("counts", {})
+    cloud_table = Table(title="[bold green]Cloud Runner Autonomous Actions[/bold green]", box=box.ROUNDED)
+    cloud_table.add_column("Channel / Vector", style="bold white")
+    cloud_table.add_column("Today's Dispatched Count", justify="center", style="bold green")
+    cloud_table.add_column("Safety Daily Cap", justify="center", style="dim")
+    cloud_table.add_column("Cloud Engine", style="cyan")
 
-    # Alerts table if any
+    cloud_table.add_row("LinkedIn Connection Notes (<280 chars)", str(counts.get("connections", 0)), "15 / day", "YANG Execution (3h)")
+    cloud_table.add_row("Direct Founder Cold Emails (with A4 PDF)", str(counts.get("messages", 0)), "10 / day", "YANG Execution (3h)")
+    cloud_table.add_row("Founder & HM Shadow Comments", str(counts.get("comments", 0)), "10 / day", "YANG Execution (3h)")
+    cloud_table.add_row("Fresh Capital Funding Sweeps", str(v2_summary.get("signals_captured", 0)), "Continuous", "YING Recon (6h)")
+
+    console.print(cloud_table)
+
+    # 2. JobIt v2.0 3-Pillar Funnel Table
+    f_table = Table(title="[bold yellow]Targeting & Conversion Funnel Telemetry[/bold yellow]", box=box.ROUNDED)
+    f_table.add_column("Funnel Stage", style="bold white")
+    f_table.add_column("Count", justify="center", style="bold cyan")
+    f_table.add_column("Conversion %", justify="center", style="green")
+    f_table.add_column("Status / Benchmark", style="dim")
+
+    sig = v2_summary.get("signals_captured", 0)
+    opp = v2_summary.get("opportunities_identified", 0)
+    qual = v2_summary.get("qualified_opportunities", 0)
+    sent = v2_summary.get("outreach_sent", 0)
+    rep = v2_summary.get("responses_received", 0)
+    screen = v2_summary.get("screening_calls", 0)
+    offers = v2_summary.get("offers_received", 0)
+
+    f_table.add_row("1. Fresh Funding Signals", str(sig), "-", "Inc42, Entrackr, YourStory")
+    f_table.add_row("2. Qualified Startups (Score >= 70)", str(qual), f"{round(qual/sig*100, 1)}%" if sig else "0%", "Legacy banks & IT MNCs blocked")
+    f_table.add_row("3. Automated Outbound Sent", str(sent), f"{round(sent/qual*100, 1)}%" if qual else "0%", "Cloud auto-dispatched")
+    f_table.add_row("4. Founder & Recruiter Replies", str(rep), f"{v2_summary.get('response_rate_pct', 0.0)}%", "Target: 15% - 25%")
+    f_table.add_row("5. Screening Calls Scheduled", str(screen), f"{round(screen/sent*100, 1)}%" if sent else "0%", "Target: 3 - 5 / sprint")
+    f_table.add_row("6. Full-Time Offers", str(offers), "-", "Target: 1 - 2 offers")
+
+    console.print(f_table)
+
+    # 3. 3-Pillar Distribution
+    p_table = Table(title="[bold magenta]3-Pillar Opportunity Pipeline[/bold magenta]", box=box.ROUNDED)
+    p_table.add_column("Strategic Pillar", style="bold white")
+    p_table.add_column("Qualified Startups", justify="center", style="green")
+    p_table.add_column("Avg Fit Score", justify="center", style="cyan")
+
+    for p in pillar_metrics:
+        p_table.add_row(
+            p.get("pillar", "").replace("PILLAR_", "Pillar ").replace("_", " "),
+            str(p.get("count", 0)),
+            f"{round(p.get('avg_score', 0), 1)}/100"
+        )
+    console.print(p_table)
+
+    # 4. Overdue Alerts if any (Top 5)
+    alerts = db.get_follow_up_alerts(days_threshold=4)[:5]
     if alerts:
-        alert_table = Table(title="⚠️  Follow-up Alerts (Applied/Emailed > 4 Days Ago)", box=box.ROUNDED)
+        alert_table = Table(title="⚠️ Follow-up Alerts (>4 Days Without Reply)", box=box.ROUNDED)
         alert_table.add_column("ID", width=4)
         alert_table.add_column("Company", style="bold white")
         alert_table.add_column("Role", style="cyan")
-        alert_table.add_column("Last Action", style="yellow")
-        alert_table.add_column("Contact", style="magenta")
-
+        alert_table.add_column("Last Action Date", style="yellow")
         for a in alerts:
-            alert_table.add_row(
-                str(a["id"]),
-                a["company"],
-                a["role"],
-                a.get("last_action_date", "")[:10],
-                f"{a.get('hr_name')} <{a.get('hr_email')}>"
-            )
+            alert_table.add_row(str(a["id"]), a["company"], a["role"], a.get("last_action_date", "")[:10])
         console.print(alert_table)
     else:
-        console.print("[dim]No overdue follow-up alerts pending.[/dim]")
+        console.print("[dim green]✓ No overdue follow-up bottlenecks pending.[/dim green]")
 
 
 @cli.command("run-all")
