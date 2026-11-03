@@ -128,6 +128,14 @@ class PortalWebApplier:
             try:
                 context.storage_state(path=str(storage_file))
                 print(f"[Portal Login] Exported full storage state to: {storage_file}")
+
+                if portal_lower == "linkedin":
+                    import base64
+                    with open(storage_file, "rb") as f:
+                        b64_val = base64.b64encode(f.read()).decode("utf-8")
+                    from src.services.github_secrets import sync_github_secret
+                    if sync_github_secret("LINKEDIN_STORAGE_STATE", b64_val):
+                        print("[Portal Login] Automatically synced LINKEDIN_STORAGE_STATE to GitHub Secrets!")
             except Exception as e:
                 logger.debug(f"Could not export storage_state: {e}")
 
