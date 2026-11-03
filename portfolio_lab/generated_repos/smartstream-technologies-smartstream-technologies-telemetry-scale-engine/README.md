@@ -1,5 +1,5 @@
 # Smartstream Technologies Telemetry & Scale Engine
-> **Target Alignment:** Built for Smartstream Technologies · Associate Product Manager Architecture Showcase  
+> **Target Alignment:** Built for Smartstream Technologies · Product Manager Architecture Showcase  
 > **Key Metric:** 40% latency reduction and zero SLA breaches  
 > **Tech Stack:** Python, PostgreSQL, Redis, Kafka, FastAPI
 

@@ -1,5 +1,5 @@
 # Datavruti Telemetry & Scale Engine
-> **Target Alignment:** Built for Datavruti · Associate Product Manager Architecture Showcase  
+> **Target Alignment:** Built for Datavruti · Product Manager Architecture Showcase  
 > **Key Metric:** 40% latency reduction and zero SLA breaches  
 > **Tech Stack:** Python, PostgreSQL, Redis, Kafka, FastAPI
 
