@@ -1,0 +1,36 @@
+sprint_metadata:
+  name: "JobIt v2.0 28-Day Founder & High-Signal Sprint"
+  target_offers: 2
+  sprint_duration_days: 28
+  anchor_current_ctc_lpa: 8.0
+
+daily_kpi_targets:
+  founder_dms_sent: 10
+  wellfound_applications: 5
+  tailored_resumes_generated: 10
+
+weekly_conversion_benchmarks:
+  outbound_sent: 70
+  connection_acceptance_rate_target_pct: 35.0
+  dm_reply_rate_target_pct: 15.0
+  screening_calls_target: 4
+  final_rounds_target: 1
+
+dynamic_salary_bands:
+  seed_pre_series_a:
+    label: "Seed / Pre-Series A"
+    current_ctc_inr_lpa: 8.0
+    expected_ctc_min_inr_lpa: 8.0
+    expected_ctc_max_inr_lpa: 10.5
+    quote_strategy: "Anchor around ₹8.5L to ₹10L with upside in early equity/ESOPs."
+  series_a_b:
+    label: "Series A / Series B+"
+    current_ctc_inr_lpa: 8.0
+    expected_ctc_min_inr_lpa: 11.0
+    expected_ctc_max_inr_lpa: 15.0
+    quote_strategy: "Anchor firmly at ₹12L to ₹14L base given proven AI pipeline and P&L scaling track record."
+
+pillar_distribution_targets:
+  pillar_1_founders_office_pct: 40
+  pillar_2_product_operations_pct: 30
+  pillar_3_early_stage_ai_apm_pct: 30

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ candidate.name }} - Founder's Office & Strategy Lead</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 6mm 8mm 5mm 8mm;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 7.5pt;
+      line-height: 1.18;
+      color: #111827;
+      background: #ffffff;
+    }
+    a {
+      color: #1d4ed8;
+      text-decoration: none;
+    }
+    .header {
+      border-bottom: 1.5px solid #1e293b;
+      padding-bottom: 3.5px;
+      margin-bottom: 4.5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .header-left h1 {
+      font-size: 13.5pt;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: #0f172a;
+      line-height: 1.1;
+    }
+    .header-left .target-role {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: #1d4ed8;
+      margin-top: 1px;
+    }
+    .header-right {
+      text-align: right;
+      font-size: 7.1pt;
+      color: #4b5563;
+      line-height: 1.25;
+    }
+    .section-title {
+      font-size: 7.9pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #0f172a;
+      border-bottom: 0.75px solid #cbd5e1;
+      padding-bottom: 1px;
+      margin-top: 4px;
+      margin-bottom: 2.5px;
+    }
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-top: 2px;
+    }
+    .entry-title {
+      font-weight: 700;
+      font-size: 7.7pt;
+      color: #0f172a;
+    }
+    .entry-company {
+      font-weight: 600;
+      color: #374151;
+    }
+    .entry-meta {
+      font-size: 7.0pt;
+      color: #6b7280;
+      font-weight: 500;
+    }
+    ul.bullet-list {
+      margin-top: 1px;
+      margin-bottom: 2px;
+      padding-left: 11px;
+    }
+    ul.bullet-list li {
+      margin-bottom: 1.2px;
+      color: #1f2937;
+    }
+    .metric {
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+      margin-top: 1px;
+    }
+    .pill {
+      background: #f1f5f9;
+      border: 0.5px solid #cbd5e1;
+      padding: 0.5px 3.5px;
+      border-radius: 2px;
+      font-size: 6.9pt;
+      color: #334155;
+      font-weight: 500;
+    }
+    .project-card {
+      background: #f8fafc;
+      border: 0.5px solid #e2e8f0;
+      border-left: 2px solid #1d4ed8;
+      padding: 2.5px 4.5px;
+      margin-top: 2px;
+      margin-bottom: 2px;
+      border-radius: 2px;
+    }
+    .project-card-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 7.3pt;
+      color: #0f172a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-left">
+      <h1>{{ candidate.name }}</h1>
+      <div class="target-role">{{ target_role }} &bull; Target: {{ target_company }}</div>
+    </div>
+    <div class="header-right">
+      <div>{{ candidate.location }} &bull; {{ candidate.phone }}</div>
+      <div><a href="mailto:{{ candidate.email }}">{{ candidate.email }}</a> &bull; <a href="{{ candidate.links.linkedin }}">LinkedIn</a></div>
+      <div><a href="{{ candidate.links.pm_product_lab }}">Interactive PM Lab</a> &bull; <a href="{{ candidate.links.portfolio }}">Portfolio</a></div>
+    </div>
+  </div>
+
+  <div class="section-title">Executive Profile & Founder Leverage</div>
+  <p style="margin-bottom: 3px; color: #1f2937;">
+    Operational founder and technical PM with direct 0-to-1 P&L discipline. Bootstrapped NeoManpower from scratch to <span class="metric">50+ B2B clients</span> and <span class="metric">200+ projects</span> across Mumbai with zero external capital. Led product delivery at HireFlo, architecting AI parsing pipelines and cutting compute costs by <span class="metric">40%</span>. Specializes in taking operational firefighting and zero-to-one workflow execution off the founding team's desk.
+  </p>
+
+  <div class="section-title">Founder & Product Execution Track Record</div>
+
+  <div class="entry-header">
+    <div class="entry-title">Founder & Commercial Operations Lead &bull; <span class="entry-company">NeoManpower</span></div>
+    <div class="entry-meta">Dec 2022 &ndash; Feb 2026 &bull; Mumbai, India</div>
+  </div>
+  <ul class="bullet-list">
+    <li>Bootstrapped B2B workforce operations from zero to <span class="metric">50+ enterprise clients</span> and <span class="metric">200+ on-ground projects</span> across commercial exhibitions and high-stakes events.</li>
+    <li>Scheduled and directed field operations of up to <span class="metric">133 personnel</span> across multi-shift engagements with <span class="metric">100% contractual SLA compliance</span> and a 15-minute emergency standby protocol.</li>
+    <li>Designed QR check-in workflows and spreadsheet reconciliation audits that reduced client billing cycles from <span class="metric">12 days to 48 hours</span>.</li>
+    <li>Managed end-to-end commercial contracts, vendor payment reconciliations, compliance, and positive operational cash flows from month three onward.</li>
+  </ul>
+
+  <div class="entry-header">
+    <div class="entry-title">Product Manager &bull; <span class="entry-company">HireFlo India</span></div>
+    <div class="entry-meta">Jan 2026 &ndash; Aug 2026 &bull; Mumbai, India</div>
+  </div>
+  <ul class="bullet-list">
+    <li>Partnered directly with the founder to steer product discovery, PRDs, and delivery roadmap for an AI hiring intelligence platform.</li>
+    <li>Cut model inference compute costs by <span class="metric">40%</span> on Llama 3.1 via self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.</li>
+    <li>Restructured platform monetization to a <span class="metric">5-tier freemium model</span> supporting enterprise subscriptions up to &#8377;59,999/month.</li>
+    <li>Redesigned screening and candidate review funnels in Figma, lifting end-to-end recruiter workflow completion by <span class="metric">30%</span>.</li>
+  </ul>
+
+  <div class="section-title">Interactive Systems & Proof of Work (PM Product Lab)</div>
+  <div style="font-size: 7.0pt; color: #4b5563; margin-bottom: 2px;">
+    Live interactive architectural simulations tested in browser: <a href="{{ candidate.links.pm_product_lab }}">{{ candidate.links.pm_product_lab }}</a>
+  </div>
+
+  {% for proj in projects %}
+  <div class="project-card">
+    <div class="project-card-header">
+      <span>{{ proj.name }} &bull; <span style="font-weight: 500; color: #4b5563;">{{ proj.category }}</span></span>
+      <span class="metric">{{ proj.key_metrics }}</span>
+    </div>
+    <div style="font-size: 7.0pt; color: #374151; margin-top: 1px;">
+      {{ proj.summary }} <a href="{{ proj.url }}">[Launch Build]</a>
+    </div>
+  </div>
+  {% endfor %}
+
+  <div class="section-title">Core Competencies & Tools</div>
+  <div class="grid-2">
+    <div>
+      <div style="font-weight: 700; color: #0f172a; margin-bottom: 1px;">Founder's Office & Operations:</div>
+      <div class="pill-group">
+        <span class="pill">0-to-1 P&L Ownership</span>
+        <span class="pill">B2B Client Scaling</span>
+        <span class="pill">SLA Enforcement</span>
+        <span class="pill">Cash Flow Management</span>
+        <span class="pill">Pricing & Monetization</span>
+        <span class="pill">Cross-Functional Delivery</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-weight: 700; color: #0f172a; margin-bottom: 1px;">Technical & Product Literacy:</div>
+      <div class="pill-group">
+        <span class="pill">PRDs & User Stories</span>
+        <span class="pill">JSON Schema Contracts</span>
+        <span class="pill">SQL Data Exploration</span>
+        <span class="pill">NVIDIA NIM / LLM Cost</span>
+        <span class="pill">Figma Wireframing</span>
+        <span class="pill">Jira & Linear</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Education & Technical Certifications</div>
+  <div class="grid-2">
+    <div>
+      <div class="entry-title">Bachelor of Commerce (B.Com)</div>
+      <div class="entry-meta">University of Mumbai &bull; Accounting & Finance</div>
+    </div>
+    <div>
+      <div style="font-size: 7.1pt; color: #1f2937;">
+        <strong>Scaler:</strong> Quora System Design Course (Distributed Systems, Caching, CAP) &bull;
+        <strong>PMI:</strong> CIPM Certified &bull;
+        <strong>Saylor:</strong> Operations Management
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

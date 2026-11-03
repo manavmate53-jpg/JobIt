@@ -4,7 +4,7 @@
     "location": "Jogeshwari East, Mumbai, Maharashtra",
     "phone": "+91 85915 95889",
     "email": "manavmate53@gmail.com",
-    "headline": "Product Manager & Early-Career Builder | AI Systems, PRDs & Operations",
+    "headline": "Product Manager & Operational Founder | Founder's Office, Product Operations & AI Systems",
     "links": {
       "portfolio": "https://manavmate53-jpg.github.io/portfolio/#hero",
       "pm_product_lab": "https://manavmate53-jpg.github.io/pm-product-lab/#hub",
@@ -13,8 +13,8 @@
     }
   },
   "positioning": {
-    "persona": "Early-career tech product manager and former bootstrapped founder who transitioned from commercial ground operations to high-leverage AI product management. Proven ability to take 0-to-1 products from customer discovery to production delivery.",
-    "years_experience": "2-3 years across tech product management and bootstrapped founder operations",
+    "persona": "Battle-tested operational founder and technical Product Manager. Bootstrapped NeoManpower to 50+ B2B clients and led AI product delivery at HireFlo. Technical literacy centered on PRDs, JSON schema guardrails, API contracts, SQL data exploration, and system trade-offs rather than hand-coding backends from scratch.",
+    "years_experience": "2-3 years across technical product management and bootstrapped founder operations",
     "primary_target_roles": [
       "Founder's Office",
       "Chief of Staff",
@@ -26,27 +26,75 @@
       "Growth Product Manager",
       "Technical Product Manager"
     ],
+    "strategic_pillars": {
+      "pillar_1_founders_office": {
+        "title": "Founder's Office / Chief of Staff / Strategy & Ops",
+        "narrative": "Zero-to-one business operator who scaled NeoManpower from scratch to 50+ B2B clients and 200+ projects with full P&L ownership. Restructured HireFlo monetization to a 5-tier model. Takes operational firefighting off the founder's plate with high ownership and zero hand-holding.",
+        "target_titles": [
+          "Founder's Office",
+          "Chief of Staff",
+          "Strategy & Operations Lead",
+          "Founder Associate",
+          "Special Projects Lead"
+        ],
+        "key_metrics": "50+ B2B clients bootstrapped, 200+ projects delivered, 100% SLA compliance, 5-tier monetization restructuring"
+      },
+      "pillar_2_product_operations": {
+        "title": "Product Operations Manager / Operations PM / Supply Chain PM",
+        "narrative": "High-velocity operator who coordinated 133 field personnel across 200+ events with zero SLA breaches. Built QR check-in workflows and roster audit systems that cut billing reconciliation from 12 days to 48 hours. Bridges messy on-ground operational reality with scalable product systems.",
+        "target_titles": [
+          "Product Operations Manager",
+          "Operations Product Manager",
+          "Supply Chain PM",
+          "Program Manager - Product",
+          "Product Ops Lead"
+        ],
+        "key_metrics": "133 field personnel managed, 100% SLA compliance across 200+ projects, 12 days to 48 hrs reconciliation cycle, CrewRoster & AutoMatch IQ builds"
+      },
+      "pillar_3_early_stage_ai_apm": {
+        "title": "Early-Stage APM / AI PM / Fintech PM",
+        "narrative": "Technical PM with Scaler Quora System Design rigor. Designed HireFlo 1,000-document parsing pipeline with 98% precision and reduced Llama 3.1 compute costs by 40% using NVIDIA NIM and strict JSON schema contracts. Author of 6 production-grade browser simulations.",
+        "target_titles": [
+          "Associate Product Manager",
+          "Junior Product Manager",
+          "AI Product Manager",
+          "Technical Product Manager",
+          "Fintech PM",
+          "Growth Product Manager"
+        ],
+        "key_metrics": "1,000 docs in <10m at 98% precision, 40% compute cost reduction on Llama 3.1, 14+ PRDs authored, 6 PM Lab builds"
+      }
+    },
     "target_locations": [
       "Mumbai",
       "Navi Mumbai",
       "Thane",
       "Hybrid - Mumbai",
       "Remote",
-      "India"
+      "Bengaluru",
+      "NCR"
     ],
     "target_domains": [
-      "Software",
-      "AI / GenAI",
+      "Fintech & Payments",
+      "AI & GenAI Systems",
       "B2B SaaS",
-      "Marketplaces",
-      "Fintech",
-      "Supply Chain & Logistics"
+      "Marketplaces & Quick Commerce",
+      "Supply Chain & Logistics",
+      "Workforce Tech"
     ],
     "compensation": {
       "current_ctc_inr_lpa": 8.0,
-      "expected_ctc_min_inr_lpa": 11.0,
-      "expected_ctc_max_inr_lpa": 16.0,
-      "notes": "Current CTC anchored at ₹8 LPA. Expected CTC targeted at ₹11 to ₹16 LPA based on company profile and role scope."
+      "expected_ctc_min_inr_lpa": 8.0,
+      "expected_ctc_max_inr_lpa": 15.0,
+      "seed_pre_series_a_range": {
+        "min_lpa": 8.0,
+        "max_lpa": 10.5
+      },
+      "series_a_b_range": {
+        "min_lpa": 11.0,
+        "max_lpa": 15.0
+      },
+      "notes": "Current CTC anchored at ₹8.0 LPA. Expected CTC quotes ₹8L to ₹10.5L for Seed/Pre-Series A startups, and ₹11L to ₹15L for Series A/B tech startups."
     }
   },
   "work_experience": [
@@ -57,7 +105,7 @@
       "location": "Mumbai, India",
       "context": "Joined the founder early to own product discovery, PRDs, sprint planning, and core user journeys for an AI hiring intelligence platform.",
       "achievements": [
-        "Architected resume parsing/scoring pipeline ingesting 1,000 documents in under 10 minutes with 98% field extraction precision.",
+        "Architected resume parsing and scoring pipeline ingesting 1,000 documents in under 10 minutes with 98% field extraction precision.",
         "Cut model inference compute costs by 40% on Llama 3.1 via self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.",
         "Redesigned onboarding and screening funnels in Figma, lifting workflow completion by 30%.",
         "Restructured platform monetization to a 5-tier freemium model supporting enterprise tiers up to ₹59,999/month.",
@@ -83,46 +131,58 @@
   ],
   "featured_projects": [
     {
+      "id": "payrouter",
       "name": "PayRouter Engine",
       "category": "Fintech & Smart Routing",
       "url": "https://manavmate53-jpg.github.io/pm-product-lab/#payrouter",
       "summary": "Smart cascading payment router with sub-200ms failover, gateway health monitoring, MDR optimization, and refund idempotency.",
-      "key_metrics": "Sub-200ms failover, 15-45 bps lower MDR fees"
+      "key_metrics": "Sub-200ms failover, 15-45 bps lower MDR fees",
+      "domains": ["fintech", "payments", "bfsi", "e-commerce", "b2b saas"]
     },
     {
+      "id": "flashqueue",
       "name": "FlashQueue Simulator",
       "category": "High Scale & Infrastructure",
       "url": "https://manavmate53-jpg.github.io/pm-product-lab/#flashqueue",
       "summary": "High-concurrency virtual waiting room buffering 50,000+ user surges, mitigating 504 timeouts via token bucket rate limiting.",
-      "key_metrics": "50,000+ user surge buffer, zero 504 timeouts"
+      "key_metrics": "50,000+ user surge buffer, zero 504 timeouts",
+      "domains": ["logistics", "quick commerce", "ticketing", "marketplaces", "consumer tech"]
     },
     {
+      "id": "crewrostering",
       "name": "CrewRoster Dashboard",
       "category": "Operations PM & Workforce Tech",
       "url": "https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering",
       "summary": "Frontline workforce rostering and SLA escalation system with automated standby dispatch buffers and QR attendance audit (modeled on NeoManpower).",
-      "key_metrics": "100% SLA compliance, 48-hr reconciliation"
+      "key_metrics": "100% SLA compliance, 48-hr reconciliation",
+      "domains": ["operations", "workforce", "supply chain", "logistics", "field services"]
     },
     {
+      "id": "verishield",
       "name": "VeriShield",
       "category": "B2B KYC & Verification",
       "url": "https://manavmate53-jpg.github.io/pm-product-lab/#verishield",
       "summary": "B2B KYC and GSTIN/PAN verification engine with fuzzy entity matching and risk routing.",
-      "key_metrics": "Sub-800ms verification, 12-point checks"
+      "key_metrics": "Sub-800ms verification, 12-point checks",
+      "domains": ["fintech", "compliance", "identity", "b2b saas", "legaltech"]
     },
     {
+      "id": "automatch",
       "name": "AutoMatch IQ",
       "category": "Marketplace & Discovery",
       "url": "https://manavmate53-jpg.github.io/pm-product-lab/#automatch",
       "summary": "Marketplace discovery flow with live event telemetry and embedded SQL runner.",
-      "key_metrics": "24% conversion bottleneck resolved"
+      "key_metrics": "24% conversion bottleneck resolved",
+      "domains": ["marketplaces", "recruitment", "e-commerce", "growth", "discovery"]
     },
     {
+      "id": "evalguard",
       "name": "EvalGuard AI",
       "category": "B2B SaaS & Production AI",
       "url": "https://manavmate53-jpg.github.io/pm-product-lab/#evalguard",
       "summary": "Production LLM agent with JSON schema guardrails, HITL escalation, and token unit economics.",
-      "key_metrics": "99.4% schema compliance, 40% cost reduction"
+      "key_metrics": "99.4% schema compliance, 40% cost reduction",
+      "domains": ["ai", "genai", "b2b saas", "developer tools", "automation"]
     }
   ],
   "skills": {
@@ -142,7 +202,7 @@
       "JSON Schema Enforcement & Guardrails",
       "Prompt Engineering & Few-Shot Design",
       "SQL Data Extraction & Analytics",
-      "FastAPI & RESTful API Architecture",
+      "FastAPI & RESTful API Contracts",
       "Git & Technical Workflow Automation"
     ],
     "operations_and_business": [

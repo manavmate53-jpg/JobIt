@@ -28,6 +28,8 @@ class KeywordAligner:
         matched_highlights: List[str] = []
 
         for category, skills in candidate_skills.items():
+            if not skills or not isinstance(skills, list):
+                continue
             scored_skills: List[Tuple[str, int]] = []
             for skill in skills:
                 skill_clean = skill.lower()

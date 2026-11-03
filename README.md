@@ -1,8 +1,88 @@
-# JobIt ⚡
+# JobIt ⚡ v2.0
 
-**Production-grade, local-first automated job hunting, ATS resume tailoring, recruiter outreach, and application tracking system.**
+**Signal-Driven Startup Outbound, 3-Pillar Tailoring & Funnel Telemetry Engine.**
 
-Built specifically for early-career tech product managers and founder-operators transitioning from commercial operations to product execution.
+Built to completely bypass automated enterprise ATS degree gates by tracking freshly funded Seed-to-Series B tech startups, filtering out corporate institutions, and routing high-leverage proof-of-work pitches directly to Founders and Product Leaders.
+
+---
+
+## ⚡ JobIt v2.0 Strategic Architecture
+
+```
+JobIt/
+├── config/
+│   ├── candidate_profile.json       # Candidate ground truth, 3-pillar framing, 6 PM Lab builds
+│   ├── filter_matrix.json           # Hard Blacklist (Banks, IT MNCs, Non-tech traps) & Whitelists
+│   └── sprint_targets.yaml          # 28-day sprint targets, dynamic salary bands (Seed vs Series A/B)
+├── src/
+│   ├── signals/                     # Module A: Fresh Capital Signal Engine
+│   │   ├── funding_scraper.py       # Scrapes Inc42, Entrackr, YourStory feeds & verified seed dataset
+│   │   ├── wellfound_crosscheck.py  # Matches funded startups to open roles across 3 pillars
+│   │   └── job_board_scraper.py     # Filtered scraper dropping blacklisted institutions upfront
+│   ├── strategy/                    # Module B: 3-Pillar Strategy & Gatekeeper
+│   │   ├── gatekeeper_filter.py     # Drops legacy banks, IT MNCs, pharma & seniority traps
+│   │   ├── pillar_classifier.py     # Classifies into Pillar 1 (Founder's Office), Pillar 2 (ProdOps), Pillar 3 (AI APM)
+│   │   └── scoring_engine.py        # 100-point rubric (funding stage, pillar, location, proof-of-work)
+│   ├── tailoring/                   # Module C: 1-Page A4 Pillar CV Generator
+│   │   ├── pillar_cv_generator.py   # Compiles strict 1-page A4 PDFs via Playwright headless Chromium
+│   │   └── proof_of_work_mapper.py  # Maps top 3 PM Lab builds matching the target company
+│   ├── outreach/                    # Module D: Signal-to-Founder Outreach Engine
+│   │   ├── decision_maker_finder.py # Discovers Founder / Head of Product + email permutations
+│   │   ├── sequence_generator.py    # Generates 4 touchpoints + Daily Action Pack markdown
+│   │   └── dispatcher.py            # Safe dry-run preview and confirmed dispatch
+│   └── analytics/                   # Module E: Conversion Telemetry Engine
+│       ├── telemetry_db.py          # Local SQLite engine tracking full funnel stages
+│       └── funnel_dashboard.py      # Rich terminal conversion report & bottleneck diagnostics
+├── templates/
+│   ├── resume_pillar1_founders_office.html
+│   ├── resume_pillar2_prod_ops.html
+│   ├── resume_pillar3_ai_apm.html
+│   └── outreach_playbooks.json      # 4-touchpoint message copy (<280-char connect notes, cold DMs)
+├── data/
+│   └── jobit_v2.db                  # Local telemetry database
+├── exports/
+│   ├── resumes/                     # Generated 1-page tailored A4 PDFs
+│   └── daily_action_packs/          # Daily top 10 actionable founder outbound digest
+└── cli.py                           # Unified CLI entrypoint
+```
+
+---
+
+## 🚀 JobIt v2.0 Workflow Commands
+
+### 1. Capture Fresh Capital Signals
+```bash
+python3 cli.py signals --limit 15
+```
+Scrapes Indian startups funded in the last 90-180 days across Inc42, Entrackr, YourStory, and verified high-signal seed data.
+
+### 2. Score & Qualify Opportunities (100-Point Rubric)
+```bash
+python3 cli.py hunt --min-score 70
+```
+Filters out legacy banks and IT MNCs, routes roles into the 3 Strategic Pillars, and scores startups on funding recency, local Mumbai advantage, and domain overlap.
+
+### 3. Generate Daily Action Pack & Tailored 1-Page PDFs
+```bash
+python3 cli.py pack --limit 10
+```
+- Compiles `exports/daily_action_packs/YYYY-MM-DD_action_pack.md` with:
+  1. LinkedIn Connect Note (strictly < 280 characters, zero em dashes)
+  2. Funding-Hook Cold DM / InMail (referencing round, operational pain point, PM Lab build, dynamic CTC quote)
+  3. Wellfound Founder Note
+  4. 4-Day Follow-Up Bump
+- Generates 1-page A4 PDF resumes in `exports/resumes/` tuned to the target company's domain.
+
+### 4. Log Outreach & Telemetry
+```bash
+python3 cli.py log --id <OPP_ID> --channel linkedin_connect --status SENT --notes "Sent connect note to Founder"
+```
+
+### 5. View Full Funnel Telemetry & Diagnostics
+```bash
+python3 cli.py analytics
+```
+Displays conversion stage fall-offs, response rates across the 3 pillars, and automated bottleneck warnings.
 
 ---
 

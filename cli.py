@@ -1238,7 +1238,296 @@ def vibe_clone_cmd(company: str, role: str, title: str):
     ))
 
 
+# ==============================================================================
+# JobIt v2.0 - Signal-Driven Startup Outbound, Tailoring & Telemetry Commands
+# ==============================================================================
+
+@cli.command("signals")
+@click.option("--source", default="all", type=click.Choice(["all", "verified", "inc42", "yourstory"], case_sensitive=False), help="Signal source feed")
+@click.option("--limit", default=15, type=int, help="Maximum funding signals to display")
+@click.option("--sync-db/--no-sync-db", default=True, help="Sync signals to local SQLite telemetry DB")
+def signals_cmd(source: str, limit: int, sync_db: bool):
+    """Scrapes fresh Indian startup funding signals (Seed to Series B) from Inc42, Entrackr & feeds."""
+    from src.signals.funding_scraper import FundingSignalScraper
+    from src.analytics.telemetry_db import TelemetryDB
+
+    console.print(Panel(
+        f"[bold cyan]JobIt v2.0 &bull; Fresh Capital Signal Engine[/bold cyan]\n"
+        f"Tracking newly funded tech startups in the last 90-180 days across Mumbai, Remote & tech hubs",
+        box=box.ROUNDED
+    ))
+
+    scraper = FundingSignalScraper()
+    include_live = source in ("all", "inc42", "yourstory")
+    signals = scraper.collect_all_signals(include_live_rss=include_live)
+
+    if sync_db:
+        db_v2 = TelemetryDB()
+        for sig in signals:
+            db_v2.record_signal(sig.to_dict())
+
+    table = Table(title=f"Fresh Capital Signals (Showing Top {min(limit, len(signals))})", box=box.ROUNDED)
+    table.add_column("Company", style="bold white")
+    table.add_column("Stage", style="cyan", width=12)
+    table.add_column("Amount", style="green", width=10)
+    table.add_column("Sector", style="magenta")
+    table.add_column("HQ Location", style="yellow")
+    table.add_column("Founders / Investors", style="dim")
+
+    for s in signals[:limit]:
+        investors_str = ", ".join(s.investors[:2]) if s.investors else "VC"
+        founders_str = ", ".join(s.founder_names[:2]) if s.founder_names else "Founding Team"
+        table.add_row(
+            s.company_name,
+            s.funding_stage,
+            s.amount_raised,
+            s.sector,
+            s.hq_location,
+            f"{founders_str} | {investors_str}"
+        )
+
+    console.print(table)
+    console.print(f"[bold green]✓ Captured {len(signals)} fresh capital signals.[/bold green] Synced to SQLite: [dim]data/jobit_v2.db[/dim]")
+
+
+@cli.command("hunt")
+@click.option("--min-score", default=70, type=int, help="Minimum 100-point rubric score to qualify")
+@click.option("--limit", default=10, type=int, help="Maximum qualified opportunities to return")
+def hunt_cmd(min_score: int, limit: int):
+    """Bypasses enterprise degree gates: scores funded startups against the 3 Strategic Pillars."""
+    from src.signals.funding_scraper import FundingSignalScraper
+    from src.signals.wellfound_crosscheck import WellfoundCrossChecker
+    from src.strategy.gatekeeper_filter import GatekeeperFilter
+    from src.strategy.scoring_engine import StrategyScoringEngine
+    from src.analytics.telemetry_db import TelemetryDB
+
+    console.print(Panel(
+        f"[bold cyan]JobIt v2.0 &bull; 3-Pillar Opportunity Hunt[/bold cyan]\n"
+        f"Pillar 1: Founder's Office | Pillar 2: Product Ops | Pillar 3: AI APM\n"
+        f"Filtering out legacy banks, IT services MNCs, and seniority traps",
+        box=box.ROUNDED
+    ))
+
+    scraper = FundingSignalScraper()
+    signals = scraper.collect_all_signals(include_live_rss=False)
+    crosschecker = WellfoundCrossChecker()
+    gatekeeper = GatekeeperFilter()
+    scoring_engine = StrategyScoringEngine()
+    db_v2 = TelemetryDB()
+
+    qualified_opps = []
+
+    for sig in signals:
+        opp = crosschecker.match_opportunity(sig)
+
+        # Gatekeeper evaluation
+        gk_res = gatekeeper.evaluate(
+            company_name=opp.company_name,
+            role_title=opp.suggested_role,
+            job_description=sig.key_challenge
+        )
+        if not gk_res.passed:
+            continue
+
+        # Strategy scoring
+        score_data, classification = scoring_engine.evaluate(
+            company_name=opp.company_name,
+            role_title=opp.suggested_role,
+            funding_stage=opp.funding_stage,
+            sector=opp.sector,
+            location=opp.hq_location,
+            description=sig.key_challenge
+        )
+
+        if score_data.total_score >= min_score:
+            opp_id = db_v2.record_opportunity(
+                company_name=opp.company_name,
+                role_title=opp.suggested_role,
+                pillar=classification.pillar.value,
+                score=score_data.total_score,
+                target_dm_name=", ".join(opp.founder_names),
+                target_dm_title="Founder / CEO",
+                expected_ctc_quote=f"₹{classification.suggested_ctc_band['min_lpa']}L - ₹{classification.suggested_ctc_band['max_lpa']}L",
+                notes=f"Key hook: {opp.key_pitch_hook}"
+            )
+            qualified_opps.append({
+                "id": opp_id,
+                "opp": opp,
+                "score": score_data,
+                "classification": classification
+            })
+
+    table = Table(title=f"Top Qualified Startup Opportunities (Score >= {min_score})", box=box.ROUNDED)
+    table.add_column("ID", style="dim", width=4)
+    table.add_column("Company", style="bold white")
+    table.add_column("Funding", style="green", width=14)
+    table.add_column("Target Pillar", style="cyan")
+    table.add_column("Score", justify="center", width=7)
+    table.add_column("Salary Band", justify="center", style="yellow")
+    table.add_column("Location", style="magenta")
+
+    for item in qualified_opps[:limit]:
+        op = item["opp"]
+        sc = item["score"]
+        cl = item["classification"]
+        score_style = "bold green" if sc.total_score >= 85 else "green"
+        table.add_row(
+            str(item["id"]),
+            op.company_name,
+            f"{op.funding_stage} ({op.amount_raised})",
+            cl.pillar.value.replace("PILLAR_", "Pillar ").replace("_", " "),
+            f"[{score_style}]{sc.total_score}/100[/{score_style}]",
+            f"₹{cl.suggested_ctc_band['min_lpa']}L-₹{cl.suggested_ctc_band['max_lpa']}L",
+            op.hq_location
+        )
+
+    console.print(table)
+    console.print(f"[bold green]✓ Discovered {len(qualified_opps)} high-intent startup opportunities.[/bold green]")
+    console.print("Run [bold cyan]python3 cli.py pack[/bold cyan] to generate ready-to-send outreach notes and tailored 1-page A4 PDFs.")
+
+
+@cli.command("pack")
+@click.option("--limit", default=10, type=int, help="Number of opportunities to package in daily digest")
+@click.option("--date", "pack_date", default=None, help="Action pack date (YYYY-MM-DD)")
+@click.option("--generate-resumes/--no-resumes", default=True, help="Compile tailored 1-page A4 PDFs")
+def pack_cmd(limit: int, pack_date: Optional[str], generate_resumes: bool):
+    """Builds Daily Founder Action Pack + tailored 1-page A4 PDFs ready for instant outbound."""
+    from src.signals.funding_scraper import FundingSignalScraper
+    from src.signals.wellfound_crosscheck import WellfoundCrossChecker
+    from src.strategy.gatekeeper_filter import GatekeeperFilter
+    from src.strategy.scoring_engine import StrategyScoringEngine
+    from src.tailoring.pillar_cv_generator import PillarCVGenerator
+    from src.outreach.sequence_generator import SequenceGenerator
+    from src.analytics.telemetry_db import TelemetryDB
+
+    console.print(Panel(
+        f"[bold cyan]JobIt v2.0 &bull; Daily Founder Action Pack Generator[/bold cyan]\n"
+        f"Compiling ready-to-paste messages (Connect Note, Cold DM, Wellfound note, Follow-up bump)\n"
+        f"and generating tailored single-page A4 PDF resumes into exports/resumes/",
+        box=box.ROUNDED
+    ))
+
+    scraper = FundingSignalScraper()
+    signals = scraper.collect_all_signals(include_live_rss=False)
+    crosschecker = WellfoundCrossChecker()
+    gatekeeper = GatekeeperFilter()
+    scoring_engine = StrategyScoringEngine()
+    cv_gen = PillarCVGenerator()
+    seq_gen = SequenceGenerator()
+    db_v2 = TelemetryDB()
+
+    packaged_items = []
+
+    with console.status("[bold green]Compiling daily action pack & tailoring A4 resumes...[/bold green]"):
+        for sig in signals:
+            opp = crosschecker.match_opportunity(sig)
+
+            gk_res = gatekeeper.evaluate(
+                company_name=opp.company_name,
+                role_title=opp.suggested_role,
+                job_description=sig.key_challenge
+            )
+            if not gk_res.passed:
+                continue
+
+            score_data, classification = scoring_engine.evaluate(
+                company_name=opp.company_name,
+                role_title=opp.suggested_role,
+                funding_stage=opp.funding_stage,
+                sector=opp.sector,
+                location=opp.hq_location,
+                description=sig.key_challenge
+            )
+
+            if score_data.total_score >= 70:
+                pdf_path_str = ""
+                if generate_resumes:
+                    res_paths = cv_gen.generate_cv(
+                        company_name=opp.company_name,
+                        role_title=opp.suggested_role,
+                        pillar=classification.pillar.value,
+                        sector=opp.sector,
+                        generate_pdf=True
+                    )
+                    pdf_path_str = str(res_paths["pdf"])
+
+                lead_inv = sig.investors[0] if sig.investors else "prominent investors"
+                touchpoints = seq_gen.generate_touchpoints(
+                    opportunity=opp,
+                    pillar=classification.pillar.value,
+                    lead_investor=lead_inv,
+                    tailored_pdf_path=pdf_path_str
+                )
+
+                packaged_items.append({
+                    "opportunity": opp,
+                    "score": score_data,
+                    "classification": classification,
+                    "touchpoints": touchpoints
+                })
+
+    # Sort by score descending
+    packaged_items.sort(key=lambda x: x["score"].total_score, reverse=True)
+
+    action_pack_path = seq_gen.build_daily_action_pack(
+        ranked_items=packaged_items[:limit],
+        pack_date=pack_date
+    )
+
+    console.print(Panel(
+        f"[bold green]✓ Daily Action Pack Generated Successfully![/bold green]\n\n"
+        f"📄 [bold]Digest Path:[/bold] {action_pack_path}\n"
+        f"🎯 [bold]Startups Included:[/bold] {len(packaged_items[:limit])}\n"
+        f"📂 [bold]Tailored Resumes:[/bold] exports/resumes/\n\n"
+        f"[dim]Contains ready-to-paste LinkedIn Connect Notes (<280 chars), Cold DMs, and Wellfound notes.[/dim]",
+        title="Action Pack Ready",
+        box=box.ROUNDED
+    ))
+
+
+@cli.command("log")
+@click.option("--id", "opp_id", required=True, type=int, help="Opportunity ID from 'hunt'")
+@click.option("--channel", default="linkedin_connect", type=click.Choice(["linkedin_connect", "linkedin_dm", "email", "wellfound"], case_sensitive=False), help="Communication channel")
+@click.option("--status", default="SENT", type=click.Choice(["SENT", "REPLIED", "SCREENING_SCHEDULED", "OFFER", "REJECTED"], case_sensitive=False), help="New status")
+@click.option("--notes", default="", help="Contextual notes on interaction")
+def log_cmd(opp_id: int, channel: str, status: str, notes: str):
+    """Logs an outreach touchpoint or status update into the local telemetry engine."""
+    from src.analytics.telemetry_db import TelemetryDB
+
+    db_v2 = TelemetryDB()
+    with db_v2._get_connection() as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT company_name, role_title, pillar FROM opportunities WHERE id=?", (opp_id,))
+        row = cur.fetchone()
+
+    if not row:
+        console.print(f"[red]Error:[/red] Opportunity ID {opp_id} not found.")
+        return
+
+    comp_name = row["company_name"]
+    db_v2.log_outreach(
+        company_name=comp_name,
+        channel=channel,
+        touchpoint_type=channel,
+        message_text=f"Status updated to {status}. Notes: {notes}",
+        status=status,
+        opportunity_id=opp_id
+    )
+    db_v2.update_status(opp_id, status, notes)
+
+    console.print(f"[bold green]✓ Logged touchpoint for ID {opp_id} ({comp_name})[/bold green]: Channel: [cyan]{channel}[/cyan] | Status: [yellow]{status}[/yellow]")
+
+
+@cli.command("analytics")
+def analytics_cmd():
+    """Renders the Rich Funnel Telemetry Dashboard and diagnostic bottleneck report."""
+    from src.analytics.funnel_dashboard import FunnelDashboard
+    dashboard = FunnelDashboard()
+    dashboard.render()
+
+
 if __name__ == "__main__":
     cli()
+
 
 

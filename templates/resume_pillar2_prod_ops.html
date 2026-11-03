@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ candidate.name }} - Product Operations Manager</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 6mm 8mm 5mm 8mm;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 7.5pt;
+      line-height: 1.18;
+      color: #111827;
+      background: #ffffff;
+    }
+    a {
+      color: #1d4ed8;
+      text-decoration: none;
+    }
+    .header {
+      border-bottom: 1.5px solid #1e293b;
+      padding-bottom: 3.5px;
+      margin-bottom: 4.5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .header-left h1 {
+      font-size: 13.5pt;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: #0f172a;
+      line-height: 1.1;
+    }
+    .header-left .target-role {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: #0284c7;
+      margin-top: 1px;
+    }
+    .header-right {
+      text-align: right;
+      font-size: 7.1pt;
+      color: #4b5563;
+      line-height: 1.25;
+    }
+    .section-title {
+      font-size: 7.9pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #0f172a;
+      border-bottom: 0.75px solid #cbd5e1;
+      padding-bottom: 1px;
+      margin-top: 4px;
+      margin-bottom: 2.5px;
+    }
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-top: 2px;
+    }
+    .entry-title {
+      font-weight: 700;
+      font-size: 7.7pt;
+      color: #0f172a;
+    }
+    .entry-company {
+      font-weight: 600;
+      color: #374151;
+    }
+    .entry-meta {
+      font-size: 7.0pt;
+      color: #6b7280;
+      font-weight: 500;
+    }
+    ul.bullet-list {
+      margin-top: 1px;
+      margin-bottom: 2px;
+      padding-left: 11px;
+    }
+    ul.bullet-list li {
+      margin-bottom: 1.2px;
+      color: #1f2937;
+    }
+    .metric {
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+      margin-top: 1px;
+    }
+    .pill {
+      background: #f0f9ff;
+      border: 0.5px solid #bae6fd;
+      padding: 0.5px 3.5px;
+      border-radius: 2px;
+      font-size: 6.9pt;
+      color: #0369a1;
+      font-weight: 500;
+    }
+    .project-card {
+      background: #f8fafc;
+      border: 0.5px solid #e2e8f0;
+      border-left: 2px solid #0284c7;
+      padding: 2.5px 4.5px;
+      margin-top: 2px;
+      margin-bottom: 2px;
+      border-radius: 2px;
+    }
+    .project-card-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 7.3pt;
+      color: #0f172a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-left">
+      <h1>{{ candidate.name }}</h1>
+      <div class="target-role">{{ target_role }} &bull; Target: {{ target_company }}</div>
+    </div>
+    <div class="header-right">
+      <div>{{ candidate.location }} &bull; {{ candidate.phone }}</div>
+      <div><a href="mailto:{{ candidate.email }}">{{ candidate.email }}</a> &bull; <a href="{{ candidate.links.linkedin }}">LinkedIn</a></div>
+      <div><a href="{{ candidate.links.pm_product_lab }}">Interactive PM Lab</a> &bull; <a href="{{ candidate.links.portfolio }}">Portfolio</a></div>
+    </div>
+  </div>
+
+  <div class="section-title">Product Operations Profile & Systems Bridge</div>
+  <p style="margin-bottom: 3px; color: #1f2937;">
+    Systems-first Product Operations Manager and former operational founder. Directed field teams of <span class="metric">133 personnel</span> across <span class="metric">200+ high-concurrency projects</span> with <span class="metric">0 SLA breaches</span>. Transformed manual paper check-ins into automated QR auditing workflows, slashing billing reconciliation from <span class="metric">12 days to 48 hours</span>. Bridges ground reality with engineering sprint backlogs to make operations measurable, predictable, and scalable.
+  </p>
+
+  <div class="section-title">Operations Leadership & Product Systems Experience</div>
+
+  <div class="entry-header">
+    <div class="entry-title">Founder & Operations Lead &bull; <span class="entry-company">NeoManpower</span></div>
+    <div class="entry-meta">Dec 2022 &ndash; Feb 2026 &bull; Mumbai, India</div>
+  </div>
+  <ul class="bullet-list">
+    <li>Built frontline workforce operations from ground up, delivering <span class="metric">200+ projects</span> for <span class="metric">50+ commercial B2B clients</span> across Mumbai.</li>
+    <li>Scheduled, audited, and deployed shift rosters for up to <span class="metric">133 personnel simultaneously</span>, maintaining zero service level breaches via an active 15-minute standby reserve.</li>
+    <li>Re-engineered field auditing workflows using standardized digital rosters and QR attendance verification, reducing payroll and billing reconciliation cycles from <span class="metric">12 days down to 48 hours</span>.</li>
+    <li>Established standardized incident escalation SOPs, contract compliance frameworks, and vendor dispute resolution mechanisms.</li>
+  </ul>
+
+  <div class="entry-header">
+    <div class="entry-title">Product Manager &bull; <span class="entry-company">HireFlo India</span></div>
+    <div class="entry-meta">Jan 2026 &ndash; Aug 2026 &bull; Mumbai, India</div>
+  </div>
+  <ul class="bullet-list">
+    <li>Spearheaded product operations and workflow optimization for an AI recruiter intelligence SaaS platform.</li>
+    <li>Redesigned screening workflows and user onboarding funnels in Figma, driving a <span class="metric">30% increase</span> in end-to-end recruiter workflow completion.</li>
+    <li>Maintained operational uptime and telemetry dashboards for 1,000-document parsing batches processed in <span class="metric">under 10 minutes at 98% precision</span>.</li>
+    <li>Authored 14+ end-to-end technical PRDs, user stories, and acceptance criteria in Jira, aligning engineering deliverables with customer success escalations.</li>
+  </ul>
+
+  <div class="section-title">Proof of Work: Operations Tech Simulations (PM Product Lab)</div>
+  <div style="font-size: 7.0pt; color: #4b5563; margin-bottom: 2px;">
+    Interactive functional prototypes demonstrating operational systems architecture: <a href="{{ candidate.links.pm_product_lab }}">{{ candidate.links.pm_product_lab }}</a>
+  </div>
+
+  {% for proj in projects %}
+  <div class="project-card">
+    <div class="project-card-header">
+      <span>{{ proj.name }} &bull; <span style="font-weight: 500; color: #4b5563;">{{ proj.category }}</span></span>
+      <span class="metric">{{ proj.key_metrics }}</span>
+    </div>
+    <div style="font-size: 7.0pt; color: #374151; margin-top: 1px;">
+      {{ proj.summary }} <a href="{{ proj.url }}">[Test Simulation]</a>
+    </div>
+  </div>
+  {% endfor %}
+
+  <div class="section-title">Product Operations Competencies & Tooling</div>
+  <div class="grid-2">
+    <div>
+      <div style="font-weight: 700; color: #0f172a; margin-bottom: 1px;">Operations Architecture & Execution:</div>
+      <div class="pill-group">
+        <span class="pill">Field Logistics & Roster Audits</span>
+        <span class="pill">SLA Design & Escalation</span>
+        <span class="pill">Workflow Bottleneck Analysis</span>
+        <span class="pill">Reconciliation Systems</span>
+        <span class="pill">Process Automation</span>
+        <span class="pill">Vendor Incident Management</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-weight: 700; color: #0f172a; margin-bottom: 1px;">Data, Product & Technical Tooling:</div>
+      <div class="pill-group">
+        <span class="pill">SQL (PostgreSQL Queries)</span>
+        <span class="pill">Jira & Linear Sprint Tracking</span>
+        <span class="pill">Figma Process Flows</span>
+        <span class="pill">JSON Schema Contracts</span>
+        <span class="pill">Postman API Testing</span>
+        <span class="pill">Telemetry Instrumentation</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Education & Specialized Certifications</div>
+  <div class="grid-2">
+    <div>
+      <div class="entry-title">Bachelor of Commerce (B.Com)</div>
+      <div class="entry-meta">University of Mumbai &bull; Accounting & Finance</div>
+    </div>
+    <div>
+      <div style="font-size: 7.1pt; color: #1f2937;">
+        <strong>Saylor:</strong> Operations Management &bull;
+        <strong>PMI:</strong> Certified International Project Manager (CIPM) &bull;
+        <strong>Scaler:</strong> Quora System Design Certification
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
