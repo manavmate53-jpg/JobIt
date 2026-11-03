@@ -1,0 +1,82 @@
+name: "JobIt v2.0 Daily Startup Outbound & Action Pack (09:00 AM IST)"
+
+on:
+  schedule:
+    # Runs daily at 03:30 UTC (09:00 AM IST)
+    - cron: '30 3 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: jobit-v2-daily-sprint
+  cancel-in-progress: false
+
+jobs:
+  daily-action-pack:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Cache Playwright Chromium
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('requirements.txt') }}
+
+      - name: Install Playwright Browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: |
+          playwright install --with-deps chromium
+
+      - name: Ingest Signals & Score Startup Opportunities
+        run: |
+          python cli.py signals --sync-db
+          python cli.py hunt --min-score 70
+
+      - name: Compile Daily Action Pack & Tailored Resumes
+        run: |
+          python cli.py pack --limit 10
+
+      - name: Check Founder & Recruiter Email Replies
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          IMAP_SERVER: ${{ secrets.IMAP_SERVER }}
+        run: |
+          if [ -n "$EMAIL_USER" ] && [ -n "$EMAIL_PASSWORD" ]; then
+            python cli.py check-replies || true
+          fi
+
+      - name: Commit & Push Daily Action Pack
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(pack): automated daily startup action pack [skip ci]"
+          file_pattern: "exports/daily_action_packs/*.md reports/state.json"
+          commit_user_name: "JobIt-Sprint [Bot]"
+          commit_user_email: "jobit-bot@users.noreply.github.com"
+
+      - name: Upload Tailored Resumes as Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: daily-tailored-resumes
+          path: exports/resumes/*.pdf
+          retention-days: 14
