@@ -1,5 +1,5 @@
 # 🦅 YING RECONNAISSANCE INTELLIGENCE REPORT
-**Generated:** `2026-11-03T13:21:38.039809`  
+**Generated:** `2026-11-04T00:54:45.106472`  
 **Cycle Execution:** Every 6 Hours  
 
 ---
@@ -16,8 +16,8 @@
 ---
 
 ## 2. Vector 1: Reverse-Engineered Successful Hires
-### Alum Hire 1 (Datavruti) · Associate Product Manager at Datavruti
-- **Headline:** Associate Product Manager @ Datavruti | Prev: Early-stage Builder
+### Alum Hire 1 (Datavruti) · Product Manager at Datavruti
+- **Headline:** Product Manager @ Datavruti | Prev: Early-stage Builder
 - **Extracted Skills:** `System Architecture, Distributed Scaling, API Schema Design, Mixpanel, SQL, Product Analytics`
 - **Tech Stack:** `Python, PostgreSQL, Redis, Kafka, FastAPI`
 - **Architectures Demonstrated:**
@@ -25,8 +25,8 @@
   * Reverse-proxy caching layer cutting database read-latency by 45%
 - **Metric Framing:** _Emphasizes quantitative latency reductions and SLA uptime over buzzwords._
 
-### Alum Hire 2 (Datavruti) · Associate Product Manager at Datavruti
-- **Headline:** Associate Product Manager @ Datavruti | Ex-Founder | Systems PM
+### Alum Hire 2 (Datavruti) · Product Manager at Datavruti
+- **Headline:** Product Manager @ Datavruti | Ex-Founder | Systems PM
 - **Extracted Skills:** `Microservices, Cost Sizing, Database Replication, CAP Theorem, PRD Authoring, Jira`
 - **Tech Stack:** `Python, Flask, RabbitMQ, Docker, Supabase`
 - **Architectures Demonstrated:**
@@ -34,7 +34,7 @@
   * Automated schema validation guardrail for third-party webhooks
 - **Metric Framing:** _Frames features around token economics and infrastructure cost trade-offs._
 
-### Alum Hire 3 (Datavruti) · Associate Product Manager at Datavruti
+### Alum Hire 3 (Datavruti) · Product Manager at Datavruti
 - **Headline:** Associate PM @ Datavruti | Product Operations
 - **Extracted Skills:** `Funnel Telemetry, A/B Testing, Figma, Stripe Connect, REST APIs`
 - **Tech Stack:** `Python, TypeScript, PostHog, Retool`
@@ -43,8 +43,8 @@
   * Self-serve driver onboarding verification flow
 - **Metric Framing:** _Focuses on operational throughput and zero-downtime migrations._
 
-### Alum Hire 1 (Purplle) · Associate Product Manager at Purplle
-- **Headline:** Associate Product Manager @ Purplle | Prev: Early-stage Builder
+### Alum Hire 1 (Purplle) · Product Manager at Purplle
+- **Headline:** Product Manager @ Purplle | Prev: Early-stage Builder
 - **Extracted Skills:** `System Architecture, Distributed Scaling, API Schema Design, Mixpanel, SQL, Product Analytics`
 - **Tech Stack:** `Python, PostgreSQL, Redis, Kafka, FastAPI`
 - **Architectures Demonstrated:**
@@ -52,8 +52,8 @@
   * Reverse-proxy caching layer cutting database read-latency by 45%
 - **Metric Framing:** _Emphasizes quantitative latency reductions and SLA uptime over buzzwords._
 
-### Alum Hire 2 (Purplle) · Associate Product Manager at Purplle
-- **Headline:** Associate Product Manager @ Purplle | Ex-Founder | Systems PM
+### Alum Hire 2 (Purplle) · Product Manager at Purplle
+- **Headline:** Product Manager @ Purplle | Ex-Founder | Systems PM
 - **Extracted Skills:** `Microservices, Cost Sizing, Database Replication, CAP Theorem, PRD Authoring, Jira`
 - **Tech Stack:** `Python, Flask, RabbitMQ, Docker, Supabase`
 - **Architectures Demonstrated:**
@@ -61,7 +61,7 @@
   * Automated schema validation guardrail for third-party webhooks
 - **Metric Framing:** _Frames features around token economics and infrastructure cost trade-offs._
 
-### Alum Hire 3 (Purplle) · Associate Product Manager at Purplle
+### Alum Hire 3 (Purplle) · Product Manager at Purplle
 - **Headline:** Associate PM @ Purplle | Product Operations
 - **Extracted Skills:** `Funnel Telemetry, A/B Testing, Figma, Stripe Connect, REST APIs`
 - **Tech Stack:** `Python, TypeScript, PostHog, Retool`
@@ -70,8 +70,8 @@
   * Self-serve driver onboarding verification flow
 - **Metric Framing:** _Focuses on operational throughput and zero-downtime migrations._
 
-### Alum Hire 1 (Smartstream Technologies) · Associate Product Manager at Smartstream Technologies
-- **Headline:** Associate Product Manager @ Smartstream Technologies | Prev: Early-stage Builder
+### Alum Hire 1 (Smartstream Technologies) · Product Manager at Smartstream Technologies
+- **Headline:** Product Manager @ Smartstream Technologies | Prev: Early-stage Builder
 - **Extracted Skills:** `System Architecture, Distributed Scaling, API Schema Design, Mixpanel, SQL, Product Analytics`
 - **Tech Stack:** `Python, PostgreSQL, Redis, Kafka, FastAPI`
 - **Architectures Demonstrated:**
@@ -79,8 +79,8 @@
   * Reverse-proxy caching layer cutting database read-latency by 45%
 - **Metric Framing:** _Emphasizes quantitative latency reductions and SLA uptime over buzzwords._
 
-### Alum Hire 2 (Smartstream Technologies) · Associate Product Manager at Smartstream Technologies
-- **Headline:** Associate Product Manager @ Smartstream Technologies | Ex-Founder | Systems PM
+### Alum Hire 2 (Smartstream Technologies) · Product Manager at Smartstream Technologies
+- **Headline:** Product Manager @ Smartstream Technologies | Ex-Founder | Systems PM
 - **Extracted Skills:** `Microservices, Cost Sizing, Database Replication, CAP Theorem, PRD Authoring, Jira`
 - **Tech Stack:** `Python, Flask, RabbitMQ, Docker, Supabase`
 - **Architectures Demonstrated:**
@@ -88,7 +88,7 @@
   * Automated schema validation guardrail for third-party webhooks
 - **Metric Framing:** _Frames features around token economics and infrastructure cost trade-offs._
 
-### Alum Hire 3 (Smartstream Technologies) · Associate Product Manager at Smartstream Technologies
+### Alum Hire 3 (Smartstream Technologies) · Product Manager at Smartstream Technologies
 - **Headline:** Associate PM @ Smartstream Technologies | Product Operations
 - **Extracted Skills:** `Funnel Telemetry, A/B Testing, Figma, Stripe Connect, REST APIs`
 - **Tech Stack:** `Python, TypeScript, PostHog, Retool`
@@ -97,8 +97,8 @@
   * Self-serve driver onboarding verification flow
 - **Metric Framing:** _Focuses on operational throughput and zero-downtime migrations._
 
-### Alum Hire 1 (Sovos) · Associate Product Manager at Sovos
-- **Headline:** Associate Product Manager @ Sovos | Prev: Early-stage Builder
+### Alum Hire 1 (Sovos) · Product Manager at Sovos
+- **Headline:** Product Manager @ Sovos | Prev: Early-stage Builder
 - **Extracted Skills:** `System Architecture, Distributed Scaling, API Schema Design, Mixpanel, SQL, Product Analytics`
 - **Tech Stack:** `Python, PostgreSQL, Redis, Kafka, FastAPI`
 - **Architectures Demonstrated:**
@@ -106,8 +106,8 @@
   * Reverse-proxy caching layer cutting database read-latency by 45%
 - **Metric Framing:** _Emphasizes quantitative latency reductions and SLA uptime over buzzwords._
 
-### Alum Hire 2 (Sovos) · Associate Product Manager at Sovos
-- **Headline:** Associate Product Manager @ Sovos | Ex-Founder | Systems PM
+### Alum Hire 2 (Sovos) · Product Manager at Sovos
+- **Headline:** Product Manager @ Sovos | Ex-Founder | Systems PM
 - **Extracted Skills:** `Microservices, Cost Sizing, Database Replication, CAP Theorem, PRD Authoring, Jira`
 - **Tech Stack:** `Python, Flask, RabbitMQ, Docker, Supabase`
 - **Architectures Demonstrated:**
@@ -115,7 +115,7 @@
   * Automated schema validation guardrail for third-party webhooks
 - **Metric Framing:** _Frames features around token economics and infrastructure cost trade-offs._
 
-### Alum Hire 3 (Sovos) · Associate Product Manager at Sovos
+### Alum Hire 3 (Sovos) · Product Manager at Sovos
 - **Headline:** Associate PM @ Sovos | Product Operations
 - **Extracted Skills:** `Funnel Telemetry, A/B Testing, Figma, Stripe Connect, REST APIs`
 - **Tech Stack:** `Python, TypeScript, PostHog, Retool`
@@ -124,8 +124,8 @@
   * Self-serve driver onboarding verification flow
 - **Metric Framing:** _Focuses on operational throughput and zero-downtime migrations._
 
-### Alum Hire 1 (IDfy) · Associate Product Manager at IDfy
-- **Headline:** Associate Product Manager @ IDfy | Prev: Early-stage Builder
+### Alum Hire 1 (IDfy) · Product Manager at IDfy
+- **Headline:** Product Manager @ IDfy | Prev: Early-stage Builder
 - **Extracted Skills:** `System Architecture, Distributed Scaling, API Schema Design, Mixpanel, SQL, Product Analytics`
 - **Tech Stack:** `Python, PostgreSQL, Redis, Kafka, FastAPI`
 - **Architectures Demonstrated:**
@@ -133,8 +133,8 @@
   * Reverse-proxy caching layer cutting database read-latency by 45%
 - **Metric Framing:** _Emphasizes quantitative latency reductions and SLA uptime over buzzwords._
 
-### Alum Hire 2 (IDfy) · Associate Product Manager at IDfy
-- **Headline:** Associate Product Manager @ IDfy | Ex-Founder | Systems PM
+### Alum Hire 2 (IDfy) · Product Manager at IDfy
+- **Headline:** Product Manager @ IDfy | Ex-Founder | Systems PM
 - **Extracted Skills:** `Microservices, Cost Sizing, Database Replication, CAP Theorem, PRD Authoring, Jira`
 - **Tech Stack:** `Python, Flask, RabbitMQ, Docker, Supabase`
 - **Architectures Demonstrated:**
@@ -142,7 +142,7 @@
   * Automated schema validation guardrail for third-party webhooks
 - **Metric Framing:** _Frames features around token economics and infrastructure cost trade-offs._
 
-### Alum Hire 3 (IDfy) · Associate Product Manager at IDfy
+### Alum Hire 3 (IDfy) · Product Manager at IDfy
 - **Headline:** Associate PM @ IDfy | Product Operations
 - **Extracted Skills:** `Funnel Telemetry, A/B Testing, Figma, Stripe Connect, REST APIs`
 - **Tech Stack:** `Python, TypeScript, PostHog, Retool`
@@ -194,12 +194,12 @@
 ---
 
 ## 4. Vector 3: 'Fixed Your Bug' Value-Drop Payloads
-### Datavruti · Associate Product Manager
+### Datavruti · Product Manager
 - **Decision Maker:** Hiring Lead (Datavruti) (`hiring.datavruti@datavruti.com`)
 - **Friction Identified:** Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts
 - **Proposed Architectural Spec:** Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync
 - **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/datavruti-telemetry-fix
-- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager`
+- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Product Manager`
 
 ```text
 Hi Hiring,
@@ -217,12 +217,12 @@ Manav Mate
 Product Manager | System Design
 ```
 
-### Purplle · Associate Product Manager
+### Purplle · Product Manager
 - **Decision Maker:** Hiring Lead (Purplle) (`hiring.purplle@purplle.com`)
 - **Friction Identified:** Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts
 - **Proposed Architectural Spec:** Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync
 - **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/purplle-telemetry-fix
-- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager`
+- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Product Manager`
 
 ```text
 Hi Hiring,
@@ -240,12 +240,12 @@ Manav Mate
 Product Manager | System Design
 ```
 
-### Smartstream Technologies · Associate Product Manager
+### Smartstream Technologies · Product Manager
 - **Decision Maker:** Hiring Lead (Smartstream Technologies) (`hiring.technologies@smartstream.com`)
 - **Friction Identified:** Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts
 - **Proposed Architectural Spec:** Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync
 - **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/smartstream technologies-telemetry-fix
-- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager`
+- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Product Manager`
 
 ```text
 Hi Hiring,
@@ -263,12 +263,12 @@ Manav Mate
 Product Manager | System Design
 ```
 
-### Sovos · Associate Product Manager
+### Sovos · Product Manager
 - **Decision Maker:** Hiring Lead (Sovos) (`hiring.sovos@sovos.com`)
 - **Friction Identified:** Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts
 - **Proposed Architectural Spec:** Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync
 - **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/sovos-telemetry-fix
-- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager`
+- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Product Manager`
 
 ```text
 Hi Hiring,
@@ -286,12 +286,12 @@ Manav Mate
 Product Manager | System Design
 ```
 
-### IDfy · Associate Product Manager
+### IDfy · Product Manager
 - **Decision Maker:** Hiring Lead (IDfy) (`hiring.idfy@idfy.com`)
 - **Friction Identified:** Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts
 - **Proposed Architectural Spec:** Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync
 - **Prototype Link:** https://github.com/manavmate53-jpg/portfolio/tree/main/idfy-telemetry-fix
-- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager`
+- **Payload Subject:** `I fixed your Unbatched webhook retries caus for free: Future Product Manager`
 
 ```text
 Hi Hiring,

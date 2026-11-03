@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-03T13:21:38.039809",
+  "timestamp": "2026-11-04T00:54:45.106472",
   "cycle": "6_hour_recon",
   "summary": {
     "companies_scanned": 5,
@@ -26,7 +26,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "250_DELIVERABLE",
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/datavruti-product-lead",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -48,7 +48,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "250_DELIVERABLE",
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/datavruti-talent-partner",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -69,11 +69,11 @@
         "hiringpurplle@purplle.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/purplle-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Talent Partner (Purplle)",
@@ -91,11 +91,11 @@
         "talentpurplle@purplle.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/purplle-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Hiring Lead (Smartstream Technologies)",
@@ -113,11 +113,11 @@
         "hiringtechnologies@smartstream.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/smartstream technologies-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Talent Partner (Smartstream Technologies)",
@@ -135,11 +135,11 @@
         "talenttechnologies@smartstream.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/smartstream technologies-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Hiring Lead (Sovos)",
@@ -157,11 +157,11 @@
         "hiringsovos@sovos.com"
       ],
       "mx_host": "sovos-com.mail.protection.outlook.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/sovos-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Talent Partner (Sovos)",
@@ -179,11 +179,11 @@
         "talentsovos@sovos.com"
       ],
       "mx_host": "sovos-com.mail.protection.outlook.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/sovos-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Hiring Lead (IDfy)",
@@ -201,11 +201,11 @@
         "hiringidfy@idfy.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/idfy-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Talent Partner (IDfy)",
@@ -223,19 +223,19 @@
         "talentidfy@idfy.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/idfy-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     }
   ],
   "reverse_engineered_profiles": [
     {
       "name": "Alum Hire 1 (Datavruti)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "Datavruti",
-      "headline": "Associate Product Manager @ Datavruti | Prev: Early-stage Builder",
+      "headline": "Product Manager @ Datavruti | Prev: Early-stage Builder",
       "tenure_months": 4,
       "skills": [
         "System Architecture",
@@ -260,9 +260,9 @@
     },
     {
       "name": "Alum Hire 2 (Datavruti)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "Datavruti",
-      "headline": "Associate Product Manager @ Datavruti | Ex-Founder | Systems PM",
+      "headline": "Product Manager @ Datavruti | Ex-Founder | Systems PM",
       "tenure_months": 8,
       "skills": [
         "Microservices",
@@ -287,7 +287,7 @@
     },
     {
       "name": "Alum Hire 3 (Datavruti)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "Datavruti",
       "headline": "Associate PM @ Datavruti | Product Operations",
       "tenure_months": 2,
@@ -312,9 +312,9 @@
     },
     {
       "name": "Alum Hire 1 (Purplle)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "Purplle",
-      "headline": "Associate Product Manager @ Purplle | Prev: Early-stage Builder",
+      "headline": "Product Manager @ Purplle | Prev: Early-stage Builder",
       "tenure_months": 4,
       "skills": [
         "System Architecture",
@@ -339,9 +339,9 @@
     },
     {
       "name": "Alum Hire 2 (Purplle)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "Purplle",
-      "headline": "Associate Product Manager @ Purplle | Ex-Founder | Systems PM",
+      "headline": "Product Manager @ Purplle | Ex-Founder | Systems PM",
       "tenure_months": 8,
       "skills": [
         "Microservices",
@@ -366,7 +366,7 @@
     },
     {
       "name": "Alum Hire 3 (Purplle)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "Purplle",
       "headline": "Associate PM @ Purplle | Product Operations",
       "tenure_months": 2,
@@ -391,9 +391,9 @@
     },
     {
       "name": "Alum Hire 1 (Smartstream Technologies)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "Smartstream Technologies",
-      "headline": "Associate Product Manager @ Smartstream Technologies | Prev: Early-stage Builder",
+      "headline": "Product Manager @ Smartstream Technologies | Prev: Early-stage Builder",
       "tenure_months": 4,
       "skills": [
         "System Architecture",
@@ -418,9 +418,9 @@
     },
     {
       "name": "Alum Hire 2 (Smartstream Technologies)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "Smartstream Technologies",
-      "headline": "Associate Product Manager @ Smartstream Technologies | Ex-Founder | Systems PM",
+      "headline": "Product Manager @ Smartstream Technologies | Ex-Founder | Systems PM",
       "tenure_months": 8,
       "skills": [
         "Microservices",
@@ -445,7 +445,7 @@
     },
     {
       "name": "Alum Hire 3 (Smartstream Technologies)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "Smartstream Technologies",
       "headline": "Associate PM @ Smartstream Technologies | Product Operations",
       "tenure_months": 2,
@@ -470,9 +470,9 @@
     },
     {
       "name": "Alum Hire 1 (Sovos)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "Sovos",
-      "headline": "Associate Product Manager @ Sovos | Prev: Early-stage Builder",
+      "headline": "Product Manager @ Sovos | Prev: Early-stage Builder",
       "tenure_months": 4,
       "skills": [
         "System Architecture",
@@ -497,9 +497,9 @@
     },
     {
       "name": "Alum Hire 2 (Sovos)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "Sovos",
-      "headline": "Associate Product Manager @ Sovos | Ex-Founder | Systems PM",
+      "headline": "Product Manager @ Sovos | Ex-Founder | Systems PM",
       "tenure_months": 8,
       "skills": [
         "Microservices",
@@ -524,7 +524,7 @@
     },
     {
       "name": "Alum Hire 3 (Sovos)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "Sovos",
       "headline": "Associate PM @ Sovos | Product Operations",
       "tenure_months": 2,
@@ -549,9 +549,9 @@
     },
     {
       "name": "Alum Hire 1 (IDfy)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "IDfy",
-      "headline": "Associate Product Manager @ IDfy | Prev: Early-stage Builder",
+      "headline": "Product Manager @ IDfy | Prev: Early-stage Builder",
       "tenure_months": 4,
       "skills": [
         "System Architecture",
@@ -576,9 +576,9 @@
     },
     {
       "name": "Alum Hire 2 (IDfy)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "IDfy",
-      "headline": "Associate Product Manager @ IDfy | Ex-Founder | Systems PM",
+      "headline": "Product Manager @ IDfy | Ex-Founder | Systems PM",
       "tenure_months": 8,
       "skills": [
         "Microservices",
@@ -603,7 +603,7 @@
     },
     {
       "name": "Alum Hire 3 (IDfy)",
-      "role": "Associate Product Manager",
+      "role": "Product Manager",
       "company": "IDfy",
       "headline": "Associate PM @ IDfy | Product Operations",
       "tenure_months": 2,
@@ -677,7 +677,7 @@
   "teardown_vectors": [
     {
       "company": "Datavruti",
-      "target_role": "Associate Product Manager",
+      "target_role": "Product Manager",
       "decision_maker": "Hiring Lead (Datavruti)",
       "decision_maker_email": "hiring.datavruti@datavruti.com",
       "problem_area": "Webhook Ingestion Telemetry & Retry Lag",
@@ -685,13 +685,13 @@
       "proposed_fix": "Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync",
       "prototype_link": "https://github.com/manavmate53-jpg/portfolio/tree/main/datavruti-telemetry-fix",
       "outreach_pitch": {
-        "subject": "I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager",
+        "subject": "I fixed your Unbatched webhook retries caus for free: Future Product Manager",
         "body": "Hi Hiring,\n\nWas diving deep into Datavruti's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.\n\nRather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.\n\nHere is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/datavruti-telemetry-fix\n\nWould love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.\n\nBest,\nManav Mate\nProduct Manager | System Design"
       }
     },
     {
       "company": "Purplle",
-      "target_role": "Associate Product Manager",
+      "target_role": "Product Manager",
       "decision_maker": "Hiring Lead (Purplle)",
       "decision_maker_email": "hiring.purplle@purplle.com",
       "problem_area": "Webhook Ingestion Telemetry & Retry Lag",
@@ -699,13 +699,13 @@
       "proposed_fix": "Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync",
       "prototype_link": "https://github.com/manavmate53-jpg/portfolio/tree/main/purplle-telemetry-fix",
       "outreach_pitch": {
-        "subject": "I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager",
+        "subject": "I fixed your Unbatched webhook retries caus for free: Future Product Manager",
         "body": "Hi Hiring,\n\nWas diving deep into Purplle's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.\n\nRather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.\n\nHere is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/purplle-telemetry-fix\n\nWould love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.\n\nBest,\nManav Mate\nProduct Manager | System Design"
       }
     },
     {
       "company": "Smartstream Technologies",
-      "target_role": "Associate Product Manager",
+      "target_role": "Product Manager",
       "decision_maker": "Hiring Lead (Smartstream Technologies)",
       "decision_maker_email": "hiring.technologies@smartstream.com",
       "problem_area": "Webhook Ingestion Telemetry & Retry Lag",
@@ -713,13 +713,13 @@
       "proposed_fix": "Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync",
       "prototype_link": "https://github.com/manavmate53-jpg/portfolio/tree/main/smartstream technologies-telemetry-fix",
       "outreach_pitch": {
-        "subject": "I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager",
+        "subject": "I fixed your Unbatched webhook retries caus for free: Future Product Manager",
         "body": "Hi Hiring,\n\nWas diving deep into Smartstream Technologies's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.\n\nRather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.\n\nHere is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/smartstream technologies-telemetry-fix\n\nWould love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.\n\nBest,\nManav Mate\nProduct Manager | System Design"
       }
     },
     {
       "company": "Sovos",
-      "target_role": "Associate Product Manager",
+      "target_role": "Product Manager",
       "decision_maker": "Hiring Lead (Sovos)",
       "decision_maker_email": "hiring.sovos@sovos.com",
       "problem_area": "Webhook Ingestion Telemetry & Retry Lag",
@@ -727,13 +727,13 @@
       "proposed_fix": "Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync",
       "prototype_link": "https://github.com/manavmate53-jpg/portfolio/tree/main/sovos-telemetry-fix",
       "outreach_pitch": {
-        "subject": "I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager",
+        "subject": "I fixed your Unbatched webhook retries caus for free: Future Product Manager",
         "body": "Hi Hiring,\n\nWas diving deep into Sovos's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.\n\nRather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.\n\nHere is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/sovos-telemetry-fix\n\nWould love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.\n\nBest,\nManav Mate\nProduct Manager | System Design"
       }
     },
     {
       "company": "IDfy",
-      "target_role": "Associate Product Manager",
+      "target_role": "Product Manager",
       "decision_maker": "Hiring Lead (IDfy)",
       "decision_maker_email": "hiring.idfy@idfy.com",
       "problem_area": "Webhook Ingestion Telemetry & Retry Lag",
@@ -741,7 +741,7 @@
       "proposed_fix": "Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync",
       "prototype_link": "https://github.com/manavmate53-jpg/portfolio/tree/main/idfy-telemetry-fix",
       "outreach_pitch": {
-        "subject": "I fixed your Unbatched webhook retries caus for free: Future Associate Product Manager",
+        "subject": "I fixed your Unbatched webhook retries caus for free: Future Product Manager",
         "body": "Hi Hiring,\n\nWas diving deep into IDfy's product flow this week and noticed a critical friction point: Unbatched webhook retries causing 350ms p95 latency spikes during concurrent traffic bursts.\n\nRather than just sending a standard resume, I engineered a concrete architectural fix: Implemented an in-memory Redis stream buffer with exponential backoff and batch database sync.\n\nHere is the interactive spec & blueprint: https://github.com/manavmate53-jpg/portfolio/tree/main/idfy-telemetry-fix\n\nWould love to share 2 quick ideas on your product telemetry whenever you have 5 minutes. No pitch, just builder to builder.\n\nBest,\nManav Mate\nProduct Manager | System Design"
       }
     }
