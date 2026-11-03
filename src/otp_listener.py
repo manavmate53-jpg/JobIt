@@ -33,9 +33,15 @@ class EmailOTPListener:
         self.imap_server = os.getenv("IMAP_SERVER", "imap.gmail.com")
         self.email_user = os.getenv("EMAIL_USER", "manavmate53@gmail.com")
         self.email_password = os.getenv("EMAIL_PASSWORD")
+        self.linkedin_email_user = os.getenv("LINKEDIN_EMAIL_USER", os.getenv("LINKEDIN_EMAIL", self.email_user))
+        raw_li_pw = os.getenv("LINKEDIN_EMAIL_PASSWORD", "")
+        self.linkedin_email_password = raw_li_pw.replace(" ", "") if raw_li_pw else self.email_password
 
     def is_configured(self) -> bool:
         return bool(self.email_user and self.email_password)
+
+    def is_linkedin_configured(self) -> bool:
+        return bool(self.linkedin_email_user and self.linkedin_email_password)
 
     def _clean_header(self, raw_header: str) -> str:
         if not raw_header:
@@ -56,19 +62,23 @@ class EmailOTPListener:
         poll_interval_seconds: int = 4,
     ) -> Optional[str]:
         """Polls inbox for the most recent OTP/verification code matching sender."""
-        if not self.is_configured():
+        is_linkedin = bool(sender_keyword and "linkedin" in sender_keyword.lower())
+        user_to_use = self.linkedin_email_user if is_linkedin and self.is_linkedin_configured() else self.email_user
+        pw_to_use = self.linkedin_email_password if is_linkedin and self.is_linkedin_configured() else self.email_password
+
+        if not user_to_use or not pw_to_use:
             logger.warning("IMAP credentials not configured. Cannot poll for OTP.")
             return None
 
         logger.info(
-            f"Listening for verification code (Sender: {sender_keyword or 'Any'}, Timeout: {max_wait_seconds}s)..."
+            f"Listening for verification code on {user_to_use} (Sender: {sender_keyword or 'Any'}, Timeout: {max_wait_seconds}s)..."
         )
         start_time = time.time()
 
         while time.time() - start_time < max_wait_seconds:
             try:
                 mail = imaplib.IMAP4_SSL(self.imap_server)
-                mail.login(self.email_user, self.email_password)
+                mail.login(user_to_use, pw_to_use)
                 mail.select("INBOX")
 
                 # Search criteria: look for messages matching sender or subject cues

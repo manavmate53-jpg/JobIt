@@ -81,14 +81,24 @@ class PortalWebApplier:
             except Exception:
                 pass
 
-            # Pre-fill email if on login page
+            # Pre-fill email and password if on login page
             try:
                 page.wait_for_timeout(1500)
+                email_val = os.getenv("LINKEDIN_EMAIL", "manavstore666@gmail.com") if portal_lower == "linkedin" else os.getenv("EMAIL_USER", "manavmate53@gmail.com")
+                pass_val = os.getenv("LINKEDIN_PASSWORD", "M@navmate_01") if portal_lower == "linkedin" else ""
+
                 email_input = page.locator("#username, input[name='session_key'], input[type='email']").first
                 if email_input.is_visible(timeout=3000):
                     curr_val = email_input.input_value()
                     if not curr_val:
-                        email_input.fill("manavmate53@gmail.com")
+                        email_input.fill(email_val)
+
+                if pass_val:
+                    pass_input = page.locator("#password, input[name='session_password'], input[type='password']").first
+                    if pass_input.is_visible(timeout=2000):
+                        curr_pass = pass_input.input_value()
+                        if not curr_pass:
+                            pass_input.fill(pass_val)
             except Exception:
                 pass
 
