@@ -72,7 +72,7 @@ class ScoringEngine:
         else:
             # Default for unspecified experience if title indicates early career or specialist
             title_lower = job.role.lower()
-            if any(t in title_lower for t in ["associate", "junior", "apm", "coordinator", "analyst", "intern", "specialist", "trainee", "lead"]):
+            if any(t in title_lower for t in ["associate", "junior", "apm", "coordinator", "analyst", "intern", "specialist", "trainee", "founder", "chief of staff", "product operations"]):
                 score += 15
             else:
                 score += 10
@@ -82,7 +82,8 @@ class ScoringEngine:
         target_domains = [
             "ai", "llm", "genai", "software", "saas", "b2b", "fintech",
             "marketplace", "logistics", "supply chain", "fleet", "operations",
-            "kyc", "compliance", "developer tools", "product operations", "data",
+            "founder's office", "chief of staff", "founder", "product operations",
+            "kyc", "compliance", "developer tools", "data",
             "s&op", "demand planning", "project management", "agile", "business analyst",
             "solutions", "systems", "growth", "product owner", "system architecture",
             "scalability", "distributed systems", "api platforms", "microservices",

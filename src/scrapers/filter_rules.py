@@ -58,9 +58,24 @@ OFFLINE_FINANCE_KEYWORDS = [
     r"\bbranch\s+credit\s+manager\b",
 ]
 
-FOUNDER_OFFICE_KEYWORDS = [
-    r"\bfounder'?s?\s+office\b",
-    r"\bchief\s+of\s+staff\b",
+ENTERPRISE_PEDIGREE_BANKS_IT = [
+    r"\bidfc\s+first\s+bank\b",
+    r"\bdbs\s+bank\b",
+    r"\bhdfc\s+bank\b",
+    r"\bicici\s+bank\b",
+    r"\bstandard\s+chartered\b",
+    r"\baccenture\b",
+    r"\bcognizant\b",
+]
+
+SENIOR_TITLE_KEYWORDS = [
+    r"\bsenior\s+product\s+manager\b",
+    r"\bsr\.?\s+product\s+manager\b",
+    r"\bsr\s+pm\b",
+    r"\blead\s+product\s+manager\b",
+    r"\bprincipal\s+product\s+manager\b",
+    r"\bproduct\s+manager\s*-\s*debit\s+cards?\b",
+    r"\bproduct\s+manager\s*-\s*credit\s+cards?\b",
 ]
 
 SENIOR_YEARS_PATTERNS = [
@@ -101,14 +116,18 @@ def check_negative_filters(
         if re.search(pat, full_text, flags=re.IGNORECASE):
             return False, f"Domain Trap: Offline vehicle/equipment NBFC financing ({pat})"
 
-    # 4. Check Founder's Office (Candidate Preference)
-    for pat in FOUNDER_OFFICE_KEYWORDS:
-        if re.search(pat, full_text, flags=re.IGNORECASE):
-            return False, f"Candidate Preference: Founder's Office skipped ({pat})"
+    # 4. Check Enterprise Banks & IT MNC Pedigree Gates
+    for pat in ENTERPRISE_PEDIGREE_BANKS_IT:
+        if re.search(pat, company.lower(), flags=re.IGNORECASE):
+            return False, f"Pedigree Trap: Legacy Bank/IT MNC with rigid degree filter ({company})"
 
-    # 5. Check mandatory 5+ years corporate PM gate
-    # Check title first (e.g. Vice President, VP, Director, Head of Product, Principal)
+    # 5. Check Senior Title Mismatch
     title_lower = title.lower()
+    for pat in SENIOR_TITLE_KEYWORDS:
+        if re.search(pat, title_lower, flags=re.IGNORECASE):
+            return False, f"Seniority Trap: Senior PM / Specialized Card title mismatch ({pat})"
+
+    # 6. Check mandatory 5+ years corporate PM gate
     senior_title_patterns = [
         r"\bvice\s+president\b",
         r"\bvp\b",

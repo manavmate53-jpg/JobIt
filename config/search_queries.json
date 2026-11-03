@@ -1,16 +1,23 @@
 {
   "target_roles": [
+    "Founder's Office",
+    "Chief of Staff",
+    "Product Operations Manager",
+    "Operations Product Manager",
     "Associate Product Manager",
-    "Product Manager",
     "Junior Product Manager",
     "AI Product Manager",
+    "Growth Product Manager",
     "Product Operations",
     "Technical Product Manager"
   ],
   "target_locations": [
     "Mumbai",
     "Navi Mumbai",
-    "Remote"
+    "Thane",
+    "Remote",
+    "Hybrid",
+    "India"
   ],
   "portals": {
     "linkedin": {
@@ -25,6 +32,32 @@
     }
   },
   "negative_traps": {
+    "enterprise_pedigree_gates": [
+      "idfc first bank",
+      "dbs bank",
+      "accenture",
+      "cognizant",
+      "tata consultancy services",
+      "tcs",
+      "infosys",
+      "wipro",
+      "capgemini",
+      "tech mahindra",
+      "hcl tech",
+      "debit cards",
+      "credit cards",
+      "treasury operations"
+    ],
+    "senior_title_mismatch": [
+      "senior product manager",
+      "sr. product manager",
+      "sr product manager",
+      "lead product manager",
+      "principal product manager",
+      "director of product",
+      "vp of product",
+      "chief product officer"
+    ],
     "manufacturing_operations": [
       "mattress",
       "foam production",

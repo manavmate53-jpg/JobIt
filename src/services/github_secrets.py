@@ -103,3 +103,4 @@ def sync_github_secret(
     except Exception as e:
         logger.error(f"Error syncing GitHub secret {secret_name}: {e}")
         return False
+

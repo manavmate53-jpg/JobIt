@@ -51,3 +51,34 @@ def test_valid_apm_role():
     )
     assert is_valid
     assert reason is None
+
+
+def test_founders_office_allowed():
+    is_valid, reason = check_negative_filters(
+        title="Founder's Office",
+        company="FastGrowth Tech",
+        description="Work with founder on GTM, product PRDs, and operations"
+    )
+    assert is_valid
+    assert reason is None
+
+
+def test_enterprise_bank_filtered():
+    is_valid, reason = check_negative_filters(
+        title="Associate Product Manager",
+        company="IDFC FIRST Bank",
+        description="Debit cards and banking products"
+    )
+    assert not is_valid
+    assert "pedigree trap" in reason.lower()
+
+
+def test_senior_title_filtered():
+    is_valid, reason = check_negative_filters(
+        title="Senior Product Manager",
+        company="Tech Innovators",
+        description="Lead product roadmaps and strategy"
+    )
+    assert not is_valid
+    assert "seniority trap" in reason.lower()
+

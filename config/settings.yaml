@@ -10,22 +10,29 @@ project:
 # Target roles, locations, and flagship companies
 targets:
   roles:
+    - "Founder's Office"
+    - "Chief of Staff"
+    - "Product Operations Manager"
+    - "Operations Product Manager"
     - "Associate Product Manager"
-    - "Product Manager"
-    - "Technical Product Manager"
+    - "Junior Product Manager"
+    - "AI Product Manager"
     - "Product Operations Specialist"
-    - "Fintech Product Analyst"
     - "Growth Product Manager"
+    - "Technical Product Manager"
   locations:
     - "Mumbai, India"
+    - "Navi Mumbai, India"
+    - "Thane, India"
+    - "Hybrid - Mumbai"
     - "Remote Worldwide"
+    - "India"
   priority_companies:
     - "Datavruti"
     - "Purplle"
     - "Smartstream Technologies"
     - "Sovos"
     - "IDfy"
-    - "DBS Bank"
     - "Shaadi.com"
     - "MakeMyTrip"
     - "Beam AI"
@@ -34,6 +41,24 @@ targets:
     - "Jupiter Money"
     - "PostHog"
     - "ElevenLabs"
+    - "Porter"
+    - "Shadowfax"
+    - "Shiprocket"
+    - "Razorpay"
+  blacklisted_companies:
+    - "IDFC FIRST Bank"
+    - "DBS Bank"
+    - "HDFC Bank"
+    - "ICICI Bank"
+    - "Standard Chartered"
+    - "Accenture"
+    - "Cognizant"
+    - "Tata Consultancy Services"
+    - "TCS"
+    - "Infosys"
+    - "Wipro"
+    - "Capgemini"
+    - "Tech Mahindra"
 
 # Strict Human-Simulation Daily Throttles (Enforced to avoid LinkedIn bot flagging)
 throttles:
