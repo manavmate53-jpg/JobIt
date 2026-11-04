@@ -410,10 +410,10 @@ class PortalWebApplier:
             if ctc_inputs.count() > 0:
                 ctc_inputs.first.fill("800000")
 
-            # Expected CTC
+            # Expected CTC (calibrated down by 2 lakhs)
             exp_ctc = page.locator("input[placeholder*='Expected CTC'], input[id*='expectedCtc']")
             if exp_ctc.count() > 0:
-                exp_ctc.first.fill("1400000")
+                exp_ctc.first.fill("1200000")
 
             # Location / City
             city_inputs = page.locator("input[id*='city'], input[placeholder*='Current Location']")

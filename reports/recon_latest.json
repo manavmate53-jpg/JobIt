@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-04T04:09:15.740701",
+  "timestamp": "2026-11-04T16:47:24.850118",
   "cycle": "6_hour_recon",
   "summary": {
     "companies_scanned": 5,
@@ -26,7 +26,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "250_DELIVERABLE",
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/datavruti-product-lead",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -48,7 +48,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "250_DELIVERABLE",
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/datavruti-talent-partner",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -69,11 +69,11 @@
         "hiringpurplle@purplle.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/purplle-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Talent Partner (Purplle)",
@@ -91,11 +91,11 @@
         "talentpurplle@purplle.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/purplle-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Hiring Lead (Smartstream Technologies)",
@@ -113,11 +113,11 @@
         "hiringtechnologies@smartstream.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/smartstream technologies-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Talent Partner (Smartstream Technologies)",
@@ -135,11 +135,11 @@
         "talenttechnologies@smartstream.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/smartstream technologies-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Hiring Lead (Sovos)",
@@ -157,11 +157,11 @@
         "hiringsovos@sovos.com"
       ],
       "mx_host": "sovos-com.mail.protection.outlook.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/sovos-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Talent Partner (Sovos)",
@@ -179,11 +179,11 @@
         "talentsovos@sovos.com"
       ],
       "mx_host": "sovos-com.mail.protection.outlook.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/sovos-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Hiring Lead (IDfy)",
@@ -201,11 +201,11 @@
         "hiringidfy@idfy.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/idfy-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Talent Partner (IDfy)",
@@ -223,11 +223,11 @@
         "talentidfy@idfy.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/idfy-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Arvind Parthiban",
@@ -247,7 +247,7 @@
       "confidence_score": 90,
       "primary_channel": "linkedin_connect",
       "connect_note": "Hi Arvind, congrats on SuperOps's $12.4M Series B round. Bootstrapped a B2B business to 50+ clients and led AI product delivery at HireFlo. Would love to connect and share a few operational systems I built at manavmate53-jpg.github.io/pm-product-lab/#hub",
-      "cold_dm": "Hi Arvind,\n\nCongrats on closing SuperOps's $12.4M Series B round from Addition.\n\nAs you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.\n\nI am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.\n\nI built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nI am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at \u20b98.0 LPA (targeting \u20b912L to \u20b914L base given proven AI pipeline and P&L scaling track record).\n\nOpen to a brief 15-minute chat this week?\n\nBest,\nManav Mate\n+91 85915 95889",
+      "cold_dm": "Hi Arvind,\n\nCongrats on closing SuperOps's $12.4M Series B round from Addition.\n\nAs you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.\n\nI am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.\n\nI built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nI am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at \u20b98.0 LPA (targeting \u20b910L to \u20b912L base given proven AI pipeline and P&L scaling track record).\n\nOpen to a brief 15-minute chat this week?\n\nBest,\nManav Mate\n+91 85915 95889",
       "wellfound_note": "Hi Arvind,\n\nI saw SuperOps's recent momentum and wanted to reach out directly regarding your operational hiring needs. I am an operational founder who bootstrapped a B2B workforce business from zero to 50+ enterprise clients and 200+ projects in Mumbai, then led AI product delivery at HireFlo (40% compute cost reduction, 14+ PRDs).\n\nI specialize in taking 0-to-1 operational fires, pricing models, and client delivery off the founder's plate with zero hand-holding. Tested simulations of my work: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love to speak if you need an operator in your corner.",
       "follow_up_bump": "Hi Arvind, bumping this quickly in case it got buried under your post-funding inbox surge. Still keen to explore how I can take operational execution off your plate at SuperOps. Happy to share a quick teardown of your current customer onboarding flow whenever convenient.",
       "attachment_pdf": "exports/resumes/Manav_Mate_SuperOps_office.pdf",
@@ -272,7 +272,7 @@
       "confidence_score": 95,
       "primary_channel": "linkedin_connect",
       "connect_note": "Hi Rishab, congrats on GrayQuest's $7M Series A round. Architected an AI parsing pipeline at HireFlo cutting Llama 3.1 costs by 40% on NVIDIA NIM. Built 6 interactive systems at manavmate53-jpg.github.io/pm-product-lab/#hub. Would love to connect!",
-      "cold_dm": "Hi Rishab,\n\nCongrats to you and the team on GrayQuest's $7M Series A round.\n\nI am an early-stage Technical PM with Scaler Quora System Design training and founder grit. At HireFlo, I owned product discovery and delivery for an AI hiring intelligence platform:\n- Architected a resume parsing pipeline processing 1,000 documents in under 10 minutes with 98% precision.\n- Cut model inference compute costs by 40% on Llama 3.1 by deploying self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.\n- Authored 14+ technical PRDs, user stories, and acceptance criteria in Jira with zero sprint slippage.\n\nI also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#payrouter\n\nLooking for an APM / AI PM role where I can drive execution velocity immediately (targeting \u20b912L to \u20b914L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "cold_dm": "Hi Rishab,\n\nCongrats to you and the team on GrayQuest's $7M Series A round.\n\nI am an early-stage Technical PM with Scaler Quora System Design training and founder grit. At HireFlo, I owned product discovery and delivery for an AI hiring intelligence platform:\n- Architected a resume parsing pipeline processing 1,000 documents in under 10 minutes with 98% precision.\n- Cut model inference compute costs by 40% on Llama 3.1 by deploying self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.\n- Authored 14+ technical PRDs, user stories, and acceptance criteria in Jira with zero sprint slippage.\n\nI also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#payrouter\n\nLooking for an APM / AI PM role where I can drive execution velocity immediately (targeting \u20b910L to \u20b912L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.\n\nBest,\nManav Mate\n+91 85915 95889",
       "wellfound_note": "Hi Rishab,\n\nReaching out for APM / AI PM opportunities at GrayQuest. At HireFlo, I owned our AI parsing pipeline (1,000 docs in <10m, 98% precision), cut Llama 3.1 inference costs by 40% via NVIDIA NIM and JSON schemas, and authored 14+ PRDs in Jira.\n\nI love shipping functional proof-of-work: I built 6 interactive browser simulations of distributed systems trade-offs and LLM guardrails at https://manavmate53-jpg.github.io/pm-product-lab/#payrouter\n\nWould welcome a chat on how I can help ship GrayQuest's roadmap.",
       "follow_up_bump": "Hi Rishab, quick follow-up to see if you have 10 minutes this week to discuss product execution for GrayQuest. Always happy to share relevant PRD artifacts or architectural trade-off teardowns.",
       "attachment_pdf": "exports/resumes/Manav_Mate_GrayQuest_apm.pdf",
@@ -297,7 +297,7 @@
       "confidence_score": 100,
       "primary_channel": "linkedin_connect",
       "connect_note": "Hi Kunal, congrats on Finvolv's $2.5M Pre-Series A round. Bootstrapped a B2B business to 50+ clients and led AI product delivery at HireFlo. Would love to connect and share a few operational systems I built at manavmate53-jpg.github.io/pm-product-lab/#hub",
-      "cold_dm": "Hi Kunal,\n\nCongrats on closing Finvolv's $2.5M Pre-Series A round from Kalaari Capital.\n\nAs you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.\n\nI am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.\n\nI built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#payrouter\n\nI am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at \u20b98.0 LPA (targeting \u20b98.5L to \u20b910L with upside in early equity).\n\nOpen to a brief 15-minute chat this week?\n\nBest,\nManav Mate\n+91 85915 95889",
+      "cold_dm": "Hi Kunal,\n\nCongrats on closing Finvolv's $2.5M Pre-Series A round from Kalaari Capital.\n\nAs you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.\n\nI am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.\n\nI built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#payrouter\n\nI am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at \u20b98.0 LPA (targeting \u20b96.5L to \u20b98L with upside in early equity).\n\nOpen to a brief 15-minute chat this week?\n\nBest,\nManav Mate\n+91 85915 95889",
       "wellfound_note": "Hi Kunal,\n\nI saw Finvolv's recent momentum and wanted to reach out directly regarding your operational hiring needs. I am an operational founder who bootstrapped a B2B workforce business from zero to 50+ enterprise clients and 200+ projects in Mumbai, then led AI product delivery at HireFlo (40% compute cost reduction, 14+ PRDs).\n\nI specialize in taking 0-to-1 operational fires, pricing models, and client delivery off the founder's plate with zero hand-holding. Tested simulations of my work: https://manavmate53-jpg.github.io/pm-product-lab/#payrouter\n\nWould love to speak if you need an operator in your corner.",
       "follow_up_bump": "Hi Kunal, bumping this quickly in case it got buried under your post-funding inbox surge. Still keen to explore how I can take operational execution off your plate at Finvolv. Happy to share a quick teardown of your current customer onboarding flow whenever convenient.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Finvolv_office.pdf",
@@ -322,7 +322,7 @@
       "confidence_score": 90,
       "primary_channel": "linkedin_connect",
       "connect_note": "Hi Prukalpa, congrats on Atlan's $105M Series B round. Architected an AI parsing pipeline at HireFlo cutting Llama 3.1 costs by 40% on NVIDIA NIM. Built 6 interactive systems at manavmate53-jpg.github.io/pm-product-lab/#hub. Would love to connect!",
-      "cold_dm": "Hi Prukalpa,\n\nCongrats to you and the team on Atlan's $105M Series B round.\n\nI am an early-stage Technical PM with Scaler Quora System Design training and founder grit. At HireFlo, I owned product discovery and delivery for an AI hiring intelligence platform:\n- Architected a resume parsing pipeline processing 1,000 documents in under 10 minutes with 98% precision.\n- Cut model inference compute costs by 40% on Llama 3.1 by deploying self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.\n- Authored 14+ technical PRDs, user stories, and acceptance criteria in Jira with zero sprint slippage.\n\nI also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#evalguard\n\nLooking for an APM / AI PM role where I can drive execution velocity immediately (targeting \u20b912L to \u20b914L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "cold_dm": "Hi Prukalpa,\n\nCongrats to you and the team on Atlan's $105M Series B round.\n\nI am an early-stage Technical PM with Scaler Quora System Design training and founder grit. At HireFlo, I owned product discovery and delivery for an AI hiring intelligence platform:\n- Architected a resume parsing pipeline processing 1,000 documents in under 10 minutes with 98% precision.\n- Cut model inference compute costs by 40% on Llama 3.1 by deploying self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.\n- Authored 14+ technical PRDs, user stories, and acceptance criteria in Jira with zero sprint slippage.\n\nI also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#evalguard\n\nLooking for an APM / AI PM role where I can drive execution velocity immediately (targeting \u20b910L to \u20b912L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.\n\nBest,\nManav Mate\n+91 85915 95889",
       "wellfound_note": "Hi Prukalpa,\n\nReaching out for APM / AI PM opportunities at Atlan. At HireFlo, I owned our AI parsing pipeline (1,000 docs in <10m, 98% precision), cut Llama 3.1 inference costs by 40% via NVIDIA NIM and JSON schemas, and authored 14+ PRDs in Jira.\n\nI love shipping functional proof-of-work: I built 6 interactive browser simulations of distributed systems trade-offs and LLM guardrails at https://manavmate53-jpg.github.io/pm-product-lab/#evalguard\n\nWould welcome a chat on how I can help ship Atlan's roadmap.",
       "follow_up_bump": "Hi Prukalpa, quick follow-up to see if you have 10 minutes this week to discuss product execution for Atlan. Always happy to share relevant PRD artifacts or architectural trade-off teardowns.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Atlan_apm.pdf",
@@ -347,7 +347,7 @@
       "confidence_score": 85,
       "primary_channel": "linkedin_connect",
       "connect_note": "Hi Mohit, congrats on Ultrahuman's $35M Series B round. Bootstrapped a B2B business to 50+ clients and led AI product delivery at HireFlo. Would love to connect and share a few operational systems I built at manavmate53-jpg.github.io/pm-product-lab/#hub",
-      "cold_dm": "Hi Mohit,\n\nCongrats on closing Ultrahuman's $35M Series B round from Blume Ventures.\n\nAs you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.\n\nI am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.\n\nI built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nI am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at \u20b98.0 LPA (targeting \u20b912L to \u20b914L base given proven AI pipeline and P&L scaling track record).\n\nOpen to a brief 15-minute chat this week?\n\nBest,\nManav Mate\n+91 85915 95889",
+      "cold_dm": "Hi Mohit,\n\nCongrats on closing Ultrahuman's $35M Series B round from Blume Ventures.\n\nAs you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.\n\nI am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.\n\nI built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nI am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at \u20b98.0 LPA (targeting \u20b910L to \u20b912L base given proven AI pipeline and P&L scaling track record).\n\nOpen to a brief 15-minute chat this week?\n\nBest,\nManav Mate\n+91 85915 95889",
       "wellfound_note": "Hi Mohit,\n\nI saw Ultrahuman's recent momentum and wanted to reach out directly regarding your operational hiring needs. I am an operational founder who bootstrapped a B2B workforce business from zero to 50+ enterprise clients and 200+ projects in Mumbai, then led AI product delivery at HireFlo (40% compute cost reduction, 14+ PRDs).\n\nI specialize in taking 0-to-1 operational fires, pricing models, and client delivery off the founder's plate with zero hand-holding. Tested simulations of my work: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love to speak if you need an operator in your corner.",
       "follow_up_bump": "Hi Mohit, bumping this quickly in case it got buried under your post-funding inbox surge. Still keen to explore how I can take operational execution off your plate at Ultrahuman. Happy to share a quick teardown of your current customer onboarding flow whenever convenient.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Ultrahuman_office.pdf",
@@ -372,7 +372,7 @@
       "confidence_score": 90,
       "primary_channel": "linkedin_connect",
       "connect_note": "Hi Akash, congrats on Cashfree Payments's $35M Series B round. Architected an AI parsing pipeline at HireFlo cutting Llama 3.1 costs by 40% on NVIDIA NIM. Built 6 interactive systems at manavmate53-jpg.github.io/pm-product-lab/#hub. Would love to connect!",
-      "cold_dm": "Hi Akash,\n\nCongrats to you and the team on Cashfree Payments's $35M Series B round.\n\nI am an early-stage Technical PM with Scaler Quora System Design training and founder grit. At HireFlo, I owned product discovery and delivery for an AI hiring intelligence platform:\n- Architected a resume parsing pipeline processing 1,000 documents in under 10 minutes with 98% precision.\n- Cut model inference compute costs by 40% on Llama 3.1 by deploying self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.\n- Authored 14+ technical PRDs, user stories, and acceptance criteria in Jira with zero sprint slippage.\n\nI also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#payrouter\n\nLooking for an APM / AI PM role where I can drive execution velocity immediately (targeting \u20b912L to \u20b914L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "cold_dm": "Hi Akash,\n\nCongrats to you and the team on Cashfree Payments's $35M Series B round.\n\nI am an early-stage Technical PM with Scaler Quora System Design training and founder grit. At HireFlo, I owned product discovery and delivery for an AI hiring intelligence platform:\n- Architected a resume parsing pipeline processing 1,000 documents in under 10 minutes with 98% precision.\n- Cut model inference compute costs by 40% on Llama 3.1 by deploying self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.\n- Authored 14+ technical PRDs, user stories, and acceptance criteria in Jira with zero sprint slippage.\n\nI also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#payrouter\n\nLooking for an APM / AI PM role where I can drive execution velocity immediately (targeting \u20b910L to \u20b912L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.\n\nBest,\nManav Mate\n+91 85915 95889",
       "wellfound_note": "Hi Akash,\n\nReaching out for APM / AI PM opportunities at Cashfree Payments. At HireFlo, I owned our AI parsing pipeline (1,000 docs in <10m, 98% precision), cut Llama 3.1 inference costs by 40% via NVIDIA NIM and JSON schemas, and authored 14+ PRDs in Jira.\n\nI love shipping functional proof-of-work: I built 6 interactive browser simulations of distributed systems trade-offs and LLM guardrails at https://manavmate53-jpg.github.io/pm-product-lab/#payrouter\n\nWould welcome a chat on how I can help ship Cashfree Payments's roadmap.",
       "follow_up_bump": "Hi Akash, quick follow-up to see if you have 10 minutes this week to discuss product execution for Cashfree Payments. Always happy to share relevant PRD artifacts or architectural trade-off teardowns.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Cashfree_Payments_apm.pdf",
@@ -397,7 +397,7 @@
       "confidence_score": 90,
       "primary_channel": "linkedin_connect",
       "connect_note": "Hi Aadit, congrats on Zepto's Series B round. Managed 133 field staff across 200+ projects with 0 SLA breaches and cut reconciliation from 12 days to 48 hrs. Would love to connect and share my workforce system: manavmate53-jpg.github.io/pm-product-lab/#crewrostering",
-      "cold_dm": "Hi Aadit,\n\nCongrats on Zepto's $665M Series B round.\n\nScaling transaction volume often strains on-ground fulfillment, field SLAs, and cross-functional feedback loops between ops and product teams.\n\nAt NeoManpower, I directed 133 field personnel across 200+ live events with 0 contractual SLA breaches via a 15-minute emergency fill buffer. I replaced manual rosters with digital check-ins and QR audits that reduced billing reconciliation cycles from 12 days to 48 hours.\n\nAt HireFlo, I redesigned recruiter onboarding funnels in Figma, lifting workflow completion by 30% while authoring 14+ technical PRDs.\n\nI built an interactive simulation of this workforce and SLA escalation engine: https://manavmate53-jpg.github.io/pm-product-lab/#flashqueue\n\nI am targeting Product Operations / Operations PM roles in Mumbai or Remote (targeting \u20b912L to \u20b914L base given proven AI pipeline and P&L scaling track record). Would love to share how these systems could support Zepto's scale.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "cold_dm": "Hi Aadit,\n\nCongrats on Zepto's $665M Series B round.\n\nScaling transaction volume often strains on-ground fulfillment, field SLAs, and cross-functional feedback loops between ops and product teams.\n\nAt NeoManpower, I directed 133 field personnel across 200+ live events with 0 contractual SLA breaches via a 15-minute emergency fill buffer. I replaced manual rosters with digital check-ins and QR audits that reduced billing reconciliation cycles from 12 days to 48 hours.\n\nAt HireFlo, I redesigned recruiter onboarding funnels in Figma, lifting workflow completion by 30% while authoring 14+ technical PRDs.\n\nI built an interactive simulation of this workforce and SLA escalation engine: https://manavmate53-jpg.github.io/pm-product-lab/#flashqueue\n\nI am targeting Product Operations / Operations PM roles in Mumbai or Remote (targeting \u20b910L to \u20b912L base given proven AI pipeline and P&L scaling track record). Would love to share how these systems could support Zepto's scale.\n\nBest,\nManav Mate\n+91 85915 95889",
       "wellfound_note": "Hi Aadit,\n\nApplying for Product Operations / Operations PM. I bring direct experience managing 133 field personnel across 200+ events with 0 SLA breaches, plus technical PM execution at HireFlo (14+ PRDs, 30% workflow lift).\n\nMy focus is eliminating manual operational drag: at NeoManpower, my roster and QR audit workflows cut billing reconciliation from 12 days to 48 hours. Live interactive simulation of this architecture: https://manavmate53-jpg.github.io/pm-product-lab/#flashqueue\n\nExcited about Zepto's mission and ready to dive into the messy ground reality.",
       "follow_up_bump": "Hi Aadit, following up briefly on my note regarding Product Operations at Zepto. Would love 10 minutes to discuss how we can automate your field tracking and SLA escalation protocols.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Zepto_operations.pdf",
@@ -422,7 +422,7 @@
       "confidence_score": 95,
       "primary_channel": "linkedin_connect",
       "connect_note": "Hi Rohit, congrats on Portkey's $3M Seed round. Bootstrapped a B2B business to 50+ clients and led AI product delivery at HireFlo. Would love to connect and share a few operational systems I built at manavmate53-jpg.github.io/pm-product-lab/#hub",
-      "cold_dm": "Hi Rohit,\n\nCongrats on closing Portkey's $3M Seed round from Lightspeed.\n\nAs you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.\n\nI am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.\n\nI built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#evalguard\n\nI am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at \u20b98.0 LPA (targeting \u20b98.5L to \u20b910L with upside in early equity).\n\nOpen to a brief 15-minute chat this week?\n\nBest,\nManav Mate\n+91 85915 95889",
+      "cold_dm": "Hi Rohit,\n\nCongrats on closing Portkey's $3M Seed round from Lightspeed.\n\nAs you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.\n\nI am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.\n\nI built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#evalguard\n\nI am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at \u20b98.0 LPA (targeting \u20b96.5L to \u20b98L with upside in early equity).\n\nOpen to a brief 15-minute chat this week?\n\nBest,\nManav Mate\n+91 85915 95889",
       "wellfound_note": "Hi Rohit,\n\nI saw Portkey's recent momentum and wanted to reach out directly regarding your operational hiring needs. I am an operational founder who bootstrapped a B2B workforce business from zero to 50+ enterprise clients and 200+ projects in Mumbai, then led AI product delivery at HireFlo (40% compute cost reduction, 14+ PRDs).\n\nI specialize in taking 0-to-1 operational fires, pricing models, and client delivery off the founder's plate with zero hand-holding. Tested simulations of my work: https://manavmate53-jpg.github.io/pm-product-lab/#evalguard\n\nWould love to speak if you need an operator in your corner.",
       "follow_up_bump": "Hi Rohit, bumping this quickly in case it got buried under your post-funding inbox surge. Still keen to explore how I can take operational execution off your plate at Portkey. Happy to share a quick teardown of your current customer onboarding flow whenever convenient.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Portkey_office.pdf",
@@ -447,7 +447,7 @@
       "confidence_score": 90,
       "primary_channel": "linkedin_connect",
       "connect_note": "Hi Vivek, congrats on Sarvam AI's $41M Series A round. Architected an AI parsing pipeline at HireFlo cutting Llama 3.1 costs by 40% on NVIDIA NIM. Built 6 interactive systems at manavmate53-jpg.github.io/pm-product-lab/#hub. Would love to connect!",
-      "cold_dm": "Hi Vivek,\n\nCongrats to you and the team on Sarvam AI's $41M Series A round.\n\nI am an early-stage Technical PM with Scaler Quora System Design training and founder grit. At HireFlo, I owned product discovery and delivery for an AI hiring intelligence platform:\n- Architected a resume parsing pipeline processing 1,000 documents in under 10 minutes with 98% precision.\n- Cut model inference compute costs by 40% on Llama 3.1 by deploying self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.\n- Authored 14+ technical PRDs, user stories, and acceptance criteria in Jira with zero sprint slippage.\n\nI also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#evalguard\n\nLooking for an APM / AI PM role where I can drive execution velocity immediately (targeting \u20b912L to \u20b914L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "cold_dm": "Hi Vivek,\n\nCongrats to you and the team on Sarvam AI's $41M Series A round.\n\nI am an early-stage Technical PM with Scaler Quora System Design training and founder grit. At HireFlo, I owned product discovery and delivery for an AI hiring intelligence platform:\n- Architected a resume parsing pipeline processing 1,000 documents in under 10 minutes with 98% precision.\n- Cut model inference compute costs by 40% on Llama 3.1 by deploying self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.\n- Authored 14+ technical PRDs, user stories, and acceptance criteria in Jira with zero sprint slippage.\n\nI also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#evalguard\n\nLooking for an APM / AI PM role where I can drive execution velocity immediately (targeting \u20b910L to \u20b912L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.\n\nBest,\nManav Mate\n+91 85915 95889",
       "wellfound_note": "Hi Vivek,\n\nReaching out for APM / AI PM opportunities at Sarvam AI. At HireFlo, I owned our AI parsing pipeline (1,000 docs in <10m, 98% precision), cut Llama 3.1 inference costs by 40% via NVIDIA NIM and JSON schemas, and authored 14+ PRDs in Jira.\n\nI love shipping functional proof-of-work: I built 6 interactive browser simulations of distributed systems trade-offs and LLM guardrails at https://manavmate53-jpg.github.io/pm-product-lab/#evalguard\n\nWould welcome a chat on how I can help ship Sarvam AI's roadmap.",
       "follow_up_bump": "Hi Vivek, quick follow-up to see if you have 10 minutes this week to discuss product execution for Sarvam AI. Always happy to share relevant PRD artifacts or architectural trade-off teardowns.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Sarvam_AI_apm.pdf",
@@ -472,7 +472,7 @@
       "confidence_score": 90,
       "primary_channel": "linkedin_connect",
       "connect_note": "Hi Siddharth, congrats on Spendflo's $11M Series A round. Bootstrapped a B2B business to 50+ clients and led AI product delivery at HireFlo. Would love to connect and share a few operational systems I built at manavmate53-jpg.github.io/pm-product-lab/#hub",
-      "cold_dm": "Hi Siddharth,\n\nCongrats on closing Spendflo's $11M Series A round from Prosus Ventures.\n\nAs you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.\n\nI am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.\n\nI built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nI am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at \u20b98.0 LPA (targeting \u20b912L to \u20b914L base given proven AI pipeline and P&L scaling track record).\n\nOpen to a brief 15-minute chat this week?\n\nBest,\nManav Mate\n+91 85915 95889",
+      "cold_dm": "Hi Siddharth,\n\nCongrats on closing Spendflo's $11M Series A round from Prosus Ventures.\n\nAs you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.\n\nI am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.\n\nI built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nI am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at \u20b98.0 LPA (targeting \u20b910L to \u20b912L base given proven AI pipeline and P&L scaling track record).\n\nOpen to a brief 15-minute chat this week?\n\nBest,\nManav Mate\n+91 85915 95889",
       "wellfound_note": "Hi Siddharth,\n\nI saw Spendflo's recent momentum and wanted to reach out directly regarding your operational hiring needs. I am an operational founder who bootstrapped a B2B workforce business from zero to 50+ enterprise clients and 200+ projects in Mumbai, then led AI product delivery at HireFlo (40% compute cost reduction, 14+ PRDs).\n\nI specialize in taking 0-to-1 operational fires, pricing models, and client delivery off the founder's plate with zero hand-holding. Tested simulations of my work: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love to speak if you need an operator in your corner.",
       "follow_up_bump": "Hi Siddharth, bumping this quickly in case it got buried under your post-funding inbox surge. Still keen to explore how I can take operational execution off your plate at Spendflo. Happy to share a quick teardown of your current customer onboarding flow whenever convenient.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Spendflo_office.pdf",
@@ -497,7 +497,7 @@
       "confidence_score": 85,
       "primary_channel": "linkedin_connect",
       "connect_note": "Hi Deepanshu, congrats on Toddle's $17M Series A round. Bootstrapped a B2B business to 50+ clients and led AI product delivery at HireFlo. Would love to connect and share a few operational systems I built at manavmate53-jpg.github.io/pm-product-lab/#hub",
-      "cold_dm": "Hi Deepanshu,\n\nCongrats on closing Toddle's $17M Series A round from Tenacity Venture Capital.\n\nAs you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.\n\nI am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.\n\nI built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nI am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at \u20b98.0 LPA (targeting \u20b912L to \u20b914L base given proven AI pipeline and P&L scaling track record).\n\nOpen to a brief 15-minute chat this week?\n\nBest,\nManav Mate\n+91 85915 95889",
+      "cold_dm": "Hi Deepanshu,\n\nCongrats on closing Toddle's $17M Series A round from Tenacity Venture Capital.\n\nAs you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.\n\nI am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.\n\nI built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nI am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at \u20b98.0 LPA (targeting \u20b910L to \u20b912L base given proven AI pipeline and P&L scaling track record).\n\nOpen to a brief 15-minute chat this week?\n\nBest,\nManav Mate\n+91 85915 95889",
       "wellfound_note": "Hi Deepanshu,\n\nI saw Toddle's recent momentum and wanted to reach out directly regarding your operational hiring needs. I am an operational founder who bootstrapped a B2B workforce business from zero to 50+ enterprise clients and 200+ projects in Mumbai, then led AI product delivery at HireFlo (40% compute cost reduction, 14+ PRDs).\n\nI specialize in taking 0-to-1 operational fires, pricing models, and client delivery off the founder's plate with zero hand-holding. Tested simulations of my work: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love to speak if you need an operator in your corner.",
       "follow_up_bump": "Hi Deepanshu, bumping this quickly in case it got buried under your post-funding inbox surge. Still keen to explore how I can take operational execution off your plate at Toddle. Happy to share a quick teardown of your current customer onboarding flow whenever convenient.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Toddle_office.pdf",
@@ -522,7 +522,7 @@
       "confidence_score": 90,
       "primary_channel": "linkedin_connect",
       "connect_note": "Hi Achuthanand, congrats on Kula's $3.7M Seed round. Bootstrapped a B2B business to 50+ clients and led AI product delivery at HireFlo. Would love to connect and share a few operational systems I built at manavmate53-jpg.github.io/pm-product-lab/#hub",
-      "cold_dm": "Hi Achuthanand,\n\nCongrats on closing Kula's $3.7M Seed round from Norwest Venture Partners.\n\nAs you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.\n\nI am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.\n\nI built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#automatch\n\nI am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at \u20b98.0 LPA (targeting \u20b98.5L to \u20b910L with upside in early equity).\n\nOpen to a brief 15-minute chat this week?\n\nBest,\nManav Mate\n+91 85915 95889",
+      "cold_dm": "Hi Achuthanand,\n\nCongrats on closing Kula's $3.7M Seed round from Norwest Venture Partners.\n\nAs you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.\n\nI am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.\n\nI built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#automatch\n\nI am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at \u20b98.0 LPA (targeting \u20b96.5L to \u20b98L with upside in early equity).\n\nOpen to a brief 15-minute chat this week?\n\nBest,\nManav Mate\n+91 85915 95889",
       "wellfound_note": "Hi Achuthanand,\n\nI saw Kula's recent momentum and wanted to reach out directly regarding your operational hiring needs. I am an operational founder who bootstrapped a B2B workforce business from zero to 50+ enterprise clients and 200+ projects in Mumbai, then led AI product delivery at HireFlo (40% compute cost reduction, 14+ PRDs).\n\nI specialize in taking 0-to-1 operational fires, pricing models, and client delivery off the founder's plate with zero hand-holding. Tested simulations of my work: https://manavmate53-jpg.github.io/pm-product-lab/#automatch\n\nWould love to speak if you need an operator in your corner.",
       "follow_up_bump": "Hi Achuthanand, bumping this quickly in case it got buried under your post-funding inbox surge. Still keen to explore how I can take operational execution off your plate at Kula. Happy to share a quick teardown of your current customer onboarding flow whenever convenient.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Kula_office.pdf",

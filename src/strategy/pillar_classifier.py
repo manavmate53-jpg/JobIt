@@ -132,11 +132,11 @@ class PillarClassifier:
                 narrative = "Technical product manager focused on execution velocity, PRDs, and quantifiable business outcomes."
                 lab_ids = ["payrouter", "evalguard", "crewrostering"]
 
-        # CTC Band calculation
+        # CTC Band calculation (calibrated down by 2 lakhs)
         if is_seed_stage:
-            ctc_band = {"min_lpa": 8.0, "max_lpa": 10.5, "quoted": 9.0}
+            ctc_band = {"min_lpa": 6.0, "max_lpa": 8.5, "quoted": 7.0}
         else:
-            ctc_band = {"min_lpa": 11.0, "max_lpa": 15.0, "quoted": 12.5}
+            ctc_band = {"min_lpa": 9.0, "max_lpa": 13.0, "quoted": 10.5}
 
         return ClassificationResult(
             pillar=pillar,

@@ -22,6 +22,8 @@ from pydantic import BaseModel, Field
 from src.profile_engine import ProfileEngine, sanitize_builder_text
 from src.scrapers.base_scraper import ScrapedJob
 from src.scrapers.filter_rules import check_negative_filters
+from src.strategy.gatekeeper_filter import GatekeeperFilter
+from src.strategy.pillar_classifier import PillarClassifier, StrategicPillar
 
 logger = logging.getLogger(__name__)
 
@@ -36,14 +38,20 @@ class EvaluationResult(BaseModel):
     recommended_angle: str
     is_filtered_out: bool = False
     filter_reason: Optional[str] = None
+    pillar: Optional[str] = None
+    pillar_label: Optional[str] = None
+    matched_lab_builds: List[str] = Field(default_factory=list)
+    suggested_ctc_quoted: Optional[float] = None
 
 
 class ScoringEngine:
-    """Evaluates job postings against the candidate's master profile."""
+    """Evaluates job postings against the candidate's master profile and 3-pillar strategy."""
 
     def __init__(self, profile_engine: Optional[ProfileEngine] = None):
         self.profile_engine = profile_engine or ProfileEngine()
         self.profile = self.profile_engine.profile
+        self.gatekeeper = GatekeeperFilter()
+        self.pillar_classifier = PillarClassifier()
 
     def compute_deterministic_score(self, job: ScrapedJob) -> int:
         """Calculates deterministic score (0 to 40 pts) based on location, experience, and domain."""
@@ -98,8 +106,28 @@ class ScoringEngine:
         return min(40, score)
 
     def evaluate(self, job: ScrapedJob) -> EvaluationResult:
-        """Full evaluation pipeline: filter check -> deterministic score -> semantic evaluation."""
-        # 1. Check negative domain traps first
+        """Full evaluation pipeline: Gatekeeper blacklist check -> negative filter check -> 3-pillar classification -> deterministic score -> semantic evaluation."""
+        # 1. Gatekeeper Blacklist & Degree-Gate Bypass Check
+        gk_res = self.gatekeeper.evaluate(
+            company_name=job.company,
+            role_title=job.role,
+            job_description=job.raw_description,
+            requirements=job.experience_years
+        )
+        if not gk_res.passed:
+            return EvaluationResult(
+                deterministic_score=0,
+                semantic_score=0,
+                fit_score=0,
+                decision="SKIP",
+                matching_skills=[],
+                gap_analysis=f"Disqualified by Gatekeeper: {gk_res.drop_reason}",
+                recommended_angle="Do not pursue. Blacklisted corporate gate or seniority trap.",
+                is_filtered_out=True,
+                filter_reason=gk_res.drop_reason
+            )
+
+        # 2. Check negative domain traps
         is_valid, filter_reason = check_negative_filters(
             title=job.role,
             company=job.company,
@@ -119,10 +147,19 @@ class ScoringEngine:
                 filter_reason=filter_reason
             )
 
-        # 2. Compute deterministic score (0 - 40)
+        # 3. Classify into 3-Pillar Strategy Architecture
+        is_seed = any(s in f"{job.role} {job.company} {job.raw_description}".lower() for s in ["seed", "pre-series", "angel", "bootstrapped", "stealth"])
+        pillar_res = self.pillar_classifier.classify(
+            title=job.role,
+            description=job.raw_description,
+            sector="",
+            stage="Seed" if is_seed else "Series A"
+        )
+
+        # 4. Compute deterministic score (0 - 40)
         det_score = self.compute_deterministic_score(job)
 
-        # 3. Semantic evaluation (0 - 60)
+        # 5. Semantic evaluation (0 - 60)
         # Try LLM if API key exists; fallback to grounded heuristic evaluator
         gemini_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
         openai_key = os.getenv("OPENAI_API_KEY")
@@ -134,7 +171,7 @@ class ScoringEngine:
             sem_result = self._evaluate_with_openai(job, det_score, openai_key)
 
         if not sem_result:
-            sem_result = self._evaluate_heuristically(job, det_score)
+            sem_result = self._evaluate_heuristically(job, det_score, pillar_res=pillar_res)
 
         sem_score = int(sem_result.get("semantic_score", 45))
         total_score = min(100, det_score + sem_score)
@@ -155,11 +192,15 @@ class ScoringEngine:
             matching_skills=sem_result.get("matching_skills", []),
             gap_analysis=sanitize_builder_text(sem_result.get("gap_analysis", "")),
             recommended_angle=sanitize_builder_text(sem_result.get("recommended_angle", "")),
-            is_filtered_out=False
+            is_filtered_out=False,
+            pillar=pillar_res.pillar.value if pillar_res else None,
+            pillar_label=pillar_res.pillar_label if pillar_res else None,
+            matched_lab_builds=getattr(pillar_res, "primary_pm_lab_ids", []) if pillar_res else [],
+            suggested_ctc_quoted=pillar_res.suggested_ctc_band.get("quoted") if pillar_res else None
         )
 
-    def _evaluate_heuristically(self, job: ScrapedJob, det_score: int) -> Dict[str, Any]:
-        """Grounded heuristic semantic evaluator without external API dependency."""
+    def _evaluate_heuristically(self, job: ScrapedJob, det_score: int, pillar_res: Optional[Any] = None) -> Dict[str, Any]:
+        """Grounded heuristic semantic evaluator without external API dependency, aligned to 3-pillar strategy."""
         job_text = f"{job.role} {job.company} {job.raw_description}".lower()
 
         # Skill bank mapping
@@ -210,7 +251,6 @@ class ScoringEngine:
             if "System Architecture & Distributed Scaling (Scaler)" not in matched_skills:
                 matched_skills.insert(0, "System Architecture & Distributed Scaling (Scaler)")
             else:
-                # Prioritize at top of matched skills
                 matched_skills.remove("System Architecture & Distributed Scaling (Scaler)")
                 matched_skills.insert(0, "System Architecture & Distributed Scaling (Scaler)")
             
@@ -219,13 +259,48 @@ class ScoringEngine:
             else:
                 arch_bonus = 10
 
-        # Calculate semantic score based on matches and relevance
-        base_sem = 32
-        bonus = min(28, (len(matched_skills) * 4) + arch_bonus)
+        # Check 3-Pillar Strategic Alignment Bonus
+        pillar_bonus = 0
+        if pillar_res:
+            p_val = pillar_res.pillar.value
+            if p_val == StrategicPillar.FOUNDERS_OFFICE.value:
+                pillar_bonus = 14
+                if "Founder Operations & Zero-to-One" not in matched_skills:
+                    matched_skills.insert(0, "Founder Operations & Zero-to-One")
+            elif p_val == StrategicPillar.PRODUCT_OPERATIONS.value:
+                pillar_bonus = 14
+                if "Product Operations & Workflows" not in matched_skills:
+                    matched_skills.insert(0, "Product Operations & Workflows")
+            elif p_val == StrategicPillar.AI_APM.value:
+                pillar_bonus = 14
+                if "AI Product Management & LLMs" not in matched_skills:
+                    matched_skills.insert(0, "AI Product Management & LLMs")
+
+        # Calculate semantic score based on matches, arch relevance, and pillar alignment
+        base_sem = 34
+        bonus = min(26, (len(matched_skills) * 4) + arch_bonus + pillar_bonus)
         sem_score = min(60, base_sem + bonus)
 
-        # Generate grounded gap analysis
-        if has_arch_emphasis or (is_tech_pm_role and any(w in job_text for w in ["system", "api", "architecture", "scale"])):
+        lab_ids = getattr(pillar_res, "primary_pm_lab_ids", ["payrouter", "evalguard"]) if pillar_res else ["payrouter"]
+        # Generate grounded gap analysis and pitch angle
+        if pillar_res and pillar_res.pillar == StrategicPillar.FOUNDERS_OFFICE:
+            gap = (
+                f"Role seeks high-velocity generalist execution directly beside founders. "
+                f"Candidate's NeoManpower 0-to-1 track record (50+ B2B clients, 133 personnel, 200+ deployments with zero SLA breaches) "
+                f"and Saylor Operations Management certification directly proves builder grit."
+            )
+            angle = (
+                f"Emphasize founder-level ownership, commercial P&L scaling, and interactive PM Lab builds ({', '.join(lab_ids)})."
+            )
+        elif pillar_res and pillar_res.pillar == StrategicPillar.PRODUCT_OPERATIONS:
+            gap = (
+                f"Role requires scaling operational tooling, metrics telemetry, and cross-functional handoffs. "
+                f"Candidate's track record designing shift rosters and automated billing reconciliations cutting cycles from 12 days to 48 hours provides direct proof."
+            )
+            angle = (
+                f"Highlight Product Operations velocity, SQL funnel analytics, and the {lab_ids[0]} operational simulation."
+            )
+        elif has_arch_emphasis or (is_tech_pm_role and any(w in job_text for w in ["system", "api", "architecture", "scale"])):
             gap = (
                 "Role prioritizes system architecture, scalability trade-offs, and technical cross-functional alignment. "
                 "Candidate's Scaler Quora System Design certification (distributed scaling, caching & CDN, database replication, asynchronous queues, CAP theorem) "

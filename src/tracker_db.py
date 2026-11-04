@@ -60,9 +60,19 @@ class TrackerDB:
                     applied_date TIMESTAMP,
                     last_action_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     notes TEXT,
+                    pillar TEXT,
+                    lab_builds TEXT,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
             """)
+            try:
+                cursor.execute("ALTER TABLE applications ADD COLUMN pillar TEXT")
+            except sqlite3.OperationalError:
+                pass
+            try:
+                cursor.execute("ALTER TABLE applications ADD COLUMN lab_builds TEXT")
+            except sqlite3.OperationalError:
+                pass
             cursor.execute("""
                 CREATE INDEX IF NOT EXISTS idx_apps_status ON applications(status);
             """)
@@ -88,6 +98,8 @@ class TrackerDB:
         matching_skills = json.dumps(eval_result.matching_skills) if eval_result else "[]"
         gap_analysis = eval_result.gap_analysis if eval_result else ""
         recommended_angle = eval_result.recommended_angle if eval_result else ""
+        pillar = eval_result.pillar if eval_result else None
+        lab_builds = json.dumps(eval_result.matched_lab_builds) if eval_result and eval_result.matched_lab_builds else "[]"
         
         default_status = "Scraped"
         if eval_result and eval_result.is_filtered_out:
@@ -115,24 +127,28 @@ class TrackerDB:
                     SET company = ?, role = ?, source = ?, location = ?, experience_years = ?, salary = ?,
                         fit_score = ?, decision = ?, status = ?, hr_name = COALESCE(?, hr_name),
                         hr_email = COALESCE(?, hr_email), matching_skills = ?, gap_analysis = ?,
-                        recommended_angle = ?, raw_description = ?, last_action_date = ?, notes = ?
+                        recommended_angle = ?, raw_description = ?, last_action_date = ?, notes = ?,
+                        pillar = COALESCE(?, pillar), lab_builds = COALESCE(?, lab_builds)
                     WHERE id = ?
                 """, (
                     job.company, job.role, job.source, job.location, job.experience_years, job.salary,
                     fit_score, decision, final_status, job.hr_name, job.hr_email, matching_skills,
-                    gap_analysis, recommended_angle, job.raw_description, now, new_notes, job_id
+                    gap_analysis, recommended_angle, job.raw_description, now, new_notes,
+                    pillar, lab_builds, job_id
                 ))
             else:
                 cursor.execute("""
                     INSERT INTO applications (
                         company, role, job_url, source, location, experience_years, salary,
                         fit_score, decision, status, hr_name, hr_email, matching_skills,
-                        gap_analysis, recommended_angle, raw_description, last_action_date, notes
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        gap_analysis, recommended_angle, raw_description, last_action_date, notes,
+                        pillar, lab_builds
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, (
                     job.company, job.role, job.job_url, job.source, job.location, job.experience_years, job.salary,
                     fit_score, decision, final_status, job.hr_name, job.hr_email, matching_skills,
-                    gap_analysis, recommended_angle, job.raw_description, now, notes
+                    gap_analysis, recommended_angle, job.raw_description, now, notes,
+                    pillar, lab_builds
                 ))
                 job_id = cursor.lastrowid
 

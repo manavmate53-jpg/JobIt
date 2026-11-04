@@ -33,7 +33,7 @@ I am an operational founder and technical PM. Before leading product at HireFlo 
 
 I built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#payrouter
 
-I am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at ₹8.0 LPA (targeting ₹8.5L to ₹10L with upside in early equity).
+I am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at ₹8.0 LPA (targeting ₹6.5L to ₹8L with upside in early equity).
 
 Open to a brief 15-minute chat this week?
 
@@ -89,7 +89,7 @@ I am an early-stage Technical PM with Scaler Quora System Design training and fo
 
 I also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#payrouter
 
-Looking for an APM / AI PM role where I can drive execution velocity immediately (targeting ₹12L to ₹14L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.
+Looking for an APM / AI PM role where I can drive execution velocity immediately (targeting ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.
 
 Best,
 Manav Mate
@@ -142,7 +142,7 @@ I am an operational founder and technical PM. Before leading product at HireFlo 
 
 I built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#evalguard
 
-I am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at ₹8.0 LPA (targeting ₹8.5L to ₹10L with upside in early equity).
+I am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at ₹8.0 LPA (targeting ₹6.5L to ₹8L with upside in early equity).
 
 Open to a brief 15-minute chat this week?
 
@@ -197,7 +197,7 @@ I am an operational founder and technical PM. Before leading product at HireFlo 
 
 I built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering
 
-I am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at ₹8.0 LPA (targeting ₹12L to ₹14L base given proven AI pipeline and P&L scaling track record).
+I am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at ₹8.0 LPA (targeting ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record).
 
 Open to a brief 15-minute chat this week?
 
@@ -253,7 +253,7 @@ I am an early-stage Technical PM with Scaler Quora System Design training and fo
 
 I also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#evalguard
 
-Looking for an APM / AI PM role where I can drive execution velocity immediately (targeting ₹12L to ₹14L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.
+Looking for an APM / AI PM role where I can drive execution velocity immediately (targeting ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.
 
 Best,
 Manav Mate
@@ -307,7 +307,7 @@ I am an early-stage Technical PM with Scaler Quora System Design training and fo
 
 I also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#payrouter
 
-Looking for an APM / AI PM role where I can drive execution velocity immediately (targeting ₹12L to ₹14L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.
+Looking for an APM / AI PM role where I can drive execution velocity immediately (targeting ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.
 
 Best,
 Manav Mate
@@ -362,7 +362,7 @@ At HireFlo, I redesigned recruiter onboarding funnels in Figma, lifting workflow
 
 I built an interactive simulation of this workforce and SLA escalation engine: https://manavmate53-jpg.github.io/pm-product-lab/#flashqueue
 
-I am targeting Product Operations / Operations PM roles in Mumbai or Remote (targeting ₹12L to ₹14L base given proven AI pipeline and P&L scaling track record). Would love to share how these systems could support Zepto's scale.
+I am targeting Product Operations / Operations PM roles in Mumbai or Remote (targeting ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record). Would love to share how these systems could support Zepto's scale.
 
 Best,
 Manav Mate
@@ -416,7 +416,7 @@ I am an early-stage Technical PM with Scaler Quora System Design training and fo
 
 I also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#evalguard
 
-Looking for an APM / AI PM role where I can drive execution velocity immediately (targeting ₹12L to ₹14L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.
+Looking for an APM / AI PM role where I can drive execution velocity immediately (targeting ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.
 
 Best,
 Manav Mate
@@ -469,7 +469,7 @@ I am an operational founder and technical PM. Before leading product at HireFlo 
 
 I built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering
 
-I am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at ₹8.0 LPA (targeting ₹12L to ₹14L base given proven AI pipeline and P&L scaling track record).
+I am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at ₹8.0 LPA (targeting ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record).
 
 Open to a brief 15-minute chat this week?
 
@@ -524,7 +524,7 @@ I am an operational founder and technical PM. Before leading product at HireFlo 
 
 I built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#automatch
 
-I am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at ₹8.0 LPA (targeting ₹8.5L to ₹10L with upside in early equity).
+I am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at ₹8.0 LPA (targeting ₹6.5L to ₹8L with upside in early equity).
 
 Open to a brief 15-minute chat this week?
 

@@ -74,7 +74,7 @@ def test_pillar_classification():
     # Pillar 1: Founder's Office
     p1 = classifier.classify(title="Founder's Office", stage="Seed")
     assert p1.pillar == StrategicPillar.FOUNDERS_OFFICE
-    assert p1.suggested_ctc_band["quoted"] == 9.0
+    assert p1.suggested_ctc_band["quoted"] == 7.0
 
     # Pillar 2: Product Operations
     p2 = classifier.classify(title="Product Operations Manager", stage="Series A")
@@ -83,7 +83,7 @@ def test_pillar_classification():
     # Pillar 3: AI APM
     p3 = classifier.classify(title="Associate Product Manager", description="AI Systems", stage="Series A")
     assert p3.pillar == StrategicPillar.AI_APM
-    assert p3.suggested_ctc_band["quoted"] == 12.5
+    assert p3.suggested_ctc_band["quoted"] == 10.5
 
 
 def test_scoring_rubric():

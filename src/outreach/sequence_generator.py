@@ -66,8 +66,8 @@ class SequenceGenerator:
     def get_salary_quote_note(self, funding_stage: str) -> str:
         st = funding_stage.lower()
         if "seed" in st or "pre-series a" in st or "angel" in st:
-            return "targeting ₹8.5L to ₹10L with upside in early equity"
-        return "targeting ₹12L to ₹14L base given proven AI pipeline and P&L scaling track record"
+            return "targeting ₹6.5L to ₹8L with upside in early equity"
+        return "targeting ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record"
 
     def clean_text_strict(self, text: str) -> str:
         """Removes em dashes, double dashes, and corporate buzzwords."""

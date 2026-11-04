@@ -27,6 +27,7 @@ from src.services.bullet_selector import BulletSelector
 from src.services.keyword_aligner import KeywordAligner
 from src.services.writing_quality import WritingQualityAudit
 from src.services.page_fit import PageFitValidator
+from src.tailoring.pillar_cv_generator import PillarCVGenerator
 
 logger = logging.getLogger(__name__)
 
@@ -59,6 +60,11 @@ class TailorEngine:
         self.ats_scorer = ATSScorer()
         self.bullet_selector = BulletSelector()
         self.keyword_aligner = KeywordAligner()
+        self.pillar_cv_gen = PillarCVGenerator(
+            candidate_profile_path=self.base_dir / "config" / "candidate_profile.json",
+            templates_dir=self.templates_dir,
+            output_dir=self.exports_resumes_dir
+        )
 
     def tailor(
         self,
@@ -424,10 +430,25 @@ class TailorEngine:
         # Step 9: Render single-page PDF via Playwright
         self._export_pdf(html_path, pdf_path)
 
+        pillar_cv_path = None
+        if eval_result and eval_result.pillar:
+            try:
+                p_res = self.pillar_cv_gen.generate_cv(
+                    company_name=job.company,
+                    role_title=job.role,
+                    pillar=eval_result.pillar,
+                    sector="",
+                    generate_pdf=True
+                )
+                pillar_cv_path = str(p_res.get("pdf", ""))
+            except Exception as e:
+                logger.warning(f"Could not generate pillar CV for {job.company}: {e}")
+
         return {
             "html_path": str(html_path),
             "md_path": str(md_path),
             "pdf_path": str(pdf_path),
+            "pillar_cv_path": pillar_cv_path,
             "ats_report_path": str(report_path),
             "ats_score": ats_report.overall_score,
             "ats_report": ats_report

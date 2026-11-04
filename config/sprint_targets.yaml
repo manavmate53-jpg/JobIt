@@ -20,15 +20,15 @@ dynamic_salary_bands:
   seed_pre_series_a:
     label: "Seed / Pre-Series A"
     current_ctc_inr_lpa: 8.0
-    expected_ctc_min_inr_lpa: 8.0
-    expected_ctc_max_inr_lpa: 10.5
-    quote_strategy: "Anchor around ₹8.5L to ₹10L with upside in early equity/ESOPs."
+    expected_ctc_min_inr_lpa: 6.0
+    expected_ctc_max_inr_lpa: 8.5
+    quote_strategy: "Anchor around ₹6.5L to ₹8L with upside in early equity/ESOPs."
   series_a_b:
     label: "Series A / Series B+"
     current_ctc_inr_lpa: 8.0
-    expected_ctc_min_inr_lpa: 11.0
-    expected_ctc_max_inr_lpa: 15.0
-    quote_strategy: "Anchor firmly at ₹12L to ₹14L base given proven AI pipeline and P&L scaling track record."
+    expected_ctc_min_inr_lpa: 9.0
+    expected_ctc_max_inr_lpa: 13.0
+    quote_strategy: "Anchor firmly at ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record."
 
 pillar_distribution_targets:
   pillar_1_founders_office_pct: 40

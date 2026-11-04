@@ -84,17 +84,17 @@
     ],
     "compensation": {
       "current_ctc_inr_lpa": 8.0,
-      "expected_ctc_min_inr_lpa": 8.0,
-      "expected_ctc_max_inr_lpa": 15.0,
+      "expected_ctc_min_inr_lpa": 6.0,
+      "expected_ctc_max_inr_lpa": 13.0,
       "seed_pre_series_a_range": {
-        "min_lpa": 8.0,
-        "max_lpa": 10.5
+        "min_lpa": 6.0,
+        "max_lpa": 8.5
       },
       "series_a_b_range": {
-        "min_lpa": 11.0,
-        "max_lpa": 15.0
+        "min_lpa": 9.0,
+        "max_lpa": 13.0
       },
-      "notes": "Current CTC anchored at ₹8.0 LPA. Expected CTC quotes ₹8L to ₹10.5L for Seed/Pre-Series A startups, and ₹11L to ₹15L for Series A/B tech startups."
+      "notes": "Current CTC anchored at ₹8.0 LPA. Expected CTC quotes ₹6.0L to ₹8.5L for Seed/Pre-Series A startups, and ₹9.0L to ₹13.0L for Series A/B tech startups."
     }
   },
   "work_experience": [

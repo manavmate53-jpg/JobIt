@@ -66,6 +66,7 @@ def scrape_cmd(portal: str, keywords: str, location: str, limit: int):
     table.add_column("ID", style="dim", width=4)
     table.add_column("Company", style="bold white")
     table.add_column("Role", style="cyan")
+    table.add_column("Pillar", style="magenta")
     table.add_column("Source", style="blue", width=9)
     table.add_column("Score", justify="center", width=7)
     table.add_column("Decision", justify="center", width=10)
@@ -85,10 +86,13 @@ def scrape_cmd(portal: str, keywords: str, location: str, limit: int):
         if eval_result.decision == "APPLY":
             apply_count += 1
 
+        pillar_txt = eval_result.pillar_label.split(":")[0] if eval_result.pillar_label else "-"
+
         table.add_row(
             str(job_id),
             job.company[:24],
-            job.role[:32],
+            job.role[:30],
+            pillar_txt,
             job.source,
             f"[{score_color}]{eval_result.fit_score}[/{score_color}]",
             f"[{decision_style}]{eval_result.decision}[/{decision_style}]",
@@ -925,11 +929,11 @@ def status_cmd():
 @cli.command("run-all")
 @click.option("--limit", default=10, type=int, help="Number of jobs to process")
 def run_all_cmd(limit: int):
-    """End-to-end automated pipeline: Scrapes, scores, tailors APPLY jobs, and drafts outreach."""
+    """End-to-end automated pipeline: Scrapes across all portals, scores against 3-pillar strategy, tailors APPLY jobs, and drafts outreach."""
     console.print(Panel(
         f"[bold cyan]Executing Full End-to-End Autonomous Pipeline[/bold cyan]\n"
-        f"Candidate: [bold]Manav Mate[/bold] (Product Manager | 0-3 yrs)\n"
-        f"Limit: {limit} listings across LinkedIn & Naukri",
+        f"Candidate: [bold]Manav Mate[/bold] (Product Manager | Founder's Office | 0-3 yrs)\n"
+        f"Limit: {limit} listings across all portals (LinkedIn, Naukri, Wellfound, Cutshort, Instahyre, Indeed, Remote)",
         box=box.ROUNDED
     ))
 
@@ -952,7 +956,8 @@ def run_all_cmd(limit: int):
 
     # 3. Tailor & Draft Outreach for APPLY jobs
     for job_id, job, eval_res in apply_jobs:
-        console.print(f"\n[bold cyan]Processing #{job_id}: {job.role} at {job.company}[/bold cyan]")
+        pillar_tag = f"[{eval_res.pillar_label}]" if eval_res.pillar_label else ""
+        console.print(f"\n[bold cyan]Processing #{job_id}: {job.role} at {job.company}[/bold cyan] [magenta]{pillar_tag}[/magenta]")
         with console.status("Generating tailored CV and Cover Letter..."):
             outputs = tailor_engine.tailor(job, eval_res)
             db.update_status(job_id, status="Tailored", tailored_cv_path=outputs["pdf_path"])
@@ -967,6 +972,8 @@ def run_all_cmd(limit: int):
             )
 
         console.print(f"  ✓ Single-page PDF CV: {outputs['pdf_path']}")
+        if outputs.get("pillar_cv_path"):
+            console.print(f"  ✓ Strategic Pillar CV: {outputs['pillar_cv_path']}")
         console.print(f"  ✓ Cover letter: {outputs['cover_letter_txt']}")
         console.print(f"  ✓ Outreach draft: {outreach['draft_txt_path']}")
 
@@ -1007,7 +1014,7 @@ def auto_pilot_cmd(locations: str, roles: str, limit_per_query: int, min_score: 
     console.print(Panel(
         f"[bold cyan]⚡ JobIt Autonomous Auto-Pilot Engine[/bold cyan]\n"
         f"Locations: [magenta]{', '.join(target_locations)}[/magenta] | Roles: [green]{len(target_roles)} search vectors[/green]\n"
-        f"Target CTC: [yellow]₹11 - ₹16 LPA (or USD remote equivalent)[/yellow] | Min Fit Score: [green]{min_score}+[/green]\n"
+        f"Target CTC: [yellow]₹6 - ₹13 LPA (or USD remote equivalent)[/yellow] | Min Fit Score: [green]{min_score}+[/green]\n"
         f"Filter: [red]Anti-manufacturing, pharma, NBFC traps active[/red]",
         box=box.ROUNDED
     ))
