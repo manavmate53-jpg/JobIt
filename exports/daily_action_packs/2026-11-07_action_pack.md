@@ -68,7 +68,7 @@ Hi Kunal, bumping this quickly in case it got buried under your post-funding inb
 - **Email Permutations**: `sanjay@bcdmeetingsevents.com`, `sanjay.sharma@bcdmeetingsevents.com`, `sanjaysharma@bcdmeetingsevents.com`
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22BCD%20Meetings%20%26%20Events%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/bcd-meetings-events/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_BCD_Meetings___Events_mice.pdf`
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Event_Management_CV.pdf`
 - **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
 
 ### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
@@ -139,7 +139,7 @@ Hi Sanjay, following up briefly on my note regarding Event Operations at BCD Mee
 - **Email Permutations**: `bhawna@cwtmeetingsevents.com`, `bhawna.gupta@cwtmeetingsevents.com`, `bhawnagupta@cwtmeetingsevents.com`
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22CWT%20Meetings%20%26%20Events%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/cwt-meetings-events/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_CWT_Meetings___Events_mice.pdf`
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Event_Management_CV.pdf`
 - **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
 
 ### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
@@ -210,7 +210,7 @@ Hi Bhawna, following up briefly on my note regarding Event Operations at CWT Mee
 - **Email Permutations**: `sukesh@biworldwide.com`, `sukesh.jain@biworldwide.com`, `sukeshjain@biworldwide.com`
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22BI%20Worldwide%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/bi-worldwide/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_BI_Worldwide_mice.pdf`
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Event_Management_CV.pdf`
 - **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
 
 ### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
@@ -281,7 +281,7 @@ Hi Sukesh, following up briefly on my note regarding Event Operations at BI Worl
 - **Email Permutations**: `gaurav@americanexpressgbt.com`, `gaurav.malhotra@americanexpressgbt.com`, `gauravmalhotra@americanexpressgbt.com`
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22American%20Express%20GBT%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/american-express-gbt/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_American_Express_GBT_mice.pdf`
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Event_Management_CV.pdf`
 - **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
 
 ### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
@@ -352,7 +352,7 @@ Hi Gaurav, following up briefly on my note regarding Event Operations at America
 - **Email Permutations**: `rajeev@thomascookmice.com`, `rajeev.kale@thomascookmice.com`, `rajeevkale@thomascookmice.com`
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22Thomas%20Cook%20MICE%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/thomas-cook-mice/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Thomas_Cook_MICE_mice.pdf`
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Event_Management_CV.pdf`
 - **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
 
 ### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
@@ -423,7 +423,7 @@ Hi Rajeev, following up briefly on my note regarding Event Operations at Thomas 
 - **Email Permutations**: `manpreet@fcmmeetingsevents.com`, `manpreet.bindra@fcmmeetingsevents.com`, `manpreetbindra@fcmmeetingsevents.com`
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22FCM%20Meetings%20%26%20Events%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/fcm-meetings-events/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_FCM_Meetings___Events_mice.pdf`
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Event_Management_CV.pdf`
 - **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
 
 ### Touchpoint 1: LinkedIn Connect Note (270/280 chars)
