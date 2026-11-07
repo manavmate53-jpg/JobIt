@@ -80,7 +80,11 @@ class ScoringEngine:
         else:
             # Default for unspecified experience if title indicates early career or specialist
             title_lower = job.role.lower()
-            if any(t in title_lower for t in ["associate", "junior", "apm", "coordinator", "analyst", "intern", "specialist", "trainee", "founder", "chief of staff", "product operations"]):
+            if any(t in title_lower for t in [
+                "associate", "junior", "apm", "coordinator", "analyst", "intern", "specialist",
+                "trainee", "founder", "chief of staff", "product operations", "event", "mice",
+                "production", "venue", "procurement", "client servicing", "operations"
+            ]):
                 score += 15
             else:
                 score += 10
@@ -95,7 +99,9 @@ class ScoringEngine:
             "s&op", "demand planning", "project management", "agile", "business analyst",
             "solutions", "systems", "growth", "product owner", "system architecture",
             "scalability", "distributed systems", "api platforms", "microservices",
-            "platform pm", "technical product manager", "tpm"
+            "platform pm", "technical product manager", "tpm",
+            "event", "events", "mice", "experiential", "venue", "production", "procurement",
+            "convention", "hospitality", "client servicing", "conferences"
         ]
         matches = [d for d in target_domains if d in domain_text]
         if matches:
@@ -222,6 +228,20 @@ class ScoringEngine:
                 "system architecture", "scalability", "distributed systems", "api platform", "api platforms",
                 "microservices", "caching", "cdn", "database scaling", "replication", "asynchronous",
                 "message queue", "queues", "cap theorem", "latency", "throughput", "infrastructure sizing"
+            ],
+            "Event Operations & Production": [
+                "event", "events", "production", "stage", "venue", "run of show", "show time", "av",
+                "sound", "lighting", "on-ground", "setup", "floor map", "zone mapping"
+            ],
+            "Corporate MICE & Conferences": [
+                "mice", "conference", "summit", "delegate", "registration", "hospitality", "convention",
+                "exhibition", "client servicing", "corporate events"
+            ],
+            "Event Procurement & Catering Logistics": [
+                "procurement", "vendor", "supplies", "goodies", "merchandise", "catering", "f&b", "dining", "menu"
+            ],
+            "Canva Pitch Decks & AI Planning": [
+                "canva", "pitch", "signage", "collateral", "presentation", "ai tools", "chatgpt", "ideation", "schedules"
             ]
         }
 
@@ -275,6 +295,10 @@ class ScoringEngine:
                 pillar_bonus = 14
                 if "AI Product Management & LLMs" not in matched_skills:
                     matched_skills.insert(0, "AI Product Management & LLMs")
+            elif p_val == StrategicPillar.EVENT_OPERATIONS.value:
+                pillar_bonus = 14
+                if "Event Operations & MICE Delivery" not in matched_skills:
+                    matched_skills.insert(0, "Event Operations & MICE Delivery")
 
         # Calculate semantic score based on matches, arch relevance, and pillar alignment
         base_sem = 34
@@ -283,7 +307,17 @@ class ScoringEngine:
 
         lab_ids = getattr(pillar_res, "primary_pm_lab_ids", ["payrouter", "evalguard"]) if pillar_res else ["payrouter"]
         # Generate grounded gap analysis and pitch angle
-        if pillar_res and pillar_res.pillar == StrategicPillar.FOUNDERS_OFFICE:
+        if pillar_res and pillar_res.pillar == StrategicPillar.EVENT_OPERATIONS:
+            gap = (
+                "Role requires hands-on event operations, venue booking, AV timing, and MICE coordination. "
+                "Candidate's track record delivering 150-200+ events with 15+ agencies in Mumbai, 2026 marquee executions "
+                "at Tata Mumbai Marathon (Mumbai University venue), ICANN 2026, and Neurology Summit 2026, and PMI CIPM certification proves immediate operational mastery."
+            )
+            angle = (
+                "Highlight 4+ years event operations across 150-200+ events, 2026 Tata Mumbai Marathon and ICANN executions, "
+                "end-to-end procurement, AV show timing, catering planning, Canva pitch decks, and live CrewRoster simulation."
+            )
+        elif pillar_res and pillar_res.pillar == StrategicPillar.FOUNDERS_OFFICE:
             gap = (
                 f"Role seeks high-velocity generalist execution directly beside founders. "
                 f"Candidate's NeoManpower 0-to-1 track record (50+ B2B clients, 133 personnel, 200+ deployments with zero SLA breaches) "

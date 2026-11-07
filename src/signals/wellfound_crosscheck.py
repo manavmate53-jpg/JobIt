@@ -61,12 +61,17 @@ class WellfoundCrossChecker:
     def infer_primary_pillar(self, signal: FundingSignal) -> str:
         """
         Determines the most strategic pillar to lead with based on stage & sector.
+        - Event / MICE / Venue / Experiential: Event Operations Manager / MICE Project Lead
         - Seed / Pre-Series A (<$5M): Founder's Office / Chief of Staff (highest founder leverage)
         - Logistics / Quick Commerce / Ops-heavy: Product Operations Manager
         - AI / Developer Tools / Fintech / Series A+: AI APM / Technical PM
         """
         sec = signal.sector.lower()
         stage = signal.funding_stage.lower()
+        tags = [t.lower() for t in getattr(signal, "domain_tags", [])]
+
+        if "event" in sec or "mice" in sec or "venue" in sec or "experiential" in sec or any("event" in t or "mice" in t for t in tags):
+            return "EVENT_OPERATIONS"
 
         if "logistics" in sec or "operations" in sec or "supply chain" in sec or "quick commerce" in sec:
             return "PRODUCT_OPERATIONS"
@@ -87,7 +92,20 @@ class WellfoundCrossChecker:
 
         pillar = self.infer_primary_pillar(signal)
 
-        if pillar == "FOUNDERS_OFFICE":
+        if pillar == "EVENT_OPERATIONS":
+            comp_lower = signal.company_name.lower()
+            if "venue" in comp_lower or "nesco" in comp_lower or "jio" in comp_lower:
+                suggested_role = "Venue Operations Manager"
+            elif "procurement" in signal.key_challenge.lower() or "production" in comp_lower:
+                suggested_role = "Event Production & Procurement Executive"
+            elif "mice" in comp_lower or "mice" in signal.sector.lower():
+                suggested_role = "MICE Project Manager / Coordinator"
+            elif "servicing" in signal.key_challenge.lower():
+                suggested_role = "Client Servicing & Operations Lead"
+            else:
+                suggested_role = "Event Operations Manager"
+            pitch_hook = f"Executing end-to-end venue operations, procurement, AV timing, and MICE coordination for {signal.company_name} with 100% SLA compliance backed by 4+ years and 150-200+ events track record."
+        elif pillar == "FOUNDERS_OFFICE":
             suggested_role = "Founder's Office / Strategy & Operations Lead"
             pitch_hook = f"Helping the founding team scale {signal.company_name} post-{signal.funding_stage} round by taking operational execution and 0-to-1 workflows off your plate."
         elif pillar == "PRODUCT_OPERATIONS":

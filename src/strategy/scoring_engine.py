@@ -37,8 +37,8 @@ class StrategyScoringEngine:
 
     def score_funding_stage(self, stage: str) -> int:
         st = stage.lower()
-        if "seed" in st or "pre-series a" in st or "pre seed" in st:
-            return 25  # Sweet spot: highest founder accessibility and urgency
+        if "seed" in st or "pre-series a" in st or "pre seed" in st or "mice" in st or "enterprise mice" in st or "corporate" in st:
+            return 25  # Sweet spot: highest founder/operations accessibility and urgency
         if "series a" in st:
             return 20  # Excellent: capital to scale, hiring 1st/2nd PM or ProdOps
         if "series b" in st:
@@ -57,7 +57,7 @@ class StrategyScoringEngine:
     def score_location(self, location: str) -> int:
         loc = location.lower()
         # Mumbai local network (candidate is based in Jogeshwari East, Mumbai)
-        if any(m in loc for m in ["mumbai", "navi mumbai", "thane"]):
+        if any(m in loc for m in ["mumbai", "andheri", "goregaon", "bkc", "lower parel", "western suburbs", "navi mumbai", "thane"]):
             return 25
         if "remote" in loc:
             return 20
@@ -67,7 +67,10 @@ class StrategyScoringEngine:
 
     def score_domain(self, sector: str) -> int:
         sec = sector.lower()
-        high_affinity = ["fintech", "ai", "genai", "logistics", "supply chain", "workforce", "b2b saas", "marketplace"]
+        high_affinity = [
+            "fintech", "ai", "genai", "logistics", "supply chain", "workforce", "b2b saas", "marketplace",
+            "event", "events", "mice", "experiential", "venue", "production", "procurement", "convention"
+        ]
         if any(domain in sec for domain in high_affinity):
             return 15
         if "tech" in sec or "software" in sec:

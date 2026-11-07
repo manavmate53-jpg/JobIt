@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-07T03:54:54.297955",
+  "timestamp": "2026-11-07T15:53:37.901049",
   "cycle": "6_hour_recon",
   "summary": {
     "companies_scanned": 5,
-    "leads_enriched": 22,
+    "leads_enriched": 38,
     "hires_reverse_engineered": 15,
     "active_posts_harvested": 5,
     "teardown_vectors_identified": 5
@@ -26,7 +26,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "250_DELIVERABLE",
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/datavruti-product-lead",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -48,7 +48,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "250_DELIVERABLE",
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/datavruti-talent-partner",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -69,11 +69,11 @@
         "hiringpurplle@purplle.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/purplle-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Talent Partner (Purplle)",
@@ -91,11 +91,11 @@
         "talentpurplle@purplle.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/purplle-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Hiring Lead (Smartstream Technologies)",
@@ -113,11 +113,11 @@
         "hiringtechnologies@smartstream.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/smartstream technologies-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Talent Partner (Smartstream Technologies)",
@@ -135,11 +135,11 @@
         "talenttechnologies@smartstream.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/smartstream technologies-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Hiring Lead (Sovos)",
@@ -157,11 +157,11 @@
         "hiringsovos@sovos.com"
       ],
       "mx_host": "sovos-com.mail.protection.outlook.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/sovos-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Talent Partner (Sovos)",
@@ -179,11 +179,11 @@
         "talentsovos@sovos.com"
       ],
       "mx_host": "sovos-com.mail.protection.outlook.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/sovos-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Hiring Lead (IDfy)",
@@ -201,11 +201,11 @@
         "hiringidfy@idfy.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/idfy-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Talent Partner (IDfy)",
@@ -223,11 +223,11 @@
         "talentidfy@idfy.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
       "linkedin_url": "https://www.linkedin.com/in/idfy-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Arvind Parthiban",
@@ -403,6 +403,406 @@
       "attachment_pdf": "exports/resumes/Manav_Mate_Zepto_operations.pdf",
       "is_verified": true,
       "opportunity_id": 7
+    },
+    {
+      "name": "Sanjay Sharma",
+      "company": "BCD Meetings & Events",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22BCD%20Meetings%20%26%20Events%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "bcdmeetings&events.com",
+      "primary_email": "sanjay@bcdmeetingsevents.com",
+      "email_permutations": [
+        "sanjay@bcdmeetingsevents.com",
+        "sanjay.sharma@bcdmeetingsevents.com",
+        "sanjaysharma@bcdmeetingsevents.com",
+        "ssharma@bcdmeetingsevents.com",
+        "careers@bcdmeetingsevents.com"
+      ],
+      "confidence_score": 100,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Sanjay, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Sanjay,\n\nReaching out regarding Event Operations and MICE Project Management at BCD Meetings & Events.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support BCD Meetings & Events's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Sanjay,\n\nApplying for Event Operations & MICE roles at BCD Meetings & Events. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Sanjay, following up briefly on my note regarding Event Operations at BCD Meetings & Events. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_BCD_Meetings___Events_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 217
+    },
+    {
+      "name": "Bhawna Gupta",
+      "company": "CWT Meetings & Events",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22CWT%20Meetings%20%26%20Events%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "cwtmeetings&events.com",
+      "primary_email": "bhawna@cwtmeetingsevents.com",
+      "email_permutations": [
+        "bhawna@cwtmeetingsevents.com",
+        "bhawna.gupta@cwtmeetingsevents.com",
+        "bhawnagupta@cwtmeetingsevents.com",
+        "bgupta@cwtmeetingsevents.com",
+        "careers@cwtmeetingsevents.com"
+      ],
+      "confidence_score": 100,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Bhawna, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Bhawna,\n\nReaching out regarding Event Operations and MICE Project Management at CWT Meetings & Events.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support CWT Meetings & Events's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Bhawna,\n\nApplying for Event Operations & MICE roles at CWT Meetings & Events. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Bhawna, following up briefly on my note regarding Event Operations at CWT Meetings & Events. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_CWT_Meetings___Events_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 218
+    },
+    {
+      "name": "Sukesh Jain",
+      "company": "BI Worldwide",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22BI%20Worldwide%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "biworldwide.com",
+      "primary_email": "sukesh@biworldwide.com",
+      "email_permutations": [
+        "sukesh@biworldwide.com",
+        "sukesh.jain@biworldwide.com",
+        "sukeshjain@biworldwide.com",
+        "sjain@biworldwide.com",
+        "careers@biworldwide.com"
+      ],
+      "confidence_score": 100,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Sukesh, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Sukesh,\n\nReaching out regarding Event Operations and MICE Project Management at BI Worldwide.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support BI Worldwide's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Sukesh,\n\nApplying for Event Operations & MICE roles at BI Worldwide. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Sukesh, following up briefly on my note regarding Event Operations at BI Worldwide. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_BI_Worldwide_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 219
+    },
+    {
+      "name": "Gaurav Malhotra",
+      "company": "American Express GBT",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22American%20Express%20GBT%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "americanexpressgbt.com",
+      "primary_email": "gaurav@americanexpressgbt.com",
+      "email_permutations": [
+        "gaurav@americanexpressgbt.com",
+        "gaurav.malhotra@americanexpressgbt.com",
+        "gauravmalhotra@americanexpressgbt.com",
+        "gmalhotra@americanexpressgbt.com",
+        "careers@americanexpressgbt.com"
+      ],
+      "confidence_score": 100,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Gaurav, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Gaurav,\n\nReaching out regarding Event Operations and MICE Project Management at American Express GBT.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support American Express GBT's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Gaurav,\n\nApplying for Event Operations & MICE roles at American Express GBT. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Gaurav, following up briefly on my note regarding Event Operations at American Express GBT. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_American_Express_GBT_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 220
+    },
+    {
+      "name": "Rajeev Kale",
+      "company": "Thomas Cook MICE",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22Thomas%20Cook%20MICE%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "thomascookmice.com",
+      "primary_email": "rajeev@thomascookmice.com",
+      "email_permutations": [
+        "rajeev@thomascookmice.com",
+        "rajeev.kale@thomascookmice.com",
+        "rajeevkale@thomascookmice.com",
+        "rkale@thomascookmice.com",
+        "careers@thomascookmice.com"
+      ],
+      "confidence_score": 100,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Rajeev, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Rajeev,\n\nReaching out regarding Event Operations and MICE Project Management at Thomas Cook MICE.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support Thomas Cook MICE's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Rajeev,\n\nApplying for Event Operations & MICE roles at Thomas Cook MICE. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Rajeev, following up briefly on my note regarding Event Operations at Thomas Cook MICE. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_Thomas_Cook_MICE_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 221
+    },
+    {
+      "name": "Manpreet Bindra",
+      "company": "FCM Meetings & Events",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22FCM%20Meetings%20%26%20Events%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "fcmmeetings&events.com",
+      "primary_email": "manpreet@fcmmeetingsevents.com",
+      "email_permutations": [
+        "manpreet@fcmmeetingsevents.com",
+        "manpreet.bindra@fcmmeetingsevents.com",
+        "manpreetbindra@fcmmeetingsevents.com",
+        "mbindra@fcmmeetingsevents.com",
+        "careers@fcmmeetingsevents.com"
+      ],
+      "confidence_score": 100,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Manpreet, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Manpreet,\n\nReaching out regarding Event Operations and MICE Project Management at FCM Meetings & Events.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support FCM Meetings & Events's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Manpreet,\n\nApplying for Event Operations & MICE roles at FCM Meetings & Events. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Manpreet, following up briefly on my note regarding Event Operations at FCM Meetings & Events. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_FCM_Meetings___Events_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 222
+    },
+    {
+      "name": "Dhiraj Agarwal",
+      "company": "Jio World Convention Centre",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22Jio%20World%20Convention%20Centre%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "jioworldconventioncentre.com",
+      "primary_email": "dhiraj@jioworldconventioncentre.com",
+      "email_permutations": [
+        "dhiraj@jioworldconventioncentre.com",
+        "dhiraj.agarwal@jioworldconventioncentre.com",
+        "dhirajagarwal@jioworldconventioncentre.com",
+        "dagarwal@jioworldconventioncentre.com",
+        "careers@jioworldconventioncentre.com"
+      ],
+      "confidence_score": 85,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Dhiraj, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Dhiraj,\n\nReaching out regarding Event Operations and MICE Project Management at Jio World Convention Centre.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support Jio World Convention Centre's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Dhiraj,\n\nApplying for Event Operations & MICE roles at Jio World Convention Centre. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Dhiraj, following up briefly on my note regarding Event Operations at Jio World Convention Centre. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_Jio_World_Convention_Centre_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 223
+    },
+    {
+      "name": "Sumant Patel",
+      "company": "NESCO Events",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22NESCO%20Events%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "nescoevents.com",
+      "primary_email": "sumant@nescoevents.com",
+      "email_permutations": [
+        "sumant@nescoevents.com",
+        "sumant.patel@nescoevents.com",
+        "sumantpatel@nescoevents.com",
+        "spatel@nescoevents.com",
+        "careers@nescoevents.com"
+      ],
+      "confidence_score": 85,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Sumant, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Sumant,\n\nReaching out regarding Event Operations and MICE Project Management at NESCO Events.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support NESCO Events's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Sumant,\n\nApplying for Event Operations & MICE roles at NESCO Events. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Sumant, following up briefly on my note regarding Event Operations at NESCO Events. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_NESCO_Events_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 224
+    },
+    {
+      "name": "Yogesh Mudras",
+      "company": "Informa Markets",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22Informa%20Markets%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "informamarkets.com",
+      "primary_email": "yogesh@informamarkets.com",
+      "email_permutations": [
+        "yogesh@informamarkets.com",
+        "yogesh.mudras@informamarkets.com",
+        "yogeshmudras@informamarkets.com",
+        "ymudras@informamarkets.com",
+        "careers@informamarkets.com"
+      ],
+      "confidence_score": 75,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Yogesh, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Yogesh,\n\nReaching out regarding Event Operations and MICE Project Management at Informa Markets.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support Informa Markets's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Yogesh,\n\nApplying for Event Operations & MICE roles at Informa Markets. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Yogesh, following up briefly on my note regarding Event Operations at Informa Markets. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_Informa_Markets_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 225
+    },
+    {
+      "name": "Raj Manek",
+      "company": "Messe Frankfurt India",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22Messe%20Frankfurt%20India%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "messefrankfurtindia.com",
+      "primary_email": "raj@messefrankfurtindia.com",
+      "email_permutations": [
+        "raj@messefrankfurtindia.com",
+        "raj.manek@messefrankfurtindia.com",
+        "rajmanek@messefrankfurtindia.com",
+        "rmanek@messefrankfurtindia.com",
+        "careers@messefrankfurtindia.com"
+      ],
+      "confidence_score": 85,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Raj, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Raj,\n\nReaching out regarding Event Operations and MICE Project Management at Messe Frankfurt India.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support Messe Frankfurt India's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Raj,\n\nApplying for Event Operations & MICE roles at Messe Frankfurt India. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Raj, following up briefly on my note regarding Event Operations at Messe Frankfurt India. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_Messe_Frankfurt_India_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 226
+    },
+    {
+      "name": "Vivek Singh",
+      "company": "Procam International",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22Procam%20International%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "procaminternational.com",
+      "primary_email": "vivek@procaminternational.com",
+      "email_permutations": [
+        "vivek@procaminternational.com",
+        "vivek.singh@procaminternational.com",
+        "viveksingh@procaminternational.com",
+        "vsingh@procaminternational.com",
+        "careers@procaminternational.com"
+      ],
+      "confidence_score": 85,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Vivek, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Vivek,\n\nReaching out regarding Event Operations and MICE Project Management at Procam International.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support Procam International's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Vivek,\n\nApplying for Event Operations & MICE roles at Procam International. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Vivek, following up briefly on my note regarding Event Operations at Procam International. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_Procam_International_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 227
+    },
+    {
+      "name": "Thanush Joseph",
+      "company": "70 EMG",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%2270%20EMG%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "70emg.com",
+      "primary_email": "thanush@70emg.com",
+      "email_permutations": [
+        "thanush@70emg.com",
+        "thanush.joseph@70emg.com",
+        "thanushjoseph@70emg.com",
+        "tjoseph@70emg.com",
+        "careers@70emg.com"
+      ],
+      "confidence_score": 85,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Thanush, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Thanush,\n\nReaching out regarding Event Operations and MICE Project Management at 70 EMG.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support 70 EMG's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Thanush,\n\nApplying for Event Operations & MICE roles at 70 EMG. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Thanush, following up briefly on my note regarding Event Operations at 70 EMG. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_70_EMG_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 228
+    },
+    {
+      "name": "Sabbas Joseph",
+      "company": "Wizcraft Corporate",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22Wizcraft%20Corporate%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "wizcraftcorporate.com",
+      "primary_email": "sabbas@wizcraftcorporate.com",
+      "email_permutations": [
+        "sabbas@wizcraftcorporate.com",
+        "sabbas.joseph@wizcraftcorporate.com",
+        "sabbasjoseph@wizcraftcorporate.com",
+        "sjoseph@wizcraftcorporate.com",
+        "careers@wizcraftcorporate.com"
+      ],
+      "confidence_score": 85,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Sabbas, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Sabbas,\n\nReaching out regarding Event Operations and MICE Project Management at Wizcraft Corporate.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support Wizcraft Corporate's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Sabbas,\n\nApplying for Event Operations & MICE roles at Wizcraft Corporate. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Sabbas, following up briefly on my note regarding Event Operations at Wizcraft Corporate. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_Wizcraft_Corporate_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 229
+    },
+    {
+      "name": "Roshan Abbas",
+      "company": "Geometry Encompass",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22Geometry%20Encompass%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "geometryencompass.com",
+      "primary_email": "roshan@geometryencompass.com",
+      "email_permutations": [
+        "roshan@geometryencompass.com",
+        "roshan.abbas@geometryencompass.com",
+        "roshanabbas@geometryencompass.com",
+        "rabbas@geometryencompass.com",
+        "careers@geometryencompass.com"
+      ],
+      "confidence_score": 85,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Roshan, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Roshan,\n\nReaching out regarding Event Operations and MICE Project Management at Geometry Encompass.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support Geometry Encompass's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Roshan,\n\nApplying for Event Operations & MICE roles at Geometry Encompass. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Roshan, following up briefly on my note regarding Event Operations at Geometry Encompass. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_Geometry_Encompass_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 230
+    },
+    {
+      "name": "Navneeth Mohan",
+      "company": "Laqshya Live Experiences",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22Laqshya%20Live%20Experiences%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "laqshyaliveexperiences.com",
+      "primary_email": "navneeth@laqshyaliveexperiences.com",
+      "email_permutations": [
+        "navneeth@laqshyaliveexperiences.com",
+        "navneeth.mohan@laqshyaliveexperiences.com",
+        "navneethmohan@laqshyaliveexperiences.com",
+        "nmohan@laqshyaliveexperiences.com",
+        "careers@laqshyaliveexperiences.com"
+      ],
+      "confidence_score": 85,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Navneeth, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Navneeth,\n\nReaching out regarding Event Operations and MICE Project Management at Laqshya Live Experiences.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support Laqshya Live Experiences's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Navneeth,\n\nApplying for Event Operations & MICE roles at Laqshya Live Experiences. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Navneeth, following up briefly on my note regarding Event Operations at Laqshya Live Experiences. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_Laqshya_Live_Experiences_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 231
+    },
+    {
+      "name": "Brian Tellis",
+      "company": "Fountainhead MKTG",
+      "title": "Founder / CEO",
+      "pillar": "PILLAR_4_EVENT_OPERATIONS_MICE",
+      "linkedin_url": "https://www.linkedin.com/search/results/people/?keywords=%22Fountainhead%20MKTG%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER",
+      "domain": "fountainheadmktg.com",
+      "primary_email": "brian@fountainheadmktg.com",
+      "email_permutations": [
+        "brian@fountainheadmktg.com",
+        "brian.tellis@fountainheadmktg.com",
+        "briantellis@fountainheadmktg.com",
+        "btellis@fountainheadmktg.com",
+        "careers@fountainheadmktg.com"
+      ],
+      "confidence_score": 85,
+      "primary_channel": "linkedin_connect",
+      "connect_note": "Hi Brian, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!",
+      "cold_dm": "Hi Brian,\n\nReaching out regarding Event Operations and MICE Project Management at Fountainhead MKTG.\n\nI bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.\n\nKey 2026 Marquee Event Executions:\n1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).\n2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.\n3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.\n\nOperational & Tool Capabilities:\n- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.\n- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).\n- Technical AV operation handling with strict run-of-show time management.\n- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.\n- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.\n- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.\n\nCredentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.\nSalary expectation: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC).\nLive Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering\n\nWould love 10 minutes to discuss how I can support Fountainhead MKTG's live productions and MICE calendar.\n\nBest,\nManav Mate\n+91 85915 95889",
+      "wellfound_note": "Hi Brian,\n\nApplying for Event Operations & MICE roles at Fountainhead MKTG. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.\n\n2026 Execution Track Record:\n- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).\n- ICANN 2026: High-volume international delegate registration and on-ground logistics.\n- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.\n\nCapabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.\n\nSalary Floor: Minimum \u20b940,000/month in-hand (\u20b95.5L to \u20b97.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.",
+      "follow_up_bump": "Hi Brian, following up briefly on my note regarding Event Operations at Fountainhead MKTG. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
+      "attachment_pdf": "exports/resumes/Manav_Mate_Fountainhead_MKTG_mice.pdf",
+      "is_verified": true,
+      "opportunity_id": 232
     },
     {
       "name": "Rohit Agarwal",

@@ -254,18 +254,22 @@ class SequenceGenerator:
     def build_daily_action_pack(
         self,
         ranked_items: List[Dict[str, Any]],
-        pack_date: Optional[str] = None
+        pack_date: Optional[str] = None,
+        pack_file_path: Optional[Path] = None,
+        title: Optional[str] = None,
+        limit: int = 15
     ) -> Path:
         """
-        Compiles the Top 10 target startups into a clean, ready-to-paste markdown action pack.
+        Compiles the target openings into a clean, ready-to-paste markdown action pack.
         """
         date_str = pack_date or datetime.now().strftime("%Y-%m-%d")
         out_dir = Path("exports/daily_action_packs")
         out_dir.mkdir(parents=True, exist_ok=True)
-        pack_file = out_dir / f"{date_str}_action_pack.md"
+        pack_file = pack_file_path or (out_dir / f"{date_str}_action_pack.md")
 
+        header_title = title or f"JobIt v2.0 &bull; Daily Founder Action Pack &bull; {date_str}"
         lines = [
-            f"# JobIt v2.0 &bull; Daily Founder Action Pack &bull; {date_str}",
+            f"# {header_title}",
             "",
             "> Target: 10 Founder Outbound DMs + 5 Wellfound Applications per day.",
             "> Grounded execution voice: zero corporate buzzwords, zero em dashes.",
@@ -274,7 +278,7 @@ class SequenceGenerator:
             ""
         ]
 
-        for i, item in enumerate(ranked_items[:10], start=1):
+        for i, item in enumerate(ranked_items[:limit], start=1):
             touch: OutreachTouchpoints = item["touchpoints"]
             score_data: ScoreBreakdown = item["score"]
             opp: StartupOpportunity = item["opportunity"]

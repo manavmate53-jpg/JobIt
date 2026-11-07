@@ -49,6 +49,8 @@ class PillarCVGenerator:
 
     def get_template_name(self, pillar: str) -> str:
         pil = str(pillar).upper()
+        if "EVENT" in pil or "MICE" in pil or "PILLAR_4" in pil:
+            return "resume_event_management.html"
         if "FOUNDER" in pil or "PILLAR_1" in pil:
             return "resume_pillar1_founders_office.html"
         if "PRODUCT_OPERATIONS" in pil or "PILLAR_2" in pil or "OPS" in pil:

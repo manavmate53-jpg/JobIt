@@ -74,7 +74,8 @@ class FunnelDashboard:
         pillar_descs = {
             "PILLAR_1_FOUNDERS_OFFICE": "NeoManpower 0-50+ clients, P&L ownership, HireFlo 5-tier monetization",
             "PILLAR_2_PRODUCT_OPERATIONS": "133 field personnel, 0 SLA breaches, 12 days to 48 hrs reconciliation",
-            "PILLAR_3_AI_APM": "HireFlo 1,000-doc parsing, 40% Llama 3.1 compute cost reduction, 14+ PRDs"
+            "PILLAR_3_AI_APM": "HireFlo 1,000-doc parsing, 40% Llama 3.1 compute cost reduction, 14+ PRDs",
+            "PILLAR_4_EVENT_OPERATIONS_MICE": "150-200+ events, 15+ agencies, Tata Marathon '26 venue ops, ICANN '26, Neurology Summit '26"
         }
 
         for p in pillar_metrics:

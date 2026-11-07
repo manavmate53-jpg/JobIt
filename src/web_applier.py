@@ -400,24 +400,34 @@ class PortalWebApplier:
     def _fill_standard_questions(self, page: Page):
         """Auto-fills typical application questionnaire inputs with grounded candidate data."""
         try:
-            # Notice period
+            # Notice period: Immediate / 0 Days
             notice_inputs = page.locator("input[id*='notice'], select[id*='notice'], input[placeholder*='Notice']")
             if notice_inputs.count() > 0:
-                notice_inputs.first.fill("15 days")
+                notice_inputs.first.fill("Immediate / 0 Days")
 
-            # Current CTC
+            # Current CTC: ₹6,00,000 (6.0 LPA)
             ctc_inputs = page.locator("input[id*='ctc'], input[id*='salary'], input[placeholder*='Current CTC']")
             if ctc_inputs.count() > 0:
-                ctc_inputs.first.fill("800000")
+                ctc_inputs.first.fill("600000")
 
-            # Expected CTC (calibrated down by 2 lakhs)
+            # Expected CTC: ₹6,50,000 to ₹7,20,000 (6.5 - 7.2 LPA CTC / ₹45k-₹50k in-hand)
             exp_ctc = page.locator("input[placeholder*='Expected CTC'], input[id*='expectedCtc']")
             if exp_ctc.count() > 0:
-                exp_ctc.first.fill("1200000")
+                exp_ctc.first.fill("680000")
 
-            # Location / City
+            # Location / City: Jogeshwari East, Mumbai (Available On-Site Immediately)
             city_inputs = page.locator("input[id*='city'], input[placeholder*='Current Location']")
             if city_inputs.count() > 0:
-                city_inputs.first.fill("Mumbai")
+                city_inputs.first.fill("Jogeshwari East, Mumbai (Available On-Site Immediately)")
+
+            # Total Experience in Events / Operations: 4 Years
+            exp_inputs = page.locator("input[id*='experience'], input[placeholder*='Experience'], input[name*='experience']")
+            if exp_inputs.count() > 0:
+                exp_inputs.first.fill("4")
+
+            # Comfortable with live event date flexibility: Yes
+            flex_inputs = page.locator("input[id*='flexib'], select[id*='flexib'], input[name*='flexib']")
+            if flex_inputs.count() > 0:
+                flex_inputs.first.fill("Yes")
         except Exception as e:
             logger.debug(f"Questionnaire auto-fill note: {e}")

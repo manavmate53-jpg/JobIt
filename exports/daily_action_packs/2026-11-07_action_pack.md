@@ -60,7 +60,433 @@ Hi Kunal, bumping this quickly in case it got buried under your post-funding inb
 
 ---
 
-## 2. GrayQuest (Series A &bull; $7M)
+## 2. BCD Meetings & Events (Enterprise MICE &bull; $15M+ Capital Base)
+- **Sector / HQ**: Corporate MICE / Event Operations &bull; Andheri East, Mumbai
+- **Assigned Pillar**: `PILLAR_4_EVENT_OPERATIONS_MICE`
+- **Strategic Score**: **100/100**
+- **Target Decision Maker**: Sanjay Sharma (Founder / CEO)
+- **Email Permutations**: `sanjay@bcdmeetingsevents.com`, `sanjay.sharma@bcdmeetingsevents.com`, `sanjaysharma@bcdmeetingsevents.com`
+- **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22BCD%20Meetings%20%26%20Events%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
+- **Wellfound Careers**: [Open Board](https://wellfound.com/company/bcd-meetings-events/jobs)
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_BCD_Meetings___Events_mice.pdf`
+- **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
+
+### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
+```text
+Hi Sanjay, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!
+```
+
+### Touchpoint 2: Funding-Hook Cold DM / InMail / Email
+```text
+Hi Sanjay,
+
+Reaching out regarding Event Operations and MICE Project Management at BCD Meetings & Events.
+
+I bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.
+
+Key 2026 Marquee Event Executions:
+1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).
+2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.
+3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.
+
+Operational & Tool Capabilities:
+- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.
+- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).
+- Technical AV operation handling with strict run-of-show time management.
+- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.
+- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.
+- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.
+
+Credentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.
+Salary expectation: Minimum ₹40,000/month in-hand (₹5.5L to ₹7.5L CTC).
+Live Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering
+
+Would love 10 minutes to discuss how I can support BCD Meetings & Events's live productions and MICE calendar.
+
+Best,
+Manav Mate
++91 85915 95889
+```
+
+### Touchpoint 3: Wellfound / Direct Note
+```text
+Hi Sanjay,
+
+Applying for Event Operations & MICE roles at BCD Meetings & Events. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.
+
+2026 Execution Track Record:
+- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).
+- ICANN 2026: High-volume international delegate registration and on-ground logistics.
+- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.
+
+Capabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.
+
+Salary Floor: Minimum ₹40,000/month in-hand (₹5.5L to ₹7.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.
+```
+
+### Touchpoint 4: 4-Day Follow-Up Bump
+```text
+Hi Sanjay, following up briefly on my note regarding Event Operations at BCD Meetings & Events. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.
+```
+
+---
+
+## 3. CWT Meetings & Events (Enterprise MICE &bull; $12M+ Capital Base)
+- **Sector / HQ**: Corporate MICE & Global Business Travel &bull; Lower Parel, Mumbai
+- **Assigned Pillar**: `PILLAR_4_EVENT_OPERATIONS_MICE`
+- **Strategic Score**: **100/100**
+- **Target Decision Maker**: Bhawna Gupta (Founder / CEO)
+- **Email Permutations**: `bhawna@cwtmeetingsevents.com`, `bhawna.gupta@cwtmeetingsevents.com`, `bhawnagupta@cwtmeetingsevents.com`
+- **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22CWT%20Meetings%20%26%20Events%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
+- **Wellfound Careers**: [Open Board](https://wellfound.com/company/cwt-meetings-events/jobs)
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_CWT_Meetings___Events_mice.pdf`
+- **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
+
+### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
+```text
+Hi Bhawna, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!
+```
+
+### Touchpoint 2: Funding-Hook Cold DM / InMail / Email
+```text
+Hi Bhawna,
+
+Reaching out regarding Event Operations and MICE Project Management at CWT Meetings & Events.
+
+I bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.
+
+Key 2026 Marquee Event Executions:
+1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).
+2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.
+3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.
+
+Operational & Tool Capabilities:
+- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.
+- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).
+- Technical AV operation handling with strict run-of-show time management.
+- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.
+- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.
+- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.
+
+Credentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.
+Salary expectation: Minimum ₹40,000/month in-hand (₹5.5L to ₹7.5L CTC).
+Live Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering
+
+Would love 10 minutes to discuss how I can support CWT Meetings & Events's live productions and MICE calendar.
+
+Best,
+Manav Mate
++91 85915 95889
+```
+
+### Touchpoint 3: Wellfound / Direct Note
+```text
+Hi Bhawna,
+
+Applying for Event Operations & MICE roles at CWT Meetings & Events. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.
+
+2026 Execution Track Record:
+- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).
+- ICANN 2026: High-volume international delegate registration and on-ground logistics.
+- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.
+
+Capabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.
+
+Salary Floor: Minimum ₹40,000/month in-hand (₹5.5L to ₹7.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.
+```
+
+### Touchpoint 4: 4-Day Follow-Up Bump
+```text
+Hi Bhawna, following up briefly on my note regarding Event Operations at CWT Meetings & Events. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.
+```
+
+---
+
+## 4. BI Worldwide (Enterprise MICE &bull; $10M+ Capital Base)
+- **Sector / HQ**: Experiential Corporate Events & MICE &bull; Andheri East, Mumbai
+- **Assigned Pillar**: `PILLAR_4_EVENT_OPERATIONS_MICE`
+- **Strategic Score**: **100/100**
+- **Target Decision Maker**: Sukesh Jain (Founder / CEO)
+- **Email Permutations**: `sukesh@biworldwide.com`, `sukesh.jain@biworldwide.com`, `sukeshjain@biworldwide.com`
+- **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22BI%20Worldwide%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
+- **Wellfound Careers**: [Open Board](https://wellfound.com/company/bi-worldwide/jobs)
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_BI_Worldwide_mice.pdf`
+- **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
+
+### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
+```text
+Hi Sukesh, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!
+```
+
+### Touchpoint 2: Funding-Hook Cold DM / InMail / Email
+```text
+Hi Sukesh,
+
+Reaching out regarding Event Operations and MICE Project Management at BI Worldwide.
+
+I bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.
+
+Key 2026 Marquee Event Executions:
+1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).
+2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.
+3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.
+
+Operational & Tool Capabilities:
+- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.
+- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).
+- Technical AV operation handling with strict run-of-show time management.
+- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.
+- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.
+- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.
+
+Credentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.
+Salary expectation: Minimum ₹40,000/month in-hand (₹5.5L to ₹7.5L CTC).
+Live Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering
+
+Would love 10 minutes to discuss how I can support BI Worldwide's live productions and MICE calendar.
+
+Best,
+Manav Mate
++91 85915 95889
+```
+
+### Touchpoint 3: Wellfound / Direct Note
+```text
+Hi Sukesh,
+
+Applying for Event Operations & MICE roles at BI Worldwide. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.
+
+2026 Execution Track Record:
+- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).
+- ICANN 2026: High-volume international delegate registration and on-ground logistics.
+- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.
+
+Capabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.
+
+Salary Floor: Minimum ₹40,000/month in-hand (₹5.5L to ₹7.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.
+```
+
+### Touchpoint 4: 4-Day Follow-Up Bump
+```text
+Hi Sukesh, following up briefly on my note regarding Event Operations at BI Worldwide. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.
+```
+
+---
+
+## 5. American Express GBT (Enterprise MICE &bull; $25M+ Capital Base)
+- **Sector / HQ**: Global Business Travel & Corporate MICE &bull; Lower Parel / BKC, Mumbai
+- **Assigned Pillar**: `PILLAR_4_EVENT_OPERATIONS_MICE`
+- **Strategic Score**: **100/100**
+- **Target Decision Maker**: Gaurav Malhotra (Founder / CEO)
+- **Email Permutations**: `gaurav@americanexpressgbt.com`, `gaurav.malhotra@americanexpressgbt.com`, `gauravmalhotra@americanexpressgbt.com`
+- **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22American%20Express%20GBT%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
+- **Wellfound Careers**: [Open Board](https://wellfound.com/company/american-express-gbt/jobs)
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_American_Express_GBT_mice.pdf`
+- **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
+
+### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
+```text
+Hi Gaurav, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!
+```
+
+### Touchpoint 2: Funding-Hook Cold DM / InMail / Email
+```text
+Hi Gaurav,
+
+Reaching out regarding Event Operations and MICE Project Management at American Express GBT.
+
+I bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.
+
+Key 2026 Marquee Event Executions:
+1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).
+2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.
+3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.
+
+Operational & Tool Capabilities:
+- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.
+- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).
+- Technical AV operation handling with strict run-of-show time management.
+- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.
+- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.
+- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.
+
+Credentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.
+Salary expectation: Minimum ₹40,000/month in-hand (₹5.5L to ₹7.5L CTC).
+Live Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering
+
+Would love 10 minutes to discuss how I can support American Express GBT's live productions and MICE calendar.
+
+Best,
+Manav Mate
++91 85915 95889
+```
+
+### Touchpoint 3: Wellfound / Direct Note
+```text
+Hi Gaurav,
+
+Applying for Event Operations & MICE roles at American Express GBT. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.
+
+2026 Execution Track Record:
+- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).
+- ICANN 2026: High-volume international delegate registration and on-ground logistics.
+- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.
+
+Capabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.
+
+Salary Floor: Minimum ₹40,000/month in-hand (₹5.5L to ₹7.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.
+```
+
+### Touchpoint 4: 4-Day Follow-Up Bump
+```text
+Hi Gaurav, following up briefly on my note regarding Event Operations at American Express GBT. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.
+```
+
+---
+
+## 6. Thomas Cook MICE (Enterprise MICE &bull; $20M+ Capital Base)
+- **Sector / HQ**: Corporate MICE & Group Travel Operations &bull; Lower Parel, Mumbai
+- **Assigned Pillar**: `PILLAR_4_EVENT_OPERATIONS_MICE`
+- **Strategic Score**: **100/100**
+- **Target Decision Maker**: Rajeev Kale (Founder / CEO)
+- **Email Permutations**: `rajeev@thomascookmice.com`, `rajeev.kale@thomascookmice.com`, `rajeevkale@thomascookmice.com`
+- **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22Thomas%20Cook%20MICE%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
+- **Wellfound Careers**: [Open Board](https://wellfound.com/company/thomas-cook-mice/jobs)
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Thomas_Cook_MICE_mice.pdf`
+- **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
+
+### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
+```text
+Hi Rajeev, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!
+```
+
+### Touchpoint 2: Funding-Hook Cold DM / InMail / Email
+```text
+Hi Rajeev,
+
+Reaching out regarding Event Operations and MICE Project Management at Thomas Cook MICE.
+
+I bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.
+
+Key 2026 Marquee Event Executions:
+1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).
+2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.
+3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.
+
+Operational & Tool Capabilities:
+- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.
+- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).
+- Technical AV operation handling with strict run-of-show time management.
+- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.
+- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.
+- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.
+
+Credentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.
+Salary expectation: Minimum ₹40,000/month in-hand (₹5.5L to ₹7.5L CTC).
+Live Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering
+
+Would love 10 minutes to discuss how I can support Thomas Cook MICE's live productions and MICE calendar.
+
+Best,
+Manav Mate
++91 85915 95889
+```
+
+### Touchpoint 3: Wellfound / Direct Note
+```text
+Hi Rajeev,
+
+Applying for Event Operations & MICE roles at Thomas Cook MICE. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.
+
+2026 Execution Track Record:
+- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).
+- ICANN 2026: High-volume international delegate registration and on-ground logistics.
+- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.
+
+Capabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.
+
+Salary Floor: Minimum ₹40,000/month in-hand (₹5.5L to ₹7.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.
+```
+
+### Touchpoint 4: 4-Day Follow-Up Bump
+```text
+Hi Rajeev, following up briefly on my note regarding Event Operations at Thomas Cook MICE. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.
+```
+
+---
+
+## 7. FCM Meetings & Events (Enterprise MICE &bull; $10M+ Capital Base)
+- **Sector / HQ**: Corporate MICE & Event Management &bull; Andheri, Mumbai
+- **Assigned Pillar**: `PILLAR_4_EVENT_OPERATIONS_MICE`
+- **Strategic Score**: **100/100**
+- **Target Decision Maker**: Manpreet Bindra (Founder / CEO)
+- **Email Permutations**: `manpreet@fcmmeetingsevents.com`, `manpreet.bindra@fcmmeetingsevents.com`, `manpreetbindra@fcmmeetingsevents.com`
+- **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22FCM%20Meetings%20%26%20Events%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
+- **Wellfound Careers**: [Open Board](https://wellfound.com/company/fcm-meetings-events/jobs)
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_FCM_Meetings___Events_mice.pdf`
+- **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
+
+### Touchpoint 1: LinkedIn Connect Note (270/280 chars)
+```text
+Hi Manpreet, 4+ yrs managing 150-200+ events across 15+ agencies. Executed Tata Mumbai Marathon '26 (Mumbai Univ venue production/ops), ICANN '26 & Neurology Summit. Specialize in procurement, venue mapping, AV time mgmt & Canva/AI workflow speed. Would love to connect!
+```
+
+### Touchpoint 2: Funding-Hook Cold DM / InMail / Email
+```text
+Hi Manpreet,
+
+Reaching out regarding Event Operations and MICE Project Management at FCM Meetings & Events.
+
+I bring 4+ years of hands-on event operations experience, having delivered 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.
+
+Key 2026 Marquee Event Executions:
+1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow, and real-time crisis management).
+2. ICANN 2026 (Global MICE): Managed high-volume international delegate registration and end-to-end on-ground logistics.
+3. Neurology Summit Mumbai 2026 (Medical MICE): Handled all 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality.
+
+Operational & Tool Capabilities:
+- End-to-end procurement of custom event supplies, goodies, and client deliverables with zero stockout incidents.
+- Venue booking and precision floor mapping at premier venues (Jio World Centre, NESCO, Mumbai University, hotel banquets).
+- Technical AV operation handling with strict run-of-show time management.
+- Catering setup planning, F&B menu suggestions, and dining crowd flow coordination.
+- Rapid client pitch PPTs and signage via Canva, and accelerated ideation, budgeting drafts, and schedules using AI tools.
+- Deployed and directed field teams of up to 133 personnel with a 100% contractual SLA record.
+
+Credentials: PMI Certified International Project Manager (CIPM), Saylor Operations Management, and Scaler System Design.
+Salary expectation: Minimum ₹40,000/month in-hand (₹5.5L to ₹7.5L CTC).
+Live Ops Simulation: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering
+
+Would love 10 minutes to discuss how I can support FCM Meetings & Events's live productions and MICE calendar.
+
+Best,
+Manav Mate
++91 85915 95889
+```
+
+### Touchpoint 3: Wellfound / Direct Note
+```text
+Hi Manpreet,
+
+Applying for Event Operations & MICE roles at FCM Meetings & Events. I bring 4+ years experience executing 150 to 200+ events with 15+ agencies across Mumbai.
+
+2026 Execution Track Record:
+- Tata Mumbai Marathon 2026: Full venue operations and production across Mumbai University (zone mapping, stage setup, crowd flow, crisis management).
+- ICANN 2026: High-volume international delegate registration and on-ground logistics.
+- Neurology Summit 2026: Registration, stage production, floor operations, and VIP hospitality.
+
+Capabilities: End-to-end procurement, venue booking and floor mapping, technical AV show-time management, catering setup planning, Canva pitch decks, and AI-driven planning workflows. Certified PMI CIPM and Saylor Operations Management.
+
+Salary Floor: Minimum ₹40,000/month in-hand (₹5.5L to ₹7.5L CTC). Would welcome a conversation to discuss your upcoming event pipeline.
+```
+
+### Touchpoint 4: 4-Day Follow-Up Bump
+```text
+Hi Manpreet, following up briefly on my note regarding Event Operations at FCM Meetings & Events. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.
+```
+
+---
+
+## 8. GrayQuest (Series A &bull; $7M)
 - **Sector / HQ**: Fintech / EdTech Credit &bull; Mumbai
 - **Assigned Pillar**: `PILLAR_3_AI_APM`
 - **Strategic Score**: **95/100**
@@ -114,7 +540,7 @@ Hi Rishab, quick follow-up to see if you have 10 minutes this week to discuss pr
 
 ---
 
-## 3. Portkey (Seed &bull; $3M)
+## 9. Portkey (Seed &bull; $3M)
 - **Sector / HQ**: AI / Developer Tools &bull; Bengaluru / Remote
 - **Assigned Pillar**: `PILLAR_1_FOUNDERS_OFFICE`
 - **Strategic Score**: **95/100**
@@ -169,7 +595,7 @@ Hi Rohit, bumping this quickly in case it got buried under your post-funding inb
 
 ---
 
-## 4. SuperOps (Series B &bull; $12.4M)
+## 10. SuperOps (Series B &bull; $12.4M)
 - **Sector / HQ**: B2B SaaS / IT Ops &bull; Mumbai / Remote
 - **Assigned Pillar**: `PILLAR_1_FOUNDERS_OFFICE`
 - **Strategic Score**: **90/100**
@@ -220,333 +646,6 @@ Would love to speak if you need an operator in your corner.
 ### Touchpoint 4: 4-Day Follow-Up Bump
 ```text
 Hi Arvind, bumping this quickly in case it got buried under your post-funding inbox surge. Still keen to explore how I can take operational execution off your plate at SuperOps. Happy to share a quick teardown of your current customer onboarding flow whenever convenient.
-```
-
----
-
-## 5. Atlan (Series B &bull; $105M)
-- **Sector / HQ**: Data Collaboration & AI Governance &bull; Remote / Mumbai
-- **Assigned Pillar**: `PILLAR_3_AI_APM`
-- **Strategic Score**: **90/100**
-- **Target Decision Maker**: Prukalpa Sankar (Founder / CEO)
-- **Email Permutations**: `prukalpa@atlan.com`, `prukalpa.sankar@atlan.com`, `prukalpasankar@atlan.com`
-- **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22Atlan%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
-- **Wellfound Careers**: [Open Board](https://wellfound.com/company/atlan/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Atlan_apm.pdf`
-- **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
-
-### Touchpoint 1: LinkedIn Connect Note (247/280 chars)
-```text
-Hi Prukalpa, congrats on Atlan's $105M Series B round. Architected an AI parsing pipeline at HireFlo cutting Llama 3.1 costs by 40% on NVIDIA NIM. Built 6 interactive systems at manavmate53-jpg.github.io/pm-product-lab/#hub. Would love to connect!
-```
-
-### Touchpoint 2: Funding-Hook Cold DM / InMail / Email
-```text
-Hi Prukalpa,
-
-Congrats to you and the team on Atlan's $105M Series B round.
-
-I am an early-stage Technical PM with Scaler Quora System Design training and founder grit. At HireFlo, I owned product discovery and delivery for an AI hiring intelligence platform:
-- Architected a resume parsing pipeline processing 1,000 documents in under 10 minutes with 98% precision.
-- Cut model inference compute costs by 40% on Llama 3.1 by deploying self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.
-- Authored 14+ technical PRDs, user stories, and acceptance criteria in Jira with zero sprint slippage.
-
-I also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#evalguard
-
-Looking for an APM / AI PM role where I can drive execution velocity immediately (targeting ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.
-
-Best,
-Manav Mate
-+91 85915 95889
-```
-
-### Touchpoint 3: Wellfound / Direct Note
-```text
-Hi Prukalpa,
-
-Reaching out for APM / AI PM opportunities at Atlan. At HireFlo, I owned our AI parsing pipeline (1,000 docs in <10m, 98% precision), cut Llama 3.1 inference costs by 40% via NVIDIA NIM and JSON schemas, and authored 14+ PRDs in Jira.
-
-I love shipping functional proof-of-work: I built 6 interactive browser simulations of distributed systems trade-offs and LLM guardrails at https://manavmate53-jpg.github.io/pm-product-lab/#evalguard
-
-Would welcome a chat on how I can help ship Atlan's roadmap.
-```
-
-### Touchpoint 4: 4-Day Follow-Up Bump
-```text
-Hi Prukalpa, quick follow-up to see if you have 10 minutes this week to discuss product execution for Atlan. Always happy to share relevant PRD artifacts or architectural trade-off teardowns.
-```
-
----
-
-## 6. Cashfree Payments (Series B &bull; $35M)
-- **Sector / HQ**: Fintech / Payment Infrastructure &bull; Bengaluru / Mumbai
-- **Assigned Pillar**: `PILLAR_3_AI_APM`
-- **Strategic Score**: **90/100**
-- **Target Decision Maker**: Akash Sinha (Founder / CEO)
-- **Email Permutations**: `akash@cashfreepayments.com`, `akash.sinha@cashfreepayments.com`, `akashsinha@cashfreepayments.com`
-- **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22Cashfree%20Payments%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
-- **Wellfound Careers**: [Open Board](https://wellfound.com/company/cashfree/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Cashfree_Payments_apm.pdf`
-- **Featured PM Lab Build**: [PayRouter Engine](https://manavmate53-jpg.github.io/pm-product-lab/#payrouter)
-
-### Touchpoint 1: LinkedIn Connect Note (255/280 chars)
-```text
-Hi Akash, congrats on Cashfree Payments's $35M Series B round. Architected an AI parsing pipeline at HireFlo cutting Llama 3.1 costs by 40% on NVIDIA NIM. Built 6 interactive systems at manavmate53-jpg.github.io/pm-product-lab/#hub. Would love to connect!
-```
-
-### Touchpoint 2: Funding-Hook Cold DM / InMail / Email
-```text
-Hi Akash,
-
-Congrats to you and the team on Cashfree Payments's $35M Series B round.
-
-I am an early-stage Technical PM with Scaler Quora System Design training and founder grit. At HireFlo, I owned product discovery and delivery for an AI hiring intelligence platform:
-- Architected a resume parsing pipeline processing 1,000 documents in under 10 minutes with 98% precision.
-- Cut model inference compute costs by 40% on Llama 3.1 by deploying self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.
-- Authored 14+ technical PRDs, user stories, and acceptance criteria in Jira with zero sprint slippage.
-
-I also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#payrouter
-
-Looking for an APM / AI PM role where I can drive execution velocity immediately (targeting ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.
-
-Best,
-Manav Mate
-+91 85915 95889
-```
-
-### Touchpoint 3: Wellfound / Direct Note
-```text
-Hi Akash,
-
-Reaching out for APM / AI PM opportunities at Cashfree Payments. At HireFlo, I owned our AI parsing pipeline (1,000 docs in <10m, 98% precision), cut Llama 3.1 inference costs by 40% via NVIDIA NIM and JSON schemas, and authored 14+ PRDs in Jira.
-
-I love shipping functional proof-of-work: I built 6 interactive browser simulations of distributed systems trade-offs and LLM guardrails at https://manavmate53-jpg.github.io/pm-product-lab/#payrouter
-
-Would welcome a chat on how I can help ship Cashfree Payments's roadmap.
-```
-
-### Touchpoint 4: 4-Day Follow-Up Bump
-```text
-Hi Akash, quick follow-up to see if you have 10 minutes this week to discuss product execution for Cashfree Payments. Always happy to share relevant PRD artifacts or architectural trade-off teardowns.
-```
-
----
-
-## 7. Zepto (Series B &bull; $665M)
-- **Sector / HQ**: Quick Commerce / Logistics &bull; Mumbai
-- **Assigned Pillar**: `PILLAR_2_PRODUCT_OPERATIONS`
-- **Strategic Score**: **90/100**
-- **Target Decision Maker**: Aadit Palicha (Founder / CEO)
-- **Email Permutations**: `aadit@zepto.com`, `aadit.palicha@zepto.com`, `aaditpalicha@zepto.com`
-- **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22Zepto%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
-- **Wellfound Careers**: [Open Board](https://wellfound.com/company/zepto-app/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Zepto_operations.pdf`
-- **Featured PM Lab Build**: [FlashQueue Simulator](https://manavmate53-jpg.github.io/pm-product-lab/#flashqueue)
-
-### Touchpoint 1: LinkedIn Connect Note (266/280 chars)
-```text
-Hi Aadit, congrats on Zepto's Series B round. Managed 133 field staff across 200+ projects with 0 SLA breaches and cut reconciliation from 12 days to 48 hrs. Would love to connect and share my workforce system: manavmate53-jpg.github.io/pm-product-lab/#crewrostering
-```
-
-### Touchpoint 2: Funding-Hook Cold DM / InMail / Email
-```text
-Hi Aadit,
-
-Congrats on Zepto's $665M Series B round.
-
-Scaling transaction volume often strains on-ground fulfillment, field SLAs, and cross-functional feedback loops between ops and product teams.
-
-At NeoManpower, I directed 133 field personnel across 200+ live events with 0 contractual SLA breaches via a 15-minute emergency fill buffer. I replaced manual rosters with digital check-ins and QR audits that reduced billing reconciliation cycles from 12 days to 48 hours.
-
-At HireFlo, I redesigned recruiter onboarding funnels in Figma, lifting workflow completion by 30% while authoring 14+ technical PRDs.
-
-I built an interactive simulation of this workforce and SLA escalation engine: https://manavmate53-jpg.github.io/pm-product-lab/#flashqueue
-
-I am targeting Product Operations / Operations PM roles in Mumbai or Remote (targeting ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record). Would love to share how these systems could support Zepto's scale.
-
-Best,
-Manav Mate
-+91 85915 95889
-```
-
-### Touchpoint 3: Wellfound / Direct Note
-```text
-Hi Aadit,
-
-Applying for Product Operations / Operations PM. I bring direct experience managing 133 field personnel across 200+ events with 0 SLA breaches, plus technical PM execution at HireFlo (14+ PRDs, 30% workflow lift).
-
-My focus is eliminating manual operational drag: at NeoManpower, my roster and QR audit workflows cut billing reconciliation from 12 days to 48 hours. Live interactive simulation of this architecture: https://manavmate53-jpg.github.io/pm-product-lab/#flashqueue
-
-Excited about Zepto's mission and ready to dive into the messy ground reality.
-```
-
-### Touchpoint 4: 4-Day Follow-Up Bump
-```text
-Hi Aadit, following up briefly on my note regarding Product Operations at Zepto. Would love 10 minutes to discuss how we can automate your field tracking and SLA escalation protocols.
-```
-
----
-
-## 8. Sarvam AI (Series A &bull; $41M)
-- **Sector / HQ**: AI / GenAI &bull; Bengaluru / Remote
-- **Assigned Pillar**: `PILLAR_3_AI_APM`
-- **Strategic Score**: **90/100**
-- **Target Decision Maker**: Vivek Raghavan (Founder / CEO)
-- **Email Permutations**: `vivek@sarvamai.com`, `vivek.raghavan@sarvamai.com`, `vivekraghavan@sarvamai.com`
-- **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22Sarvam%20AI%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
-- **Wellfound Careers**: [Open Board](https://wellfound.com/company/sarvam-ai/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Sarvam_AI_apm.pdf`
-- **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
-
-### Touchpoint 1: LinkedIn Connect Note (247/280 chars)
-```text
-Hi Vivek, congrats on Sarvam AI's $41M Series A round. Architected an AI parsing pipeline at HireFlo cutting Llama 3.1 costs by 40% on NVIDIA NIM. Built 6 interactive systems at manavmate53-jpg.github.io/pm-product-lab/#hub. Would love to connect!
-```
-
-### Touchpoint 2: Funding-Hook Cold DM / InMail / Email
-```text
-Hi Vivek,
-
-Congrats to you and the team on Sarvam AI's $41M Series A round.
-
-I am an early-stage Technical PM with Scaler Quora System Design training and founder grit. At HireFlo, I owned product discovery and delivery for an AI hiring intelligence platform:
-- Architected a resume parsing pipeline processing 1,000 documents in under 10 minutes with 98% precision.
-- Cut model inference compute costs by 40% on Llama 3.1 by deploying self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.
-- Authored 14+ technical PRDs, user stories, and acceptance criteria in Jira with zero sprint slippage.
-
-I also built 6 interactive systems simulating payment routing failovers, LLM evaluation guardrails, and concurrency buffers: https://manavmate53-jpg.github.io/pm-product-lab/#evalguard
-
-Looking for an APM / AI PM role where I can drive execution velocity immediately (targeting ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record). Would love to connect for a 15-minute chat.
-
-Best,
-Manav Mate
-+91 85915 95889
-```
-
-### Touchpoint 3: Wellfound / Direct Note
-```text
-Hi Vivek,
-
-Reaching out for APM / AI PM opportunities at Sarvam AI. At HireFlo, I owned our AI parsing pipeline (1,000 docs in <10m, 98% precision), cut Llama 3.1 inference costs by 40% via NVIDIA NIM and JSON schemas, and authored 14+ PRDs in Jira.
-
-I love shipping functional proof-of-work: I built 6 interactive browser simulations of distributed systems trade-offs and LLM guardrails at https://manavmate53-jpg.github.io/pm-product-lab/#evalguard
-
-Would welcome a chat on how I can help ship Sarvam AI's roadmap.
-```
-
-### Touchpoint 4: 4-Day Follow-Up Bump
-```text
-Hi Vivek, quick follow-up to see if you have 10 minutes this week to discuss product execution for Sarvam AI. Always happy to share relevant PRD artifacts or architectural trade-off teardowns.
-```
-
----
-
-## 9. Spendflo (Series A &bull; $11M)
-- **Sector / HQ**: B2B SaaS / Procurement &bull; Bengaluru / Remote
-- **Assigned Pillar**: `PILLAR_1_FOUNDERS_OFFICE`
-- **Strategic Score**: **90/100**
-- **Target Decision Maker**: Siddharth Sridharan (Founder / CEO)
-- **Email Permutations**: `siddharth@spendflo.com`, `siddharth.sridharan@spendflo.com`, `siddharthsridharan@spendflo.com`
-- **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22Spendflo%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
-- **Wellfound Careers**: [Open Board](https://wellfound.com/company/spendflo/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Spendflo_office.pdf`
-- **Featured PM Lab Build**: [CrewRoster Dashboard](https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering)
-
-### Touchpoint 1: LinkedIn Connect Note (255/280 chars)
-```text
-Hi Siddharth, congrats on Spendflo's $11M Series A round. Bootstrapped a B2B business to 50+ clients and led AI product delivery at HireFlo. Would love to connect and share a few operational systems I built at manavmate53-jpg.github.io/pm-product-lab/#hub
-```
-
-### Touchpoint 2: Funding-Hook Cold DM / InMail / Email
-```text
-Hi Siddharth,
-
-Congrats on closing Spendflo's $11M Series A round from Prosus Ventures.
-
-As you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.
-
-I am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.
-
-I built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering
-
-I am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at ₹8.0 LPA (targeting ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record).
-
-Open to a brief 15-minute chat this week?
-
-Best,
-Manav Mate
-+91 85915 95889
-```
-
-### Touchpoint 3: Wellfound / Direct Note
-```text
-Hi Siddharth,
-
-I saw Spendflo's recent momentum and wanted to reach out directly regarding your operational hiring needs. I am an operational founder who bootstrapped a B2B workforce business from zero to 50+ enterprise clients and 200+ projects in Mumbai, then led AI product delivery at HireFlo (40% compute cost reduction, 14+ PRDs).
-
-I specialize in taking 0-to-1 operational fires, pricing models, and client delivery off the founder's plate with zero hand-holding. Tested simulations of my work: https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering
-
-Would love to speak if you need an operator in your corner.
-```
-
-### Touchpoint 4: 4-Day Follow-Up Bump
-```text
-Hi Siddharth, bumping this quickly in case it got buried under your post-funding inbox surge. Still keen to explore how I can take operational execution off your plate at Spendflo. Happy to share a quick teardown of your current customer onboarding flow whenever convenient.
-```
-
----
-
-## 10. Kula (Seed &bull; $3.7M)
-- **Sector / HQ**: Recruitment Tech / HR SaaS &bull; Bengaluru / Remote
-- **Assigned Pillar**: `PILLAR_1_FOUNDERS_OFFICE`
-- **Strategic Score**: **90/100**
-- **Target Decision Maker**: Achuthanand Ravi (Founder / CEO)
-- **Email Permutations**: `achuthanand@kula.com`, `achuthanand.ravi@kula.com`, `achuthanandravi@kula.com`
-- **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22Kula%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
-- **Wellfound Careers**: [Open Board](https://wellfound.com/company/kula-app/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Kula_office.pdf`
-- **Featured PM Lab Build**: [AutoMatch IQ](https://manavmate53-jpg.github.io/pm-product-lab/#automatch)
-
-### Touchpoint 1: LinkedIn Connect Note (250/280 chars)
-```text
-Hi Achuthanand, congrats on Kula's $3.7M Seed round. Bootstrapped a B2B business to 50+ clients and led AI product delivery at HireFlo. Would love to connect and share a few operational systems I built at manavmate53-jpg.github.io/pm-product-lab/#hub
-```
-
-### Touchpoint 2: Funding-Hook Cold DM / InMail / Email
-```text
-Hi Achuthanand,
-
-Congrats on closing Kula's $3.7M Seed round from Norwest Venture Partners.
-
-As you ramp up post-raise, founder bandwidth quickly gets consumed by operational firefighting, cross-functional coordination, and customer onboarding bottlenecks.
-
-I am an operational founder and technical PM. Before leading product at HireFlo (where I cut Llama 3.1 inference costs by 40% and restructured monetization into a 5-tier model), I bootstrapped NeoManpower from scratch to 50+ B2B clients and 200+ projects across Mumbai with zero external capital, managing 133 field personnel with 100% SLA compliance.
-
-I built interactive browser simulations of the systems I design: https://manavmate53-jpg.github.io/pm-product-lab/#automatch
-
-I am looking for a Founder's Office or Strategy & Ops role where I can take high-stakes operational execution off your desk immediately. Current CTC is anchored at ₹8.0 LPA (targeting ₹6.5L to ₹8L with upside in early equity).
-
-Open to a brief 15-minute chat this week?
-
-Best,
-Manav Mate
-+91 85915 95889
-```
-
-### Touchpoint 3: Wellfound / Direct Note
-```text
-Hi Achuthanand,
-
-I saw Kula's recent momentum and wanted to reach out directly regarding your operational hiring needs. I am an operational founder who bootstrapped a B2B workforce business from zero to 50+ enterprise clients and 200+ projects in Mumbai, then led AI product delivery at HireFlo (40% compute cost reduction, 14+ PRDs).
-
-I specialize in taking 0-to-1 operational fires, pricing models, and client delivery off the founder's plate with zero hand-holding. Tested simulations of my work: https://manavmate53-jpg.github.io/pm-product-lab/#automatch
-
-Would love to speak if you need an operator in your corner.
-```
-
-### Touchpoint 4: 4-Day Follow-Up Bump
-```text
-Hi Achuthanand, bumping this quickly in case it got buried under your post-funding inbox surge. Still keen to explore how I can take operational execution off your plate at Kula. Happy to share a quick teardown of your current customer onboarding flow whenever convenient.
 ```
 
 ---

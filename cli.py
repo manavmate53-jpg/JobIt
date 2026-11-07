@@ -1352,18 +1352,20 @@ def signals_cmd(source: str, limit: int, sync_db: bool):
 
 @cli.command("hunt")
 @click.option("--min-score", default=70, type=int, help="Minimum 100-point rubric score to qualify")
-@click.option("--limit", default=10, type=int, help="Maximum qualified opportunities to return")
-def hunt_cmd(min_score: int, limit: int):
-    """Bypasses enterprise degree gates: scores funded startups against the 3 Strategic Pillars."""
+@click.option("--limit", default=15, type=int, help="Maximum qualified opportunities to return")
+@click.option("--pillar", "target_pillar", default=None, help="Filter by pillar (e.g. event_mice, founders_office, prod_ops, ai_apm)")
+def hunt_cmd(min_score: int, limit: int, target_pillar: Optional[str] = None):
+    """Bypasses enterprise degree gates: scores funded startups against the Strategic Pillars."""
     from src.signals.funding_scraper import FundingSignalScraper
     from src.signals.wellfound_crosscheck import WellfoundCrossChecker
     from src.strategy.gatekeeper_filter import GatekeeperFilter
     from src.strategy.scoring_engine import StrategyScoringEngine
+    from src.strategy.pillar_classifier import StrategicPillar
     from src.analytics.telemetry_db import TelemetryDB
 
     console.print(Panel(
-        f"[bold cyan]JobIt v2.0 &bull; 3-Pillar Opportunity Hunt[/bold cyan]\n"
-        f"Pillar 1: Founder's Office | Pillar 2: Product Ops | Pillar 3: AI APM\n"
+        f"[bold cyan]JobIt v2.0 &bull; Strategic Opportunity Hunt[/bold cyan]\n"
+        f"Pillar 1: Founder's Office | Pillar 2: Product Ops | Pillar 3: AI APM | Pillar 4: Event & MICE Operations\n"
         f"Filtering out legacy banks, IT services MNCs, and seniority traps",
         box=box.ROUNDED
     ))
@@ -1399,6 +1401,11 @@ def hunt_cmd(min_score: int, limit: int):
             description=sig.key_challenge
         )
 
+        if target_pillar:
+            tp = target_pillar.lower()
+            if tp in ["event_mice", "event", "mice"] and not (classification.pillar.value == StrategicPillar.EVENT_OPERATIONS.value or "EVENT" in classification.pillar.value):
+                continue
+
         if score_data.total_score >= min_score:
             opp_id = db_v2.record_opportunity(
                 company_name=opp.company_name,
@@ -1406,7 +1413,7 @@ def hunt_cmd(min_score: int, limit: int):
                 pillar=classification.pillar.value,
                 score=score_data.total_score,
                 target_dm_name=", ".join(opp.founder_names),
-                target_dm_title="Founder / CEO",
+                target_dm_title="Hiring Lead / Operations Director" if "EVENT" in classification.pillar.value else "Founder / CEO",
                 expected_ctc_quote=f"₹{classification.suggested_ctc_band['min_lpa']}L - ₹{classification.suggested_ctc_band['max_lpa']}L",
                 notes=f"Key hook: {opp.key_pitch_hook}"
             )
@@ -1417,7 +1424,7 @@ def hunt_cmd(min_score: int, limit: int):
                 "classification": classification
             })
 
-    table = Table(title=f"Top Qualified Startup Opportunities (Score >= {min_score})", box=box.ROUNDED)
+    table = Table(title=f"Top Qualified Opportunities (Score >= {min_score})", box=box.ROUNDED)
     table.add_column("ID", style="dim", width=4)
     table.add_column("Company", style="bold white")
     table.add_column("Funding", style="green", width=14)
@@ -1447,21 +1454,26 @@ def hunt_cmd(min_score: int, limit: int):
 
 
 @cli.command("pack")
-@click.option("--limit", default=10, type=int, help="Number of opportunities to package in daily digest")
+@click.option("--limit", default=15, type=int, help="Number of opportunities to package in daily digest")
 @click.option("--date", "pack_date", default=None, help="Action pack date (YYYY-MM-DD)")
 @click.option("--generate-resumes/--no-resumes", default=True, help="Compile tailored 1-page A4 PDFs")
-def pack_cmd(limit: int, pack_date: Optional[str], generate_resumes: bool):
+@click.option("--pillar", "target_pillar", default=None, help="Filter by pillar (e.g. event_mice, founders_office, prod_ops, ai_apm)")
+@click.option("--output-file", "output_file", default=None, help="Custom path for action pack markdown file")
+def pack_cmd(limit: int, pack_date: Optional[str], generate_resumes: bool, target_pillar: Optional[str] = None, output_file: Optional[str] = None):
     """Builds Daily Founder Action Pack + tailored 1-page A4 PDFs ready for instant outbound."""
     from src.signals.funding_scraper import FundingSignalScraper
     from src.signals.wellfound_crosscheck import WellfoundCrossChecker
     from src.strategy.gatekeeper_filter import GatekeeperFilter
     from src.strategy.scoring_engine import StrategyScoringEngine
+    from src.strategy.pillar_classifier import StrategicPillar
     from src.tailoring.pillar_cv_generator import PillarCVGenerator
     from src.outreach.sequence_generator import SequenceGenerator
     from src.analytics.telemetry_db import TelemetryDB
+    from datetime import datetime
 
+    pack_title = "Event Management & Corporate MICE Launch Pack" if target_pillar and "event" in target_pillar.lower() else "Daily Founder Action Pack"
     console.print(Panel(
-        f"[bold cyan]JobIt v2.0 &bull; Daily Founder Action Pack Generator[/bold cyan]\n"
+        f"[bold cyan]JobIt v2.0 &bull; {pack_title} Generator[/bold cyan]\n"
         f"Compiling ready-to-paste messages (Connect Note, Cold DM, Wellfound note, Follow-up bump)\n"
         f"and generating tailored single-page A4 PDF resumes into exports/resumes/",
         box=box.ROUNDED
@@ -1499,9 +1511,16 @@ def pack_cmd(limit: int, pack_date: Optional[str], generate_resumes: bool):
                 description=sig.key_challenge
             )
 
+            if target_pillar:
+                tp = target_pillar.lower()
+                if tp in ["event_mice", "event", "mice"] and not (classification.pillar.value == StrategicPillar.EVENT_OPERATIONS.value or "EVENT" in classification.pillar.value):
+                    continue
+
             if score_data.total_score >= 70:
-                pdf_path_str = ""
-                if generate_resumes:
+                is_event_role = classification.pillar.value == StrategicPillar.EVENT_OPERATIONS.value or "EVENT" in classification.pillar.value
+                pdf_path_str = "exports/resumes/Manav_Mate_Event_Management_CV.pdf" if is_event_role else ""
+                
+                if generate_resumes and not is_event_role:
                     res_paths = cv_gen.generate_cv(
                         company_name=opp.company_name,
                         role_title=opp.suggested_role,
@@ -1530,16 +1549,19 @@ def pack_cmd(limit: int, pack_date: Optional[str], generate_resumes: bool):
     packaged_items.sort(key=lambda x: x["score"].total_score, reverse=True)
 
     action_pack_path = seq_gen.build_daily_action_pack(
-        ranked_items=packaged_items[:limit],
-        pack_date=pack_date
+        ranked_items=packaged_items,
+        pack_date=pack_date,
+        pack_file_path=Path(output_file) if output_file else None,
+        title=f"JobIt v2.0 &bull; {pack_title} &bull; {pack_date or datetime.now().strftime('%Y-%m-%d')}",
+        limit=limit
     )
 
     console.print(Panel(
-        f"[bold green]✓ Daily Action Pack Generated Successfully![/bold green]\n\n"
+        f"[bold green]✓ Action Pack Generated Successfully![/bold green]\n\n"
         f"📄 [bold]Digest Path:[/bold] {action_pack_path}\n"
-        f"🎯 [bold]Startups Included:[/bold] {len(packaged_items[:limit])}\n"
+        f"🎯 [bold]Openings Included:[/bold] {len(packaged_items[:limit])}\n"
         f"📂 [bold]Tailored Resumes:[/bold] exports/resumes/\n\n"
-        f"[dim]Contains ready-to-paste LinkedIn Connect Notes (<280 chars), Cold DMs, and Wellfound notes.[/dim]",
+        f"[dim]Contains ready-to-paste LinkedIn Connect Notes (<280 chars), Cold DMs, and Direct Application notes.[/dim]",
         title="Action Pack Ready",
         box=box.ROUNDED
     ))
