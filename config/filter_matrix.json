@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
   "blacklist": {
     "legacy_banks": [
       "IDFC First Bank",
@@ -113,9 +113,14 @@
       "Series A",
       "Series B",
       "Bootstrapped",
-      "Growth"
+      "Growth",
+      "Enterprise MICE"
     ],
     "target_sectors": [
+      "Corporate MICE",
+      "Event Management",
+      "Experiential Marketing",
+      "Venue & Convention Operations",
       "Fintech",
       "Payments",
       "B2B SaaS",
@@ -129,17 +134,54 @@
     ],
     "target_locations": [
       "Mumbai",
+      "Andheri",
+      "Goregaon",
+      "BKC",
+      "Bandra Kurla Complex",
+      "Lower Parel",
+      "Western Suburbs",
+      "Bandra",
+      "Powai",
       "Navi Mumbai",
       "Thane",
       "Remote",
       "Hybrid",
+      "Hybrid - Mumbai",
       "Bengaluru",
       "Bangalore",
       "Delhi NCR",
       "Gurgaon",
       "Noida"
     ],
+    "mumbai_priority_zones": [
+      "Andheri",
+      "Goregaon",
+      "BKC",
+      "Lower Parel",
+      "Western Suburbs"
+    ],
     "allowed_titles": [
+      "Event Operations Manager",
+      "Event Operations Executive",
+      "Event Operations",
+      "MICE Project Manager",
+      "MICE Coordinator",
+      "MICE Project Coordinator",
+      "MICE",
+      "Event Production & Procurement Executive",
+      "Event Production Executive",
+      "Event Production Manager",
+      "Event Production",
+      "Event Procurement Executive",
+      "Procurement & Venue Operations Executive",
+      "Client Servicing & Operations Lead",
+      "Client Servicing and Operations Lead",
+      "Client Servicing Executive",
+      "Client Servicing Lead",
+      "Venue Operations Manager",
+      "Venue Operations Executive",
+      "Venue Operations",
+      "Venue Manager",
       "Founder's Office",
       "Founders Office",
       "Chief of Staff",
@@ -160,7 +202,55 @@
       "AI Product Manager",
       "Technical Product Manager",
       "Growth Product Manager"
-    ]
+    ],
+    "target_event_companies": {
+      "global_corporate_mice": [
+        "BCD M&E",
+        "BCD Meetings & Events",
+        "CWT",
+        "CWT Meetings & Events",
+        "BI Worldwide",
+        "Amex GBT",
+        "American Express Global Business Travel",
+        "Thomas Cook MICE",
+        "Thomas Cook"
+      ],
+      "major_venues_and_organizers": [
+        "Jio World Centre",
+        "Jio World Convention Centre",
+        "NESCO",
+        "NESCO Events",
+        "Informa",
+        "Informa Markets",
+        "Messe Frankfurt",
+        "Messe Frankfurt India",
+        "Procam",
+        "Procam International"
+      ],
+      "tier1_experiential_agencies": [
+        "70 EMG",
+        "Seventy Event Media Group",
+        "Wizcraft",
+        "Wizcraft International Entertainment",
+        "Encompass",
+        "Geometry Encompass",
+        "Laqshya",
+        "Laqshya Live Experiences",
+        "Fountainhead",
+        "Fountainhead MKTG"
+      ]
+    },
+    "work_schedule": {
+      "preference": "5-day corporate working week with standard flexibility on live event dates",
+      "max_regular_days_per_week": 5,
+      "live_event_flexibility": true
+    },
+    "compensation_criteria": {
+      "salary_floor_in_hand_monthly_inr": 40000,
+      "ctc_min_inr_lpa": 5.5,
+      "ctc_max_inr_lpa": 7.5,
+      "notes": "Minimum ₹40,000/month in-hand (₹5.5 LPA to ₹7.5 LPA CTC) for Mumbai corporate MICE, venue operations, and event management roles."
+    }
   },
   "scoring_weights": {
     "funding_stage": 25,
@@ -171,4 +261,3 @@
     "qualification_threshold": 70
   }
 }
-

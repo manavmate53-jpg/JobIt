@@ -19,6 +19,7 @@ class StrategicPillar(str, Enum):
     FOUNDERS_OFFICE = "PILLAR_1_FOUNDERS_OFFICE"
     PRODUCT_OPERATIONS = "PILLAR_2_PRODUCT_OPERATIONS"
     AI_APM = "PILLAR_3_AI_APM"
+    EVENT_OPERATIONS = "PILLAR_4_EVENT_OPERATIONS_MICE"
 
 
 @dataclass
@@ -71,6 +72,18 @@ class PillarClassifier:
             r"\bproduct\s+manager\b"
         ]
 
+        self.p4_patterns = [
+            r"event\s+operations",
+            r"event\s+production",
+            r"event\s+procurement",
+            r"\bmice\b",
+            r"venue\s+operations",
+            r"client\s+servicing",
+            r"venue\s+manager",
+            r"event\s+project\s+manager",
+            r"experiential\s+operations"
+        ]
+
     def classify(
         self,
         title: str,
@@ -83,18 +96,28 @@ class PillarClassifier:
         p1_matches = [p for p in self.p1_patterns if re.search(p, combined_text)]
         p2_matches = [p for p in self.p2_patterns if re.search(p, combined_text)]
         p3_matches = [p for p in self.p3_patterns if re.search(p, combined_text)]
+        p4_matches = [p for p in self.p4_patterns if re.search(p, combined_text)]
 
         # Specific weighting based on title vs description
         title_lower = title.lower()
         p1_title = any(re.search(p, title_lower) for p in self.p1_patterns)
         p2_title = any(re.search(p, title_lower) for p in self.p2_patterns)
         p3_title = any(re.search(p, title_lower) for p in self.p3_patterns)
+        p4_title = any(re.search(p, title_lower) for p in self.p4_patterns)
 
         # Stage context: Early Seed/Pre-Series A strongly favors Founder's Office
         is_seed_stage = any(s in stage.lower() for s in ["seed", "pre-series a", "angel", "bootstrapped"])
 
         # Determine winner
-        if p1_title or (p1_matches and len(p1_matches) >= len(p2_matches) and len(p1_matches) >= len(p3_matches)):
+        if p4_title or (p4_matches and len(p4_matches) >= len(p1_matches) and len(p4_matches) >= len(p2_matches) and len(p4_matches) >= len(p3_matches)):
+            pillar = StrategicPillar.EVENT_OPERATIONS
+            label = "Event Operations Manager / MICE Project Manager"
+            confidence = 0.95 if p4_title else 0.82
+            matched = p4_matches
+            narrative = "4+ years delivering 150-200+ events across 15+ agencies in Mumbai. 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026. Manages procurement, venue mapping, AV, catering, and Canva/AI workflows."
+            lab_ids = ["crewrostering", "flashqueue"]
+            ctc_band = {"min_lpa": 5.5, "max_lpa": 7.5, "quoted": 6.5}
+        elif p1_title or (p1_matches and len(p1_matches) >= len(p2_matches) and len(p1_matches) >= len(p3_matches)):
             pillar = StrategicPillar.FOUNDERS_OFFICE
             label = "Founder's Office / Chief of Staff"
             confidence = 0.95 if p1_title else 0.80

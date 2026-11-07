@@ -4,27 +4,30 @@
     "location": "Jogeshwari East, Mumbai, Maharashtra",
     "phone": "+91 85915 95889",
     "email": "manavmate53@gmail.com",
-    "headline": "Product Manager & Operational Founder | Founder's Office, Product Operations & AI Systems",
+    "headline": "Event Project & Operations Manager | 4+ Years Experience | MICE, Production, Procurement & Venue Operations",
     "links": {
       "portfolio": "https://manavmate53-jpg.github.io/portfolio/#hero",
       "pm_product_lab": "https://manavmate53-jpg.github.io/pm-product-lab/#hub",
+      "crewrostering": "https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering",
+      "flashqueue": "https://manavmate53-jpg.github.io/pm-product-lab/#flashqueue",
       "github": "https://github.com/manavmate53-jpg",
       "linkedin": "https://www.linkedin.com/in/manav-mate-9448b1341/"
     }
   },
   "positioning": {
-    "persona": "Battle-tested operational founder and technical Product Manager. Bootstrapped NeoManpower to 50+ B2B clients and led AI product delivery at HireFlo. Technical literacy centered on PRDs, JSON schema guardrails, API contracts, SQL data exploration, and system trade-offs rather than hand-coding backends from scratch.",
-    "years_experience": "2-3 years across technical product management and bootstrapped founder operations",
+    "persona": "Execution-focused Event Operations Manager and Founder with 4+ years of hands-on experience delivering 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai. Proven expertise spanning Corporate MICE, Governmental Summits, Live Concerts, Sporting Marathons, and Luxury Weddings at Jio World Convention Centre, NESCO, Mumbai University, and Sahara Star. Directed end-to-end venue mapping, custom merchandise and event procurement, technical AV time management, catering setup planning, and on-ground workforce deployments of up to 133 personnel with a 100% SLA record. Certified International Project Manager (CIPM) from PMI and certified in Operations Management from Saylor University, combining calm on-site crisis handling with Canva pitch design and AI-driven planning workflows.",
+    "years_experience": "4+ years in event operations, MICE project management, and production logistics (150-200+ events across 15+ agencies)",
     "primary_target_roles": [
+      "Event Operations Manager",
+      "Event Operations Executive",
+      "MICE Project Manager",
+      "MICE Coordinator",
+      "Event Production & Procurement Executive",
+      "Client Servicing & Operations Lead",
+      "Venue Operations Manager",
       "Founder's Office",
-      "Chief of Staff",
       "Product Operations Manager",
-      "Operations Product Manager",
-      "Associate Product Manager",
-      "Junior Product Manager",
-      "AI Product Manager",
-      "Growth Product Manager",
-      "Technical Product Manager"
+      "Associate Product Manager"
     ],
     "strategic_pillars": {
       "pillar_1_founders_office": {
@@ -63,47 +66,85 @@
           "Growth Product Manager"
         ],
         "key_metrics": "1,000 docs in <10m at 98% precision, 40% compute cost reduction on Llama 3.1, 14+ PRDs authored, 6 PM Lab builds"
+      },
+      "pillar_4_event_operations_mice": {
+        "title": "Event Operations Manager / MICE Project Manager / Venue Lead",
+        "narrative": "4+ years delivering 150-200+ events across 15+ agencies in Mumbai. 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026 (registration/logistics), and Neurology Summit 2026 (registration, production, ops, hospitality). Manages end-to-end procurement, venue booking/mapping, catering, technical AV, and rapid Canva/AI workflows.",
+        "target_titles": [
+          "Event Operations Manager",
+          "Event Operations Executive",
+          "MICE Project Manager",
+          "MICE Coordinator",
+          "Event Production & Procurement Executive",
+          "Client Servicing & Operations Lead",
+          "Venue Operations Manager"
+        ],
+        "key_metrics": "150-200+ events executed, 15+ partner agencies, 133 crew deployed, 100% SLA record, 3 marquee 2026 summits"
       }
     },
+    "marquee_2026_events": [
+      {
+        "name": "Tata Mumbai Marathon 2026",
+        "category": "Social & Sporting Mega-Event",
+        "venue": "Mumbai University Complex",
+        "scope": "Handled full Operations and Production of the entire Tata Marathon venue at Mumbai University (zone mapping, production setup, crowd flow, crisis management)."
+      },
+      {
+        "name": "ICANN 2026",
+        "category": "Global MICE & Social",
+        "venue": "Mumbai",
+        "scope": "Handled high-volume international delegate Registration and end-to-end on-ground Logistics."
+      },
+      {
+        "name": "Neurology Summit Mumbai 2026",
+        "category": "Medical MICE",
+        "venue": "Mumbai",
+        "scope": "Handled 4 core pillars: Registration, Stage Production, Floor Operations, and VIP Hospitality."
+      }
+    ],
     "target_locations": [
       "Mumbai",
+      "Andheri",
+      "Goregaon",
+      "BKC",
+      "Lower Parel",
+      "Western Suburbs",
       "Navi Mumbai",
       "Thane",
       "Hybrid - Mumbai",
-      "Remote",
-      "Bengaluru",
-      "NCR"
+      "Remote"
     ],
     "target_domains": [
-      "Fintech & Payments",
-      "AI & GenAI Systems",
-      "B2B SaaS",
-      "Marketplaces & Quick Commerce",
-      "Supply Chain & Logistics",
-      "Workforce Tech"
+      "Corporate MICE & Conferences",
+      "Event Management & Experiential Agencies",
+      "Venues & Exhibition Centres",
+      "Live Entertainment & Sporting Events",
+      "Workforce Tech & Operations",
+      "B2B SaaS"
     ],
     "compensation": {
       "current_ctc_inr_lpa": 8.0,
-      "expected_ctc_min_inr_lpa": 6.0,
-      "expected_ctc_max_inr_lpa": 13.0,
+      "expected_ctc_min_inr_lpa": 5.5,
+      "expected_ctc_max_inr_lpa": 7.5,
+      "monthly_in_hand_min_inr": 40000,
       "seed_pre_series_a_range": {
-        "min_lpa": 6.0,
-        "max_lpa": 8.5
+        "min_lpa": 5.5,
+        "max_lpa": 7.5
       },
       "series_a_b_range": {
-        "min_lpa": 9.0,
-        "max_lpa": 13.0
+        "min_lpa": 7.5,
+        "max_lpa": 10.0
       },
-      "notes": "Current CTC anchored at ₹8.0 LPA. Expected CTC quotes ₹6.0L to ₹8.5L for Seed/Pre-Series A startups, and ₹9.0L to ₹13.0L for Series A/B tech startups."
+      "notes": "Minimum ₹40,000/month in-hand (₹5.5 LPA to ₹7.5 LPA CTC) for Mumbai corporate MICE, venue operations, and event management roles."
     }
   },
   "work_experience": [
     {
       "company": "HireFlo India",
-      "role": "Product Manager",
+      "role": "Product & Operations Workflow Manager",
       "duration": "Jan 2026 - Aug 2026",
       "location": "Mumbai, India",
-      "context": "Joined the founder early to own product discovery, PRDs, sprint planning, and core user journeys for an AI hiring intelligence platform.",
+      "context": "Owned product operations, workflow orchestration, PRDs, and AI efficiency systems for a recruitment intelligence platform.",
       "achievements": [
         "Architected resume parsing and scoring pipeline ingesting 1,000 documents in under 10 minutes with 98% field extraction precision.",
         "Cut model inference compute costs by 40% on Llama 3.1 via self-hosted microservices on NVIDIA NIM and strict JSON schema contracts.",
@@ -115,18 +156,34 @@
     },
     {
       "company": "NeoManpower",
-      "role": "Founder & Operations Lead",
+      "role": "Founder & Event Operations Lead",
       "duration": "Dec 2022 - Feb 2026",
       "location": "Mumbai, India",
-      "context": "Bootstrapped a commercial operations and B2B workforce business from zero without external venture capital.",
+      "context": "Bootstrapped and directed an event operations and workforce management firm, executing 150 to 200+ events in partnership with 15+ premier event management companies across Mumbai.",
       "achievements": [
-        "Bootstrapped B2B workforce operations from zero to 50+ enterprise clients and 200+ on-ground projects across Mumbai.",
-        "Scheduled and directed field teams of up to 133 personnel across demanding multi-shift commercial exhibitions and live events.",
-        "Maintained 100% contractual SLA compliance across 200+ projects via standby buffers and a 15-minute emergency fill protocol.",
-        "Built standardized shift check-in rosters and QR audit tracking tools, reducing reconciliation cycles from 12 days to 48 hours.",
-        "Managed commercial contracts, vendor reconciliations, regulatory compliance, and working capital cash flows."
+        "Delivered 150 to 200+ events across Corporate MICE, Governmental Summits, Live Concerts/Parties, Sporting Mega-Events, and High-Net-Worth Weddings in partnership with 15+ premier event agencies.",
+        "Executed operations at premier Mumbai venues including Jio World Convention Centre, NESCO, Mumbai University, and Sahara Star.",
+        "Directed end-to-end venue booking, floor mapping, and managed venue management teams for smooth multi-hall operations.",
+        "Managed event procurement end-to-end: sourcing custom event supplies, goodies, branded materials, and client-requested items with 0 stockout incidents.",
+        "Planned catering setups, F&B menu suggestions, dining crowd flows, and directed technical AV operation handling with strict show-time management.",
+        "Deployed and supervised field teams of up to 133 personnel across multi-shift events, maintaining a 100% contractual SLA compliance record via a 15-minute emergency fill protocol.",
+        "Built standardized shift check-in rosters and QR audit tracking tools, reducing reconciliation cycles from 12 days to 48 hours."
       ],
-      "technologies": ["Operational Logistics", "B2B Sales", "P&L Management", "SLA Control", "Client Account Management", "Field Operations"]
+      "technologies": ["Event Operations", "Corporate MICE", "Venue Booking & Mapping", "Event Procurement", "Technical AV Operations", "Catering & F&B Logistics", "SLA Control", "Canva", "AI Tools"]
+    },
+    {
+      "company": "Freelance Event Production",
+      "role": "Freelance Event Production & Operations Coordinator",
+      "duration": "Jun 2021 - Dec 2022",
+      "location": "Mumbai, India",
+      "context": "Managed on-ground event coordination, technical AV operations, stage setups, and vendor procurement for live concerts, corporate meets, and high-net-worth gatherings across Mumbai.",
+      "achievements": [
+        "Coordinated on-ground logistics, stage setups, and vendor deliverables across 35+ live events and private productions in Mumbai.",
+        "Managed technical AV consoles, stage sound checks, and lighting cues adhering strictly to minute-by-minute run-of-show schedules.",
+        "Handled procurement of custom stage materials, branding collateral, event goodies, and client-specified supplies.",
+        "Supervised crowd ingress/egress, delegate registrations, and VIP hospitality protocols at premier Mumbai banquet and hotel venues."
+      ],
+      "technologies": ["Event Production", "AV & Sound Coordination", "Vendor Procurement", "Stage Setup", "Crowd Logistics", "Run of Show Schedules"]
     }
   ],
   "featured_projects": [
@@ -146,7 +203,7 @@
       "url": "https://manavmate53-jpg.github.io/pm-product-lab/#flashqueue",
       "summary": "High-concurrency virtual waiting room buffering 50,000+ user surges, mitigating 504 timeouts via token bucket rate limiting.",
       "key_metrics": "50,000+ user surge buffer, zero 504 timeouts",
-      "domains": ["logistics", "quick commerce", "ticketing", "marketplaces", "consumer tech"]
+      "domains": ["logistics", "quick commerce", "ticketing", "marketplaces", "consumer tech", "events"]
     },
     {
       "id": "crewrostering",
@@ -155,7 +212,7 @@
       "url": "https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering",
       "summary": "Frontline workforce rostering and SLA escalation system with automated standby dispatch buffers and QR attendance audit (modeled on NeoManpower).",
       "key_metrics": "100% SLA compliance, 48-hr reconciliation",
-      "domains": ["operations", "workforce", "supply chain", "logistics", "field services"]
+      "domains": ["operations", "workforce", "supply chain", "logistics", "field services", "events", "mice"]
     },
     {
       "id": "verishield",
@@ -186,6 +243,16 @@
     }
   ],
   "skills": {
+    "event_operations_and_mice": [
+      "Corporate MICE & Summit Operations",
+      "End-to-End Venue Booking & Floor Mapping",
+      "Custom Event Supplies & Goodies Procurement",
+      "Technical AV Operations & Run-of-Show Time Management",
+      "Catering Setup, Menu Suggestion & Dining Crowd Flow",
+      "VIP Hospitality & High-Volume Registration Logistics",
+      "Rapid On-Site Crisis Handling & Contingency Management",
+      "Field Workforce Scheduling & SLA Control (up to 133 crew)"
+    ],
     "product_management": [
       "Product Discovery & Customer Interviews",
       "Technical PRD Authoring & User Stories",
@@ -206,14 +273,16 @@
       "Git & Technical Workflow Automation"
     ],
     "operations_and_business": [
-      "B2B Enterprise Client Acquisition",
+      "150-200+ Events Delivered across 15+ Agencies",
+      "End-to-End Manpower & Event Procurement",
+      "Venue Management & Multi-Hall Coordination",
+      "B2B Enterprise Client Acquisition & Servicing",
       "P&L and Unit Economics Discipline",
-      "Field Logistics & Shift Scheduling",
-      "SLA Formulation & Compliance",
-      "Vendor Negotiation & Contract Management",
-      "Cross-Functional Team Leadership"
+      "Contractual SLA Formulation & 100% Compliance Record"
     ],
     "tools": [
+      "Canva (Client Pitch PPTs, Event Signage, Collateral)",
+      "AI Tools (Ideation Schedules, Client Emails, Budgeting Drafts)",
       "Jira",
       "Figma",
       "Linear",
@@ -300,6 +369,6 @@
       "robotic cover letter openings (I am writing to express my enthusiasm, My name is...)",
       "fabricated corporate tenures or claiming 10+ years of corporate enterprise PM experience"
     ],
-    "required_framing": "Emphasize hands-on technical product execution (PRDs, Llama 3.1 cost reduction, NVIDIA NIM, EvalGuard AI, SQL funnel analysis) backed by real-world operational grit (NeoManpower 50+ B2B clients, 133 personnel, zero SLA breaches)."
+    "required_framing": "Emphasize 4+ years of hands-on event operations experience across 150-200+ events with 15+ agencies in Mumbai, highlighting 2026 marquee executions (Tata Mumbai Marathon, ICANN 2026, Neurology Summit 2026), end-to-end procurement, venue booking and mapping, AV show-time management, catering planning, and Canva/AI workflow speed alongside proven technical and operational grit."
   }
 }

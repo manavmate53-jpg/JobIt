@@ -63,8 +63,11 @@ class SequenceGenerator:
                 return json.load(f)
         return {}
 
-    def get_salary_quote_note(self, funding_stage: str) -> str:
+    def get_salary_quote_note(self, funding_stage: str, pillar: str = "") -> str:
         st = funding_stage.lower()
+        pil = str(pillar).upper()
+        if "EVENT" in pil or "MICE" in pil or "event" in st or "mice" in st or "enterprise mice" in st:
+            return "targeting minimum ₹40,000/month in-hand (₹5.5L to ₹7.5L CTC)"
         if "seed" in st or "pre-series a" in st or "angel" in st:
             return "targeting ₹6.5L to ₹8L with upside in early equity"
         return "targeting ₹10L to ₹12L base given proven AI pipeline and P&L scaling track record"
@@ -83,7 +86,24 @@ class SequenceGenerator:
         tailored_pdf_path: str = ""
     ) -> OutreachTouchpoints:
         pillars_data = self.playbooks.get("pillars", {})
-        playbook = pillars_data.get(pillar, pillars_data.get("PILLAR_1_FOUNDERS_OFFICE", {}))
+        is_event = (
+            "EVENT" in str(pillar).upper()
+            or "MICE" in str(pillar).upper()
+            or "event" in opportunity.sector.lower()
+            or "mice" in opportunity.sector.lower()
+        )
+        if is_event and pillar not in pillars_data:
+            resolved_pillar = "PILLAR_4_EVENT_OPERATIONS_MICE"
+        else:
+            resolved_pillar = pillar
+
+        playbook = pillars_data.get(
+            resolved_pillar,
+            pillars_data.get("PILLAR_4_EVENT_OPERATIONS_MICE" if is_event else "PILLAR_1_FOUNDERS_OFFICE", {})
+        )
+
+        if not tailored_pdf_path and is_event:
+            tailored_pdf_path = "exports/resumes/Manav_Mate_Event_Management_CV.pdf"
 
         # Identify decision maker
         contacts = self.finder.identify_targets(
@@ -117,7 +137,7 @@ class SequenceGenerator:
             domains=[]
         )
 
-        salary_note = self.get_salary_quote_note(opportunity.funding_stage)
+        salary_note = self.get_salary_quote_note(opportunity.funding_stage, pillar=pillar)
 
         # Context dict for formatting
         fmt = {
@@ -144,7 +164,7 @@ class SequenceGenerator:
             company_name=opportunity.company_name,
             target_person=primary_contact.name,
             target_title=primary_contact.title,
-            pillar=pillar,
+            pillar=resolved_pillar,
             linkedin_connect_note=conn_note,
             funding_hook_cold_dm=cold_dm,
             wellfound_founder_note=wellfound,
@@ -153,6 +173,81 @@ class SequenceGenerator:
             primary_project=primary_proj,
             email_options=primary_contact.email_permutations,
             linkedin_search_url=primary_contact.linkedin_search_url,
+            tailored_pdf_path=tailored_pdf_path
+        )
+
+    def generate_event_touchpoints(
+        self,
+        company_name: str,
+        target_person: str = "Hiring Team",
+        target_title: str = "Operations Lead",
+        role_title: str = "Event Operations Manager",
+        tailored_pdf_path: str = "exports/resumes/Manav_Mate_Event_Management_CV.pdf",
+        first_name: Optional[str] = None,
+        email_permutations: Optional[List[str]] = None,
+    ) -> OutreachTouchpoints:
+        """
+        Generates dedicated event operations & MICE outreach touchpoints explicitly referencing:
+        - 4+ years experience across 150-200+ events with 15+ agencies
+        - 2026 execution at Tata Mumbai Marathon (Mumbai University venue production/ops),
+          ICANN 2026 (registration/logistics), and Neurology Summit 2026 (registration, production, ops, hospitality)
+        - End-to-end procurement, venue mapping, AV time management, catering planning, and Canva/AI workflow speed.
+        - Strict constraints: zero em dashes, zero double hyphens, and LinkedIn connect note <= 280 chars.
+        """
+        fname = first_name or (target_person.split()[0] if target_person else "there")
+        pillars_data = self.playbooks.get("pillars", {})
+        playbook = pillars_data.get("PILLAR_4_EVENT_OPERATIONS_MICE", {})
+
+        primary_proj = PMLabBuild(
+            id="crewrostering",
+            name="CrewRoster Dashboard",
+            category="Operations PM & Workforce Tech",
+            url="https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering",
+            summary="Frontline workforce rostering and SLA escalation system with automated standby dispatch buffers and QR attendance audit (modeled on NeoManpower).",
+            key_metrics="100% SLA compliance, 48-hr reconciliation",
+            domains=["operations", "workforce", "supply chain", "logistics", "events", "mice"]
+        )
+
+        salary_note = "minimum ₹40,000/month in-hand (₹5.5L to ₹7.5L CTC)"
+        fmt = {
+            "first_name": fname,
+            "company_name": company_name,
+            "amount_raised": "",
+            "funding_stage": "Enterprise MICE",
+            "lead_investor": "",
+            "primary_project_id": "crewrostering",
+            "salary_quote_note": salary_note
+        }
+
+        conn_note = self.clean_text_strict(playbook.get("linkedin_connect_note", "").format(**fmt))
+        if len(conn_note) > 280:
+            conn_note = conn_note[:277] + "..."
+
+        cold_dm = self.clean_text_strict(playbook.get("funding_hook_cold_dm", "").format(**fmt))
+        wellfound = self.clean_text_strict(playbook.get("wellfound_founder_note", "").format(**fmt))
+        bump = self.clean_text_strict(playbook.get("follow_up_bump", "").format(**fmt))
+
+        clean_comp = re.sub(r"[^a-zA-Z0-9]", "", company_name.lower())
+        domain = f"{clean_comp}.com"
+        emails = email_permutations if email_permutations else [
+            f"careers@{domain}",
+            f"hiring@{domain}",
+            f"hr@{domain}"
+        ]
+
+        return OutreachTouchpoints(
+            company_name=company_name,
+            target_person=target_person,
+            target_title=target_title,
+            pillar="PILLAR_4_EVENT_OPERATIONS_MICE",
+            linkedin_connect_note=conn_note,
+            funding_hook_cold_dm=cold_dm,
+            wellfound_founder_note=wellfound,
+            follow_up_bump=bump,
+            salary_quote_note=salary_note,
+            primary_project=primary_proj,
+            email_options=emails,
+            linkedin_search_url=f"https://www.linkedin.com/search/results/people/?keywords={company_name}%20event%20operations",
             tailored_pdf_path=tailored_pdf_path
         )
 

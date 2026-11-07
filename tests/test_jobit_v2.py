@@ -217,3 +217,23 @@ def test_telemetry_database(tmp_path):
     assert summary["qualified_opportunities"] == 1
     assert summary["outreach_sent"] == 1
 
+
+def test_event_outreach_sequence():
+    seq_gen = SequenceGenerator()
+    touchpoints = seq_gen.generate_event_touchpoints(
+        company_name="Wizcraft International",
+        target_person="Sabbas Joseph"
+    )
+
+    assert len(touchpoints.linkedin_connect_note) <= 280
+    assert "—" not in touchpoints.linkedin_connect_note
+    assert "--" not in touchpoints.linkedin_connect_note
+    assert "—" not in touchpoints.funding_hook_cold_dm
+    assert "--" not in touchpoints.funding_hook_cold_dm
+    assert "150-200+" in touchpoints.linkedin_connect_note or "150 to 200+" in touchpoints.funding_hook_cold_dm
+    assert "Tata Mumbai Marathon 2026" in touchpoints.funding_hook_cold_dm
+    assert "ICANN 2026" in touchpoints.funding_hook_cold_dm
+    assert "Neurology Summit Mumbai 2026" in touchpoints.funding_hook_cold_dm
+    assert "exports/resumes/Manav_Mate_Event_Management_CV.pdf" in touchpoints.tailored_pdf_path
+
+

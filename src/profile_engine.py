@@ -30,6 +30,9 @@ class Compensation(BaseModel):
     expected_ctc_min_inr_lpa: float
     expected_ctc_max_inr_lpa: float
     notes: str
+    monthly_in_hand_min_inr: Optional[float] = None
+    seed_pre_series_a_range: Optional[Dict[str, float]] = None
+    series_a_b_range: Optional[Dict[str, float]] = None
 
 
 class Positioning(BaseModel):
@@ -39,6 +42,8 @@ class Positioning(BaseModel):
     target_locations: List[str]
     target_domains: List[str]
     compensation: Compensation
+    strategic_pillars: Optional[Dict[str, Any]] = None
+    marquee_2026_events: Optional[List[Dict[str, Any]]] = None
 
 
 class WorkExperience(BaseModel):
@@ -66,6 +71,7 @@ class SkillsCollection(BaseModel):
     tools: List[str]
     technical: Optional[Dict[str, List[str]]] = None
     system_architecture: Optional[List[str]] = None
+    event_operations_and_mice: Optional[List[str]] = None
 
 
 class Education(BaseModel):
@@ -98,6 +104,7 @@ class CandidateProfile(BaseModel):
     education: List[Education]
     certifications: List[Certification]
     tone_rules: ToneRules
+    marquee_2026_events: Optional[List[Dict[str, Any]]] = None
 
 
 def get_default_profile_path() -> Path:
