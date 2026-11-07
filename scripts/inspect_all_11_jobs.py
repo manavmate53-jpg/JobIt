@@ -84,3 +84,4 @@ with open(BASE_DIR / "data" / "target_jobs_inspection.json", "w", encoding="utf-
     json.dump(results, f, indent=2)
 
 print("\nDone inspection! Saved to data/target_jobs_inspection.json")
+
