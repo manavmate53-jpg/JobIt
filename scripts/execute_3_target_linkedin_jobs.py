@@ -35,7 +35,7 @@ JOBS = [
         "platform": "LinkedIn",
         "decision_maker": "Alwin Chettiar (Reporting Hiring Manager / CMO Dept)",
         "fit_score": 98,
-        "experience_req": "4–5+ Years",
+        "experience_req": "4-5+ Years",
         "status": "QUEUED_YANG",
         "notes": "Regional marketing events, trade shows, conferences, exhibitions, registrations, logistics, travel, vendor SLAs, POs/budget tracking, branded merchandise. Reports directly to Alwin Chettiar."
     },
@@ -49,7 +49,7 @@ JOBS = [
         "platform": "LinkedIn",
         "decision_maker": "Head of Experiential & Brand Events",
         "fit_score": 96,
-        "experience_req": "2–4 Years",
+        "experience_req": "2-4 Years",
         "status": "QUEUED_YANG",
         "notes": "Intimate & high-touch brand events, launches, community evenings, founder dinners, pop-ups, partner showcases, venue, vendors, run of show across cities."
     },
@@ -63,7 +63,7 @@ JOBS = [
         "platform": "LinkedIn",
         "decision_maker": "Sunburn Festival Operations & Live Events Head",
         "fit_score": 97,
-        "experience_req": "2–5 Years",
+        "experience_req": "2-5 Years",
         "status": "QUEUED_YANG",
         "notes": "Sunburn Campus, Arena & Festival project management across India. Venue production, artist logistics, college partnerships, crowd flow, vendor SLAs, and budget closure."
     }
@@ -101,7 +101,7 @@ def generate_cold_dm(job: dict) -> str:
     else:  # BookMyShow - Sunburn
         salutation = "Hi,"
         hook = f"Reaching out regarding the Executive - Project Management role for Sunburn at BookMyShow."
-        context_para = "Having executed 150 to 200+ events across Mumbai—ranging from mega-sporting events and live concert venues to high-volume youth activations—I bring battle-tested on-ground production and venue management ready for Sunburn Campus and Arena tours."
+        context_para = "Having executed 150 to 200+ events across Mumbai - ranging from mega-sporting events and live concert venues to high-volume youth activations - I bring battle-tested on-ground production and venue management ready for Sunburn Campus and Arena tours."
 
     body = f"""{salutation}
 

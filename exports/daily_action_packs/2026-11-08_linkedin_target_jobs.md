@@ -166,7 +166,7 @@ Hi,
 
 Reaching out regarding the Executive - Project Management role for Sunburn at BookMyShow.
 
-Having executed 150 to 200+ events across Mumbai—ranging from mega-sporting events and live concert venues to high-volume youth activations—I bring battle-tested on-ground production and venue management ready for Sunburn Campus and Arena tours.
+Having executed 150 to 200+ events across Mumbai - ranging from mega-sporting events and live concert venues to high-volume youth activations - I bring battle-tested on-ground production and venue management ready for Sunburn Campus and Arena tours.
 
 Key 2026 Marquee Event Executions:
 1. Tata Mumbai Marathon 2026: Directed entire venue operations and on-ground production across Mumbai University (zone mapping, production setup, crowd flow control, and real-time crisis management).
