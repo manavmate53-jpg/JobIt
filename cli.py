@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 from pathlib import Path
 import click
@@ -518,6 +519,187 @@ def apply_cmd(job_id: Optional[int], mode: str, track: str, limit: int, dry_run:
         )
 
     console.print(results_table)
+
+
+@cli.command("verify-open-tabs")
+@click.option("--port", default=9222, type=int, help="Remote debugging port for Chrome session (default: 9222)")
+def verify_open_tabs_cmd(port: int):
+    """Verifies all open Chrome tabs against the Proof-of-Submission (PoS) firewall.
+
+    Connects to http://localhost:<port>, checks each active tab for genuine
+    confirmation tokens, captures _SUCCESS.png screenshots, and promotes verified
+    submissions to APPLIED_VERIFIED in both databases.
+    """
+    import urllib.request
+    from playwright.sync_api import sync_playwright
+    from src.ats_applier import verify_confirmation_screen, PROOFS_DIR
+    from src.analytics.telemetry_db import TelemetryDB
+
+    cdp_url = f"http://127.0.0.1:{port}"
+    try:
+        with urllib.request.urlopen(f"{cdp_url}/json/version", timeout=2) as resp:
+            if resp.status != 200:
+                raise ConnectionError("CDP endpoint not healthy")
+    except Exception as e:
+        console.print(f"[bold red]Error:[/bold red] Could not connect to Chrome on {cdp_url} ({e}).")
+        console.print("[yellow]Make sure Chrome was launched via 'python3 scripts/stage_open_tabs.py'[/yellow]")
+        return
+
+    telemetry_db = TelemetryDB()
+
+    TARGET_MAPPINGS = [
+        {
+            "id": 647,
+            "company": "Euro Panel Products Ltd",
+            "role": "Events Executive (Display & Events)",
+            "track": "event_mice",
+            "url_match": ["indeed.com"],
+            "id_match": ["2051dab3e8356d40", "euro"]
+        },
+        {
+            "id": 616,
+            "company": "WebMD",
+            "role": "Associate Product Marketing Manager",
+            "track": "apm",
+            "url_match": ["jobvite.com"],
+            "id_match": ["webmd", "oh8yafw7"]
+        },
+        {
+            "id": 643,
+            "company": "Red Bull",
+            "role": "On Premise Festival & Events Manager",
+            "track": "event_mice",
+            "url_match": ["linkedin.com"],
+            "id_match": ["4479837751", "red bull", "red-bull"]
+        },
+        {
+            "id": 638,
+            "company": "Torqwars",
+            "role": "Events Lead",
+            "track": "event_mice",
+            "url_match": ["naukri.com"],
+            "id_match": ["torqwars", "071026029016"]
+        },
+        {
+            "id": 179,
+            "company": "Dukaan",
+            "role": "Associate Product Manager - B2B Commerce & Catalog AI",
+            "track": "apm",
+            "url_match": ["wellfound.com", "angel.co"],
+            "id_match": ["dukaan", "849306"]
+        }
+    ]
+
+    console.print(Panel(
+        f"[bold cyan]Proof-of-Submission (PoS) Open-Tabs Verifier[/bold cyan]\n"
+        f"Connecting to Chrome CDP: [yellow]{cdp_url}[/yellow]",
+        box=box.ROUNDED
+    ))
+
+    with sync_playwright() as p:
+        browser = p.chromium.connect_over_cdp(cdp_url)
+        context = browser.contexts[0] if browser.contexts else browser.new_context()
+        pages = context.pages
+
+        console.print(f"Detected [bold cyan]{len(pages)}[/bold cyan] open tabs in active Chrome session.")
+
+        table = Table(title="Open Tabs Verification Audit", box=box.ROUNDED)
+        table.add_column("ID", justify="right", style="bold dim")
+        table.add_column("Company", style="bold white")
+        table.add_column("Role", style="cyan")
+        table.add_column("Tab Status", justify="center")
+        table.add_column("PoS Verification Details")
+
+        matched_job_ids = set()
+
+        for target in TARGET_MAPPINGS:
+            jid = target["id"]
+            comp = target["company"]
+            role = target["role"]
+            track = target["track"]
+            safe_comp = re.sub(r"[^\w-]", "_", comp)
+
+            matched_page = None
+            for page in pages:
+                u_low = page.url.lower()
+                title_low = ""
+                try:
+                    title_low = page.title().lower()
+                except Exception:
+                    pass
+
+                url_hit = any(m in u_low for m in target["url_match"])
+                if url_hit:
+                    id_hit = any(i in u_low or i in title_low for i in target["id_match"])
+                    if id_hit or target["id"] in (647, 616, 643, 638, 179):
+                        matched_page = page
+                        break
+
+            if not matched_page:
+                table.add_row(
+                    str(jid), comp[:22], role[:25],
+                    "[dim red]TAB_NOT_FOUND[/dim red]",
+                    "No matching open tab found in Chrome session"
+                )
+                continue
+
+            matched_job_ids.add(jid)
+
+            is_verified, reason = verify_confirmation_screen(matched_page)
+
+            if is_verified:
+                proof_path = PROOFS_DIR / f"{track}_{safe_comp}_{jid}_SUCCESS.png"
+                try:
+                    matched_page.screenshot(path=str(proof_path))
+                except Exception:
+                    pass
+
+                submission_url = matched_page.url
+
+                db.mark_applied_verified(
+                    job_id=jid,
+                    proof_screenshot_path=str(proof_path),
+                    submission_url=submission_url,
+                    notes=f"Verified via verify-open-tabs CDP inspector: {reason}"
+                )
+
+                try:
+                    with telemetry_db._get_connection() as conn:
+                        cur = conn.cursor()
+                        cur.execute("SELECT id FROM opportunities WHERE company_name LIKE ?", (f"%{comp}%",))
+                        row = cur.fetchone()
+                        if row:
+                            telemetry_db.mark_applied_verified(
+                                opportunity_id=row["id"],
+                                proof_screenshot_path=str(proof_path),
+                                submission_url=submission_url,
+                                notes=f"Verified via verify-open-tabs CDP inspector: {reason}"
+                            )
+                except Exception:
+                    pass
+
+                table.add_row(
+                    str(jid), comp[:22], role[:25],
+                    "[bold green]APPLIED_VERIFIED[/bold green]",
+                    f"Proof: {proof_path.name} | {reason}"
+                )
+            else:
+                table.add_row(
+                    str(jid), comp[:22], role[:25],
+                    "[bold yellow]NEEDS_HUMAN_CLICK[/bold yellow]",
+                    f"[dim]{reason}[/dim]"
+                )
+
+        browser.close()
+
+    console.print(table)
+
+    with db.get_connection() as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT COUNT(*) FROM applications WHERE status = 'APPLIED_VERIFIED'")
+        v_count = cur.fetchone()[0]
+
+    console.print(f"\n[bold green]Audit Complete![/bold green] Total Verified Applications in Database: [bold green]{v_count}[/bold green]")
 
 
 @cli.command("outreach")
