@@ -1,9 +1,9 @@
 """Direct ATS Form Applier and Browser Co-Pilot Engine.
 
 Provides two execution modes:
-MODE A: Direct ATS Form Applier (Lever, Greenhouse, Trakstar, Gem, Ashby, Workable, Zoho)
-MODE B: Persistent Logged-In Browser Co-Pilot Mode (Naukri, LinkedIn, Custom Portals)
-Enforces Proof-of-Submission (PoS) Firewall.
+MODE A: Direct ATS Form Applier (Jobvite, Lever, Greenhouse, Trakstar, Gem, Ashby, Workable, Zoho)
+MODE B: Persistent Logged-In Browser Co-Pilot Mode (Naukri, LinkedIn, Indeed, Wellfound, Custom Portals)
+Enforces Proof-of-Submission (PoS) Firewall, Multi-Step DOM Form Filling, and Mandatory 3-Stage Screenshots.
 """
 
 from __future__ import annotations
@@ -14,9 +14,12 @@ import os
 import re
 import time
 from pathlib import Path
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
-from playwright.sync_api import sync_playwright, BrowserContext, Page, TimeoutError as PlaywrightTimeoutError
+try:
+    from patchright.sync_api import sync_playwright, BrowserContext, Page, TimeoutError as PlaywrightTimeoutError
+except ImportError:
+    from playwright.sync_api import sync_playwright, BrowserContext, Page, TimeoutError as PlaywrightTimeoutError
 
 from src.tracker_db import TrackerDB
 from src.analytics.telemetry_db import TelemetryDB
@@ -39,6 +42,7 @@ CANDIDATE_DATA = {
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
+    "zip": "400060",
     "linkedin": "https://www.linkedin.com/in/manav-mate-9448b1341/",
     "portfolio": "https://manavmate53-jpg.github.io/portfolio/#hero",
     "product_lab": "https://manavmate53-jpg.github.io/pm-product-lab/#crewrostering",
@@ -47,10 +51,11 @@ CANDIDATE_DATA = {
     "experience_years": "4",
     "notice_period": "Immediate / 0 Days",
     "notice_period_days": "0",
+    "notice_period_dropdown": "0-15",
     "current_ctc": "6.0 LPA",
     "current_ctc_numeric": "600000",
     "expected_ctc": "6.5 - 7.2 LPA (₹45,000 - ₹50,000 in-hand)",
-    "expected_ctc_numeric": "700000"
+    "expected_ctc_numeric": "650000",
 }
 
 TRACK_RESUMES = {
@@ -60,8 +65,14 @@ TRACK_RESUMES = {
     "apm": BASE_DIR / "exports" / "resumes" / "Manav_Mate_APM_CV.pdf",
 }
 
+
 class SubmissionIncompleteError(Exception):
     """Raised when an application is claimed to be submitted but pre-apply or unsubmitted elements remain visible."""
+    pass
+
+
+class ZeroFieldsFilledError(Exception):
+    """Raised when an application form is loaded but 0 input fields could be identified and filled."""
     pass
 
 
@@ -82,6 +93,7 @@ SUBMIT_BUTTON_SELECTORS = [
     "button:has-text('Submit your application')",
     "button:has-text('Submit application')",
     "button:has-text('Submit Application')",
+    "button:has-text('Send Application')",
     "button:has-text('Submit')",
     "button#submit_app",
     "input[type='submit']",
@@ -94,14 +106,397 @@ BOT_WALL_PHRASES = [
     "access denied",
     "403 forbidden",
     "verify you are human",
-    "captcha",
+    "please verify you are human",
     "cloudflare ray id",
-    "please enable cookies"
+    "please enable cookies",
+    "security check to continue",
 ]
+
+
+def detect_login_wall(page: Any, job_id: Optional[int] = None) -> Tuple[bool, str, str]:
+    """Detects whether the current page is blocked by an authentication wall.
+
+    Returns (is_gated: bool, platform: str, reason: str).
+    If gated, captures exports/proofs/step0_login_wall_<job_id>.png.
+    """
+    url = getattr(page, "url", "")
+    if callable(url):
+        url = url()
+    url_lower = str(url).lower()
+
+    content = ""
+    if hasattr(page, "content"):
+        content = page.content() if callable(page.content) else page.content
+    content_lower = str(content).lower()
+
+    platform = "generic"
+    is_gated = False
+    reason = ""
+
+    if "linkedin.com" in url_lower:
+        platform = "LinkedIn"
+        if any(p in url_lower for p in ["/login", "/checkpoint", "authwall"]):
+            is_gated = True
+            reason = f"LinkedIn auth gate in URL: {url}"
+        elif any(t in content_lower for t in ["sign in to linkedin", "join linkedin to apply", "sign in with google"]):
+            is_gated = True
+            reason = "LinkedIn sign-in form visible in DOM"
+
+    elif "naukri.com" in url_lower:
+        platform = "Naukri"
+        if any(p in url_lower for p in ["/nlogin", "/login"]):
+            is_gated = True
+            reason = f"Naukri login URL detected: {url}"
+        elif any(t in content_lower for t in ["login to apply", "register to apply", "login / register"]):
+            is_gated = True
+            reason = "Naukri login required banner in DOM"
+
+    elif "indeed.com" in url_lower:
+        platform = "Indeed"
+        if any(p in url_lower for p in ["/account/login", "secure.indeed.com"]):
+            is_gated = True
+            reason = f"Indeed sign-in URL detected: {url}"
+        elif any(t in content_lower for t in ["sign in to your account", "create an account to continue"]):
+            is_gated = True
+            reason = "Indeed sign-in modal in DOM"
+
+    elif "wellfound.com" in url_lower or "angel.co" in url_lower:
+        platform = "Wellfound"
+        if "/login" in url_lower:
+            is_gated = True
+            reason = f"Wellfound login URL detected: {url}"
+        elif "log in" in content_lower and "sign up to apply" in content_lower:
+            is_gated = True
+            reason = "Wellfound auth wall in DOM"
+
+    else:
+        if any(p in url_lower for p in ["/login", "/signin", "/sign-in", "/auth"]):
+            is_gated = True
+            platform = "Generic"
+            reason = f"Generic login URL detected: {url}"
+
+    if is_gated:
+        jid_str = str(job_id) if job_id is not None else "unknown"
+        wall_shot = PROOFS_DIR / f"step0_login_wall_{jid_str}.png"
+        try:
+            if hasattr(page, "screenshot") and callable(page.screenshot):
+                page.screenshot(path=str(wall_shot))
+        except Exception:
+            pass
+        print(f"\n[AUTH REQUIRED] Logged out on {platform}. Reason: {reason}")
+        print(f"Auth wall screenshot: {wall_shot}")
+
+    return is_gated, platform, reason
+
+
+def normalize_ats_url(url: str) -> str:
+    """Normalizes job posting URLs directly to application endpoints where applicable."""
+    u = url.strip()
+    u_lower = u.lower()
+
+    if "jobs.jobvite.com" in u_lower and "/apply" not in u_lower:
+        parts = u.split("?")
+        base = parts[0].rstrip("/")
+        query = f"?{parts[1]}" if len(parts) > 1 else ""
+        return f"{base}/apply{query}"
+
+    if "lever.co" in u_lower and not u_lower.endswith("/apply") and "/apply" not in u_lower:
+        parts = u.split("?")
+        base = parts[0].rstrip("/")
+        query = f"?{parts[1]}" if len(parts) > 1 else ""
+        return f"{base}/apply{query}"
+
+    return u
+
+
+def fill_all_visible_inputs(
+    page: Page,
+    profile: Dict[str, Any] = CANDIDATE_DATA,
+    cv_path: Optional[Path] = None,
+    job_id: Optional[int] = None,
+) -> List[Tuple[str, str]]:
+    """Smart Label-Matched DOM Form Filler.
+
+    Iterates over all visible inputs, selects, and textareas across the page and child iframes.
+    Matches candidate attributes by inspecting label[for], parent labels, placeholder, name, id,
+    aria-label, and autocomplete.
+    Handles file upload inputs (even when hidden).
+    Highlights filled inputs in green (#10b981).
+    Logs [FILLED] <name> = <val>.
+    Raises ZeroFieldsFilledError if no fields could be filled.
+    """
+    filled_fields: List[Tuple[str, str]] = []
+
+    # 1. Handle Country / Language Select dropdowns (e.g. Jobvite country selector)
+    try:
+        country_selectors = ["#jv-country-select", "select[name*='country']", "select[id*='country']"]
+        for c_sel in country_selectors:
+            loc = page.locator(c_sel).first
+            if loc.count() > 0 and loc.is_visible():
+                options = loc.locator("option").all_inner_texts()
+                target_val = None
+                for opt in options:
+                    if any(target in opt.lower() for target in ["united states & other", "india", "united states", "other"]):
+                        target_val = opt
+                        break
+                if target_val:
+                    loc.select_option(label=target_val)
+                else:
+                    # Select first non-empty option
+                    opts = loc.locator("option").all()
+                    if len(opts) > 1:
+                        val = opts[1].get_attribute("value")
+                        if val:
+                            loc.select_option(value=val)
+                time.sleep(2)
+                print(f"[FILLED] Country/Language Selector = '{target_val or 'Default'}'")
+                filled_fields.append(("Country/Language Selector", target_val or "Selected"))
+                break
+    except Exception as e:
+        logger.debug(f"Country select handling: {e}")
+
+    # 2. File Upload handling across main page and child iframes
+    if cv_path and cv_path.exists():
+        all_frames = [page.main_frame] + [f for f in page.frames if f != page.main_frame]
+        resume_uploaded = False
+        for frame in all_frames:
+            try:
+                file_inputs = frame.locator("input[type='file']").all()
+                for finp in file_inputs:
+                    finp.set_input_files(str(cv_path))
+                    time.sleep(1.5)
+                    resume_uploaded = True
+                    fname = cv_path.name
+                    print(f"[FILLED] Resume / CV File Upload = '{fname}'")
+                    filled_fields.append(("Resume File", fname))
+                    break
+                if resume_uploaded:
+                    break
+            except Exception as e:
+                logger.debug(f"File upload error in frame: {e}")
+
+    # 3. Label-Matched Input / Select / Textarea Filling
+    all_frames = [page.main_frame] + [f for f in page.frames if f != page.main_frame]
+
+    for frame in all_frames:
+        try:
+            elements = frame.locator("input:not([type='file']):not([type='hidden']), textarea, select").all()
+        except Exception:
+            continue
+
+        for el in elements:
+            try:
+                if not el.is_visible():
+                    continue
+
+                tag = el.evaluate("e => e.tagName").upper()
+                itype = (el.get_attribute("type") or "text").lower()
+                iid = el.get_attribute("id") or ""
+                name = el.get_attribute("name") or ""
+                ph = el.get_attribute("placeholder") or ""
+                aria = el.get_attribute("aria-label") or ""
+                auto = el.get_attribute("autocomplete") or ""
+
+                # Find associated label text
+                lbl_text = ""
+                if iid:
+                    lbl = frame.locator(f"label[for='{iid}']").first
+                    if lbl.count() > 0:
+                        lbl_text = lbl.inner_text().strip()
+                if not lbl_text:
+                    try:
+                        lbl_text = el.evaluate("e => e.closest('label') ? e.closest('label').innerText : ''").strip()
+                    except Exception:
+                        pass
+
+                desc = f"{lbl_text} {name} {iid} {ph} {aria} {auto}".lower()
+                display_name = lbl_text or name or iid or ph or "Unknown Field"
+
+                val_to_fill = None
+
+                # Matching logic
+                if any(k in desc for k in ["first name", "firstname", "first_name", "given-name", "given name"]) or (
+                    desc.strip() == "first" or ("first" in desc and "name" in desc)
+                ):
+                    val_to_fill = profile.get("first_name", "Manav")
+
+                elif any(k in desc for k in ["last name", "lastname", "last_name", "family-name", "family name", "surname"]) or (
+                    desc.strip() == "last" or ("last" in desc and "name" in desc)
+                ):
+                    val_to_fill = profile.get("last_name", "Mate")
+
+                elif any(k in desc for k in ["full name", "fullname", "your name", "candidate name"]) or desc.strip() in ["name", "name *"]:
+                    val_to_fill = profile.get("full_name", "Manav Mate")
+
+                elif any(k in desc for k in ["email", "e-mail"]):
+                    val_to_fill = profile.get("email", "manavmate53@gmail.com")
+
+                elif any(k in desc for k in ["phone", "mobile", "cell", "telephone", "tel"]):
+                    if itype in ["tel", "number"] or "10" in desc or "cellphone" in desc:
+                        val_to_fill = profile.get("phone_clean", "8591595889")
+                    else:
+                        val_to_fill = profile.get("phone", "+91 85915 95889")
+
+                elif ("current" in desc and any(k in desc for k in ["salary", "ctc", "compensation", "earning"])) or desc.strip() in [
+                    "current salary*",
+                    "current ctc",
+                ]:
+                    val_to_fill = profile.get("current_ctc_numeric", "600000")
+
+                elif any(k in desc for k in ["desired", "expected", "target"]) and any(k in desc for k in ["salary", "ctc", "compensation"]):
+                    val_to_fill = profile.get("expected_ctc_numeric", "650000")
+
+                elif "notice" in desc:
+                    if tag == "SELECT":
+                        opts = el.locator("option").all_inner_texts()
+                        selected_opt = None
+                        for opt in opts:
+                            if any(target in opt.lower() for target in ["0-15", "immediate", "0", "15", "1 month"]):
+                                selected_opt = opt
+                                break
+                        if selected_opt:
+                            el.select_option(label=selected_opt)
+                            val_to_fill = selected_opt
+                        else:
+                            val_to_fill = profile.get("notice_period", "0-15")
+                    else:
+                        val_to_fill = profile.get("notice_period", "Immediate / 0 Days")
+
+                elif "city" in desc or "address-level2" in desc:
+                    val_to_fill = profile.get("city", "Mumbai")
+
+                elif any(k in desc for k in ["zip", "postal", "pincode", "pin code", "postal-code"]):
+                    val_to_fill = profile.get("zip", "400060")
+
+                elif any(k in desc for k in ["location", "address"]) and not any(k in desc for k in ["email", "ip"]):
+                    val_to_fill = profile.get("location", "Mumbai, Maharashtra, India")
+
+                elif "linkedin" in desc:
+                    val_to_fill = profile.get("linkedin", "https://www.linkedin.com/in/manav-mate-9448b1341/")
+
+                elif any(k in desc for k in ["portfolio", "website", "personal website", "github", "url"]):
+                    val_to_fill = profile.get("portfolio", "https://manavmate53-jpg.github.io/portfolio/#hero")
+
+                elif any(k in desc for k in ["company", "employer", "organization", "current org"]):
+                    val_to_fill = profile.get("current_company", "NeoManpower")
+
+                elif any(k in desc for k in ["title", "current title", "designation"]):
+                    val_to_fill = profile.get("current_title", "Product & Operations Lead")
+
+                elif any(k in desc for k in ["experience", "years of exp"]):
+                    val_to_fill = profile.get("experience_years", "4")
+
+                if val_to_fill:
+                    if tag == "SELECT":
+                        try:
+                            el.select_option(label=str(val_to_fill))
+                        except Exception:
+                            try:
+                                el.select_option(value=str(val_to_fill))
+                            except Exception:
+                                pass
+                    else:
+                        el.fill(str(val_to_fill))
+                        try:
+                            el.dispatch_event("input")
+                            el.dispatch_event("change")
+                            el.dispatch_event("blur")
+                        except Exception:
+                            pass
+
+                    print(f"[FILLED] {display_name} = '{val_to_fill}'")
+                    filled_fields.append((display_name, str(val_to_fill)))
+
+            except Exception as e:
+                logger.debug(f"Input fill loop element error: {e}")
+
+    # 4. Highlight filled inputs in green
+    try:
+        page.evaluate("""() => {
+            document.querySelectorAll('input, select, textarea').forEach(el => {
+                if (el.value && el.value.length > 0 && el.type !== 'hidden' && el.type !== 'file') {
+                    el.style.border = '2px solid #10b981';
+                    el.style.backgroundColor = '#ecfdf5';
+                    el.style.boxShadow = '0 0 8px #10b981';
+                }
+            });
+        }""")
+    except Exception:
+        pass
+
+    # 5. Enforce Non-Zero Filled Fields
+    if len(filled_fields) == 0:
+        raise ZeroFieldsFilledError(
+            f"0 fields filled on {page.url}. Smart DOM agent could not match any inputs to candidate profile."
+        )
+
+    return filled_fields
+
+
+def step_through_wizard(
+    page: Page,
+    profile: Dict[str, Any] = CANDIDATE_DATA,
+    cv_path: Optional[Path] = None,
+    max_steps: int = 5,
+) -> Tuple[bool, str]:
+    """Iterates through multi-step application wizards until final Submit is reached.
+
+    Returns (submitted: bool, notes: str).
+    """
+    for step_num in range(1, max_steps + 1):
+        print(f"[WIZARD STEP {step_num}] Filling visible step inputs...")
+        try:
+            fill_all_visible_inputs(page, profile=profile, cv_path=cv_path)
+        except ZeroFieldsFilledError:
+            pass
+
+        # Check for final submit button
+        submit_btn = None
+        for sel in SUBMIT_BUTTON_SELECTORS:
+            btn = page.locator(sel).first
+            if btn.count() > 0 and btn.is_visible() and btn.is_enabled():
+                submit_btn = btn
+                break
+
+        # Check for intermediate wizard progression button
+        wizard_btn = None
+        wizard_selectors = [
+            "button:has-text('Next')",
+            "button:has-text('Continue')",
+            "button:has-text('Save & Continue')",
+            "button:has-text('Review')",
+            "a:has-text('Next')",
+            "a:has-text('Continue')",
+        ]
+        for w_sel in wizard_selectors:
+            w_btn = page.locator(w_sel).first
+            if w_btn.count() > 0 and w_btn.is_visible() and w_btn.is_enabled():
+                wizard_btn = w_btn
+                break
+
+        # If a next button is visible and not final submit, advance
+        if wizard_btn and (not submit_btn or wizard_btn != submit_btn):
+            print(f"[WIZARD STEP {step_num}] Clicking progression button: '{wizard_btn.inner_text().strip()}'")
+            wizard_btn.click()
+            time.sleep(2)
+            continue
+
+        # If final submit is visible, click it
+        if submit_btn:
+            print(f"[WIZARD FINAL] Clicking submit button: '{submit_btn.inner_text().strip()}'")
+            submit_btn.scroll_into_view_if_needed()
+            submit_btn.click()
+            time.sleep(4)
+            return True, f"Submit button clicked on step {step_num}"
+
+        time.sleep(1)
+
+    return False, f"Completed {max_steps} wizard steps without finding final submit button"
 
 
 def verify_confirmation_screen(page: Any, ats_type: str = "generic", raise_on_failure: bool = False) -> Tuple[bool, str]:
     """Strictly validates that the page is genuinely a post-submission confirmation screen.
+
     Returns (is_verified: bool, reason: str).
     Rules:
     1. Blacklist check: If any pre-apply or in-progress marker is visible, strictly forbid verification.
@@ -183,7 +578,11 @@ def verify_confirmation_screen(page: Any, ats_type: str = "generic", raise_on_fa
         return True, "Lever post-submission confirmation verified"
 
     elif "greenhouse.io" in url_lower:
-        has_positive = "/confirmation" in url_lower or "application submitted!" in content_lower or "thank you for applying" in content_lower
+        has_positive = (
+            "/confirmation" in url_lower
+            or "application submitted!" in content_lower
+            or "thank you for applying" in content_lower
+        )
         if not has_positive:
             reason = "Greenhouse submission incomplete: Missing '/confirmation' URL or 'Application submitted!' text"
             if raise_on_failure:
@@ -192,7 +591,12 @@ def verify_confirmation_screen(page: Any, ats_type: str = "generic", raise_on_fa
         return True, "Greenhouse post-submission confirmation verified"
 
     elif "jobvite.com" in url_lower:
-        has_positive = "thank you for your interest" in content_lower or "your application has been successfully submitted" in content_lower or "application submitted" in content_lower
+        has_positive = (
+            "thank you for your interest" in content_lower
+            or "your application has been successfully submitted" in content_lower
+            or "application submitted" in content_lower
+            or "thank you for applying" in content_lower
+        )
         if not has_positive:
             reason = "Jobvite submission incomplete: Missing 'successfully submitted' or 'Thank you for your interest' confirmation text"
             if raise_on_failure:
@@ -228,7 +632,6 @@ def verify_confirmation_screen(page: Any, ats_type: str = "generic", raise_on_fa
         return True, "Wellfound post-submission confirmation verified"
 
     else:
-        # Generic ATS: Check for URL confirmation or explicit success header
         generic_confirm_tokens = [
             "your application has been submitted",
             "thank you for applying",
@@ -274,6 +677,8 @@ class DirectATSApplier:
             return "lever"
         elif "greenhouse.io" in u:
             return "greenhouse"
+        elif "jobvite.com" in u:
+            return "jobvite"
         elif "trakstar.com" in u:
             return "trakstar"
         elif "gem.com" in u:
@@ -295,36 +700,59 @@ class DirectATSApplier:
         company: str,
         role: str,
         track: str = "event_mice",
-        dry_run: bool = False
+        dry_run: bool = False,
     ) -> Dict[str, Any]:
-        """Applies to an ATS posting with Proof-of-Submission (PoS) verification."""
-        ats_type = self.detect_ats_type(job_url)
+        """Applies to an ATS posting with Proof-of-Submission (PoS) verification and mandatory 3-stage screenshots."""
+        normalized_url = normalize_ats_url(job_url)
+        ats_type = self.detect_ats_type(normalized_url)
         safe_comp = re.sub(r"[^\w-]", "_", company)
-        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         resume_pdf = self.get_resume_path(track)
 
-        logger.info(f"Applying to {company} ({role}) via {ats_type.upper()} | URL: {job_url}")
+        # Mandatory 3-Stage Screenshots Paths
+        step1_path = PROOFS_DIR / f"job_{job_id}_step1_loaded.png"
+        step2_path = PROOFS_DIR / f"job_{job_id}_step2_filled.png"
+        step3_path = PROOFS_DIR / f"job_{job_id}_step3_result.png"
+
+        logger.info(f"Applying to {company} ({role}) via {ats_type.upper()} | URL: {normalized_url}")
 
         with sync_playwright() as p:
             browser = p.chromium.launch(
                 headless=True,
                 args=[
                     "--disable-blink-features=AutomationControlled",
-                    "--no-sandbox"
-                ]
+                    "--no-sandbox",
+                ],
             )
             context = browser.new_context(
                 viewport={"width": 1280, "height": 900},
-                user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+                user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
             )
             page = context.new_page()
 
             try:
-                page.goto(job_url, wait_until="domcontentloaded", timeout=25000)
+                page.goto(normalized_url, wait_until="domcontentloaded", timeout=30000)
                 time.sleep(2)
 
-                # Check for bot walls immediately
-                page_text_lower = page.content().lower()
+                # Mandatory Stage 1: Loaded Screenshot
+                page.screenshot(path=str(step1_path))
+                logger.info(f"Step 1 loaded screenshot captured: {step1_path}")
+
+                # Check for login walls
+                is_gated, platform, gate_reason = detect_login_wall(page, job_id=job_id)
+                if is_gated:
+                    browser.close()
+                    self.tracker_db.mark_needs_human_click(job_id, f"Auth wall detected: {gate_reason}", str(step1_path))
+                    return {
+                        "status": "NEEDS_HUMAN_CLICK",
+                        "reason": f"Login wall detected on {platform}: {gate_reason}",
+                        "step1_screenshot": str(step1_path),
+                    }
+
+                # Check for bot walls on visible page text
+                try:
+                    page_text_lower = page.inner_text("body").lower()
+                except Exception:
+                    page_text_lower = page.content().lower()
                 for bw in BOT_WALL_PHRASES:
                     if bw in page_text_lower:
                         shot_path = PROOFS_DIR / f"blocked_{track}_{safe_comp}_{job_id}.png"
@@ -334,11 +762,13 @@ class DirectATSApplier:
                         return {
                             "status": "NEEDS_HUMAN_CLICK",
                             "reason": f"Bot wall detected: {bw}",
-                            "screenshot": str(shot_path)
+                            "screenshot": str(shot_path),
                         }
 
                 # Dismiss cookie banners if present
-                for cookie_btn in page.locator("button:has-text('Accept'), button:has-text('Agree'), button:has-text('Allow all')").all():
+                for cookie_btn in page.locator(
+                    "button:has-text('Accept'), button:has-text('Agree'), button:has-text('Allow all')"
+                ).all():
                     if cookie_btn.is_visible():
                         try:
                             cookie_btn.click()
@@ -347,46 +777,31 @@ class DirectATSApplier:
                         except Exception:
                             pass
 
-                # If on job posting page, click Apply button if needed
-                if ats_type == "lever":
-                    apply_btn = page.locator("a.postings-btn:has-text('Apply'), a:has-text('Apply for this job')").first
-                    if apply_btn.is_visible(timeout=3000):
-                        apply_btn.click()
-                        time.sleep(2)
-                elif ats_type == "greenhouse":
-                    apply_link = page.locator("#apply_button, a:has-text('Apply')").first
-                    if apply_link.is_visible(timeout=2000):
-                        apply_link.click()
-                        time.sleep(1)
+                # Smart DOM Form Filling
+                filled = fill_all_visible_inputs(page, profile=CANDIDATE_DATA, cv_path=resume_pdf, job_id=job_id)
+                logger.info(f"Filled {len(filled)} fields for {company}")
 
-                # Form filling
-                self._fill_ats_form(page, ats_type, resume_pdf)
-
-                preview_path = PROOFS_DIR / f"preview_{track}_{safe_comp}_{job_id}.png"
-                page.screenshot(path=str(preview_path))
+                # Mandatory Stage 2: Filled Screenshot
+                page.screenshot(path=str(step2_path))
+                logger.info(f"Step 2 filled screenshot captured: {step2_path}")
 
                 if dry_run:
                     browser.close()
                     return {
                         "status": "READY_TO_SUBMIT",
-                        "preview_screenshot": str(preview_path),
-                        "message": f"Form filled successfully in dry-run mode for {company}."
+                        "step1_screenshot": str(step1_path),
+                        "step2_screenshot": str(step2_path),
+                        "fields_filled_count": len(filled),
+                        "message": f"Form filled successfully in dry-run mode for {company}.",
                     }
 
-                # Submit form
-                submitted = self._submit_ats_form(page, ats_type)
-                if not submitted:
-                    shot_path = PROOFS_DIR / f"unsubmitted_{track}_{safe_comp}_{job_id}.png"
-                    page.screenshot(path=str(shot_path))
-                    browser.close()
-                    self.tracker_db.mark_needs_human_click(job_id, "Submit button not found or click failed", str(shot_path))
-                    return {
-                        "status": "NEEDS_HUMAN_CLICK",
-                        "reason": "Submit button not found",
-                        "screenshot": str(shot_path)
-                    }
+                # Multi-Step Wizard Progression or Submit
+                submitted, submit_notes = step_through_wizard(page, profile=CANDIDATE_DATA, cv_path=resume_pdf)
 
-                # Wait for post-submission confirmation
+                # Mandatory Stage 3: Result Screenshot
+                page.screenshot(path=str(step3_path))
+                logger.info(f"Step 3 result screenshot captured: {step3_path}")
+
                 time.sleep(4)
                 is_verified, reason = verify_confirmation_screen(page, ats_type=ats_type)
 
@@ -400,7 +815,7 @@ class DirectATSApplier:
                         job_id=job_id,
                         proof_screenshot_path=str(proof_path),
                         submission_url=submission_url,
-                        notes=f"Submitted via Direct ATS Applier ({ats_type}): {reason}"
+                        notes=f"Submitted via Direct ATS Applier ({ats_type}): {reason}",
                     )
                     return {
                         "status": "APPLIED_VERIFIED",
@@ -408,121 +823,50 @@ class DirectATSApplier:
                         "submission_url": submission_url,
                         "company": company,
                         "role": role,
-                        "reason": reason
+                        "reason": reason,
+                        "step1_screenshot": str(step1_path),
+                        "step2_screenshot": str(step2_path),
+                        "step3_screenshot": str(step3_path),
                     }
                 else:
-                    unverified_path = PROOFS_DIR / f"unverified_{track}_{safe_comp}_{job_id}.png"
-                    page.screenshot(path=str(unverified_path))
                     browser.close()
                     self.tracker_db.mark_needs_human_click(
                         job_id,
-                        f"Post-submission confirmation failed: {reason}",
-                        str(unverified_path)
+                        f"Post-submission confirmation unconfirmed: {reason}",
+                        str(step3_path),
                     )
                     return {
                         "status": "NEEDS_HUMAN_CLICK",
                         "reason": f"Post-submission confirmation unconfirmed: {reason}",
-                        "screenshot": str(unverified_path)
+                        "step1_screenshot": str(step1_path),
+                        "step2_screenshot": str(step2_path),
+                        "step3_screenshot": str(step3_path),
                     }
 
             except Exception as e:
-                err_path = PROOFS_DIR / f"error_{track}_{safe_comp}_{job_id}.png"
                 try:
-                    page.screenshot(path=str(err_path))
+                    page.screenshot(path=str(step3_path))
                 except Exception:
                     pass
                 browser.close()
-                self.tracker_db.mark_needs_human_click(job_id, f"Automation exception: {e}", str(err_path))
+                self.tracker_db.mark_needs_human_click(job_id, f"Automation exception: {e}", str(step3_path))
                 return {
                     "status": "NEEDS_HUMAN_CLICK",
                     "reason": f"Exception: {e}",
-                    "screenshot": str(err_path)
+                    "step1_screenshot": str(step1_path),
+                    "step2_screenshot": str(step2_path),
+                    "step3_screenshot": str(step3_path),
                 }
-
-    def _fill_ats_form(self, page: Page, ats_type: str, resume_path: Path):
-        """Fills standard fields across Lever, Greenhouse, Trakstar, Gem, Ashby, Workable."""
-        # 1. Name
-        self._safe_fill(page, "input[name='name'], input[id*='name']:not([id*='first']):not([id*='last'])", CANDIDATE_DATA["full_name"])
-        self._safe_fill(page, "input[name*='first_name'], input[id*='first_name'], input[name*='firstname']", CANDIDATE_DATA["first_name"])
-        self._safe_fill(page, "input[name*='last_name'], input[id*='last_name'], input[name*='lastname']", CANDIDATE_DATA["last_name"])
-
-        # 2. Email
-        self._safe_fill(page, "input[name='email'], input[type='email'], input[id*='email']", CANDIDATE_DATA["email"])
-
-        # 3. Phone
-        self._safe_fill(page, "input[name='phone'], input[type='tel'], input[id*='phone']", CANDIDATE_DATA["phone"])
-
-        # 4. Location / Address / City
-        self._safe_fill(page, "input[name*='address'], input[id*='address']", CANDIDATE_DATA["location"])
-        self._safe_fill(page, "input[name*='location'], input[id*='location']", CANDIDATE_DATA["location"])
-        self._safe_fill(page, "input[name*='city'], input[id*='city']", CANDIDATE_DATA["city"])
-
-        # 5. Organization / Current Company
-        self._safe_fill(page, "input[name='org'], input[name*='company'], input[id*='company']", CANDIDATE_DATA["current_company"])
-
-        # 6. Experience, CTC & Notice Period
-        self._safe_fill(page, "input[name*='experience'], input[id*='experience']", CANDIDATE_DATA["experience_years"])
-        self._safe_fill(page, "input[name*='notice'], input[id*='notice']", CANDIDATE_DATA["notice_period"])
-        self._safe_fill(page, "input[name*='current_ctc'], input[id*='current_ctc'], input[name*='current_salary']", CANDIDATE_DATA["current_ctc"])
-        self._safe_fill(page, "input[name*='expected_ctc'], input[id*='expected_ctc'], input[name*='expected_salary']", CANDIDATE_DATA["expected_ctc"])
-
-        # 7. URLs (LinkedIn, Portfolio, GitHub/Other)
-        self._safe_fill(page, "input[name*='urls[LinkedIn]'], input[name*='linkedin'], input[id*='linkedin']", CANDIDATE_DATA["linkedin"])
-        self._safe_fill(page, "input[name*='urls[Portfolio]'], input[name*='portfolio'], input[id*='portfolio'], input[name*='website'], input[id*='website']", CANDIDATE_DATA["portfolio"])
-        self._safe_fill(page, "input[name*='urls[Other]'], input[name*='other_url'], input[id*='other_url']", CANDIDATE_DATA["product_lab"])
-
-        # 8. Resume file upload
-        file_input = page.locator("input[type='file']").first
-        if file_input.is_visible(timeout=3000):
-            try:
-                file_input.set_input_files(str(resume_path))
-                time.sleep(2)
-            except Exception as e:
-                logger.warning(f"Resume upload error: {e}")
-
-    def _submit_ats_form(self, page: Page, ats_type: str) -> bool:
-        """Locates and clicks the primary submit button."""
-        submit_selectors = [
-            "#btn-submit",
-            "button#submit_app",
-            "button[type='submit']",
-            "input[type='submit']",
-            "button:has-text('Submit application')",
-            "button:has-text('Submit Application')",
-            "button:has-text('Submit')",
-            "button:has-text('Apply Now')",
-            "button:has-text('Send Application')"
-        ]
-        for sel in submit_selectors:
-            btn = page.locator(sel).first
-            if btn.is_visible(timeout=2000):
-                try:
-                    btn.click()
-                    return True
-                except Exception:
-                    pass
-        return False
-
-    def _safe_fill(self, page: Page, selector: str, value: str):
-        """Fills input if present and not already populated."""
-        try:
-            loc = page.locator(selector).first
-            if loc.is_visible(timeout=1000):
-                current = loc.input_value()
-                if not current:
-                    loc.fill(value)
-        except Exception:
-            pass
 
 
 class BrowserCoPilot:
-    """Persistent Browser Co-Pilot Mode for Naukri, LinkedIn, and Custom Portals."""
+    """Persistent Browser Co-Pilot Mode for Naukri, LinkedIn, Indeed, Wellfound, and Custom Portals."""
 
     def __init__(
         self,
         profile_dir: Optional[Path] = None,
         tracker_db: Optional[TrackerDB] = None,
-        telemetry_db: Optional[TelemetryDB] = None
+        telemetry_db: Optional[TelemetryDB] = None,
     ):
         self.profile_dir = profile_dir or (BASE_DIR / "data" / "browser_profile")
         self.profile_dir.mkdir(parents=True, exist_ok=True)
@@ -535,18 +879,24 @@ class BrowserCoPilot:
         job_url: str,
         company: str,
         role: str,
-        track: str = "event_mice"
+        track: str = "event_mice",
     ) -> Dict[str, Any]:
-        """Launches a visible persistent Chrome session with auto-filled fields and terminal prompt."""
+        """Launches a persistent browser session with auto-filled fields and terminal prompt."""
         import select
         import sys
 
         safe_comp = re.sub(r"[^\w-]", "_", company)
         resume_pdf = DirectATSApplier().get_resume_path(track)
+        normalized_url = normalize_ats_url(job_url)
+
+        # Mandatory 3-Stage Screenshots Paths
+        step1_path = PROOFS_DIR / f"job_{job_id}_step1_loaded.png"
+        step2_path = PROOFS_DIR / f"job_{job_id}_step2_filled.png"
+        step3_path = PROOFS_DIR / f"job_{job_id}_step3_result.png"
 
         print("\n" + "=" * 80)
         print(f"[CO-PILOT MODE] Launching interactive browser for: {company} - {role}")
-        print(f"Target URL: {job_url}")
+        print(f"Target URL: {normalized_url}")
         print(f"Tailored CV: {resume_pdf.name}")
         print("=" * 80)
 
@@ -557,25 +907,30 @@ class BrowserCoPilot:
                 user_data_dir=str(self.profile_dir),
                 headless=headless_mode,
                 viewport={"width": 1280, "height": 900},
-                args=["--disable-blink-features=AutomationControlled"]
+                args=["--disable-blink-features=AutomationControlled"],
             )
             page = context.pages[0] if context.pages else context.new_page()
 
             try:
-                page.goto(job_url, timeout=30000)
+                page.goto(normalized_url, timeout=30000)
                 time.sleep(2)
+
+                # Step 1: Loaded Screenshot
+                page.screenshot(path=str(step1_path))
+
+                # Check for login walls
+                is_gated, platform, gate_reason = detect_login_wall(page, job_id=job_id)
+                if is_gated:
+                    print(f"\n[AUTH REQUIRED] Please log into your {platform} account in the opened browser window.")
 
                 # Auto-open application modal/form if on job posting page
                 try:
                     if "indeed.com" in page.url.lower():
-                        indeed_apply = page.locator("#indeedApplyButton, button:has-text('Apply now'), a:has-text('Apply now')").first
+                        indeed_apply = page.locator(
+                            "#indeedApplyButton, button:has-text('Apply now'), a:has-text('Apply now')"
+                        ).first
                         if indeed_apply.is_visible(timeout=3000):
                             indeed_apply.click()
-                            time.sleep(2)
-                    elif "jobvite.com" in page.url.lower() and "/apply" not in page.url.lower():
-                        jv_apply = page.locator("a:has-text('Apply')").first
-                        if jv_apply.is_visible(timeout=3000):
-                            jv_apply.click()
                             time.sleep(2)
                     elif "linkedin.com" in page.url.lower():
                         li_apply = page.locator("button.jobs-apply-button, button:has-text('Easy Apply')").first
@@ -590,9 +945,14 @@ class BrowserCoPilot:
                 except Exception:
                     pass
 
-                # Attempt auto-fill on standard questions
-                applier = DirectATSApplier()
-                applier._fill_ats_form(page, "generic_ats", resume_pdf)
+                # Fill all visible inputs
+                try:
+                    fill_all_visible_inputs(page, profile=CANDIDATE_DATA, cv_path=resume_pdf, job_id=job_id)
+                except ZeroFieldsFilledError as ze:
+                    print(f"[NOTE] Form filling notice: {ze}")
+
+                # Step 2: Filled Screenshot
+                page.screenshot(path=str(step2_path))
 
                 # Activate window on macOS if interactive
                 try:
@@ -639,6 +999,9 @@ class BrowserCoPilot:
                 if not is_verified and time.time() - start_time >= max_wait:
                     is_verified, reason = verify_confirmation_screen(page)
 
+                # Step 3: Result Screenshot
+                page.screenshot(path=str(step3_path))
+
                 if is_verified:
                     proof_path = PROOFS_DIR / f"{track}_{safe_comp}_{job_id}_SUCCESS.png"
                     page.screenshot(path=str(proof_path))
@@ -649,10 +1012,9 @@ class BrowserCoPilot:
                         job_id=job_id,
                         proof_screenshot_path=str(proof_path),
                         submission_url=submission_url,
-                        notes=f"Submitted via Co-Pilot interactive browser: {reason}"
+                        notes=f"Submitted via Co-Pilot interactive browser: {reason}",
                     )
 
-                    # Also update telemetry_db if opportunity exists
                     try:
                         with self.telemetry_db._get_connection() as conn:
                             cur = conn.cursor()
@@ -663,7 +1025,7 @@ class BrowserCoPilot:
                                     opportunity_id=row["id"],
                                     proof_screenshot_path=str(proof_path),
                                     submission_url=submission_url,
-                                    notes=f"Submitted via Co-Pilot interactive browser: {reason}"
+                                    notes=f"Submitted via Co-Pilot interactive browser: {reason}",
                                 )
                     except Exception as e:
                         logger.warning(f"Failed to update telemetry_db for {company}: {e}")
@@ -674,28 +1036,27 @@ class BrowserCoPilot:
                         "status": "APPLIED_VERIFIED",
                         "proof_screenshot_path": str(proof_path),
                         "submission_url": submission_url,
-                        "reason": reason
+                        "reason": reason,
+                        "step1_screenshot": str(step1_path),
+                        "step2_screenshot": str(step2_path),
+                        "step3_screenshot": str(step3_path),
                     }
                 else:
-                    rejected_path = PROOFS_DIR / f"copilot_rejected_{job_id}.png"
-                    try:
-                        page.screenshot(path=str(rejected_path))
-                    except Exception:
-                        pass
                     context.close()
-
                     self.tracker_db.mark_needs_human_click(
                         job_id,
                         f"Co-Pilot confirmation check failed: {reason}",
-                        str(rejected_path)
+                        str(step3_path),
                     )
                     print(f"\n\033[91m[REJECTED] Confirmation check failed. Screen still shows unsubmitted state.\033[0m")
                     print(f"Details: {reason}")
-                    print(f"State screenshot captured: {rejected_path}")
+                    print(f"State screenshot captured: {step3_path}")
                     return {
                         "status": "NEEDS_HUMAN_CLICK",
                         "reason": f"Confirmation check failed: {reason}",
-                        "screenshot": str(rejected_path)
+                        "step1_screenshot": str(step1_path),
+                        "step2_screenshot": str(step2_path),
+                        "step3_screenshot": str(step3_path),
                     }
 
             except Exception as e:
@@ -703,6 +1064,5 @@ class BrowserCoPilot:
                 self.tracker_db.mark_needs_human_click(job_id, f"Co-Pilot browser error: {e}")
                 return {
                     "status": "NEEDS_HUMAN_CLICK",
-                    "reason": str(e)
+                    "reason": str(e),
                 }
-

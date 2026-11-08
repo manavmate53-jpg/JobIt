@@ -21,10 +21,15 @@ import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List
 
-from playwright.sync_api import sync_playwright
+try:
+    from patchright.sync_api import sync_playwright
+except ImportError:
+    from playwright.sync_api import sync_playwright
 
 BASE_DIR = Path("/Users/manav/.gemini/antigravity-ide/scratch/JobIt")
 sys.path.insert(0, str(BASE_DIR))
+
+from src.ats_applier import detect_login_wall, fill_all_visible_inputs, normalize_ats_url, ZeroFieldsFilledError
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("stage_open_tabs")
@@ -176,24 +181,26 @@ def prefill_tab(page, target: Dict[str, Any]):
     url = target["url"]
     resume_path = target["resume"]
 
-    logger.info(f"Loading Job #{job_id}: {company} | URL: {url}")
+    # 1. Normalize ATS URL
+    target_url = normalize_ats_url(url)
+    logger.info(f"Loading Job #{job_id}: {company} | URL: {target_url}")
     try:
-        page.goto(url, wait_until="domcontentloaded", timeout=30000)
+        page.goto(target_url, wait_until="domcontentloaded", timeout=30000)
     except Exception as e:
         logger.warning(f"Page goto timeout/warning for {company}: {e}")
 
     time.sleep(2)
 
-    # 1. Click initial apply button if visible
+    # 2. Check for login walls
+    is_gated, platform, gate_reason = detect_login_wall(page, job_id=job_id)
+    if is_gated:
+        logger.warning(f"[AUTH REQUIRED] Job #{job_id} on {platform} blocked by login wall: {gate_reason}")
+
+    # 3. Click initial apply button if visible
     url_lower = page.url.lower()
     try:
         if "indeed.com" in url_lower:
             btn = page.locator("#indeedApplyButton, button:has-text('Apply now'), a:has-text('Apply now')").first
-            if btn.is_visible(timeout=3000):
-                btn.click()
-                time.sleep(2)
-        elif "jobvite.com" in url_lower and "/apply" not in url_lower:
-            btn = page.locator("a:has-text('Apply')").first
             if btn.is_visible(timeout=3000):
                 btn.click()
                 time.sleep(2)
@@ -215,60 +222,14 @@ def prefill_tab(page, target: Dict[str, Any]):
     except Exception as e:
         logger.debug(f"Initial apply button click passed: {e}")
 
-    # Helper for safe filling
-    def safe_fill(container, selector: str, value: str):
-        try:
-            loc = container.locator(selector).first
-            if loc.is_visible(timeout=1000):
-                curr = loc.input_value()
-                if not curr:
-                    loc.fill(str(value))
-        except Exception:
-            pass
-
-    containers = [page]
+    # 4. Smart DOM Input Filling
     try:
-        containers.extend(page.frames)
-    except Exception:
-        pass
-
-    for c in containers:
-        # Full Name & First/Last
-        safe_fill(c, "input[name='name'], input[id*='name']:not([id*='first']):not([id*='last'])", CANDIDATE_DATA["full_name"])
-        safe_fill(c, "input[name*='first_name'], input[id*='first_name'], input[name*='firstName'], input[name*='firstname']", CANDIDATE_DATA["first_name"])
-        safe_fill(c, "input[name*='last_name'], input[id*='last_name'], input[name*='lastName'], input[name*='lastname']", CANDIDATE_DATA["last_name"])
-
-        # Email
-        safe_fill(c, "input[name='email'], input[type='email'], input[id*='email'], input[name*='email']", CANDIDATE_DATA["email"])
-
-        # Phone
-        safe_fill(c, "input[name='phone'], input[type='tel'], input[id*='phone'], input[name*='phone'], input[name*='mobile']", CANDIDATE_DATA["phone"])
-
-        # Location / Address / City
-        safe_fill(c, "input[name*='address'], input[id*='address'], input[name*='location'], input[id*='location']", CANDIDATE_DATA["location"])
-        safe_fill(c, "input[name*='city'], input[id*='city']", CANDIDATE_DATA["city"])
-
-        # Experience & Notice Period
-        safe_fill(c, "input[name*='experience'], input[id*='experience'], input[name*='years_of_experience']", CANDIDATE_DATA["experience_years"])
-        safe_fill(c, "input[name*='notice'], input[id*='notice']", CANDIDATE_DATA["notice_period"])
-
-        # CTC
-        safe_fill(c, "input[name*='current_ctc'], input[id*='current_ctc'], input[name*='current_salary']", CANDIDATE_DATA["current_ctc"])
-        safe_fill(c, "input[name*='expected_ctc'], input[id*='expected_ctc'], input[name*='expected_salary']", CANDIDATE_DATA["expected_ctc"])
-
-        # URLs
-        safe_fill(c, "input[name*='linkedin'], input[id*='linkedin'], input[name*='urls[LinkedIn]']", CANDIDATE_DATA["linkedin"])
-        safe_fill(c, "input[name*='portfolio'], input[id*='portfolio'], input[name*='website'], input[id*='website'], input[name*='urls[Portfolio]']", CANDIDATE_DATA["portfolio"])
-        safe_fill(c, "input[name*='other_url'], input[id*='other_url'], input[name*='urls[Other]']", CANDIDATE_DATA["product_lab"])
-
-        # Resume file upload
-        try:
-            file_input = c.locator("input[type='file']").first
-            if file_input.is_visible(timeout=1000) and resume_path.exists():
-                file_input.set_input_files(str(resume_path))
-                time.sleep(1)
-        except Exception:
-            pass
+        filled = fill_all_visible_inputs(page, profile=CANDIDATE_DATA, cv_path=resume_path, job_id=job_id)
+        logger.info(f"Successfully filled {len(filled)} fields for Job #{job_id}: {company}")
+    except ZeroFieldsFilledError as ze:
+        logger.warning(f"No fields could be filled for Job #{job_id}: {ze}")
+    except Exception as e:
+        logger.warning(f"Form filling encountered error for Job #{job_id}: {e}")
 
     logger.info(f"Tab staged for Job #{job_id}: {company}")
 
@@ -323,3 +284,4 @@ def stage_all_tabs():
 
 if __name__ == "__main__":
     stage_all_tabs()
+
