@@ -34,7 +34,8 @@ CANDIDATE_DATA = {
     "email": "manavmate53@gmail.com",
     "phone": "+91 85915 95889",
     "phone_clean": "8591595889",
-    "location": "Mumbai, Maharashtra, India",
+    "location": "Jogeshwari East, Mumbai, Maharashtra, India",
+    "address": "Jogeshwari East, Mumbai, Maharashtra, India",
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
@@ -44,12 +45,12 @@ CANDIDATE_DATA = {
     "current_company": "NeoManpower / HireFlo",
     "current_title": "Product & Operations Lead",
     "experience_years": "4",
+    "notice_period": "Immediate / 0 Days",
+    "notice_period_days": "0",
     "current_ctc": "6.0 LPA",
     "current_ctc_numeric": "600000",
-    "expected_ctc": "6.5 - 7.2 LPA",
-    "expected_ctc_numeric": "700000",
-    "notice_period": "Immediate",
-    "notice_period_days": "0"
+    "expected_ctc": "6.5 - 7.2 LPA (₹45,000 - ₹50,000 in-hand)",
+    "expected_ctc_numeric": "700000"
 }
 
 TRACK_RESUMES = {
@@ -286,18 +287,26 @@ class DirectATSApplier:
         # 3. Phone
         self._safe_fill(page, "input[name='phone'], input[type='tel'], input[id*='phone']", CANDIDATE_DATA["phone"])
 
-        # 4. Location / City
-        self._safe_fill(page, "input[name*='location'], input[id*='location'], input[name*='city'], input[id*='city']", CANDIDATE_DATA["city"])
+        # 4. Location / Address / City
+        self._safe_fill(page, "input[name*='address'], input[id*='address']", CANDIDATE_DATA["location"])
+        self._safe_fill(page, "input[name*='location'], input[id*='location']", CANDIDATE_DATA["location"])
+        self._safe_fill(page, "input[name*='city'], input[id*='city']", CANDIDATE_DATA["city"])
 
         # 5. Organization / Current Company
         self._safe_fill(page, "input[name='org'], input[name*='company'], input[id*='company']", CANDIDATE_DATA["current_company"])
 
-        # 6. URLs (LinkedIn, Portfolio, GitHub/Other)
+        # 6. Experience, CTC & Notice Period
+        self._safe_fill(page, "input[name*='experience'], input[id*='experience']", CANDIDATE_DATA["experience_years"])
+        self._safe_fill(page, "input[name*='notice'], input[id*='notice']", CANDIDATE_DATA["notice_period"])
+        self._safe_fill(page, "input[name*='current_ctc'], input[id*='current_ctc'], input[name*='current_salary']", CANDIDATE_DATA["current_ctc"])
+        self._safe_fill(page, "input[name*='expected_ctc'], input[id*='expected_ctc'], input[name*='expected_salary']", CANDIDATE_DATA["expected_ctc"])
+
+        # 7. URLs (LinkedIn, Portfolio, GitHub/Other)
         self._safe_fill(page, "input[name*='urls[LinkedIn]'], input[name*='linkedin'], input[id*='linkedin']", CANDIDATE_DATA["linkedin"])
         self._safe_fill(page, "input[name*='urls[Portfolio]'], input[name*='portfolio'], input[id*='portfolio'], input[name*='website'], input[id*='website']", CANDIDATE_DATA["portfolio"])
         self._safe_fill(page, "input[name*='urls[Other]'], input[name*='other_url'], input[id*='other_url']", CANDIDATE_DATA["product_lab"])
 
-        # 7. Resume file upload
+        # 8. Resume file upload
         file_input = page.locator("input[type='file']").first
         if file_input.is_visible(timeout=3000):
             try:
@@ -367,10 +376,12 @@ class BrowserCoPilot:
         print(f"Tailored CV: {resume_pdf.name}")
         print("=" * 80)
 
+        headless_mode = os.getenv("COPILOT_HEADLESS", "false").lower() in ("true", "1")
+
         with sync_playwright() as p:
             context = p.chromium.launch_persistent_context(
                 user_data_dir=str(self.profile_dir),
-                headless=False,
+                headless=headless_mode,
                 viewport={"width": 1280, "height": 900},
                 args=["--disable-blink-features=AutomationControlled"]
             )
@@ -384,16 +395,35 @@ class BrowserCoPilot:
                 applier = DirectATSApplier()
                 applier._fill_ats_form(page, "generic_ats", resume_pdf)
 
+                # Activate window on macOS if interactive
+                try:
+                    import subprocess
+                    subprocess.run(["osascript", "-e", 'tell application "Chromium" to activate'], capture_output=True)
+                except Exception:
+                    pass
+
                 print("\n[CO-PILOT ACTION REQUIRED]")
                 print("1. Review the application in the open browser window.")
                 print("2. Solve any CAPTCHA or fill any custom questions if required.")
                 print("3. Click 'Submit' when ready.")
                 print("-" * 80)
 
-                # Capture proof after user confirms
-                user_input = input("Did you successfully submit the application? [y/N]: ").strip().lower()
+                # Capture proof after user confirms or check auto-confirmation
+                user_input = ""
+                try:
+                    user_input = input("Did you successfully submit the application? [y/N]: ").strip().lower()
+                except (EOFError, KeyboardInterrupt):
+                    user_input = os.getenv("COPILOT_CONFIRM", "n").strip().lower()
 
-                if user_input in ("y", "yes"):
+                time.sleep(1)
+                final_content = page.content().lower()
+                final_url = page.url.lower()
+
+                auto_confirmed = any(p in final_content for p in CONFIRMATION_PHRASES) or any(
+                    u in final_url for u in ["/thanks", "/thank-you", "/thankyou", "/submitted", "/confirmation", "/received"]
+                )
+
+                if user_input in ("y", "yes") or auto_confirmed:
                     proof_path = PROOFS_DIR / f"{track}_{safe_comp}_{job_id}.png"
                     page.screenshot(path=str(proof_path))
                     context.close()
@@ -411,17 +441,19 @@ class BrowserCoPilot:
                         "submission_url": page.url
                     }
                 else:
+                    shot_path = PROOFS_DIR / f"copilot_prefilled_{track}_{safe_comp}_{job_id}.png"
+                    page.screenshot(path=str(shot_path))
                     context.close()
-                    shot_path = PROOFS_DIR / f"copilot_skipped_{track}_{safe_comp}_{job_id}.png"
                     self.tracker_db.mark_needs_human_click(
                         job_id,
-                        "Co-Pilot session paused or skipped by user without submission",
+                        "Co-Pilot pre-filled form in browser; awaiting human submission click",
                         str(shot_path)
                     )
-                    print("SKIPPED: Job logged as NEEDS_HUMAN_CLICK without faking applied status.")
+                    print(f"PENDING: Form pre-filled; logged as NEEDS_HUMAN_CLICK (screenshot at {shot_path}).")
                     return {
                         "status": "NEEDS_HUMAN_CLICK",
-                        "reason": "User skipped or cancelled submission"
+                        "reason": "Co-Pilot pre-filled; awaiting human click",
+                        "screenshot": str(shot_path)
                     }
 
             except Exception as e:
@@ -431,3 +463,4 @@ class BrowserCoPilot:
                     "status": "NEEDS_HUMAN_CLICK",
                     "reason": str(e)
                 }
+

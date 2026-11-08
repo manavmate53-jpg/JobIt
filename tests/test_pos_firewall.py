@@ -84,3 +84,4 @@ def test_pos_firewall_telemetry_db(tmp_path: Path):
         assert row["status"] == "APPLIED_VERIFIED"
         assert row["proof_screenshot_path"] == str(fake_screenshot)
         assert row["submission_url"] == "https://cashfree.com/applied"
+
