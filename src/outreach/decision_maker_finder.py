@@ -37,27 +37,8 @@ class DecisionMakerFinder:
         return f"{clean}.com"
 
     def generate_email_permutations(self, first_name: str, last_name: str, domain: str) -> List[str]:
-        fn = re.sub(r"[^a-zA-Z]", "", first_name).lower()
-        ln = re.sub(r"[^a-zA-Z]", "", last_name).lower()
-
-        if not fn:
-            return [f"founder@{domain}", f"hiring@{domain}", f"careers@{domain}"]
-
-        perms = [
-            f"{fn}@{domain}",
-            f"{fn}.{ln}@{domain}" if ln else f"{fn}@{domain}",
-            f"{fn}{ln}@{domain}" if ln else f"{fn}@{domain}",
-            f"{fn[0]}{ln}@{domain}" if ln else f"{fn}@{domain}",
-            f"careers@{domain}"
-        ]
-        # Remove duplicates while preserving order
-        seen = set()
-        deduped = []
-        for p in perms:
-            if p not in seen:
-                seen.add(p)
-                deduped.append(p)
-        return deduped
+        """HARD-KILLED: Synthetic guessing permanently disabled."""
+        return []
 
     def generate_linkedin_search_url(self, company_name: str, target_role: str) -> str:
         query = f'"{company_name}" "{target_role}"'
@@ -100,7 +81,7 @@ class DecisionMakerFinder:
                     title="Head of Product / VP Product",
                     first_name="Product Lead",
                     last_name="",
-                    email_permutations=[f"product@{domain}", f"careers@{domain}"],
+                    email_permutations=[],
                     linkedin_search_url=self.generate_linkedin_search_url(company_name, "Head of Product"),
                     role_priority=2
                 )
@@ -113,7 +94,7 @@ class DecisionMakerFinder:
                 title="Lead Recruiter / Head of Talent",
                 first_name="Hiring Team",
                 last_name="",
-                email_permutations=[f"talent@{domain}", f"hiring@{domain}", f"careers@{domain}"],
+                email_permutations=[],
                 linkedin_search_url=self.generate_linkedin_search_url(company_name, "Talent Lead"),
                 role_priority=3
             )

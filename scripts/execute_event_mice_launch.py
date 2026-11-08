@@ -94,13 +94,8 @@ def run_launch():
         )
 
         first_name = dm_name.split()[0] if dm_name else "there"
-        clean_first = first_name.lower()
-        clean_last = dm_name.split()[-1].lower() if len(dm_name.split()) > 1 else ""
-        perms = [
-            f"{clean_first}.{clean_last}@{dm_domain}",
-            f"{clean_first}@{dm_domain}",
-            f"careers@{dm_domain}"
-        ]
+        # Synthetic email guessing hard-killed: no guessed email addresses
+        perms = []
 
         touchpoints = seq_gen.generate_event_touchpoints(
             company_name=opp.company_name,

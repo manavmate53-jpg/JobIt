@@ -4,11 +4,11 @@ from src.scrapers.base_scraper import ScrapedJob
 from src.outreach_engine import OutreachEngine, ContactEnricher
 
 
-def test_contact_permutations():
+def test_contact_permutations_disabled():
     enricher = ContactEnricher()
     perms = enricher.generate_permutations("Rohan Deshmukh", "zepto.co")
-    assert "rohan.deshmukh@zepto.co" in perms
-    assert "rohan@zepto.co" in perms
+    # Synthetic email guessing permanently disabled
+    assert perms == []
 
 
 def test_outreach_dry_run_safety():

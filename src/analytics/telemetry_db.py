@@ -65,11 +65,22 @@ class TelemetryDB:
                     expected_ctc_quote TEXT,
                     tailored_pdf_path TEXT,
                     notes TEXT,
+                    proof_screenshot_path TEXT,
+                    submission_url TEXT,
                     created_at TEXT,
                     updated_at TEXT,
                     UNIQUE(company_name, role_title)
                 )
             """)
+
+            try:
+                cur.execute("ALTER TABLE opportunities ADD COLUMN proof_screenshot_path TEXT")
+            except sqlite3.OperationalError:
+                pass
+            try:
+                cur.execute("ALTER TABLE opportunities ADD COLUMN submission_url TEXT")
+            except sqlite3.OperationalError:
+                pass
 
             # 3. Outreach logs
             cur.execute("""
@@ -223,6 +234,11 @@ class TelemetryDB:
         return log_id
 
     def update_status(self, opportunity_id: int, new_status: str, notes: str = "") -> None:
+        if new_status in ("APPLIED", "APPLIED_VERIFIED", "APPLIED_PORTAL"):
+            logger.warning("PoS Firewall: Cannot update to %s via update_status without verified proof. Diverting to NEEDS_HUMAN_CLICK.", new_status)
+            new_status = "NEEDS_HUMAN_CLICK"
+            notes = (notes + " | " if notes else "") + "[PoS Firewall] Reverted fake apply: Requires verified screenshot proof on disk."
+
         now = datetime.now().isoformat()
         with self._get_connection() as conn:
             cur = conn.cursor()
@@ -237,6 +253,84 @@ class TelemetryDB:
             conn.commit()
 
         self.record_event(opportunity_id, company_name, f"STATUS_{new_status}", {"notes": notes})
+
+    def mark_applied_verified(
+        self,
+        opportunity_id: int,
+        proof_screenshot_path: str,
+        submission_url: str,
+        submitted_at: Optional[str] = None,
+        notes: Optional[str] = None
+    ) -> bool:
+        """Enforces Proof-of-Submission (PoS) Firewall on opportunities."""
+        import os
+        if not proof_screenshot_path or not os.path.exists(proof_screenshot_path):
+            raise ValueError(
+                f"PoS Firewall Rejection: Missing or non-existent proof screenshot '{proof_screenshot_path}'. "
+                "A verified screenshot file must exist on disk before marking APPLIED_VERIFIED."
+            )
+        if not submission_url or not submission_url.startswith("http"):
+            raise ValueError(
+                f"PoS Firewall Rejection: Invalid submission URL '{submission_url}'. "
+                "A valid http/https submission URL is required."
+            )
+
+        ts = submitted_at or datetime.now().isoformat()
+        with self._get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("""
+                UPDATE opportunities
+                SET status = 'APPLIED_VERIFIED',
+                    proof_screenshot_path = ?,
+                    submission_url = ?,
+                    updated_at = ?,
+                    notes = COALESCE(notes || ' | ' || ?, ?)
+                WHERE id = ?
+            """, (
+                proof_screenshot_path,
+                submission_url,
+                ts,
+                notes or f"PoS Verified submission at {submission_url}",
+                notes or f"PoS Verified submission at {submission_url}",
+                opportunity_id
+            ))
+            cur.execute("SELECT company_name FROM opportunities WHERE id = ?", (opportunity_id,))
+            row = cur.fetchone()
+            comp = row["company_name"] if row else "Unknown"
+            conn.commit()
+
+        self.record_event(opportunity_id, comp, "STATUS_APPLIED_VERIFIED", {
+            "proof_screenshot_path": proof_screenshot_path,
+            "submission_url": submission_url,
+            "submitted_at": ts
+        })
+        return True
+
+    def mark_needs_human_click(
+        self,
+        opportunity_id: int,
+        reason: str,
+        screenshot_path: Optional[str] = None
+    ) -> bool:
+        """Logs bot barrier or unconfirmed submission without faking applied status."""
+        now = datetime.now().isoformat()
+        with self._get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("""
+                UPDATE opportunities
+                SET status = 'NEEDS_HUMAN_CLICK',
+                    updated_at = ?,
+                    proof_screenshot_path = COALESCE(?, proof_screenshot_path),
+                    notes = COALESCE(notes || ' | NEEDS_HUMAN_CLICK: ' || ?, ?)
+                WHERE id = ?
+            """, (now, screenshot_path, reason, reason, opportunity_id))
+            cur.execute("SELECT company_name FROM opportunities WHERE id = ?", (opportunity_id,))
+            row = cur.fetchone()
+            comp = row["company_name"] if row else "Unknown"
+            conn.commit()
+
+        self.record_event(opportunity_id, comp, "STATUS_NEEDS_HUMAN_CLICK", {"reason": reason})
+        return True
 
     def get_funnel_summary(self) -> Dict[str, Any]:
         with self._get_connection() as conn:

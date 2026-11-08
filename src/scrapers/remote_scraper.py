@@ -308,7 +308,7 @@ class RemoteJobScraper(BaseScraper):
                                 posting_date=item.get("date", "Recent"),
                                 raw_description=desc[:1500],
                                 hr_name="Talent Acquisition",
-                                hr_email=f"careers@{item.get('company', 'remote').lower().replace(' ', '')}.com"
+                                hr_email=None
                             ))
         except Exception as e:
             logger.warning(f"RemoteOK API scrape error: {e}")
@@ -339,7 +339,7 @@ class RemoteJobScraper(BaseScraper):
                                     posting_date="Recent",
                                     raw_description=desc[:1500],
                                     hr_name="Recruiting Team",
-                                    hr_email=f"jobs@{item.get('companyName', 'company').lower().replace(' ', '')}.com"
+                                    hr_email=None
                                 ))
             except Exception as e:
                 logger.warning(f"Himalayas API scrape error: {e}")
@@ -373,7 +373,7 @@ class RemoteJobScraper(BaseScraper):
                                     posting_date=item.get("pubDate", "Recent"),
                                     raw_description=desc[:1500],
                                     hr_name="Hiring Team",
-                                    hr_email=f"talent@{item.get('companyName', 'tech').lower().replace(' ', '')}.com"
+                                    hr_email=None
                                 ))
             except Exception as e:
                 logger.warning(f"Jobicy API scrape error: {e}")

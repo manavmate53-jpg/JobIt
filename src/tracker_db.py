@@ -5,6 +5,7 @@ from __future__ import annotations
 import datetime
 import json
 import logging
+import os
 import sqlite3
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -71,6 +72,14 @@ class TrackerDB:
                 pass
             try:
                 cursor.execute("ALTER TABLE applications ADD COLUMN lab_builds TEXT")
+            except sqlite3.OperationalError:
+                pass
+            try:
+                cursor.execute("ALTER TABLE applications ADD COLUMN proof_screenshot_path TEXT")
+            except sqlite3.OperationalError:
+                pass
+            try:
+                cursor.execute("ALTER TABLE applications ADD COLUMN submission_url TEXT")
             except sqlite3.OperationalError:
                 pass
             cursor.execute("""
@@ -211,8 +220,20 @@ class TrackerDB:
         status: str,
         notes: Optional[str] = None,
         tailored_cv_path: Optional[str] = None,
-        applied_date: Optional[str] = None
+        applied_date: Optional[str] = None,
+        proof_screenshot_path: Optional[str] = None,
+        submission_url: Optional[str] = None
     ) -> bool:
+        # Proof-of-Submission Firewall Enforcement
+        if status in ("Applied", "APPLIED_VERIFIED"):
+            if not proof_screenshot_path or not os.path.exists(proof_screenshot_path):
+                logger.warning(
+                    f"PoS Firewall: Blocked attempt to mark job {job_id} as '{status}' without verified screenshot proof. Diverting to NEEDS_HUMAN_CLICK."
+                )
+                status = "NEEDS_HUMAN_CLICK"
+                reason = "[PoS Firewall] Reverted fake apply: Requires verified screenshot proof on disk."
+                notes = f"{notes}\n{reason}" if notes else reason
+
         now = datetime.datetime.now().isoformat()
         with self.get_connection() as conn:
             cursor = conn.cursor()
@@ -225,6 +246,12 @@ class TrackerDB:
             if applied_date:
                 query += ", applied_date = ?"
                 params.append(applied_date)
+            if proof_screenshot_path:
+                query += ", proof_screenshot_path = ?"
+                params.append(proof_screenshot_path)
+            if submission_url:
+                query += ", submission_url = ?"
+                params.append(submission_url)
             if notes:
                 query += ", notes = CASE WHEN notes IS NULL OR notes = '' THEN ? ELSE notes || '\n' || ? END"
                 params.extend([notes, notes])
@@ -233,6 +260,77 @@ class TrackerDB:
             params.append(job_id)
 
             cursor.execute(query, params)
+            conn.commit()
+            return cursor.rowcount > 0
+
+    def mark_applied_verified(
+        self,
+        job_id: int,
+        proof_screenshot_path: str,
+        submission_url: str,
+        submitted_at: Optional[str] = None,
+        notes: Optional[str] = None
+    ) -> bool:
+        """Enforces Proof-of-Submission (PoS) Firewall.
+        A job CANNOT be marked APPLIED_VERIFIED without:
+        1. A verified post-submission screenshot file existing on disk.
+        2. A valid submission URL.
+        3. A valid submission timestamp.
+        """
+        if not proof_screenshot_path or not os.path.exists(proof_screenshot_path):
+            raise ValueError(
+                f"PoS Firewall Rejection: Missing or non-existent proof screenshot '{proof_screenshot_path}'. "
+                "A verified screenshot file must exist on disk before marking APPLIED_VERIFIED."
+            )
+        if not submission_url or not submission_url.startswith("http"):
+            raise ValueError(
+                f"PoS Firewall Rejection: Invalid submission URL '{submission_url}'. "
+                "A valid http/https submission URL is required."
+            )
+
+        ts = submitted_at or datetime.datetime.now().isoformat()
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                UPDATE applications
+                SET status = 'APPLIED_VERIFIED',
+                    proof_screenshot_path = ?,
+                    submission_url = ?,
+                    applied_date = ?,
+                    last_action_date = ?,
+                    notes = CASE WHEN notes IS NULL OR notes = '' THEN ? ELSE notes || '\n' || ? END
+                WHERE id = ?
+            """, (
+                proof_screenshot_path,
+                submission_url,
+                ts,
+                ts,
+                notes or f"PoS Verified submission at {submission_url}",
+                notes or f"PoS Verified submission at {submission_url}",
+                job_id
+            ))
+            conn.commit()
+            return cursor.rowcount > 0
+
+    def mark_needs_human_click(
+        self,
+        job_id: int,
+        reason: str,
+        screenshot_path: Optional[str] = None
+    ) -> bool:
+        """Logs bot-wall, captcha or manual submission barrier without faking applied status."""
+        now = datetime.datetime.now().isoformat()
+        note_msg = f"NEEDS_HUMAN_CLICK: {reason}"
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                UPDATE applications
+                SET status = 'NEEDS_HUMAN_CLICK',
+                    last_action_date = ?,
+                    notes = CASE WHEN notes IS NULL OR notes = '' THEN ? ELSE notes || '\n' || ? END,
+                    proof_screenshot_path = COALESCE(?, proof_screenshot_path)
+                WHERE id = ?
+            """, (now, note_msg, note_msg, screenshot_path, job_id))
             conn.commit()
             return cursor.rowcount > 0
 

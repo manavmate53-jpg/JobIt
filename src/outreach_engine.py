@@ -134,62 +134,37 @@ class ContactEnricher:
                 return False, []
 
     def generate_permutations(self, full_name: str, domain: str) -> List[str]:
-        """Generates standard corporate email permutations for a name and domain."""
-        parts = [p.lower() for p in re.split(r"\s+", full_name.strip()) if p]
-        if not parts:
-            return [f"careers@{domain}", f"hiring@{domain}"]
-        
-        first = parts[0]
-        last = parts[-1] if len(parts) > 1 else ""
-
-        permutations = []
-        if last:
-            permutations.append(f"{first}.{last}@{domain}")
-            permutations.append(f"{first}@{domain}")
-            permutations.append(f"{first[0]}{last}@{domain}")
-            permutations.append(f"{first}{last[0]}@{domain}")
-            permutations.append(f"{first}_{last}@{domain}")
-            permutations.append(f"{last}.{first}@{domain}")
-        else:
-            permutations.append(f"{first}@{domain}")
-            permutations.append(f"careers@{domain}")
-
-        return permutations
+        """HARD-KILLED: Synthetic email guessing is permanently disabled to prevent bounces."""
+        return []
 
     def find_or_enrich_contact(self, job: ScrapedJob) -> Dict[str, Any]:
-        """Resolves recruiter name, best email, permutations, and MX health."""
+        """Resolves recruiter name and verified email only. Never fabricates addresses."""
         domain = derive_domain_from_company_or_url(job.company, job.job_url)
         mx_valid, mx_servers = self.check_mx_records(domain)
 
         name = job.hr_name or "Talent Acquisition"
         primary_email = job.hr_email
-        is_verified = bool(primary_email)
+        is_verified = bool(primary_email and "@" in primary_email)
 
-        # If Hunter API key is provided, try enrichment
+        # If Hunter API key is provided, try enrichment only if a real human name is known
         if not primary_email and self.hunter_api_key and name != "Talent Acquisition":
             hunter_email = self._query_hunter(name, domain)
             if hunter_email:
                 primary_email = hunter_email
                 is_verified = True
 
-        permutations = self.generate_permutations(name, domain)
-        if not primary_email:
-            primary_email = permutations[0]
-            is_verified = False
-
         return {
             "name": name,
             "domain": domain,
             "primary_email": primary_email,
-            "permutations": permutations,
+            "permutations": [primary_email] if primary_email else [],
             "mx_valid": mx_valid,
             "mx_servers": mx_servers,
             "is_verified": is_verified,
         }
 
-
     def find_founder_contact(self, job: ScrapedJob) -> Dict[str, Any]:
-        """Resolves company founder name, corporate domain, and permutations."""
+        """Resolves company founder name and verified corporate contact only. Never guesses."""
         comp_lower = job.company.lower()
         founder_name = job.founder_name
         domain = derive_domain_from_company_or_url(job.company, job.job_url)
@@ -204,15 +179,14 @@ class ContactEnricher:
             founder_name = f"Founder of {job.company}"
 
         mx_valid, mx_servers = self.check_mx_records(domain)
-        permutations = self.generate_permutations(founder_name, domain)
-        primary_email = job.founder_email or permutations[0]
-        is_verified = bool(job.founder_email)
+        primary_email = job.founder_email
+        is_verified = bool(primary_email and "@" in primary_email)
 
         return {
             "name": founder_name,
             "domain": domain,
             "primary_email": primary_email,
-            "permutations": permutations,
+            "permutations": [primary_email] if primary_email else [],
             "mx_valid": mx_valid,
             "mx_servers": mx_servers,
             "is_verified": is_verified,
@@ -432,7 +406,10 @@ class OutreachEngine:
         if not recipient or "@" not in recipient:
             return {
                 "success": False,
-                "error": "No recipient email address available for this posting."
+                "error": (
+                    "Failsafe Deliverability Shield: No verified recipient email address available for this posting. "
+                    "Outbound SMTP is blocked to prevent bounces and protect your sender reputation."
+                )
             }
 
         if not is_verified:

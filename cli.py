@@ -26,6 +26,7 @@ from src.tailor_engine import TailorEngine
 from src.outreach_engine import OutreachEngine
 from src.tracker_db import TrackerDB
 from src.happenstance.manager import HappenstanceManager
+from src.ats_applier import DirectATSApplier, BrowserCoPilot
 
 console = Console()
 db = TrackerDB()
@@ -375,68 +376,132 @@ def match_cmd(job_id: int):
 
 
 @cli.command("apply")
-@click.argument("job_id", type=int)
-@click.option("--notes", default="Applied via JobIt automated pipeline", help="Notes regarding application submission")
-def apply_cmd(job_id: int, notes: str):
-    """Marks a job as Applied, auto-tailoring CV and drafting recruiter outreach if needed."""
-    app = db.get_job_by_id(job_id)
-    if not app:
-        console.print(f"[bold red]Error:[/bold red] Job #{job_id} not found.")
+@click.argument("job_id", type=int, required=False)
+@click.option("--mode", type=click.Choice(["copilot", "ats", "direct"], case_sensitive=False), default="copilot", help="Execution mode: copilot (visible persistent browser) or ats (headless direct ATS applier)")
+@click.option("--track", default="event_mice", type=click.Choice(["event_mice", "founders_office", "prod_ops", "apm", "all"], case_sensitive=False), help="Target track for queue processing")
+@click.option("--limit", default=10, type=int, help="Maximum number of applications to process in queue")
+@click.option("--dry-run/--live", default=False, help="Deterministic dry run preview vs live submission")
+@click.option("--notes", default="", help="Notes regarding application submission")
+def apply_cmd(job_id: Optional[int], mode: str, track: str, limit: int, dry_run: bool, notes: str):
+    """Executes Proof-of-Submission (PoS) Co-Pilot or Direct ATS Applier on real portals."""
+    from src.ats_applier import DirectATSApplier, BrowserCoPilot
+
+    ats_applier = DirectATSApplier(tracker_db=db)
+    copilot = BrowserCoPilot(tracker_db=db)
+
+    # 1. Single Job Execution
+    if job_id:
+        app = db.get_job_by_id(job_id)
+        if not app:
+            console.print(f"[bold red]Error:[/bold red] Job #{job_id} not found.")
+            return
+
+        target_track = track if track != "all" else (app.get("pillar") or "event_mice")
+        console.print(Panel(
+            f"[bold cyan]Initiating PoS Application[/bold cyan]\n"
+            f"Job ID: {job_id} | Mode: [yellow]{mode.upper()}[/yellow] | Track: [magenta]{target_track}[/magenta]\n"
+            f"Company: [bold white]{app['company']}[/bold white] | Role: [cyan]{app['role']}[/cyan]\n"
+            f"Portal URL: {app['job_url']}",
+            box=box.ROUNDED
+        ))
+
+        if mode == "copilot":
+            res = copilot.launch_copilot(
+                job_id=job_id,
+                job_url=app["job_url"],
+                company=app["company"],
+                role=app["role"],
+                track=target_track
+            )
+        else:
+            res = ats_applier.apply_job(
+                job_id=job_id,
+                job_url=app["job_url"],
+                company=app["company"],
+                role=app["role"],
+                track=target_track,
+                dry_run=dry_run
+            )
+
+        console.print(f"Result: {res}")
         return
 
-    job = ScrapedJob(
-        company=app["company"],
-        role=app["role"],
-        job_url=app["job_url"],
-        source=app["source"],
-        location=app.get("location", "Mumbai"),
-        raw_description=app.get("raw_description", ""),
-        hr_name=app.get("hr_name"),
-        hr_email=app.get("hr_email"),
-    )
-
-    pdf_cv = app.get("tailored_cv_path")
-
-    # If CV not yet tailored, tailor it now
-    if not pdf_cv or not os.path.exists(pdf_cv):
-        console.print(f"[bold cyan]Auto-tailoring CV for {job.role} at {job.company}...[/bold cyan]")
-        eval_result = scoring_engine.evaluate(job)
-        outputs = tailor_engine.tailor(job, eval_result)
-        pdf_cv = outputs["pdf_path"]
-
-    # Generate outreach draft for safety
-    outreach = outreach_engine.process_outreach(job, pdf_path=pdf_cv, dry_run=True)
-    contact = outreach["draft"]["contact"]
-
-    import datetime
-    now_str = datetime.datetime.now().isoformat()
-
-    db.update_status(
-        job_id=job_id,
-        status="Applied",
-        notes=notes,
-        tailored_cv_path=pdf_cv,
-        applied_date=now_str
-    )
-    db.update_outreach_contact(
-        job_id=job_id,
-        hr_name=contact["name"],
-        hr_email=contact["primary_email"]
-    )
-
+    # 2. Batch Queue Execution
     console.print(Panel(
-        f"[bold green]Application Successfully Recorded for Job #[/bold green][bold white]{job_id}[/bold white]\n\n"
-        f"🏢 [bold]Company:[/bold] {job.company}\n"
-        f"💼 [bold]Role:[/bold] {job.role} ({job.location})\n"
-        f"📊 [bold]Fit Score:[/bold] [bold green]{app.get('fit_score')}/100[/bold green] | [bold]Status:[/bold] [bold green]APPLIED[/bold green]\n"
-        f"🌐 [bold]Application Portal URL:[/bold] [link={job.job_url}]{job.job_url}[/link]\n\n"
-        f"📄 [bold]Tailored A4 PDF Resume:[/bold] {pdf_cv}\n"
-        f"👤 [bold]Target Recruiter:[/bold] {contact['name']} <{contact['primary_email']}>\n"
-        f"💬 [bold]LinkedIn Note Drafted:[/bold] \"{outreach['draft']['linkedin_note']}\"\n"
-        f"💾 [bold]Outreach Draft Path:[/bold] {outreach['draft_txt_path']}",
-        title="Application Confirmed",
+        f"[bold cyan]Proof-of-Submission (PoS) Queue Processor[/bold cyan]\n"
+        f"Mode: [yellow]{mode.upper()}[/yellow] | Track: [magenta]{track.upper()}[/magenta] | Limit: {limit} | Dry-Run: {dry_run}",
         box=box.ROUNDED
     ))
+
+    # Query ready jobs from applications table
+    with db.get_connection() as conn:
+        cur = conn.cursor()
+        query = "SELECT id, company, role, job_url, fit_score, pillar FROM applications WHERE status IN ('READY_FOR_COPILOT', 'RESET_BOUNCED_READY')"
+        params = []
+        if track != "all":
+            if track == "event_mice":
+                query += " AND (lower(role) LIKE '%event%' OR lower(role) LIKE '%mice%' OR lower(company) LIKE '%event%' OR lower(pillar) LIKE '%event%')"
+            elif track == "founders_office":
+                query += " AND (lower(role) LIKE '%founder%' OR lower(role) LIKE '%chief of staff%' OR lower(pillar) LIKE '%founder%')"
+            elif track == "prod_ops":
+                query += " AND (lower(role) LIKE '%operations%' OR lower(pillar) LIKE '%ops%')"
+            elif track == "apm":
+                query += " AND (lower(role) LIKE '%product%' OR lower(role) LIKE '%apm%')"
+
+        query += " ORDER BY fit_score DESC LIMIT ?"
+        params.append(limit)
+        cur.execute(query, params)
+        queue_rows = cur.fetchall()
+
+    if not queue_rows:
+        console.print(f"[yellow]No unapplied jobs in status READY_FOR_COPILOT or RESET_BOUNCED_READY for track '{track}'.[/yellow]")
+        return
+
+    console.print(f"[bold green]Found {len(queue_rows)} opportunities ready in queue.[/bold green]\n")
+
+    results_table = Table(title=f"PoS Application Batch Run ({track.upper()})", box=box.ROUNDED)
+    results_table.add_column("ID", width=4)
+    results_table.add_column("Company", style="bold white")
+    results_table.add_column("Role", style="cyan")
+    results_table.add_column("Score", justify="center", width=7)
+    results_table.add_column("Status", width=18)
+    results_table.add_column("Proof / Details")
+
+    for r in queue_rows:
+        jid, comp, r_title, url, score, pil = r
+        target_track = track if track != "all" else (pil or "apm")
+
+        if mode == "copilot":
+            res = copilot.launch_copilot(
+                job_id=jid,
+                job_url=url,
+                company=comp,
+                role=r_title,
+                track=target_track
+            )
+        else:
+            res = ats_applier.apply_job(
+                job_id=jid,
+                job_url=url,
+                company=comp,
+                role=r_title,
+                track=target_track,
+                dry_run=dry_run
+            )
+
+        status_style = "bold green" if res.get("status") == "APPLIED_VERIFIED" else "bold yellow"
+        proof_text = res.get("proof_screenshot_path") or res.get("reason") or res.get("preview_screenshot") or "-"
+
+        results_table.add_row(
+            str(jid),
+            comp[:20],
+            r_title[:25],
+            str(score),
+            f"[{status_style}]{res.get('status')}[/{status_style}]",
+            proof_text[-40:] if len(proof_text) > 40 else proof_text
+        )
+
+    console.print(results_table)
 
 
 @cli.command("outreach")

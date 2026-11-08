@@ -10,7 +10,7 @@
 - **Assigned Pillar**: `PILLAR_1_FOUNDERS_OFFICE`
 - **Strategic Score**: **100/100**
 - **Target Decision Maker**: Kunal Shah (Founder / CEO)
-- **Email Permutations**: `kunal@finvolv.com`, `kunal.shah@finvolv.com`, `kunalshah@finvolv.com`
+- **Email Permutations**: ``
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22Finvolv%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/finvolv/jobs)
 - **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Finvolv_office.pdf`
@@ -65,10 +65,10 @@ Hi Kunal, bumping this quickly in case it got buried under your post-funding inb
 - **Assigned Pillar**: `PILLAR_4_EVENT_OPERATIONS_MICE`
 - **Strategic Score**: **100/100**
 - **Target Decision Maker**: Sanjay Sharma (Founder / CEO)
-- **Email Permutations**: `sanjay@bcdmeetingsevents.com`, `sanjay.sharma@bcdmeetingsevents.com`, `sanjaysharma@bcdmeetingsevents.com`
+- **Email Permutations**: ``
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22BCD%20Meetings%20%26%20Events%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/bcd-meetings-events/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Event_Management_CV.pdf`
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_BCD_Meetings___Events_mice.pdf`
 - **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
 
 ### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
@@ -136,10 +136,10 @@ Hi Sanjay, following up briefly on my note regarding Event Operations at BCD Mee
 - **Assigned Pillar**: `PILLAR_4_EVENT_OPERATIONS_MICE`
 - **Strategic Score**: **100/100**
 - **Target Decision Maker**: Bhawna Gupta (Founder / CEO)
-- **Email Permutations**: `bhawna@cwtmeetingsevents.com`, `bhawna.gupta@cwtmeetingsevents.com`, `bhawnagupta@cwtmeetingsevents.com`
+- **Email Permutations**: ``
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22CWT%20Meetings%20%26%20Events%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/cwt-meetings-events/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Event_Management_CV.pdf`
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_CWT_Meetings___Events_mice.pdf`
 - **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
 
 ### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
@@ -207,10 +207,10 @@ Hi Bhawna, following up briefly on my note regarding Event Operations at CWT Mee
 - **Assigned Pillar**: `PILLAR_4_EVENT_OPERATIONS_MICE`
 - **Strategic Score**: **100/100**
 - **Target Decision Maker**: Sukesh Jain (Founder / CEO)
-- **Email Permutations**: `sukesh@biworldwide.com`, `sukesh.jain@biworldwide.com`, `sukeshjain@biworldwide.com`
+- **Email Permutations**: ``
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22BI%20Worldwide%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/bi-worldwide/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Event_Management_CV.pdf`
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_BI_Worldwide_mice.pdf`
 - **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
 
 ### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
@@ -278,10 +278,10 @@ Hi Sukesh, following up briefly on my note regarding Event Operations at BI Worl
 - **Assigned Pillar**: `PILLAR_4_EVENT_OPERATIONS_MICE`
 - **Strategic Score**: **100/100**
 - **Target Decision Maker**: Gaurav Malhotra (Founder / CEO)
-- **Email Permutations**: `gaurav@americanexpressgbt.com`, `gaurav.malhotra@americanexpressgbt.com`, `gauravmalhotra@americanexpressgbt.com`
+- **Email Permutations**: ``
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22American%20Express%20GBT%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/american-express-gbt/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Event_Management_CV.pdf`
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_American_Express_GBT_mice.pdf`
 - **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
 
 ### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
@@ -349,10 +349,10 @@ Hi Gaurav, following up briefly on my note regarding Event Operations at America
 - **Assigned Pillar**: `PILLAR_4_EVENT_OPERATIONS_MICE`
 - **Strategic Score**: **100/100**
 - **Target Decision Maker**: Rajeev Kale (Founder / CEO)
-- **Email Permutations**: `rajeev@thomascookmice.com`, `rajeev.kale@thomascookmice.com`, `rajeevkale@thomascookmice.com`
+- **Email Permutations**: ``
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22Thomas%20Cook%20MICE%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/thomas-cook-mice/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Event_Management_CV.pdf`
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Thomas_Cook_MICE_mice.pdf`
 - **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
 
 ### Touchpoint 1: LinkedIn Connect Note (268/280 chars)
@@ -420,10 +420,10 @@ Hi Rajeev, following up briefly on my note regarding Event Operations at Thomas 
 - **Assigned Pillar**: `PILLAR_4_EVENT_OPERATIONS_MICE`
 - **Strategic Score**: **100/100**
 - **Target Decision Maker**: Manpreet Bindra (Founder / CEO)
-- **Email Permutations**: `manpreet@fcmmeetingsevents.com`, `manpreet.bindra@fcmmeetingsevents.com`, `manpreetbindra@fcmmeetingsevents.com`
+- **Email Permutations**: ``
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22FCM%20Meetings%20%26%20Events%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/fcm-meetings-events/jobs)
-- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Event_Management_CV.pdf`
+- **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_FCM_Meetings___Events_mice.pdf`
 - **Featured PM Lab Build**: [EvalGuard AI](https://manavmate53-jpg.github.io/pm-product-lab/#evalguard)
 
 ### Touchpoint 1: LinkedIn Connect Note (270/280 chars)
@@ -491,7 +491,7 @@ Hi Manpreet, following up briefly on my note regarding Event Operations at FCM M
 - **Assigned Pillar**: `PILLAR_3_AI_APM`
 - **Strategic Score**: **95/100**
 - **Target Decision Maker**: Rishab Mehta (Founder / CEO)
-- **Email Permutations**: `rishab@grayquest.com`, `rishab.mehta@grayquest.com`, `rishabmehta@grayquest.com`
+- **Email Permutations**: ``
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22GrayQuest%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/grayquest/jobs)
 - **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_GrayQuest_apm.pdf`
@@ -545,7 +545,7 @@ Hi Rishab, quick follow-up to see if you have 10 minutes this week to discuss pr
 - **Assigned Pillar**: `PILLAR_1_FOUNDERS_OFFICE`
 - **Strategic Score**: **95/100**
 - **Target Decision Maker**: Rohit Agarwal (Founder / CEO)
-- **Email Permutations**: `rohit@portkey.com`, `rohit.agarwal@portkey.com`, `rohitagarwal@portkey.com`
+- **Email Permutations**: ``
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22Portkey%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/portkey-ai/jobs)
 - **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_Portkey_office.pdf`
@@ -600,7 +600,7 @@ Hi Rohit, bumping this quickly in case it got buried under your post-funding inb
 - **Assigned Pillar**: `PILLAR_1_FOUNDERS_OFFICE`
 - **Strategic Score**: **90/100**
 - **Target Decision Maker**: Arvind Parthiban (Founder / CEO)
-- **Email Permutations**: `arvind@superops.com`, `arvind.parthiban@superops.com`, `arvindparthiban@superops.com`
+- **Email Permutations**: ``
 - **LinkedIn Search**: [Open Search](https://www.linkedin.com/search/results/people/?keywords=%22SuperOps%22%20%22Founder%22&origin=GLOBAL_SEARCH_HEADER)
 - **Wellfound Careers**: [Open Board](https://wellfound.com/company/superops-ai/jobs)
 - **Tailored 1-Page PDF**: `exports/resumes/Manav_Mate_SuperOps_office.pdf`

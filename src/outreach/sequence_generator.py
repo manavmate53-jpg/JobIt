@@ -116,7 +116,7 @@ class SequenceGenerator:
             title="Founder",
             first_name="Founder",
             last_name="",
-            email_permutations=[f"founder@{opportunity.company_name.lower()}.com"],
+            email_permutations=[],
             linkedin_search_url="",
             role_priority=1
         )
@@ -227,13 +227,7 @@ class SequenceGenerator:
         wellfound = self.clean_text_strict(playbook.get("wellfound_founder_note", "").format(**fmt))
         bump = self.clean_text_strict(playbook.get("follow_up_bump", "").format(**fmt))
 
-        clean_comp = re.sub(r"[^a-zA-Z0-9]", "", company_name.lower())
-        domain = f"{clean_comp}.com"
-        emails = email_permutations if email_permutations else [
-            f"careers@{domain}",
-            f"hiring@{domain}",
-            f"hr@{domain}"
-        ]
+        emails = email_permutations if email_permutations else []
 
         return OutreachTouchpoints(
             company_name=company_name,
