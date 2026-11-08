@@ -11,48 +11,45 @@
 
 ---
 
-## 1. Newly Verified Applications Submitted Today
+## 1. Ground-Truth Submission Audit & Rollback Summary
 
-| Job ID | Company | Role Title | Portal / Source | Timestamp (ISO) | Submission URL | Proof Screenshot |
-| :---: | :--- | :--- | :--- | :--- | :--- | :--- |
-| **647** | **Euro Panel Products Ltd** | Events Executive (Display & Events) | Indeed | 2026-11-09T00:06:28 | [Indeed Posting](https://in.indeed.com/viewjob?jk=2051dab3e8356d40) | [View Proof Screenshot](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/proofs/event_mice_Euro_Panel_Products_Ltd_647.png) |
-| **648** | **Sarvysampanna System Solutions** | Corporate Events Manager | Indeed | 2026-11-09T00:07:10 | [Indeed Posting](https://in.indeed.com/viewjob?jk=c5d94c084ced26ba) | [View Proof Screenshot](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/proofs/event_mice_Sarvysampanna_System_Solutions_648.png) |
-
-Both submissions above completed official portal verification on Indeed with confirmation text verified and post-submission confirmation screenshots preserved.
+- **Total Ground-Truth Verified Applications**: **16**
+- **False-Positive Rollbacks**: **2** (Job 647: Euro Panel Products Ltd, Job 648: Sarvysampanna System Solutions rolled back to `NEEDS_HUMAN_CLICK` after manual inspection showed pre-apply screens were improperly verified).
+- **PoS Firewall Enforcement**: Hard negative assertions active. Pre-apply markers (`Apply now`, `Job details`, `Full job description`, etc.) strictly forbid marking applications as verified. Visible submit/apply buttons require real user completion before capturing post-submission proof.
 
 ---
 
-## 2. Complete Roster of All 18 Ground-Truth Verified Applications
+## 2. Complete Roster of All 16 Ground-Truth Verified Applications
 
 | # | Company | Role | Track | Verification Type | Proof Artifact / Receipt Details |
 | :-: | :--- | :--- | :--- | :--- | :--- |
 | 1 | **BookMyShow** | Executive - Project Management (Sunburn) | Event/MICE | Trakstar ATS Email | Inbound auto-reply from `careers@bookmyshow.hire.trakstar.com` (Msg ID: 13355) |
 | 2 | **BookMyShow** | Assistant Project Management (Events) | Event/MICE | Trakstar ATS Email | Inbound auto-reply from `careers@bookmyshow.hire.trakstar.com` (Msg ID: 13355) |
-| 3 | **Euro Panel Products Ltd** | Events Executive (Display & Events) | Event/MICE | Portal Screenshot | [event_mice_Euro_Panel_Products_Ltd_647.png](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/proofs/event_mice_Euro_Panel_Products_Ltd_647.png) |
-| 4 | **Sarvysampanna System Solutions** | Corporate Events Manager | Event/MICE | Portal Screenshot | [event_mice_Sarvysampanna_System_Solutions_648.png](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/proofs/event_mice_Sarvysampanna_System_Solutions_648.png) |
-| 5 | **Mercury Travels** | MICE & Corporate Event Project Executive | Event/MICE | Form Redirect Shot | [mercury_travels_submitted.png](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/applications/mercury_travels_submitted.png) |
-| 6 | **NetApp** | Jr. Corporate Event Manager | Event/MICE | LinkedIn Inbound Email | Confirmation email received in `manavstore666@gmail.com` |
-| 7 | **Geometry Encompass** | Event Operations Manager | Event/MICE | LinkedIn Inbound Email | Confirmation email received in `manavstore666@gmail.com` |
-| 8 | **Encompass** | Events Specialist | Event/MICE | LinkedIn Inbound Email | Confirmation email received in `manavstore666@gmail.com` |
-| 9 | **Craftworld Events Pvt Ltd** | Event and Operations Manager | Event/MICE | LinkedIn Inbound Email | Confirmation email received in `manavstore666@gmail.com` |
-| 10 | **Craftworld Events Pvt Ltd** | Manager - Events Operation Manager | Event/MICE | LinkedIn Inbound Email | Confirmation email received in `manavstore666@gmail.com` |
-| 11 | **Signpost India Limited** | Event Management (2026) | Event/MICE | Official HR Email | Auto-reply received from `info@signpostindia.com` (Msg ID: 13295) |
-| 12 | **70 EMG** | Event Operations Manager | Event/MICE | Official HR Email | Inbound confirmation ("Thank you for writing to us") |
-| 13 | **BICS** | Events Manager | Event/MICE | Candidate Submission | Applied on official site |
-| 14 | **New Zealand Trade & Enterprise** | Events Manager - India | Event/MICE | Candidate Submission | Applied on official site |
-| 15 | **Daxko** (ID 353) | Product Owner | APM | Gem ATS Screenshot | [daxko_gem_submitted.png](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/applications/daxko_gem_submitted.png) |
-| 16 | **Daxko** (ID 279) | Product Owner | APM | Gem ATS Screenshot | [daxko_gem_submitted.png](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/applications/daxko_gem_submitted.png) |
-| 17 | **PeopleSprint Consultants** | Operations Lead & Business Owner | ProdOps | Shine DRM Portal | Confirmed on candidate dashboard |
-| 18 | **Purplle.com** | APM - Supply Chain (Logistics B2B) | APM | LinkedIn Easy Apply | Confirmed application receipt |
+| 3 | **Mercury Travels** | MICE & Corporate Event Project Executive | Event/MICE | Form Redirect Shot | [mercury_travels_submitted.png](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/applications/mercury_travels_submitted.png) |
+| 4 | **NetApp** | Jr. Corporate Event Manager | Event/MICE | LinkedIn Inbound Email | Confirmation email received in `manavstore666@gmail.com` |
+| 5 | **Geometry Encompass** | Event Operations Manager | Event/MICE | LinkedIn Inbound Email | Confirmation email received in `manavstore666@gmail.com` |
+| 6 | **Encompass** | Events Specialist | Event/MICE | LinkedIn Inbound Email | Confirmation email received in `manavstore666@gmail.com` |
+| 7 | **Craftworld Events Pvt Ltd** | Event and Operations Manager | Event/MICE | LinkedIn Inbound Email | Confirmation email received in `manavstore666@gmail.com` |
+| 8 | **Craftworld Events Pvt Ltd** | Manager - Events Operation Manager | Event/MICE | LinkedIn Inbound Email | Confirmation email received in `manavstore666@gmail.com` |
+| 9 | **Signpost India Limited** | Event Management (2026) | Event/MICE | Official HR Email | Auto-reply received from `info@signpostindia.com` (Msg ID: 13295) |
+| 10 | **70 EMG** | Event Operations Manager | Event/MICE | Official HR Email | Inbound confirmation ("Thank you for writing to us") |
+| 11 | **BICS** | Events Manager | Event/MICE | Candidate Submission | Applied on official site |
+| 12 | **New Zealand Trade & Enterprise** | Events Manager - India | Event/MICE | Candidate Submission | Applied on official site |
+| 13 | **Daxko** (ID 353) | Product Owner | APM | Gem ATS Screenshot | [daxko_gem_submitted.png](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/applications/daxko_gem_submitted.png) |
+| 14 | **Daxko** (ID 279) | Product Owner | APM | Gem ATS Screenshot | [daxko_gem_submitted.png](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/applications/daxko_gem_submitted.png) |
+| 15 | **PeopleSprint Consultants** | Operations Lead & Business Owner | ProdOps | Shine DRM Portal | Confirmed on candidate dashboard |
+| 16 | **Purplle.com** | APM - Supply Chain (Logistics B2B) | APM | LinkedIn Easy Apply | Confirmed application receipt |
 
 ---
 
-## 3. Co-Pilot Pre-Filled Applications Pending Human Submission (`NEEDS_HUMAN_CLICK`)
+## 3. Co-Pilot Applications Pending Human Submission (`NEEDS_HUMAN_CLICK`)
 
-Every role below was opened in a visible persistent browser session, standard candidate information was auto-filled, and the verified 1-page PDF CV was attached. The PoS Firewall halted execution before marking applied, preserving a pre-filled visual capture:
+Every role below was opened in an interactive browser session, standard candidate information was auto-filled, and the verified 1-page PDF CV was attached. The PoS Firewall halted execution before marking applied, preserving a state capture:
 
 | Job ID | Company | Role | Track | Barrier / Reason | Visual Capture Artifact | Direct Apply Link |
 | :---: | :--- | :--- | :--- | :--- | :--- | :--- |
+| **647** | **Euro Panel Products Ltd** | Events Executive (Display & Events) | Event/MICE | Pre-apply state detected; unsubmitted Indeed page | [copilot_rejected_647.png](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/proofs/copilot_rejected_647.png) | [Indeed Posting](https://in.indeed.com/viewjob?jk=2051dab3e8356d40) |
+| **648** | **Sarvysampanna System Solutions** | Corporate Events Manager | Event/MICE | Pre-apply state detected; unsubmitted Indeed page | [failed_preapply_648.png](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/proofs/failed_preapply_event_mice_Sarvysampanna_System_Solutions_648.png) | [Indeed Posting](https://in.indeed.com/viewjob?jk=c5d94c084ced26ba) |
 | **616** | **WebMD** | Associate Product Marketing Manager | PM | Awaiting final review/submit on Jobvite | [WebMD Capture](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/proofs/copilot_prefilled_event_mice_WebMD_616.png) | [Jobvite Portal](https://jobs.jobvite.com/webmd/job/oH8YAfw7?isComingFromApp=true) |
 | **643** | **Red Bull** | On Premise Festival & Events Manager | Event/MICE | Awaiting Easy Apply submit on LinkedIn | [Red Bull Capture](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/proofs/copilot_prefilled_event_mice_Red_Bull_643.png) | [LinkedIn Job](https://www.linkedin.com/jobs/view/4479837751/) |
 | **638** | **Torqwars** | Events Lead | Event/MICE | Awaiting apply on Naukri | [Torqwars Capture](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/proofs/copilot_prefilled_event_mice_Torqwars_638.png) | [Naukri Portal](https://www.naukri.com/job-listings-events-lead-torqwars-mumbai-3-to-7-years-071026029016?src=jobsearchDesk&sid=17940788904325118&xp=19&px=1&nignbevent_src=jobsearchDeskGNB) |
