@@ -85,3 +85,144 @@ def test_pos_firewall_telemetry_db(tmp_path: Path):
         assert row["proof_screenshot_path"] == str(fake_screenshot)
         assert row["submission_url"] == "https://cashfree.com/applied"
 
+
+class MockLocator:
+    def __init__(self, visible=False, enabled=True, text=""):
+        self._visible = visible
+        self._enabled = enabled
+        self._text = text
+
+    def is_visible(self, timeout=None):
+        return self._visible
+
+    def is_enabled(self, timeout=None):
+        return self._enabled
+
+    def inner_text(self):
+        return self._text
+
+    @property
+    def first(self):
+        return self
+
+
+class MockPage:
+    def __init__(self, url="", content_html="", locators=None):
+        self.url = url
+        self._content = content_html
+        self._locators = locators or {}
+
+    def content(self):
+        return self._content
+
+    def locator(self, selector):
+        for key, loc in self._locators.items():
+            if key.lower() in selector.lower():
+                return loc
+        return MockLocator(visible=False)
+
+
+def test_blacklist_apply_now_rejected_even_with_thank_you():
+    from src.ats_applier import verify_confirmation_screen, assert_confirmation_screen, SubmissionIncompleteError
+
+    # Page has both "thank you for applying" and "apply now" visible
+    page = MockPage(
+        url="https://in.indeed.com/viewjob?jk=2051dab3e8356d40",
+        content_html="<html><body><h1>Euro Panel Products</h1><p>Thank you for viewing. Apply now</p></body></html>",
+        locators={
+            "apply now": MockLocator(visible=True, text="Apply now")
+        }
+    )
+
+    is_verified, reason = verify_confirmation_screen(page)
+    assert is_verified is False
+    assert "Pre-apply blacklist marker visible: 'apply now'" in reason
+
+    with pytest.raises(SubmissionIncompleteError, match="Pre-apply blacklist marker visible"):
+        assert_confirmation_screen(page)
+
+
+def test_clickable_apply_button_rejected():
+    from src.ats_applier import verify_confirmation_screen, assert_confirmation_screen, SubmissionIncompleteError
+
+    # Page has confirmation text but an Apply button is still clickable
+    page = MockPage(
+        url="https://jobs.lever.co/example/123",
+        content_html="<html><body><p>Thank you for applying</p><button>Apply for this job</button></body></html>",
+        locators={
+            "button:has-text('Apply')": MockLocator(visible=True, enabled=True, text="Apply for this job")
+        }
+    )
+
+    is_verified, reason = verify_confirmation_screen(page)
+    assert is_verified is False
+    assert "Submit/Apply button still visible and clickable" in reason
+
+    with pytest.raises(SubmissionIncompleteError, match="Submit/Apply button still visible"):
+        assert_confirmation_screen(page)
+
+
+def test_indeed_without_post_apply_or_submitted_fails():
+    from src.ats_applier import verify_confirmation_screen, assert_confirmation_screen, SubmissionIncompleteError
+
+    # Indeed page with description but no confirmation markers
+    page = MockPage(
+        url="https://in.indeed.com/viewjob?jk=c5d94c084ced26ba",
+        content_html="<html><body><h1>Corporate Events Manager</h1><p>Requirements: 4 years exp</p></body></html>",
+        locators={}
+    )
+
+    is_verified, reason = verify_confirmation_screen(page)
+    assert is_verified is False
+    assert "Indeed submission incomplete" in reason
+
+    with pytest.raises(SubmissionIncompleteError, match="Indeed submission incomplete"):
+        assert_confirmation_screen(page)
+
+
+def test_indeed_genuine_confirmation_passes():
+    from src.ats_applier import verify_confirmation_screen, assert_confirmation_screen
+
+    # Genuine Indeed post-submission confirmation
+    page = MockPage(
+        url="https://in.indeed.com/post-apply?jk=2051dab3e8356d40",
+        content_html="<html><body><h1>Your application has been submitted</h1><p>Your application was sent to Euro Panel Products Ltd</p></body></html>",
+        locators={}
+    )
+
+    is_verified, reason = verify_confirmation_screen(page)
+    assert is_verified is True
+    assert "Indeed post-submission confirmation verified" in reason
+
+    # Should not raise exception
+    assert_confirmation_screen(page)
+
+
+def test_lever_genuine_confirmation_passes():
+    from src.ats_applier import verify_confirmation_screen, assert_confirmation_screen
+
+    page = MockPage(
+        url="https://jobs.lever.co/company/thanks",
+        content_html="<html><body><h1>Thank you for applying</h1><p>We have received your application.</p></body></html>",
+        locators={}
+    )
+
+    is_verified, reason = verify_confirmation_screen(page)
+    assert is_verified is True
+    assert "Lever post-submission confirmation verified" in reason
+
+
+def test_greenhouse_genuine_confirmation_passes():
+    from src.ats_applier import verify_confirmation_screen, assert_confirmation_screen
+
+    page = MockPage(
+        url="https://boards.greenhouse.io/company/confirmation",
+        content_html="<html><body><h1>Application submitted!</h1><p>Thanks for applying to our team.</p></body></html>",
+        locators={}
+    )
+
+    is_verified, reason = verify_confirmation_screen(page)
+    assert is_verified is True
+    assert "Greenhouse post-submission confirmation verified" in reason
+
+

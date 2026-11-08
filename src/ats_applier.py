@@ -60,20 +60,33 @@ TRACK_RESUMES = {
     "apm": BASE_DIR / "exports" / "resumes" / "Manav_Mate_APM_CV.pdf",
 }
 
-CONFIRMATION_PHRASES = [
-    "thank you for applying",
-    "application submitted",
-    "application received",
-    "we have received your application",
-    "thanks for applying",
-    "application complete",
-    "your application has been submitted",
-    "your application was submitted",
-    "successfully applied",
-    "thank you for submitting",
-    "thank you for your interest",
-    "we will be in touch",
-    "application has been sent"
+class SubmissionIncompleteError(Exception):
+    """Raised when an application is claimed to be submitted but pre-apply or unsubmitted elements remain visible."""
+    pass
+
+
+UNSUBMITTED_BLACKLIST_MARKERS = [
+    "apply now",
+    "apply on company site",
+    "apply with your resume",
+    "job details",
+    "full job description",
+    "review your application",
+    "submit your application",
+]
+
+SUBMIT_BUTTON_SELECTORS = [
+    "button:has-text('Apply now')",
+    "button:has-text('Apply on company site')",
+    "button:has-text('Apply')",
+    "button:has-text('Submit your application')",
+    "button:has-text('Submit application')",
+    "button:has-text('Submit Application')",
+    "button:has-text('Submit')",
+    "button#submit_app",
+    "input[type='submit']",
+    "a:has-text('Apply now')",
+    "a:has-text('Apply on company site')",
 ]
 
 BOT_WALL_PHRASES = [
@@ -85,6 +98,158 @@ BOT_WALL_PHRASES = [
     "cloudflare ray id",
     "please enable cookies"
 ]
+
+
+def verify_confirmation_screen(page: Any, ats_type: str = "generic", raise_on_failure: bool = False) -> Tuple[bool, str]:
+    """Strictly validates that the page is genuinely a post-submission confirmation screen.
+    Returns (is_verified: bool, reason: str).
+    Rules:
+    1. Blacklist check: If any pre-apply or in-progress marker is visible, strictly forbid verification.
+    2. Button check: If an apply or submit button is still visible and clickable, reject.
+    3. Mandatory Positive Confirmation: Requires explicit post-submission tokens per portal.
+    """
+    url = getattr(page, "url", "")
+    if callable(url):
+        url = url()
+    url_lower = str(url).lower()
+
+    content = ""
+    if hasattr(page, "content"):
+        content = page.content() if callable(page.content) else page.content
+    content_lower = str(content).lower()
+
+    # Rule 1: Blacklist False Confirmation Markers
+    for marker in UNSUBMITTED_BLACKLIST_MARKERS:
+        marker_found = False
+        if hasattr(page, "locator") and callable(page.locator):
+            try:
+                loc = page.locator(f"text='{marker}'").first
+                if loc.is_visible(timeout=300):
+                    marker_found = True
+            except Exception:
+                pass
+        if not marker_found and marker in content_lower:
+            if not hasattr(page, "locator") or not callable(page.locator):
+                marker_found = True
+
+        if marker_found:
+            reason = f"Pre-apply blacklist marker visible: '{marker}' (application not submitted)"
+            if raise_on_failure:
+                raise SubmissionIncompleteError(reason)
+            return False, reason
+
+    # Rule 2: Two-Step Check for Visible Submit/Apply Buttons
+    for sel in SUBMIT_BUTTON_SELECTORS:
+        btn_txt = None
+        if hasattr(page, "locator") and callable(page.locator):
+            try:
+                btn = page.locator(sel).first
+                if btn.is_visible(timeout=300) and btn.is_enabled(timeout=300):
+                    txt = btn.inner_text().strip().lower()
+                    if any(w in txt for w in ["apply", "submit"]):
+                        btn_txt = txt
+            except Exception:
+                pass
+
+        if btn_txt:
+            reason = f"Submit/Apply button still visible and clickable: '{btn_txt}'"
+            if raise_on_failure:
+                raise SubmissionIncompleteError(reason)
+            return False, reason
+
+    # Rule 3: Mandatory Platform-Specific Positive Confirmation Markers
+    if "indeed.com" in url_lower:
+        indeed_tokens = [
+            "your application has been submitted",
+            "your application was sent to",
+            "your application has been sent",
+            "application submitted",
+        ]
+        has_positive = any(t in content_lower for t in indeed_tokens) or "/post-apply" in url_lower
+        if not has_positive:
+            reason = "Indeed submission incomplete: Missing 'Your application has been submitted / sent' or '/post-apply' URL"
+            if raise_on_failure:
+                raise SubmissionIncompleteError(reason)
+            return False, reason
+        return True, "Indeed post-submission confirmation verified"
+
+    elif "lever.co" in url_lower:
+        has_positive = "/thanks" in url_lower or "thank you for applying" in content_lower
+        if not has_positive:
+            reason = "Lever submission incomplete: Missing '/thanks' URL or 'Thank you for applying' confirmation text"
+            if raise_on_failure:
+                raise SubmissionIncompleteError(reason)
+            return False, reason
+        return True, "Lever post-submission confirmation verified"
+
+    elif "greenhouse.io" in url_lower:
+        has_positive = "/confirmation" in url_lower or "application submitted!" in content_lower or "thank you for applying" in content_lower
+        if not has_positive:
+            reason = "Greenhouse submission incomplete: Missing '/confirmation' URL or 'Application submitted!' text"
+            if raise_on_failure:
+                raise SubmissionIncompleteError(reason)
+            return False, reason
+        return True, "Greenhouse post-submission confirmation verified"
+
+    elif "jobvite.com" in url_lower:
+        has_positive = "thank you for your interest" in content_lower or "your application has been successfully submitted" in content_lower or "application submitted" in content_lower
+        if not has_positive:
+            reason = "Jobvite submission incomplete: Missing 'successfully submitted' or 'Thank you for your interest' confirmation text"
+            if raise_on_failure:
+                raise SubmissionIncompleteError(reason)
+            return False, reason
+        return True, "Jobvite post-submission confirmation verified"
+
+    elif "linkedin.com" in url_lower:
+        has_positive = "application sent" in content_lower or "your application was sent" in content_lower
+        if not has_positive:
+            reason = "LinkedIn submission incomplete: Missing 'Application sent' confirmation modal"
+            if raise_on_failure:
+                raise SubmissionIncompleteError(reason)
+            return False, reason
+        return True, "LinkedIn post-submission confirmation verified"
+
+    elif "naukri.com" in url_lower:
+        has_positive = "successfully applied" in content_lower or "you have successfully applied" in content_lower
+        if not has_positive:
+            reason = "Naukri submission incomplete: Missing 'Successfully applied' confirmation banner"
+            if raise_on_failure:
+                raise SubmissionIncompleteError(reason)
+            return False, reason
+        return True, "Naukri post-submission confirmation verified"
+
+    elif "wellfound.com" in url_lower or "angel.co" in url_lower:
+        has_positive = "application sent" in content_lower or "applied" in url_lower
+        if not has_positive:
+            reason = "Wellfound submission incomplete: Missing application confirmation"
+            if raise_on_failure:
+                raise SubmissionIncompleteError(reason)
+            return False, reason
+        return True, "Wellfound post-submission confirmation verified"
+
+    else:
+        # Generic ATS: Check for URL confirmation or explicit success header
+        generic_confirm_tokens = [
+            "your application has been submitted",
+            "thank you for applying",
+            "application submitted successfully",
+            "we have received your application",
+            "application complete",
+        ]
+        has_positive = any(t in content_lower for t in generic_confirm_tokens) or any(
+            u in url_lower for u in ["/thanks", "/thank-you", "/thankyou", "/confirmation", "/submitted"]
+        )
+        if not has_positive:
+            reason = "Generic ATS submission incomplete: No explicit confirmation header or success URL detected"
+            if raise_on_failure:
+                raise SubmissionIncompleteError(reason)
+            return False, reason
+        return True, "Generic ATS post-submission confirmation verified"
+
+
+def assert_confirmation_screen(page: Any, ats_type: str = "generic") -> Tuple[bool, str]:
+    """Strictly asserts confirmation screen. Raises SubmissionIncompleteError on any failure."""
+    return verify_confirmation_screen(page, ats_type=ats_type, raise_on_failure=True)
 
 
 class DirectATSApplier:
@@ -223,40 +388,40 @@ class DirectATSApplier:
 
                 # Wait for post-submission confirmation
                 time.sleep(4)
-                final_content = page.content().lower()
-                final_url = page.url.lower()
+                is_verified, reason = verify_confirmation_screen(page, ats_type=ats_type)
 
-                has_confirmation = any(p in final_content for p in CONFIRMATION_PHRASES) or any(
-                    u in final_url for u in ["/thanks", "/thank-you", "/thankyou", "/submitted", "/confirmation", "/received"]
-                )
+                if is_verified:
+                    proof_path = PROOFS_DIR / f"{track}_{safe_comp}_{job_id}_SUCCESS.png"
+                    page.screenshot(path=str(proof_path))
+                    submission_url = page.url
+                    browser.close()
 
-                proof_path = PROOFS_DIR / f"{track}_{safe_comp}_{job_id}.png"
-                page.screenshot(path=str(proof_path))
-                browser.close()
-
-                if has_confirmation:
-                    # Enforce PoS Firewall update
                     self.tracker_db.mark_applied_verified(
                         job_id=job_id,
                         proof_screenshot_path=str(proof_path),
-                        submission_url=page.url
+                        submission_url=submission_url,
+                        notes=f"Submitted via Direct ATS Applier ({ats_type}): {reason}"
                     )
                     return {
                         "status": "APPLIED_VERIFIED",
                         "proof_screenshot_path": str(proof_path),
-                        "submission_url": page.url,
+                        "submission_url": submission_url,
                         "company": company,
-                        "role": role
+                        "role": role,
+                        "reason": reason
                     }
                 else:
-                    # Confirmation not definitively verified
                     unverified_path = PROOFS_DIR / f"unverified_{track}_{safe_comp}_{job_id}.png"
-                    if proof_path.exists():
-                        proof_path.rename(unverified_path)
-                    self.tracker_db.mark_needs_human_click(job_id, "Form submitted but confirmation text not detected", str(unverified_path))
+                    page.screenshot(path=str(unverified_path))
+                    browser.close()
+                    self.tracker_db.mark_needs_human_click(
+                        job_id,
+                        f"Post-submission confirmation failed: {reason}",
+                        str(unverified_path)
+                    )
                     return {
                         "status": "NEEDS_HUMAN_CLICK",
-                        "reason": "Post-submission confirmation text unconfirmed",
+                        "reason": f"Post-submission confirmation unconfirmed: {reason}",
                         "screenshot": str(unverified_path)
                     }
 
@@ -402,58 +567,61 @@ class BrowserCoPilot:
                 except Exception:
                     pass
 
-                print("\n[CO-PILOT ACTION REQUIRED]")
-                print("1. Review the application in the open browser window.")
-                print("2. Solve any CAPTCHA or fill any custom questions if required.")
-                print("3. Click 'Submit' when ready.")
-                print("-" * 80)
-
-                # Capture proof after user confirms or check auto-confirmation
-                user_input = ""
-                try:
-                    user_input = input("Did you successfully submit the application? [y/N]: ").strip().lower()
-                except (EOFError, KeyboardInterrupt):
-                    user_input = os.getenv("COPILOT_CONFIRM", "n").strip().lower()
-
-                time.sleep(1)
-                final_content = page.content().lower()
-                final_url = page.url.lower()
-
-                auto_confirmed = any(p in final_content for p in CONFIRMATION_PHRASES) or any(
-                    u in final_url for u in ["/thanks", "/thank-you", "/thankyou", "/submitted", "/confirmation", "/received"]
+                prompt_msg = (
+                    f"\nCo-Pilot is paused on {company}. Complete the remaining fields and click Submit in the browser window.\n"
+                    f"Once the confirmation screen loads, press ENTER here..."
                 )
+                print(prompt_msg)
 
-                if user_input in ("y", "yes") or auto_confirmed:
-                    proof_path = PROOFS_DIR / f"{track}_{safe_comp}_{job_id}.png"
+                try:
+                    input()
+                except (EOFError, KeyboardInterrupt):
+                    pass
+
+                time.sleep(2)
+
+                # Run two-step verification check on active page
+                is_verified, reason = verify_confirmation_screen(page)
+
+                if is_verified:
+                    proof_path = PROOFS_DIR / f"{track}_{safe_comp}_{job_id}_SUCCESS.png"
                     page.screenshot(path=str(proof_path))
+                    submission_url = page.url
                     context.close()
 
                     self.tracker_db.mark_applied_verified(
                         job_id=job_id,
                         proof_screenshot_path=str(proof_path),
-                        submission_url=page.url,
-                        notes="Submitted via Co-Pilot interactive browser with candidate confirmation."
+                        submission_url=submission_url,
+                        notes=f"Submitted via Co-Pilot interactive browser: {reason}"
                     )
-                    print(f"SUCCESS: Marked APPLIED_VERIFIED with proof at {proof_path}")
+                    print(f"\n[VERIFIED SUCCESS] {reason}")
+                    print(f"Proof screenshot captured: {proof_path}")
                     return {
                         "status": "APPLIED_VERIFIED",
                         "proof_screenshot_path": str(proof_path),
-                        "submission_url": page.url
+                        "submission_url": submission_url,
+                        "reason": reason
                     }
                 else:
-                    shot_path = PROOFS_DIR / f"copilot_prefilled_{track}_{safe_comp}_{job_id}.png"
-                    page.screenshot(path=str(shot_path))
+                    rejected_path = PROOFS_DIR / f"copilot_rejected_{job_id}.png"
+                    try:
+                        page.screenshot(path=str(rejected_path))
+                    except Exception:
+                        pass
                     context.close()
+
                     self.tracker_db.mark_needs_human_click(
                         job_id,
-                        "Co-Pilot pre-filled form in browser; awaiting human submission click",
-                        str(shot_path)
+                        f"Co-Pilot confirmation check failed: {reason}",
+                        str(rejected_path)
                     )
-                    print(f"PENDING: Form pre-filled; logged as NEEDS_HUMAN_CLICK (screenshot at {shot_path}).")
+                    print(f"\n\033[91m[REJECTED] Confirmation check failed: {reason}. Application remains in NEEDS_HUMAN_CLICK.\033[0m")
+                    print(f"State screenshot captured: {rejected_path}")
                     return {
                         "status": "NEEDS_HUMAN_CLICK",
-                        "reason": "Co-Pilot pre-filled; awaiting human click",
-                        "screenshot": str(shot_path)
+                        "reason": f"Confirmation check failed: {reason}",
+                        "screenshot": str(rejected_path)
                     }
 
             except Exception as e:

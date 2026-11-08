@@ -105,3 +105,4 @@ The following 10 unapplied roles remain queued in `READY_FOR_COPILOT` with fit s
   - Event Management / MICE: [Manav_Mate_Event_Management_CV.pdf](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/resumes/Manav_Mate_Event_Management_CV.pdf)
   - Founder's Office: [Manav_Mate_Founders_Office_CV.pdf](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/resumes/Manav_Mate_Founders_Office_CV.pdf)
   - APM / PM: [Manav_Mate_APM_CV.pdf](file:///Users/manav/.gemini/antigravity-ide/scratch/JobIt/exports/resumes/Manav_Mate_APM_CV.pdf)
+

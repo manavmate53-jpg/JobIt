@@ -50,6 +50,7 @@ exports/outreach_drafts/*.json
 
 # Browser Sessions & Application Artifacts
 data/browser_sessions/
+data/browser_profile/
 data/*storage_state.json
 *.storage_state.json
 data/*base64.txt
