@@ -259,12 +259,26 @@ def fill_all_visible_inputs(
     if cv_path and cv_path.exists():
         all_frames = [page.main_frame] + [f for f in page.frames if f != page.main_frame]
         resume_uploaded = False
+
+        # If a portal has a trigger button to open attachment chooser (e.g. Jobvite "Select")
+        try:
+            select_btns = page.locator(
+                "button:has-text('Select'), button[jv-add-attachment], button:has-text('Add Resume'), button:has-text('Upload Resume')"
+            ).all()
+            for sbtn in select_btns:
+                if sbtn.is_visible():
+                    sbtn.click()
+                    time.sleep(1)
+                    break
+        except Exception:
+            pass
+
         for frame in all_frames:
             try:
                 file_inputs = frame.locator("input[type='file']").all()
                 for finp in file_inputs:
                     finp.set_input_files(str(cv_path))
-                    time.sleep(1.5)
+                    time.sleep(2)
                     resume_uploaded = True
                     fname = cv_path.name
                     print(f"[FILLED] Resume / CV File Upload = '{fname}'")
@@ -275,7 +289,58 @@ def fill_all_visible_inputs(
             except Exception as e:
                 logger.debug(f"File upload error in frame: {e}")
 
-    # 3. Label-Matched Input / Select / Textarea Filling
+    # 3. Handle Mandatory Checkboxes (Consent, Privacy, Terms, Declarations)
+    for frame in all_frames:
+        try:
+            checkboxes = frame.locator("input[type='checkbox']").all()
+        except Exception:
+            continue
+        for cb in checkboxes:
+            try:
+                if not cb.is_visible():
+                    continue
+                cid = cb.get_attribute("id") or ""
+                cname = cb.get_attribute("name") or ""
+                clbl = ""
+                if cid:
+                    lbl = frame.locator(f"label[for='{cid}']").first
+                    if lbl.count() > 0:
+                        clbl = lbl.inner_text().strip()
+                if not clbl:
+                    try:
+                        clbl = cb.evaluate("e => e.closest('label') ? e.closest('label').innerText : ''").strip()
+                    except Exception:
+                        pass
+                cdesc = f"{clbl} {cname} {cid}".lower()
+                if any(
+                    term in cdesc
+                    for term in [
+                        "consent",
+                        "privacy",
+                        "agree",
+                        "acknowledge",
+                        "certify",
+                        "declare",
+                        "terms",
+                        "policy",
+                        "authorized",
+                        "confirm",
+                        "understand",
+                    ]
+                ):
+                    if not cb.is_checked():
+                        cb.check(force=True)
+                        try:
+                            cb.dispatch_event("change")
+                        except Exception:
+                            pass
+                        cb_name = clbl or cname or cid or "Consent Checkbox"
+                        print(f"[FILLED] Checkbox '{cb_name}' = Checked")
+                        filled_fields.append((cb_name, "Checked"))
+            except Exception:
+                pass
+
+    # 4. Label-Matched Input / Select / Textarea Filling
     all_frames = [page.main_frame] + [f for f in page.frames if f != page.main_frame]
 
     for frame in all_frames:
@@ -385,6 +450,67 @@ def fill_all_visible_inputs(
 
                 elif any(k in desc for k in ["experience", "years of exp"]):
                     val_to_fill = profile.get("experience_years", "4")
+
+                elif any(
+                    k in desc
+                    for k in [
+                        "authorized to work",
+                        "legally entitled",
+                        "work authorization",
+                        "eligible to work",
+                        "right to work",
+                    ]
+                ):
+                    if tag == "SELECT":
+                        opts = el.locator("option").all_inner_texts()
+                        for opt in opts:
+                            if "yes" in opt.lower():
+                                val_to_fill = opt
+                                break
+                    else:
+                        val_to_fill = "Yes"
+
+                elif any(k in desc for k in ["sponsorship", "require visa", "visa sponsorship", "need sponsorship"]):
+                    if tag == "SELECT":
+                        opts = el.locator("option").all_inner_texts()
+                        for opt in opts:
+                            if "no" in opt.lower():
+                                val_to_fill = opt
+                                break
+                    else:
+                        val_to_fill = "No"
+
+                elif any(k in desc for k in ["relocate", "relocation", "willing to commute", "commute to"]):
+                    if tag == "SELECT":
+                        opts = el.locator("option").all_inner_texts()
+                        for opt in opts:
+                            if "yes" in opt.lower():
+                                val_to_fill = opt
+                                break
+                    else:
+                        val_to_fill = "Yes"
+
+                elif any(k in desc for k in ["how did you hear", "source", "hear about us", "referral source"]):
+                    if tag == "SELECT":
+                        opts = el.locator("option").all_inner_texts()
+                        for opt in opts:
+                            if any(s in opt.lower() for s in ["linkedin", "job board", "online", "internet"]):
+                                val_to_fill = opt
+                                break
+                        if not val_to_fill and len(opts) > 1:
+                            val_to_fill = opts[1]
+                    else:
+                        val_to_fill = "LinkedIn"
+
+                elif any(k in desc for k in ["gender", "sex"]):
+                    if tag == "SELECT":
+                        opts = el.locator("option").all_inner_texts()
+                        for opt in opts:
+                            if "male" in opt.lower() and "female" not in opt.lower():
+                                val_to_fill = opt
+                                break
+                    else:
+                        val_to_fill = "Male"
 
                 if val_to_fill:
                     if tag == "SELECT":

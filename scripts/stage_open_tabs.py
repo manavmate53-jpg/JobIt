@@ -73,13 +73,13 @@ TARGET_JOBS = [
         "portal": "Indeed",
     },
     {
-        "id": 616,
-        "company": "WebMD",
-        "role": "Associate Product Marketing Manager",
-        "track": "apm",
-        "url": "https://jobs.jobvite.com/webmd/job/oH8YAfw7?isComingFromApp=true",
-        "resume": BASE_DIR / "exports" / "resumes" / "Manav_Mate_APM_CV.pdf",
-        "portal": "Jobvite",
+        "id": 648,
+        "company": "Sarvysampanna System Solutions",
+        "role": "Corporate Events Manager",
+        "track": "event_mice",
+        "url": "https://in.indeed.com/viewjob?jk=c5d94c084ced26ba",
+        "resume": BASE_DIR / "exports" / "resumes" / "Manav_Mate_Event_Management_CV.pdf",
+        "portal": "Indeed",
     },
     {
         "id": 643,
@@ -100,13 +100,58 @@ TARGET_JOBS = [
         "portal": "Naukri",
     },
     {
-        "id": 179,
-        "company": "Dukaan",
-        "role": "Associate Product Manager - B2B Commerce & Catalog AI",
-        "track": "apm",
-        "url": "https://wellfound.com/jobs/dukaan-apm-b2b-commerce-catalog-849306",
-        "resume": BASE_DIR / "exports" / "resumes" / "Manav_Mate_APM_CV.pdf",
-        "portal": "Wellfound",
+        "id": 636,
+        "company": "Sarvysampanna System Solutions",
+        "role": "Corporate Event Planner",
+        "track": "event_mice",
+        "url": "https://www.naukri.com/job-listings-corporate-event-planner-sarvysampa",
+        "resume": BASE_DIR / "exports" / "resumes" / "Manav_Mate_Event_Management_CV.pdf",
+        "portal": "Naukri",
+    },
+    {
+        "id": 618,
+        "company": "BCD Meetings & Events",
+        "role": "MICE Project Manager / Coordinator",
+        "track": "event_mice",
+        "url": "https://www.bcdme.com/careers",
+        "resume": BASE_DIR / "exports" / "resumes" / "Manav_Mate_Event_Management_CV.pdf",
+        "portal": "Direct Portal",
+    },
+    {
+        "id": 619,
+        "company": "CWT Meetings & Events",
+        "role": "Event Production & Procurement Executive",
+        "track": "event_mice",
+        "url": "https://www.cwt-meetings-events.com/careers",
+        "resume": BASE_DIR / "exports" / "resumes" / "Manav_Mate_Event_Management_CV.pdf",
+        "portal": "Direct Portal",
+    },
+    {
+        "id": 620,
+        "company": "BI Worldwide",
+        "role": "MICE Project Manager / Coordinator",
+        "track": "event_mice",
+        "url": "https://www.biworldwide.co.in/careers",
+        "resume": BASE_DIR / "exports" / "resumes" / "Manav_Mate_Event_Management_CV.pdf",
+        "portal": "Direct Portal",
+    },
+    {
+        "id": 621,
+        "company": "American Express GBT",
+        "role": "MICE Project Manager / Coordinator",
+        "track": "event_mice",
+        "url": "https://www.amexglobalbusinesstravel.com/careers",
+        "resume": BASE_DIR / "exports" / "resumes" / "Manav_Mate_Event_Management_CV.pdf",
+        "portal": "Direct Portal",
+    },
+    {
+        "id": 623,
+        "company": "FCM Meetings & Events",
+        "role": "Event Production & Procurement Executive",
+        "track": "event_mice",
+        "url": "https://www.fcmtravel.com/en-in/careers",
+        "resume": BASE_DIR / "exports" / "resumes" / "Manav_Mate_Event_Management_CV.pdf",
+        "portal": "Direct Portal",
     },
 ]
 
@@ -126,9 +171,10 @@ def ensure_chrome_running() -> str:
         return "existing"
 
     candidates = [
+        "/Users/manav/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
+        "/Users/manav/Library/Caches/ms-playwright/chromium-1228/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
         "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
         "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
-        "/Users/manav/Library/Caches/ms-playwright/chromium-1228/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
     ]
 
     chrome_bin = None
@@ -191,6 +237,13 @@ def prefill_tab(page, target: Dict[str, Any]):
 
     time.sleep(2)
 
+    # Mandatory Stage 1 Screenshot
+    step1_path = BASE_DIR / "exports" / "proofs" / f"job_{job_id}_step1_loaded.png"
+    try:
+        page.screenshot(path=str(step1_path))
+    except Exception:
+        pass
+
     # 2. Check for login walls
     is_gated, platform, gate_reason = detect_login_wall(page, job_id=job_id)
     if is_gated:
@@ -226,10 +279,18 @@ def prefill_tab(page, target: Dict[str, Any]):
     try:
         filled = fill_all_visible_inputs(page, profile=CANDIDATE_DATA, cv_path=resume_path, job_id=job_id)
         logger.info(f"Successfully filled {len(filled)} fields for Job #{job_id}: {company}")
+        step2_path = BASE_DIR / "exports" / "proofs" / f"job_{job_id}_step2_filled.png"
+        page.screenshot(path=str(step2_path))
     except ZeroFieldsFilledError as ze:
         logger.warning(f"No fields could be filled for Job #{job_id}: {ze}")
     except Exception as e:
         logger.warning(f"Form filling encountered error for Job #{job_id}: {e}")
+
+    step3_path = BASE_DIR / "exports" / "proofs" / f"job_{job_id}_step3_result.png"
+    try:
+        page.screenshot(path=str(step3_path))
+    except Exception:
+        pass
 
     logger.info(f"Tab staged for Job #{job_id}: {company}")
 
@@ -252,7 +313,7 @@ def stage_all_tabs():
 
         # Open each target in its own tab
         for idx, target in enumerate(TARGET_JOBS, 1):
-            logger.info(f"[{idx}/5] Staging tab for: {target['company']} - {target['role']}")
+            logger.info(f"[{idx}/{len(TARGET_JOBS)}] Staging tab for: {target['company']} - {target['role']}")
             # Create a new tab
             page = context.new_page()
             prefill_tab(page, target)

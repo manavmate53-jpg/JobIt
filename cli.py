@@ -521,6 +521,123 @@ def apply_cmd(job_id: Optional[int], mode: str, track: str, limit: int, dry_run:
     console.print(results_table)
 
 
+@cli.command("fill-open-tabs")
+@click.option("--port", default=9222, type=int, help="Remote debugging port for Chrome session (default: 9222)")
+@click.option("--track", default="event_mice", help="Candidate track to select tailored resume (default: event_mice)")
+def fill_open_tabs_cmd(port: int, track: str):
+    """Loops through all open Chrome tabs on localhost:port, runs fill_all_visible_inputs()
+    with the tailored CV, highlights filled inputs in green, and pauses on the final Submit button.
+    """
+    import time
+    import urllib.request
+    try:
+        from patchright.sync_api import sync_playwright
+    except ImportError:
+        from playwright.sync_api import sync_playwright
+    from src.ats_applier import fill_all_visible_inputs, CANDIDATE_DATA, DirectATSApplier, PROOFS_DIR, detect_login_wall
+
+    cdp_url = f"http://127.0.0.1:{port}"
+    try:
+        with urllib.request.urlopen(f"{cdp_url}/json/version", timeout=2) as resp:
+            if resp.status != 200:
+                raise ConnectionError("CDP endpoint not healthy")
+    except Exception as e:
+        console.print(f"[bold red]Error:[/bold red] Could not connect to Chrome on {cdp_url} ({e}).")
+        console.print("[yellow]Make sure Chrome was launched via 'python3 scripts/stage_open_tabs.py'[/yellow]")
+        return
+
+    applier = DirectATSApplier()
+    resume_path = applier.get_resume_path(track)
+    console.print(Panel(
+        f"[bold cyan]Smart DOM Form Filler for Open Tabs[/bold cyan]\n"
+        f"Connecting to Chrome CDP: [yellow]{cdp_url}[/yellow] | Track: [magenta]{track}[/magenta] | Resume: [green]{resume_path.name}[/green]",
+        box=box.ROUNDED
+    ))
+
+    with sync_playwright() as p:
+        browser = p.chromium.connect_over_cdp(cdp_url)
+        context = browser.contexts[0] if browser.contexts else browser.new_context()
+
+        table = Table(title="Open Tabs Form Filling Status", box=box.ROUNDED)
+        table.add_column("Tab #", style="dim", width=6)
+        table.add_column("Title / URL", style="bold white")
+        table.add_column("Status", width=16)
+        table.add_column("Fields Filled", width=14)
+        table.add_column("Proof Screenshot", style="dim")
+
+        for idx, page in enumerate(context.pages, 1):
+            title = page.title() or "Untitled"
+            url = page.url
+            if not url or url.startswith("chrome://") or url.startswith("about:"):
+                continue
+
+            # Check if login wall is still active
+            is_gated, platform, gate_reason = detect_login_wall(page)
+            if is_gated:
+                shot_path = PROOFS_DIR / f"open_tab_{idx}_auth_required.png"
+                try:
+                    page.screenshot(path=str(shot_path))
+                except Exception:
+                    pass
+                table.add_row(
+                    str(idx),
+                    f"{title[:30]}\n[dim]{url[:45]}[/dim]",
+                    "[bold yellow]AUTH REQUIRED[/bold yellow]",
+                    "0 (Login Gate)",
+                    str(shot_path)
+                )
+                continue
+
+            # Auto-click initial apply button if visible (e.g. Easy Apply / Apply now)
+            url_lower = url.lower()
+            try:
+                if "indeed.com" in url_lower:
+                    btn = page.locator("#indeedApplyButton, button:has-text('Apply now'), a:has-text('Apply now')").first
+                    if btn.is_visible(timeout=2000):
+                        btn.click()
+                        time.sleep(1.5)
+                elif "linkedin.com" in url_lower:
+                    btn = page.locator("button.jobs-apply-button, button:has-text('Easy Apply')").first
+                    if btn.is_visible(timeout=2000):
+                        btn.click()
+                        time.sleep(1.5)
+                elif "naukri.com" in url_lower:
+                    btn = page.locator("button:has-text('Apply'), a:has-text('Apply')").first
+                    if btn.is_visible(timeout=2000):
+                        btn.click()
+                        time.sleep(1.5)
+            except Exception:
+                pass
+
+            # Run smart DOM filler
+            try:
+                filled = fill_all_visible_inputs(page, profile=CANDIDATE_DATA, cv_path=resume_path)
+                shot_path = PROOFS_DIR / f"open_tab_{idx}_filled.png"
+                page.screenshot(path=str(shot_path))
+                table.add_row(
+                    str(idx),
+                    f"{title[:30]}\n[dim]{url[:45]}[/dim]",
+                    "[bold green]PRE-FILLED[/bold green]",
+                    f"{len(filled)} fields",
+                    str(shot_path)
+                )
+            except Exception as e:
+                shot_path = PROOFS_DIR / f"open_tab_{idx}_error.png"
+                try:
+                    page.screenshot(path=str(shot_path))
+                except Exception:
+                    pass
+                table.add_row(
+                    str(idx),
+                    f"{title[:30]}\n[dim]{url[:45]}[/dim]",
+                    "[bold red]FAILED[/bold red]",
+                    f"0 ({str(e)[:20]})",
+                    str(shot_path)
+                )
+
+        console.print(table)
+
+
 @cli.command("verify-open-tabs")
 @click.option("--port", default=9222, type=int, help="Remote debugging port for Chrome session (default: 9222)")
 def verify_open_tabs_cmd(port: int):
@@ -557,12 +674,12 @@ def verify_open_tabs_cmd(port: int):
             "id_match": ["2051dab3e8356d40", "euro"]
         },
         {
-            "id": 616,
-            "company": "WebMD",
-            "role": "Associate Product Marketing Manager",
-            "track": "apm",
-            "url_match": ["jobvite.com"],
-            "id_match": ["webmd", "oh8yafw7"]
+            "id": 648,
+            "company": "Sarvysampanna System Solutions",
+            "role": "Corporate Events Manager",
+            "track": "event_mice",
+            "url_match": ["indeed.com"],
+            "id_match": ["c5d94c084ced26ba", "sarvysampanna"]
         },
         {
             "id": 643,
@@ -581,12 +698,52 @@ def verify_open_tabs_cmd(port: int):
             "id_match": ["torqwars", "071026029016"]
         },
         {
-            "id": 179,
-            "company": "Dukaan",
-            "role": "Associate Product Manager - B2B Commerce & Catalog AI",
-            "track": "apm",
-            "url_match": ["wellfound.com", "angel.co"],
-            "id_match": ["dukaan", "849306"]
+            "id": 636,
+            "company": "Sarvysampanna System Solutions",
+            "role": "Corporate Event Planner",
+            "track": "event_mice",
+            "url_match": ["naukri.com"],
+            "id_match": ["corporate-event-planner-sarvysampa"]
+        },
+        {
+            "id": 618,
+            "company": "BCD Meetings & Events",
+            "role": "MICE Project Manager / Coordinator",
+            "track": "event_mice",
+            "url_match": ["bcdme.com"],
+            "id_match": ["bcdme", "bcd"]
+        },
+        {
+            "id": 619,
+            "company": "CWT Meetings & Events",
+            "role": "Event Production & Procurement Executive",
+            "track": "event_mice",
+            "url_match": ["cwt-meetings-events.com"],
+            "id_match": ["cwt"]
+        },
+        {
+            "id": 620,
+            "company": "BI Worldwide",
+            "role": "MICE Project Manager / Coordinator",
+            "track": "event_mice",
+            "url_match": ["biworldwide.co.in"],
+            "id_match": ["biworldwide"]
+        },
+        {
+            "id": 621,
+            "company": "American Express GBT",
+            "role": "MICE Project Manager / Coordinator",
+            "track": "event_mice",
+            "url_match": ["amexglobalbusinesstravel.com"],
+            "id_match": ["amex"]
+        },
+        {
+            "id": 623,
+            "company": "FCM Meetings & Events",
+            "role": "Event Production & Procurement Executive",
+            "track": "event_mice",
+            "url_match": ["fcmtravel.com"],
+            "id_match": ["fcm"]
         }
     ]
 
