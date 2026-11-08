@@ -518,10 +518,16 @@ class DirectATSApplier:
 class BrowserCoPilot:
     """Persistent Browser Co-Pilot Mode for Naukri, LinkedIn, and Custom Portals."""
 
-    def __init__(self, profile_dir: Optional[Path] = None, tracker_db: Optional[TrackerDB] = None):
+    def __init__(
+        self,
+        profile_dir: Optional[Path] = None,
+        tracker_db: Optional[TrackerDB] = None,
+        telemetry_db: Optional[TelemetryDB] = None
+    ):
         self.profile_dir = profile_dir or (BASE_DIR / "data" / "browser_profile")
         self.profile_dir.mkdir(parents=True, exist_ok=True)
         self.tracker_db = tracker_db or TrackerDB()
+        self.telemetry_db = telemetry_db or TelemetryDB()
 
     def launch_copilot(
         self,
@@ -532,6 +538,9 @@ class BrowserCoPilot:
         track: str = "event_mice"
     ) -> Dict[str, Any]:
         """Launches a visible persistent Chrome session with auto-filled fields and terminal prompt."""
+        import select
+        import sys
+
         safe_comp = re.sub(r"[^\w-]", "_", company)
         resume_pdf = DirectATSApplier().get_resume_path(track)
 
@@ -556,6 +565,31 @@ class BrowserCoPilot:
                 page.goto(job_url, timeout=30000)
                 time.sleep(2)
 
+                # Auto-open application modal/form if on job posting page
+                try:
+                    if "indeed.com" in page.url.lower():
+                        indeed_apply = page.locator("#indeedApplyButton, button:has-text('Apply now'), a:has-text('Apply now')").first
+                        if indeed_apply.is_visible(timeout=3000):
+                            indeed_apply.click()
+                            time.sleep(2)
+                    elif "jobvite.com" in page.url.lower() and "/apply" not in page.url.lower():
+                        jv_apply = page.locator("a:has-text('Apply')").first
+                        if jv_apply.is_visible(timeout=3000):
+                            jv_apply.click()
+                            time.sleep(2)
+                    elif "linkedin.com" in page.url.lower():
+                        li_apply = page.locator("button.jobs-apply-button, button:has-text('Easy Apply')").first
+                        if li_apply.is_visible(timeout=3000):
+                            li_apply.click()
+                            time.sleep(2)
+                    elif "naukri.com" in page.url.lower():
+                        naukri_apply = page.locator("button:has-text('Apply'), a:has-text('Apply')").first
+                        if naukri_apply.is_visible(timeout=3000):
+                            naukri_apply.click()
+                            time.sleep(2)
+                except Exception:
+                    pass
+
                 # Attempt auto-fill on standard questions
                 applier = DirectATSApplier()
                 applier._fill_ats_form(page, "generic_ats", resume_pdf)
@@ -567,21 +601,43 @@ class BrowserCoPilot:
                 except Exception:
                     pass
 
-                prompt_msg = (
-                    f"\nCo-Pilot is paused on {company}. Complete the remaining fields and click Submit in the browser window.\n"
-                    f"Once the confirmation screen loads, press ENTER here..."
+                box_msg = (
+                    f"\n" + "=" * 70 + "\n"
+                    f"CO-PILOT READY: {company} - {role}\n"
+                    f"1. Check the opened browser window.\n"
+                    f"2. Answer any company-specific questions or complete CAPTCHA if prompted.\n"
+                    f"3. Click the final 'Submit Application' button on the website.\n"
+                    f"4. Once the confirmation screen ('Thank you / Application Sent') loads, press ENTER here.\n"
+                    + "=" * 70 + "\n"
                 )
-                print(prompt_msg)
+                print(box_msg)
 
-                try:
-                    input()
-                except (EOFError, KeyboardInterrupt):
-                    pass
+                # Wait for user submission or confirmation screen detection
+                max_wait = int(os.getenv("COPILOT_WAIT_TIMEOUT", "45"))
+                start_time = time.time()
+                is_verified = False
+                reason = "Timed out waiting for submission confirmation"
 
-                time.sleep(2)
+                while time.time() - start_time < max_wait:
+                    ver, r = verify_confirmation_screen(page)
+                    if ver:
+                        is_verified = True
+                        reason = r
+                        break
 
-                # Run two-step verification check on active page
-                is_verified, reason = verify_confirmation_screen(page)
+                    try:
+                        if sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
+                            sys.stdin.readline()
+                            time.sleep(1.5)
+                            is_verified, reason = verify_confirmation_screen(page)
+                            break
+                    except Exception:
+                        pass
+
+                    time.sleep(1.5)
+
+                if not is_verified and time.time() - start_time >= max_wait:
+                    is_verified, reason = verify_confirmation_screen(page)
 
                 if is_verified:
                     proof_path = PROOFS_DIR / f"{track}_{safe_comp}_{job_id}_SUCCESS.png"
@@ -595,7 +651,24 @@ class BrowserCoPilot:
                         submission_url=submission_url,
                         notes=f"Submitted via Co-Pilot interactive browser: {reason}"
                     )
-                    print(f"\n[VERIFIED SUCCESS] {reason}")
+
+                    # Also update telemetry_db if opportunity exists
+                    try:
+                        with self.telemetry_db._get_connection() as conn:
+                            cur = conn.cursor()
+                            cur.execute("SELECT id FROM opportunities WHERE company_name LIKE ?", (f"%{company}%",))
+                            row = cur.fetchone()
+                            if row:
+                                self.telemetry_db.mark_applied_verified(
+                                    opportunity_id=row["id"],
+                                    proof_screenshot_path=str(proof_path),
+                                    submission_url=submission_url,
+                                    notes=f"Submitted via Co-Pilot interactive browser: {reason}"
+                                )
+                    except Exception as e:
+                        logger.warning(f"Failed to update telemetry_db for {company}: {e}")
+
+                    print(f"\n[SUCCESS] Verified submission captured for {company}.")
                     print(f"Proof screenshot captured: {proof_path}")
                     return {
                         "status": "APPLIED_VERIFIED",
@@ -616,7 +689,8 @@ class BrowserCoPilot:
                         f"Co-Pilot confirmation check failed: {reason}",
                         str(rejected_path)
                     )
-                    print(f"\n\033[91m[REJECTED] Confirmation check failed: {reason}. Application remains in NEEDS_HUMAN_CLICK.\033[0m")
+                    print(f"\n\033[91m[REJECTED] Confirmation check failed. Screen still shows unsubmitted state.\033[0m")
+                    print(f"Details: {reason}")
                     print(f"State screenshot captured: {rejected_path}")
                     return {
                         "status": "NEEDS_HUMAN_CLICK",

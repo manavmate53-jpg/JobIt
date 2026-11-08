@@ -385,9 +385,11 @@ def match_cmd(job_id: int):
 def apply_cmd(job_id: Optional[int], mode: str, track: str, limit: int, dry_run: bool, notes: str):
     """Executes Proof-of-Submission (PoS) Co-Pilot or Direct ATS Applier on real portals."""
     from src.ats_applier import DirectATSApplier, BrowserCoPilot
+    from src.analytics.telemetry_db import TelemetryDB
 
-    ats_applier = DirectATSApplier(tracker_db=db)
-    copilot = BrowserCoPilot(tracker_db=db)
+    telemetry_db = TelemetryDB()
+    ats_applier = DirectATSApplier(tracker_db=db, telemetry_db=telemetry_db)
+    copilot = BrowserCoPilot(tracker_db=db, telemetry_db=telemetry_db)
 
     # 1. Single Job Execution
     if job_id:
@@ -396,7 +398,21 @@ def apply_cmd(job_id: Optional[int], mode: str, track: str, limit: int, dry_run:
             console.print(f"[bold red]Error:[/bold red] Job #{job_id} not found.")
             return
 
-        target_track = track if track != "all" else (app.get("pillar") or "event_mice")
+        if track and track not in ("all", "event_mice"):
+            target_track = track
+        else:
+            role_lower = (app.get("role") or "").lower()
+            pillar_lower = (app.get("pillar") or "").lower()
+            if "event" in role_lower or "event" in pillar_lower or "mice" in role_lower:
+                target_track = "event_mice"
+            elif "founder" in role_lower or "founder" in pillar_lower:
+                target_track = "founders_office"
+            elif "prodops" in role_lower or "product ops" in role_lower:
+                target_track = "prod_ops"
+            elif "product" in role_lower or "apm" in role_lower or "marketing" in role_lower or "b2b" in role_lower:
+                target_track = "apm"
+            else:
+                target_track = track or "event_mice"
         console.print(Panel(
             f"[bold cyan]Initiating PoS Application[/bold cyan]\n"
             f"Job ID: {job_id} | Mode: [yellow]{mode.upper()}[/yellow] | Track: [magenta]{target_track}[/magenta]\n"
