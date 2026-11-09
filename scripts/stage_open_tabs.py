@@ -14,6 +14,7 @@ import json
 import logging
 import os
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -29,7 +30,14 @@ except ImportError:
 BASE_DIR = Path("/Users/manav/.gemini/antigravity-ide/scratch/JobIt")
 sys.path.insert(0, str(BASE_DIR))
 
-from src.ats_applier import detect_login_wall, fill_all_visible_inputs, normalize_ats_url, ZeroFieldsFilledError
+from src.ats_applier import (
+    detect_login_wall,
+    fill_all_visible_inputs,
+    normalize_ats_url,
+    ZeroFieldsFilledError,
+    click_initial_apply_if_present,
+    step_through_wizard,
+)
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("stage_open_tabs")
@@ -164,16 +172,47 @@ def is_cdp_ready() -> bool:
         return False
 
 
+def sync_user_chrome_session(target_profile_dir: Path):
+    """Copies current login session & cookies from user's default Chrome profile
+    into JobIt's persistent automation profile so auth credentials persist seamlessly.
+    """
+    src_dir = Path.home() / "Library" / "Application Support" / "Google" / "Chrome"
+    if not src_dir.exists():
+        return
+
+    target_profile_dir.mkdir(parents=True, exist_ok=True)
+    target_default = target_profile_dir / "Default"
+    target_default.mkdir(parents=True, exist_ok=True)
+
+    for fname in ["Local State"]:
+        src_file = src_dir / fname
+        if src_file.exists():
+            try:
+                shutil.copy2(src_file, target_profile_dir / fname)
+            except Exception as e:
+                logger.debug(f"Could not copy {fname}: {e}")
+
+    for fname in ["Cookies", "Network Persistent State", "Login Data", "Preferences"]:
+        src_file = src_dir / "Default" / fname
+        if src_file.exists():
+            try:
+                shutil.copy2(src_file, target_default / fname)
+            except Exception as e:
+                logger.debug(f"Could not copy {fname}: {e}")
+
+
 def ensure_chrome_running() -> str:
     """Finds Chrome and launches it detached on port 9222 if not already running."""
     if is_cdp_ready():
         logger.info(f"Connected to existing Chrome session on {CDP_URL}")
         return "existing"
 
+    sync_user_chrome_session(PROFILE_DIR)
+
     candidates = [
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
         "/Users/manav/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
         "/Users/manav/Library/Caches/ms-playwright/chromium-1228/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
-        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
         "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
     ]
 
@@ -250,39 +289,22 @@ def prefill_tab(page, target: Dict[str, Any]):
         logger.warning(f"[AUTH REQUIRED] Job #{job_id} on {platform} blocked by login wall: {gate_reason}")
 
     # 3. Click initial apply button if visible
-    url_lower = page.url.lower()
-    try:
-        if "indeed.com" in url_lower:
-            btn = page.locator("#indeedApplyButton, button:has-text('Apply now'), a:has-text('Apply now')").first
-            if btn.is_visible(timeout=3000):
-                btn.click()
-                time.sleep(2)
-        elif "linkedin.com" in url_lower:
-            btn = page.locator("button.jobs-apply-button, button:has-text('Easy Apply'), button:has-text('Apply')").first
-            if btn.is_visible(timeout=3000):
-                btn.click()
-                time.sleep(2)
-        elif "naukri.com" in url_lower:
-            btn = page.locator("button:has-text('Apply'), a:has-text('Apply')").first
-            if btn.is_visible(timeout=3000):
-                btn.click()
-                time.sleep(2)
-        elif "wellfound.com" in url_lower or "angel.co" in url_lower:
-            btn = page.locator("button:has-text('Apply'), a:has-text('Apply')").first
-            if btn.is_visible(timeout=3000):
-                btn.click()
-                time.sleep(2)
-    except Exception as e:
-        logger.debug(f"Initial apply button click passed: {e}")
+    click_initial_apply_if_present(page)
 
-    # 4. Smart DOM Input Filling
+    # 4. Multi-Step Wizard & Smart DOM Filling
+    filled_fields = []
     try:
-        filled = fill_all_visible_inputs(page, profile=CANDIDATE_DATA, cv_path=resume_path, job_id=job_id)
-        logger.info(f"Successfully filled {len(filled)} fields for Job #{job_id}: {company}")
+        submitted, notes, filled_fields = step_through_wizard(
+            page,
+            profile=CANDIDATE_DATA,
+            cv_path=resume_path,
+            max_steps=5,
+            pause_before_submit=True,
+            return_details=True,
+        )
+        logger.info(f"Successfully processed Job #{job_id}: {company} | {len(filled_fields)} fields filled | {notes}")
         step2_path = BASE_DIR / "exports" / "proofs" / f"job_{job_id}_step2_filled.png"
         page.screenshot(path=str(step2_path))
-    except ZeroFieldsFilledError as ze:
-        logger.warning(f"No fields could be filled for Job #{job_id}: {ze}")
     except Exception as e:
         logger.warning(f"Form filling encountered error for Job #{job_id}: {e}")
 

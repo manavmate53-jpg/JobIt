@@ -526,7 +526,8 @@ def apply_cmd(job_id: Optional[int], mode: str, track: str, limit: int, dry_run:
 @click.option("--track", default="event_mice", help="Candidate track to select tailored resume (default: event_mice)")
 def fill_open_tabs_cmd(port: int, track: str):
     """Loops through all open Chrome tabs on localhost:port, runs fill_all_visible_inputs()
-    with the tailored CV, highlights filled inputs in green, and pauses on the final Submit button.
+    and step_through_wizard() with the tailored CV, highlights filled inputs in green,
+    and pauses on the final Submit button.
     """
     import time
     import urllib.request
@@ -534,7 +535,15 @@ def fill_open_tabs_cmd(port: int, track: str):
         from patchright.sync_api import sync_playwright
     except ImportError:
         from playwright.sync_api import sync_playwright
-    from src.ats_applier import fill_all_visible_inputs, CANDIDATE_DATA, DirectATSApplier, PROOFS_DIR, detect_login_wall
+    from src.ats_applier import (
+        fill_all_visible_inputs,
+        CANDIDATE_DATA,
+        DirectATSApplier,
+        PROOFS_DIR,
+        detect_login_wall,
+        click_initial_apply_if_present,
+        step_through_wizard,
+    )
 
     cdp_url = f"http://127.0.0.1:{port}"
     try:
@@ -542,14 +551,15 @@ def fill_open_tabs_cmd(port: int, track: str):
             if resp.status != 200:
                 raise ConnectionError("CDP endpoint not healthy")
     except Exception as e:
-        console.print(f"[bold red]Error:[/bold red] Could not connect to Chrome on {cdp_url} ({e}).")
-        console.print("[yellow]Make sure Chrome was launched via 'python3 scripts/stage_open_tabs.py'[/yellow]")
-        return
+        console.print(f"[bold yellow]Chrome session not found on {cdp_url} ({e}). Launching detached Chrome with your saved logins...[/bold yellow]")
+        from scripts.stage_open_tabs import ensure_chrome_running, stage_all_tabs
+        ensure_chrome_running()
+        stage_all_tabs()
 
     applier = DirectATSApplier()
     resume_path = applier.get_resume_path(track)
     console.print(Panel(
-        f"[bold cyan]Smart DOM Form Filler for Open Tabs[/bold cyan]\n"
+        f"[bold cyan]Smart DOM Form Filler & Wizard Co-Pilot for Open Tabs[/bold cyan]\n"
         f"Connecting to Chrome CDP: [yellow]{cdp_url}[/yellow] | Track: [magenta]{track}[/magenta] | Resume: [green]{resume_path.name}[/green]",
         box=box.ROUNDED
     ))
@@ -558,18 +568,25 @@ def fill_open_tabs_cmd(port: int, track: str):
         browser = p.chromium.connect_over_cdp(cdp_url)
         context = browser.contexts[0] if browser.contexts else browser.new_context()
 
-        table = Table(title="Open Tabs Form Filling Status", box=box.ROUNDED)
+        # If no tabs are open, stage the 10 target tabs automatically
+        valid_pages = [page for page in context.pages if page.url and not page.url.startswith("chrome://") and not page.url.startswith("about:")]
+        if not valid_pages:
+            console.print("[yellow]No target tabs found open. Staging target roles...[/yellow]")
+            from scripts.stage_open_tabs import stage_all_tabs
+            stage_all_tabs()
+            valid_pages = [page for page in context.pages if page.url and not page.url.startswith("chrome://") and not page.url.startswith("about:")]
+
+        table = Table(title="Open Tabs Form Filling & Wizard Status", box=box.ROUNDED)
         table.add_column("Tab #", style="dim", width=6)
         table.add_column("Title / URL", style="bold white")
-        table.add_column("Status", width=16)
-        table.add_column("Fields Filled", width=14)
+        table.add_column("Status", width=18)
+        table.add_column("Fields Filled", width=28)
+        table.add_column("Screen State", width=30)
         table.add_column("Proof Screenshot", style="dim")
 
-        for idx, page in enumerate(context.pages, 1):
+        for idx, page in enumerate(valid_pages, 1):
             title = page.title() or "Untitled"
             url = page.url
-            if not url or url.startswith("chrome://") or url.startswith("about:"):
-                continue
 
             # Check if login wall is still active
             is_gated, platform, gate_reason = detect_login_wall(page)
@@ -581,44 +598,42 @@ def fill_open_tabs_cmd(port: int, track: str):
                     pass
                 table.add_row(
                     str(idx),
-                    f"{title[:30]}\n[dim]{url[:45]}[/dim]",
+                    f"{title[:35]}\n[dim]{url[:50]}[/dim]",
                     "[bold yellow]AUTH REQUIRED[/bold yellow]",
                     "0 (Login Gate)",
+                    f"Blocked by {platform} login",
                     str(shot_path)
                 )
                 continue
 
             # Auto-click initial apply button if visible (e.g. Easy Apply / Apply now)
-            url_lower = url.lower()
-            try:
-                if "indeed.com" in url_lower:
-                    btn = page.locator("#indeedApplyButton, button:has-text('Apply now'), a:has-text('Apply now')").first
-                    if btn.is_visible(timeout=2000):
-                        btn.click()
-                        time.sleep(1.5)
-                elif "linkedin.com" in url_lower:
-                    btn = page.locator("button.jobs-apply-button, button:has-text('Easy Apply')").first
-                    if btn.is_visible(timeout=2000):
-                        btn.click()
-                        time.sleep(1.5)
-                elif "naukri.com" in url_lower:
-                    btn = page.locator("button:has-text('Apply'), a:has-text('Apply')").first
-                    if btn.is_visible(timeout=2000):
-                        btn.click()
-                        time.sleep(1.5)
-            except Exception:
-                pass
+            click_initial_apply_if_present(page)
 
-            # Run smart DOM filler
+            # Run smart DOM filler & multi-step wizard (pausing before final submit)
             try:
-                filled = fill_all_visible_inputs(page, profile=CANDIDATE_DATA, cv_path=resume_path)
+                submitted, notes, filled = step_through_wizard(
+                    page,
+                    profile=CANDIDATE_DATA,
+                    cv_path=resume_path,
+                    max_steps=5,
+                    pause_before_submit=True,
+                    return_details=True,
+                )
                 shot_path = PROOFS_DIR / f"open_tab_{idx}_filled.png"
                 page.screenshot(path=str(shot_path))
+
+                status_label = "[bold green]READY FOR SUBMIT[/bold green]" if "submit" in notes.lower() else "[bold green]PRE-FILLED[/bold green]"
+                field_summary = f"{len(filled)} fields"
+                if filled:
+                    field_names = [f[0] for f in filled[:4]]
+                    field_summary += f" ({', '.join(field_names)})"
+
                 table.add_row(
                     str(idx),
-                    f"{title[:30]}\n[dim]{url[:45]}[/dim]",
-                    "[bold green]PRE-FILLED[/bold green]",
-                    f"{len(filled)} fields",
+                    f"{title[:35]}\n[dim]{url[:50]}[/dim]",
+                    status_label,
+                    field_summary,
+                    notes,
                     str(shot_path)
                 )
             except Exception as e:
@@ -629,9 +644,10 @@ def fill_open_tabs_cmd(port: int, track: str):
                     pass
                 table.add_row(
                     str(idx),
-                    f"{title[:30]}\n[dim]{url[:45]}[/dim]",
+                    f"{title[:35]}\n[dim]{url[:50]}[/dim]",
                     "[bold red]FAILED[/bold red]",
-                    f"0 ({str(e)[:20]})",
+                    "0 fields",
+                    str(e)[:40],
                     str(shot_path)
                 )
 

@@ -86,20 +86,41 @@ UNSUBMITTED_BLACKLIST_MARKERS = [
     "submit your application",
 ]
 
-SUBMIT_BUTTON_SELECTORS = [
+INITIAL_APPLY_SELECTORS = [
+    "#indeedApplyButton",
     "button:has-text('Apply now')",
-    "button:has-text('Apply on company site')",
+    "a:has-text('Apply now')",
+    "button.jobs-apply-button",
+    "button:has-text('Easy Apply')",
     "button:has-text('Apply')",
+    "a:has-text('Apply')",
+    "[data-testid='indeedApplyButton']",
+]
+
+FINAL_SUBMIT_BUTTON_SELECTORS = [
     "button:has-text('Submit your application')",
     "button:has-text('Submit application')",
     "button:has-text('Submit Application')",
     "button:has-text('Send Application')",
     "button:has-text('Submit')",
     "button#submit_app",
+    "button[type='submit']",
     "input[type='submit']",
-    "a:has-text('Apply now')",
-    "a:has-text('Apply on company site')",
+    "button:has-text('Send application')",
 ]
+
+WIZARD_PROGRESSION_SELECTORS = [
+    "button:has-text('Next')",
+    "button:has-text('Continue')",
+    "button:has-text('Save & Continue')",
+    "button:has-text('Save and continue')",
+    "button:has-text('Review')",
+    "button:has-text('Review your application')",
+    "a:has-text('Next')",
+    "a:has-text('Continue')",
+]
+
+SUBMIT_BUTTON_SELECTORS = FINAL_SUBMIT_BUTTON_SELECTORS + INITIAL_APPLY_SELECTORS
 
 BOT_WALL_PHRASES = [
     "attention required! | cloudflare",
@@ -370,7 +391,13 @@ def fill_all_visible_inputs(
                         lbl_text = lbl.inner_text().strip()
                 if not lbl_text:
                     try:
-                        lbl_text = el.evaluate("e => e.closest('label') ? e.closest('label').innerText : ''").strip()
+                        lbl_text = el.evaluate("""e => {
+                            let l = e.closest('label');
+                            if (l && l.querySelectorAll('input, select, textarea').length <= 1) {
+                                return l.innerText.trim();
+                            }
+                            return '';
+                        }""").strip()
                     except Exception:
                         pass
 
@@ -379,14 +406,37 @@ def fill_all_visible_inputs(
 
                 val_to_fill = None
 
-                # Matching logic
-                if any(k in desc for k in ["first name", "firstname", "first_name", "given-name", "given name"]) or (
-                    desc.strip() == "first" or ("first" in desc and "name" in desc)
+                # Exact attribute matching first
+                lname = name.lower()
+                if lname in ["lastname", "last_name", "familyname", "surname"]:
+                    val_to_fill = profile.get("last_name", "Mate")
+
+                elif lname in ["firstname", "first_name", "givenname"]:
+                    val_to_fill = profile.get("first_name", "Manav")
+
+                elif itype == "email" or lname in ["email", "e-mail"]:
+                    val_to_fill = profile.get("email", "manavmate53@gmail.com")
+
+                elif itype == "tel" or lname in ["phone", "phonenumber", "phone_number", "mobile"]:
+                    val_to_fill = profile.get("phone", "+91 85915 95889")
+
+                elif "country" in ph.lower() or "city" in ph.lower():
+                    val_to_fill = profile.get("location", "Mumbai, Maharashtra, India")
+
+                elif lname == "messagetohiringmanager":
+                    val_to_fill = "Passionate Event Management & MICE specialist with 4 years of experience leading on-ground operations, vendor negotiations, and activations across Mumbai."
+
+                elif lname == "value" and ("jobs.redbull.com" in page.url.lower() or "linkedin" in desc):
+                    val_to_fill = profile.get("linkedin", "https://www.linkedin.com/in/manav-mate-9448b1341/")
+
+                # General matching logic
+                elif any(k in desc for k in ["first name", "firstname", "first_name", "given-name", "given name"]) or (
+                    desc.strip() == "first" or ("first" in desc and "name" in desc and "last" not in desc)
                 ):
                     val_to_fill = profile.get("first_name", "Manav")
 
                 elif any(k in desc for k in ["last name", "lastname", "last_name", "family-name", "family name", "surname"]) or (
-                    desc.strip() == "last" or ("last" in desc and "name" in desc)
+                    desc.strip() == "last" or ("last" in desc and "name" in desc and "first" not in desc)
                 ):
                     val_to_fill = profile.get("last_name", "Mate")
 
@@ -559,65 +609,102 @@ def fill_all_visible_inputs(
     return filled_fields
 
 
+def click_initial_apply_if_present(page: Page) -> bool:
+    """Clicks initial job apply button (Indeed Apply now, LinkedIn Easy Apply, Naukri Apply) if visible."""
+    for sel in INITIAL_APPLY_SELECTORS:
+        try:
+            btn = page.locator(sel).first
+            if btn.count() > 0 and btn.is_visible():
+                btn_text = btn.inner_text().strip()
+                if "applied" in btn_text.lower():
+                    return False
+                print(f"[INITIAL APPLY] Clicking '{btn_text}' via {sel}")
+                btn.click()
+                time.sleep(2)
+                return True
+        except Exception:
+            continue
+    return False
+
+
 def step_through_wizard(
     page: Page,
     profile: Dict[str, Any] = CANDIDATE_DATA,
     cv_path: Optional[Path] = None,
     max_steps: int = 5,
-) -> Tuple[bool, str]:
+    pause_before_submit: bool = False,
+    return_details: bool = False,
+):
     """Iterates through multi-step application wizards until final Submit is reached.
 
-    Returns (submitted: bool, notes: str).
+    If pause_before_submit is True, stops and highlights the final submit button in amber,
+    allowing user review before submission.
     """
+    accumulated_fields: List[Tuple[str, str]] = []
+
     for step_num in range(1, max_steps + 1):
         print(f"[WIZARD STEP {step_num}] Filling visible step inputs...")
         try:
-            fill_all_visible_inputs(page, profile=profile, cv_path=cv_path)
+            step_filled = fill_all_visible_inputs(page, profile=profile, cv_path=cv_path)
+            for item in step_filled:
+                if item not in accumulated_fields:
+                    accumulated_fields.append(item)
         except ZeroFieldsFilledError:
             pass
 
-        # Check for final submit button
-        submit_btn = None
-        for sel in SUBMIT_BUTTON_SELECTORS:
-            btn = page.locator(sel).first
-            if btn.count() > 0 and btn.is_visible() and btn.is_enabled():
-                submit_btn = btn
-                break
-
-        # Check for intermediate wizard progression button
+        # Check for intermediate wizard progression button first
         wizard_btn = None
-        wizard_selectors = [
-            "button:has-text('Next')",
-            "button:has-text('Continue')",
-            "button:has-text('Save & Continue')",
-            "button:has-text('Review')",
-            "a:has-text('Next')",
-            "a:has-text('Continue')",
-        ]
-        for w_sel in wizard_selectors:
+        for w_sel in WIZARD_PROGRESSION_SELECTORS:
             w_btn = page.locator(w_sel).first
             if w_btn.count() > 0 and w_btn.is_visible() and w_btn.is_enabled():
                 wizard_btn = w_btn
                 break
 
+        # Check for final submit button
+        submit_btn = None
+        for sel in FINAL_SUBMIT_BUTTON_SELECTORS:
+            btn = page.locator(sel).first
+            if btn.count() > 0 and btn.is_visible() and btn.is_enabled():
+                submit_btn = btn
+                break
+
         # If a next button is visible and not final submit, advance
         if wizard_btn and (not submit_btn or wizard_btn != submit_btn):
-            print(f"[WIZARD STEP {step_num}] Clicking progression button: '{wizard_btn.inner_text().strip()}'")
+            w_text = wizard_btn.inner_text().strip()
+            print(f"[WIZARD STEP {step_num}] Clicking progression button: '{w_text}'")
             wizard_btn.click()
             time.sleep(2)
             continue
 
-        # If final submit is visible, click it
+        # If final submit is visible
         if submit_btn:
-            print(f"[WIZARD FINAL] Clicking submit button: '{submit_btn.inner_text().strip()}'")
-            submit_btn.scroll_into_view_if_needed()
+            submit_text = submit_btn.inner_text().strip()
+            try:
+                submit_btn.scroll_into_view_if_needed()
+                submit_btn.evaluate("el => { el.style.border = '3px solid #f59e0b'; el.style.boxShadow = '0 0 12px #f59e0b'; }")
+            except Exception:
+                pass
+
+            if pause_before_submit:
+                note = f"Ready for final submit (paused at '{submit_text}')"
+                print(f"[WIZARD PAUSE] {note}")
+                if return_details:
+                    return False, note, accumulated_fields
+                return False, note
+
+            print(f"[WIZARD FINAL] Clicking submit button: '{submit_text}'")
             submit_btn.click()
             time.sleep(4)
+            if return_details:
+                return True, f"Submit button clicked on step {step_num}", accumulated_fields
             return True, f"Submit button clicked on step {step_num}"
 
         time.sleep(1)
 
-    return False, f"Completed {max_steps} wizard steps without finding final submit button"
+    fail_note = f"Completed {max_steps} wizard steps without finding final submit button"
+    if return_details:
+        return False, fail_note, accumulated_fields
+    return False, fail_note
 
 
 def verify_confirmation_screen(page: Any, ats_type: str = "generic", raise_on_failure: bool = False) -> Tuple[bool, str]:
