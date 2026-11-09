@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-09T02:07:48.113456",
+  "timestamp": "2026-11-09T14:48:24.462448",
   "cycle": "6_hour_recon",
   "summary": {
     "companies_scanned": 5,
@@ -26,7 +26,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "verification_status": "250_DELIVERABLE",
       "linkedin_url": "https://www.linkedin.com/in/datavruti-product-lead",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -48,7 +48,7 @@
       ],
       "mx_host": "aspmx.l.google.com",
       "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "verification_status": "250_DELIVERABLE",
       "linkedin_url": "https://www.linkedin.com/in/datavruti-talent-partner",
       "primary_channel": "linkedin_dm",
       "confidence_score": 92
@@ -69,11 +69,11 @@
         "hiringpurplle@purplle.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "is_verified": false,
+      "verification_status": "550_USER_NOT_FOUND",
       "linkedin_url": "https://www.linkedin.com/in/purplle-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 92
+      "confidence_score": 65
     },
     {
       "name": "Talent Partner (Purplle)",
@@ -91,11 +91,11 @@
         "talentpurplle@purplle.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "is_verified": false,
+      "verification_status": "550_USER_NOT_FOUND",
       "linkedin_url": "https://www.linkedin.com/in/purplle-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 92
+      "confidence_score": 65
     },
     {
       "name": "Hiring Lead (Smartstream Technologies)",
@@ -113,11 +113,11 @@
         "hiringtechnologies@smartstream.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "is_verified": false,
+      "verification_status": "550_USER_NOT_FOUND",
       "linkedin_url": "https://www.linkedin.com/in/smartstream technologies-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 92
+      "confidence_score": 65
     },
     {
       "name": "Talent Partner (Smartstream Technologies)",
@@ -135,11 +135,11 @@
         "talenttechnologies@smartstream.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "is_verified": false,
+      "verification_status": "550_USER_NOT_FOUND",
       "linkedin_url": "https://www.linkedin.com/in/smartstream technologies-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 92
+      "confidence_score": 65
     },
     {
       "name": "Hiring Lead (Sovos)",
@@ -157,11 +157,11 @@
         "hiringsovos@sovos.com"
       ],
       "mx_host": "sovos-com.mail.protection.outlook.com",
-      "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "is_verified": false,
+      "verification_status": "550_USER_NOT_FOUND",
       "linkedin_url": "https://www.linkedin.com/in/sovos-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 92
+      "confidence_score": 65
     },
     {
       "name": "Talent Partner (Sovos)",
@@ -179,11 +179,11 @@
         "talentsovos@sovos.com"
       ],
       "mx_host": "sovos-com.mail.protection.outlook.com",
-      "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "is_verified": false,
+      "verification_status": "550_USER_NOT_FOUND",
       "linkedin_url": "https://www.linkedin.com/in/sovos-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 92
+      "confidence_score": 65
     },
     {
       "name": "Hiring Lead (IDfy)",
@@ -201,11 +201,11 @@
         "hiringidfy@idfy.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "is_verified": false,
+      "verification_status": "550_USER_NOT_FOUND",
       "linkedin_url": "https://www.linkedin.com/in/idfy-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 92
+      "confidence_score": 65
     },
     {
       "name": "Talent Partner (IDfy)",
@@ -223,11 +223,11 @@
         "talentidfy@idfy.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": true,
-      "verification_status": "PATTERN_MATCHED_HIGH_CONFIDENCE",
+      "is_verified": false,
+      "verification_status": "550_USER_NOT_FOUND",
       "linkedin_url": "https://www.linkedin.com/in/idfy-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 92
+      "confidence_score": 65
     },
     {
       "name": "Arvind Parthiban",
@@ -379,7 +379,7 @@
       "follow_up_bump": "Hi Sanjay, following up briefly on my note regarding Event Operations at BCD Meetings & Events. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_BCD_Meetings___Events_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 217
+      "opportunity_id": 8
     },
     {
       "name": "Bhawna Gupta",
@@ -398,7 +398,7 @@
       "follow_up_bump": "Hi Bhawna, following up briefly on my note regarding Event Operations at CWT Meetings & Events. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_CWT_Meetings___Events_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 218
+      "opportunity_id": 9
     },
     {
       "name": "Sukesh Jain",
@@ -417,7 +417,7 @@
       "follow_up_bump": "Hi Sukesh, following up briefly on my note regarding Event Operations at BI Worldwide. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_BI_Worldwide_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 219
+      "opportunity_id": 10
     },
     {
       "name": "Gaurav Malhotra",
@@ -436,7 +436,7 @@
       "follow_up_bump": "Hi Gaurav, following up briefly on my note regarding Event Operations at American Express GBT. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_American_Express_GBT_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 220
+      "opportunity_id": 11
     },
     {
       "name": "Rajeev Kale",
@@ -455,7 +455,7 @@
       "follow_up_bump": "Hi Rajeev, following up briefly on my note regarding Event Operations at Thomas Cook MICE. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Thomas_Cook_MICE_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 221
+      "opportunity_id": 12
     },
     {
       "name": "Manpreet Bindra",
@@ -474,7 +474,7 @@
       "follow_up_bump": "Hi Manpreet, following up briefly on my note regarding Event Operations at FCM Meetings & Events. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_FCM_Meetings___Events_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 222
+      "opportunity_id": 13
     },
     {
       "name": "Dhiraj Agarwal",
@@ -493,7 +493,7 @@
       "follow_up_bump": "Hi Dhiraj, following up briefly on my note regarding Event Operations at Jio World Convention Centre. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Jio_World_Convention_Centre_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 223
+      "opportunity_id": 14
     },
     {
       "name": "Sumant Patel",
@@ -512,7 +512,7 @@
       "follow_up_bump": "Hi Sumant, following up briefly on my note regarding Event Operations at NESCO Events. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_NESCO_Events_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 224
+      "opportunity_id": 15
     },
     {
       "name": "Yogesh Mudras",
@@ -531,7 +531,7 @@
       "follow_up_bump": "Hi Yogesh, following up briefly on my note regarding Event Operations at Informa Markets. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Informa_Markets_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 225
+      "opportunity_id": 16
     },
     {
       "name": "Raj Manek",
@@ -550,7 +550,7 @@
       "follow_up_bump": "Hi Raj, following up briefly on my note regarding Event Operations at Messe Frankfurt India. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Messe_Frankfurt_India_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 226
+      "opportunity_id": 17
     },
     {
       "name": "Vivek Singh",
@@ -569,7 +569,7 @@
       "follow_up_bump": "Hi Vivek, following up briefly on my note regarding Event Operations at Procam International. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Procam_International_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 227
+      "opportunity_id": 18
     },
     {
       "name": "Thanush Joseph",
@@ -588,7 +588,7 @@
       "follow_up_bump": "Hi Thanush, following up briefly on my note regarding Event Operations at 70 EMG. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_70_EMG_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 228
+      "opportunity_id": 19
     },
     {
       "name": "Sabbas Joseph",
@@ -607,7 +607,7 @@
       "follow_up_bump": "Hi Sabbas, following up briefly on my note regarding Event Operations at Wizcraft Corporate. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Wizcraft_Corporate_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 229
+      "opportunity_id": 20
     },
     {
       "name": "Roshan Abbas",
@@ -626,7 +626,7 @@
       "follow_up_bump": "Hi Roshan, following up briefly on my note regarding Event Operations at Geometry Encompass. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Geometry_Encompass_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 230
+      "opportunity_id": 21
     },
     {
       "name": "Navneeth Mohan",
@@ -645,7 +645,7 @@
       "follow_up_bump": "Hi Navneeth, following up briefly on my note regarding Event Operations at Laqshya Live Experiences. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Laqshya_Live_Experiences_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 231
+      "opportunity_id": 22
     },
     {
       "name": "Brian Tellis",
@@ -664,7 +664,7 @@
       "follow_up_bump": "Hi Brian, following up briefly on my note regarding Event Operations at Fountainhead MKTG. With 4+ years across 150-200+ events and 2026 marquee executions at Tata Mumbai Marathon (Mumbai University venue production/ops), ICANN 2026, and Neurology Summit 2026, I am equipped to handle end-to-end procurement, venue mapping, AV show timing, and Canva/AI planning from day one. Would love to connect for 10 minutes.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Fountainhead_MKTG_mice.pdf",
       "is_verified": true,
-      "opportunity_id": 232
+      "opportunity_id": 23
     },
     {
       "name": "Rohit Agarwal",
@@ -683,7 +683,7 @@
       "follow_up_bump": "Hi Rohit, bumping this quickly in case it got buried under your post-funding inbox surge. Still keen to explore how I can take operational execution off your plate at Portkey. Happy to share a quick teardown of your current customer onboarding flow whenever convenient.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Portkey_office.pdf",
       "is_verified": true,
-      "opportunity_id": 8
+      "opportunity_id": 24
     },
     {
       "name": "Vivek Raghavan",
@@ -702,7 +702,7 @@
       "follow_up_bump": "Hi Vivek, quick follow-up to see if you have 10 minutes this week to discuss product execution for Sarvam AI. Always happy to share relevant PRD artifacts or architectural trade-off teardowns.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Sarvam_AI_apm.pdf",
       "is_verified": true,
-      "opportunity_id": 9
+      "opportunity_id": 25
     },
     {
       "name": "Siddharth Sridharan",
@@ -721,7 +721,7 @@
       "follow_up_bump": "Hi Siddharth, bumping this quickly in case it got buried under your post-funding inbox surge. Still keen to explore how I can take operational execution off your plate at Spendflo. Happy to share a quick teardown of your current customer onboarding flow whenever convenient.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Spendflo_office.pdf",
       "is_verified": true,
-      "opportunity_id": 10
+      "opportunity_id": 26
     },
     {
       "name": "Deepanshu Arora",
@@ -740,7 +740,7 @@
       "follow_up_bump": "Hi Deepanshu, bumping this quickly in case it got buried under your post-funding inbox surge. Still keen to explore how I can take operational execution off your plate at Toddle. Happy to share a quick teardown of your current customer onboarding flow whenever convenient.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Toddle_office.pdf",
       "is_verified": true,
-      "opportunity_id": 11
+      "opportunity_id": 27
     },
     {
       "name": "Achuthanand Ravi",
@@ -759,7 +759,7 @@
       "follow_up_bump": "Hi Achuthanand, bumping this quickly in case it got buried under your post-funding inbox surge. Still keen to explore how I can take operational execution off your plate at Kula. Happy to share a quick teardown of your current customer onboarding flow whenever convenient.",
       "attachment_pdf": "exports/resumes/Manav_Mate_Kula_office.pdf",
       "is_verified": true,
-      "opportunity_id": 12
+      "opportunity_id": 28
     }
   ],
   "reverse_engineered_profiles": [
