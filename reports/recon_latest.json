@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-12T23:01:31.947029",
+  "timestamp": "2026-11-13T04:22:06.879800",
   "cycle": "6_hour_recon",
   "summary": {
     "companies_scanned": 5,
@@ -157,11 +157,11 @@
         "hiringsovos@sovos.com"
       ],
       "mx_host": "sovos-com.mail.protection.outlook.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "SYNTAX_AND_MX_VERIFIED",
       "linkedin_url": "https://www.linkedin.com/in/sovos-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Talent Partner (Sovos)",
@@ -179,11 +179,11 @@
         "talentsovos@sovos.com"
       ],
       "mx_host": "sovos-com.mail.protection.outlook.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "SYNTAX_AND_MX_VERIFIED",
       "linkedin_url": "https://www.linkedin.com/in/sovos-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Hiring Lead (IDfy)",
@@ -201,11 +201,11 @@
         "hiringidfy@idfy.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "SYNTAX_AND_MX_VERIFIED",
       "linkedin_url": "https://www.linkedin.com/in/idfy-product-lead",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Talent Partner (IDfy)",
@@ -223,11 +223,11 @@
         "talentidfy@idfy.com"
       ],
       "mx_host": "aspmx.l.google.com",
-      "is_verified": false,
-      "verification_status": "550_USER_NOT_FOUND",
+      "is_verified": true,
+      "verification_status": "SYNTAX_AND_MX_VERIFIED",
       "linkedin_url": "https://www.linkedin.com/in/idfy-talent-partner",
       "primary_channel": "linkedin_dm",
-      "confidence_score": 65
+      "confidence_score": 92
     },
     {
       "name": "Arvind Parthiban",
